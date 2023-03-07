@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 // login GET route here
 
 router.get('/login', (req, res, next) => {
-    res.render('auth/login')
+    res.render('auth/index-logged-out')
 })
 
 
@@ -29,7 +29,7 @@ router.post('/login', async (req,res,next) => {
 
 try {
         const user = await User.findOne({ username });
-        res.redirect('/')
+        res.redirect('/index-logged-in')
 
 } catch (error) {
         next(error);
