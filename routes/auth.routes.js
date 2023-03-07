@@ -14,10 +14,26 @@ router.get('/login', (req, res, next) => {
 })
 
 
-
-
 //login POST route here
 
 
+router.post('/login', async (req,res,next) => {
+    const { username, password, email} = req.body
+
+    if (username === '' || password === '') {
+        res.render('auth/login', {
+                errorMessage: 'Please enter both email and password to log in.',
+        });
+        return;
+}
+
+try {
+        const user = await User.findOne({ username });
+        res.redirect('/')
+
+} catch (error) {
+        next(error);
+}
+});
 
 module.exports = router;
