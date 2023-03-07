@@ -9,20 +9,18 @@ const userSchema = new Schema(
       required: false,
       unique: true
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true
-    },
     password: {
       type: String,
       required: true
-    }
+    },
+    activities: [
+      {
+      type: Schema.Types.ObjectId,
+      ref:"Activity"
+    }]
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true
   }
 );
