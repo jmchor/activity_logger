@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 // login GET route here
 
 router.get('/login', (req, res, next) => {
-    res.render('/auth/login')
+    res.render('auth/login')
 })
 
 
@@ -19,3 +19,5 @@ router.get('/login', (req, res, next) => {
 //login POST route here
 
 
+
+module.exports = router;
