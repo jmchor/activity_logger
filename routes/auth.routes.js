@@ -7,10 +7,16 @@ const mongoose = require('mongoose')
 
 //require middleware here
 
+//user screen (you get here when calling '/user')
+
+router.get('/', async (req, res, next ) => {
+    res.render('index-logged-out')
+})
+
 // login GET route here
 
 router.get('/login', (req, res, next) => {
-    res.render('auth/index-logged-out')
+    res.render('auth/login')
 })
 
 

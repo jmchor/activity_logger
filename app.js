@@ -25,8 +25,8 @@ const projectName = "activity_logger";
 app.locals.appTitle = `${capitalize(projectName)} created by JLN with IronLauncher`;
 
 // 👇 Start handling routes here
-const indexRoutes = require("./routes/index.routes");
-app.use("/", indexRoutes);
+// const indexRoutes = require("./routes/index.routes");
+// app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/", authRoutes);
