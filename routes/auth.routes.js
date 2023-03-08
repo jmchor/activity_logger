@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs')
+
+const saltRounds = 10
 
 //password stuff here
 
@@ -41,14 +44,17 @@ router.post('/login', async (req, res, next) => {
 
 // signup GET route
 
-router.get('/signup', async (req, res, next) => {
+router.get('/signup', (req, res, next) => {
+	res.render('auth/sign-up');
+});
 
-        res.render('auth/sign-up')
+
+// signup POST route
+
+router.post('/signup', async( req, res, next ) => {
 
 })
 
 
-
-// signup POST route
 
 module.exports = router;
