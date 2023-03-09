@@ -18,9 +18,10 @@ const activitySchema = new Schema(
             enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             required: true,
           },
+          //add daily  and none options to the enum to be more precise, since weekly usually means once a week, and specific uses a specific Date object
           repeats: {
             type: String,
-            enum: ['weekly', 'specific'],
+            enum: ['none','daily', 'weekly', 'specific'],
             required: true,
           },
           //the required function means that only if the "specific" option in "repeats" was selected a date input will be required?
