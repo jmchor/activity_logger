@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
+// Import the middleware for authentication here
+const { isLoggedIn } = require('./middleware/routeguard');
 
 const bcryptjs = require('bcryptjs')
 const saltRounds = 10
+
 
 
 //require middleware here
