@@ -20,14 +20,14 @@ const activitySchema = new Schema(
           },
           repeats: {
             type: String,
-            enum: ['weekly', 'specific'],
+            enum: ['weekly', 'once'],
             required: true,
           },
-          //the required function means that only if the "specific" option in "repeats" was selected a date input will be required?
+          //the required function means that only if the "once" option in "repeats" was selected a date input will be required? !Yes it does!
           date: {
             type: Date,
             required: function () {
-              return this.repeats === 'specific';
+              return this.repeats === 'once';
             },
           },
         },
