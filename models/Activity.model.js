@@ -10,6 +10,10 @@ const activitySchema = new Schema(
       type: String,
       required: true,
     },
+    isDone: {
+      type: Boolean,
+      default: false,
+    },
     days: {
       type: [
         {
