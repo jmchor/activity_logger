@@ -35,6 +35,11 @@ const activitySchema = new Schema(
       ],
       required: true,
     },
+    //add possibility to check of specific task
+    isDone: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,
