@@ -12,7 +12,7 @@ router.get('/create', (req, res) => {
 router.post('/create', isLoggedIn, async (req, res) => {
 	const { title, description, daysOfWeek, repeat, specificDate } = req.body;
 
-	const activity = new Activity({
+	const activity = Activity.create({
 		userId: req.session.currentUser._id, // assuming there is an authenticated user
 		title,
 		description,
