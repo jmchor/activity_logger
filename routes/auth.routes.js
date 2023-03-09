@@ -9,11 +9,11 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
 router.get('/home', isLoggedIn, (req, res, next) => {
-	res.render('index-logged-in', { layout: 'loggedin-layout' });
+	res.render('home');
 });
 
 router.get('/signup', (req, res, next) => {
-	res.render('auth/sign-up');
+	res.render('auth/sign-up', {layout: 'loggedout-layout'});
 });
 
 router.post('/signup', async (req, res, next) => {
@@ -23,11 +23,12 @@ router.post('/signup', async (req, res, next) => {
 	if (!username || !password || !confirm) {
 		res.render('auth/sign-up', {
 			errorMessage: 'All fields are mandatory. Please provide username and password.',
+                        layout: 'loggedout-layout'
 		});
 	}
 	//password and confirmation need to match
 	if (password !== confirm) {
-		res.render('auth/sign-up', { errorMessage: 'Passwords do not match' });
+		res.render('auth/sign-up', { errorMessage: 'Passwords do not match', layout: 'loggedout-layout' });
 	}
 
 	//TODO include regex here to make password restrictive?
@@ -43,10 +44,10 @@ router.post('/signup', async (req, res, next) => {
 		res.redirect('/login');
 	} catch (error) {
 		if (error instanceof mongoose.Error.ValidationError) {
-			res.status(500).render('auth/sign-up', { errorMessage: error.message });
+			res.status(500).render('auth/sign-up', { errorMessage: error.message, layout: 'loggedout-layout' });
 		} else if (error.code === 11000) {
 			res.status(500).render('auth/sign-up', {
-				errorMessage: 'The username needs to be unique. Username already in use.',
+				errorMessage: 'The username needs to be unique. Username already in use.', layout: 'loggedout-layout'
 			});
 		} else {
 			next(error);
@@ -55,7 +56,7 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
-	res.render('auth/login');
+	res.render('auth/login', {layout: 'loggedout-layout'});
 });
 
 router.post('/login', async (req, res, next) => {
@@ -64,7 +65,7 @@ router.post('/login', async (req, res, next) => {
 
 	if (username === '' || password === '') {
 		res.render('auth/login', {
-			errorMessage: 'Please enter both username and password to log in.',
+			errorMessage: 'Please enter both username and password to log in.', layout: 'loggedout-layout'
 		});
 		return;
 	}
@@ -75,7 +76,7 @@ router.post('/login', async (req, res, next) => {
 			//user isn't found
 			res.render('auth/login', {
 				errorMessage: 'Username is not registered. Try with other username.',
-				layout: 'layout.hbs',
+				layout: 'loggedout-layout',
 			});
 			return;
 		} else if (bcryptjs.compareSync(password, user.password)) {
@@ -85,7 +86,7 @@ router.post('/login', async (req, res, next) => {
 		} else {
 			res.render('auth/login', {
 				errorMessage: 'Incorrect password.',
-				layout: 'layout.hbs',
+				layout: 'loggedout-layout',
 			});
 		}
 	} catch (error) {
