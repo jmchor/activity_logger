@@ -23,6 +23,7 @@ const activitySchema = new Schema(
             enum: ['weekly', 'specific'],
             required: true,
           },
+          //the required function means that only if the "specific" option in "repeats" was selected a date input will be required?
           date: {
             type: Date,
             required: function () {
