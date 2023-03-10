@@ -1,6 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&family=Rubik:wght@300;500;600;700;900&display=swap");
+
+/* Font families to use imported fonts:
+
+font-family: 'Roboto', sans-serif;
+font-family: 'Rubik', sans-serif; */
+
 body {
-  padding: 50px;
+  margin: 0px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+header {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
 }
 
 a {
@@ -9,4 +22,12 @@ a {
 
 h1 {
   color: 15px;
+}
+
+.landing {
+  background-image: url(/images/background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
 }

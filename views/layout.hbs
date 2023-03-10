@@ -1,29 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>{{appTitle}}</title>
-      <link rel="stylesheet" href="/stylesheets/style.css" />
-   </head>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<meta http-equiv='X-UA-Compatible' content='ie=edge' />
+		<title>{{appTitle}}</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
 
-   <body>
+	<body>
 
-      <header>
-         <nav>
-            <ul>
-               <li><a href="/home">Home</a></li>
-               <li><a href="/home">Home</a></li>
-            </ul>
-         </nav>
+		{{#if loggedOut}}
+			<nav>
+				<!-- Navigation menu for logged out users -->
+				<h1>Logo</h1>
+				For testing: Logged out navigation.
+			</nav>
+		{{else}}
+			<nav>
+				<!-- Navigation menu for logged in users -->
+				<h1>Logo</h1>
+				For testing: Logged in navigation.
+				<ul>
+					<li><a href='/'>Index</a></li>
+					<li><a href='/home'>Home</a></li>
+					<li><a href='/schedule'>View Schedule</a></li>
+					<li><a href='/new-activity'>New Activity</a></li>
+				</ul>
+			</nav>
+		{{/if}}
 
+		{{! Temporary navigation while testing. Should be in the navigation once above if-statement works properly. }}
 
+		{{{body}}}
 
-      {{{body}}}
-
-      <script src="/js/script.js"></script>
-   </body>
+		<script src='/js/script.js'></script>
+	</body>
 
 </html>
