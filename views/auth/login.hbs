@@ -1,14 +1,23 @@
 <h1>Login</h1>
-<form action='/login' method='POST'>
-	<label for='username'>Username:</label>
-	<input type='text' id='username' name='username' required />
+<form action="/login" method="POST">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required />
 
-	<label for='password'>Password:</label>
-	<input type='password' id='password' name='password' required />
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required />
 
-	<button type='submit'>Login</button>
+  <input
+    class="btn btn-primary btn-lg btn-block"
+    type="submit"
+    value="Log in"
+  />
+  <div class="divider d-flex align-items-center my-4">
+    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+  </div>
+  <a class="btn btn-primary btn-lg btn-block" href="/signup">Sign up</a>
+
 </form>
 
 {{#if errorMessage}}
-	<p>{{errorMessage}}</p>
+  <p>{{errorMessage}}</p>
 {{/if}}
