@@ -1,5 +1,25 @@
 const { Schema, model } = require('mongoose');
 
+
+//compartmentalize the days of the week into their own Schema
+const daySchema = new Schema(
+	{
+		day: {
+			type: String,
+			enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+			required: true,
+		},
+		isDone: {
+			type: Boolean,
+			required: true,
+			default: false,
+		},
+	},
+	{
+		_id: false,
+	}
+);
+
 const activitySchema = new Schema(
 	{
 		userId: {
@@ -8,7 +28,7 @@ const activitySchema = new Schema(
 		},
 		title: {
 			type: String,
-			required: true
+			required: true,
 		},
 		description: {
 			type: String,
@@ -16,19 +36,16 @@ const activitySchema = new Schema(
 		},
 		category: {
 			type: String,
-
 		},
-		isDone: {
-			type: Boolean,
+		daysOfWeek: {
+			type: [daySchema],
 			required: true,
-			default: false
+			//check that the user actually puts in a day
+			validate: [
+				(days) => days.length > 0 && days.length <= 7,
+				'daysOfWeek must contain between 1 and 7 days',
+			],
 		},
-		daysOfWeek: [
-			{
-				type: String,
-				enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-			},
-		],
 		repeat: {
 			type: String,
 			enum: ['weekly', 'once'],
