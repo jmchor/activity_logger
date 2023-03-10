@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const { isLoggedIn } = require("../middleware/routeguard");
 
 const bcryptjs = require("bcryptjs");
+const { userInfo } = require("os");
 const saltRounds = 10;
 
 router.get("/home", isLoggedIn, (req, res, next) => {
@@ -13,11 +14,13 @@ router.get("/home", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/sign-up");
+  const loggedOut = "You are still logged out"
+  res.render("auth/sign-up", {loggedOut: loggedOut});
 });
 
 router.post("/signup", async (req, res, next) => {
   const { username, password, confirm } = req.body;
+  const loggedOut = "You are still logged out"
 
   //make sure the user provides both required inputs
   if (!username || !password || !confirm) {
@@ -28,7 +31,7 @@ router.post("/signup", async (req, res, next) => {
   }
   //password and confirmation need to match
   if (password !== confirm) {
-    res.render("auth/sign-up", { errorMessage: "Passwords do not match" });
+    res.render("auth/sign-up", { errorMessage: "Passwords do not match", loggedOut: loggedOut });
   }
 
   //TODO include regex here to make password restrictive?
@@ -44,11 +47,11 @@ router.post("/signup", async (req, res, next) => {
     res.redirect("/login");
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      res.status(500).render("auth/sign-up", { errorMessage: error.message });
+      res.status(500).render("auth/sign-up", { errorMessage: error.message, loggedOut: loggedOut });
     } else if (error.code === 11000) {
       res.status(500).render("auth/sign-up", {
         errorMessage:
-          "The username needs to be unique. Username already in use.",
+          "The username needs to be unique. Username already in use.", loggedOut: loggedOut
       });
     } else {
       next(error);
@@ -57,16 +60,18 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  const loggedOut = "You are still logged out"
+  res.render("auth/login", {loggedOut: loggedOut});
 });
 
 router.post("/login", async (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   const { username, password } = req.body;
+  const loggedOut = "You are still logged out"
 
   if (username === "" || password === "") {
     res.render("auth/login", {
-      errorMessage: "Please enter both username and password to log in.",
+      errorMessage: "Please enter both username and password to log in.", loggedOut: loggedOut
     });
     return;
   }
@@ -76,7 +81,7 @@ router.post("/login", async (req, res, next) => {
     if (!user) {
       //user isn't found
       res.render("auth/login", {
-        errorMessage: "Username is not registered. Try with other username.",
+        errorMessage: "Username is not registered. Try with other username.", loggedOut: loggedOut
       });
       return;
     } else if (bcryptjs.compareSync(password, user.password)) {
@@ -85,7 +90,7 @@ router.post("/login", async (req, res, next) => {
       res.redirect("/home");
     } else {
       res.render("auth/login", {
-        errorMessage: "Incorrect password.",
+        errorMessage: "Incorrect password.", loggedOut: loggedOut
       });
     }
   } catch (error) {
