@@ -13,42 +13,35 @@ const saltRounds = 10;
 router.get("/home", isLoggedIn, async (req, res, next) => {
 
   const userId = req.session.currentUser._id;
-  const currentDate = new Date();
-  const yesterday = new Date();
-  yesterday.setDate(currentDate.getDate() - 1);
-	const nextWeek = new Date();
-	nextWeek.setDate(currentDate.getDate() + 1);
+  //set to Midnight of the current day so the gte checks return something
+  const currentDate = new Date(new Date().setHours(1, 0, 0, 0))
+  const tomorrow = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+  const tomorrowMidnight = new Date(tomorrow.setHours(0, 0, 0, 0));
 
 	try {
-
-    console.log(yesterday)
 		// Find all activities that have a specific date within the next two weeks
+    const user = await User.findById(userId)
 		const activities = await Activity.find({
 			userId: userId,
 			specificDate: {
-				$gte: yesterday,
-				$lte: nextWeek,
+				$gte: currentDate,
+				$lt: tomorrowMidnight,
 			},
 		});
 
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 			const activityDate = new Date(activity.specificDate);
-			return activityDate >= yesterday && activityDate < nextWeek;
+			return activityDate >= currentDate && activityDate < tomorrowMidnight;
 		});
 
 		// Send the coming week activities as the response
-
-
-		// Send the coming week activities as the response
-		res.render('home', {comingWeekActivities: comingWeekActivities});
+		res.render('home', { user, comingWeekActivities: comingWeekActivities});
 
   } catch (error) {
 next(error)
 
-
   }
-
 
 });
 
