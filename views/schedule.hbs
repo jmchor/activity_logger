@@ -3,7 +3,11 @@
     <ul>
       {{#each activities}}
         {{#if hasMonday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -12,7 +16,11 @@
     <ul>
       {{#each activities}}
         {{#if hasTuesday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -30,7 +38,11 @@
     <ul>
       {{#each activities}}
         {{#if hasThursday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -39,7 +51,11 @@
     <ul>
       {{#each activities}}
         {{#if hasFriday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -48,7 +64,11 @@
     <ul>
       {{#each activities}}
         {{#if hasSaturday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
@@ -57,7 +77,11 @@
     <ul>
       {{#each activities}}
         {{#if hasSunday}}
-          <li>{{title}} - {{description}}</li>
+            <li>
+                <input type="checkbox" id="{{this._id}}">
+                <label for="{{this._id}}">
+                {{title}} - {{description}}
+            </li>
         {{/if}}
       {{/each}}
     </ul>
