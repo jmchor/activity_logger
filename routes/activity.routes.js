@@ -147,25 +147,7 @@ router.get('/schedule', async (req, res, next) => {
 	  },
 	  });
 
-	  // Filter the activities to only include those within the coming week
-	  const comingWeekActivities = activities.filter((activity) => {
-		const activityDate = new Date(activity.specificDate);
-		return activityDate >= currentDate && activityDate < nextWeek;
-	  });
 
-	  // Add hasMonday, hasTuesday, etc. properties to each activity
-	  comingWeekActivities.forEach((activity) => {
-		const activityDate = new Date(activity.specificDate);
-		const dayOfWeek = activityDate.getDay();
-
-		activity.hasMonday = (dayOfWeek === 1);
-		activity.hasTuesday = (dayOfWeek === 2);
-		activity.hasWednesday = (dayOfWeek === 3);
-		activity.hasThursday = (dayOfWeek === 4);
-		activity.hasFriday = (dayOfWeek === 5);
-		activity.hasSaturday = (dayOfWeek === 6);
-		activity.hasSunday = (dayOfWeek === 0);
-	  });
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 		  const activityDate = new Date(activity.specificDate);
