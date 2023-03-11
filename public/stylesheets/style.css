@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------
+# Import Bootstrap icons
+--------------------------------------------------------------*/
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+/*--------------------------------------------------------------
+# Global Styles
+--------------------------------------------------------------*/
+
 body {
   background-color: #fff;
   color: #333;
@@ -48,18 +57,20 @@ footer {
   position: fixed;
 }
 
+.btn {
+  border: none;
+  background-color: #212529;
+}
+
+#menu-button {
+  display: flex;
+  flex-direction: column;
+}
+
 /*
   (To be continued)
 
-.btn {
-  border: 1px solid #555;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 15px 40px;
-  transition: all 0.5s ease-in-out 0s;
-}
+
 
 .btn-default:hover {
   border: 1px solid #555;
@@ -130,25 +141,24 @@ footer {
 # Footer Navigation
 --------------------------------------------------------------*/
 
-.bottom-nav {
-  padding: 0;
+#bottom-nav {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.bottom-nav ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  list-style: none;
-  align-items: center;
-}
-
-.bottom-nav li {
-  position: relative;
+.navbar-nav .nav-item {
+  text-align: center;
 }
 
 #bottom-nav a {
   color: white;
+}
+
+#bottom-nav i {
+  font-size: 26px;
+}
+
+#menu-button {
+  min-width: 100px;
 }

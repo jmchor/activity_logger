@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{appTitle}}</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 
   <body>
@@ -62,15 +62,35 @@
       <main id="main" class="container">
         {{{body}}}
       </main>
+      <i class="bi bi-house"></i>
       <footer>
         <nav
           id="bottom-nav"
           class="navbar fixed-bottom navbar-dark bg-dark justify-content-center"
         >
           <ul class="nav justify-content-center text-center">
-            <li class="nav-item mx-2"><a href="/home">Home</a></li>
-            <li class="nav-item mx-2"><a href="/schedule">View Schedule</a></li>
-            <li class="nav-item mx-2"><a href="/create">New Activity</a></li>
+
+            <div class="nav-item">
+              <a href="/home" id="menu-button" class="btn btn-primary">
+                <div><i class="bi bi-house"></i></div>
+                <div>Home</div>
+              </a>
+            </div>
+
+            <div class="nav-item">
+              <a href="/schedule" id="menu-button" class="btn btn-primary">
+                <div><i class="bi bi-house"></i></div>
+                <div>View Schedule</div>
+              </a>
+            </div>
+
+            <div class="nav-item">
+              <a href="/create" id="menu-button" class="btn btn-primary">
+                <div><i class="bi bi-house"></i></div>
+                <div>New Activity</div>
+              </a>
+            </div>
+
           </ul>
         </nav>
       </footer>
@@ -78,8 +98,8 @@
 
     <script src="/js/script.js"></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
   </body>
