@@ -1,3 +1,15 @@
+
+<div>
+    <strong>Sunday:</strong>
+                <ul>
+                    {{#each activities}}
+                        {{#if hasSunday}}
+                            {{> day}}
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </li>
+</div>
 <div>
     <strong>Monday:</strong>
                 <ul>
@@ -8,45 +20,45 @@
                     {{/each}}
                 </ul>
             </li>
-</div>  
+</div>
 <div>
     <strong>Tuesday:</strong>
                 <ul>
                     {{#each activities}}
-                        {{#if hasMonday}}
+                        {{#if hasTuesday}}
                             {{> day}}
                         {{/if}}
                     {{/each}}
                 </ul>
             </li>
-</div>  
+</div>
 <div>
     <strong>Wednesday:</strong>
                 <ul>
                     {{#each activities}}
-                        {{#if hasMonday}}
+                        {{#if hasWednesday}}
                             {{> day}}
                         {{/if}}
                     {{/each}}
                 </ul>
             </li>
-</div>  
+</div>
 <div>
     <strong>Thursday:</strong>
                 <ul>
                     {{#each activities}}
-                        {{#if hasMonday}}
+                        {{#if hasThursday}}
                             {{> day}}
                         {{/if}}
                     {{/each}}
                 </ul>
             </li>
-</div> 
+</div>
 <div>
     <strong>Friday:</strong>
                 <ul>
                     {{#each activities}}
-                        {{#if hasMonday}}
+                        {{#if hasFriday}}
                             {{> day}}
                         {{/if}}
                     {{/each}}
@@ -57,24 +69,14 @@
     <strong>Saturday:</strong>
                 <ul>
                     {{#each activities}}
-                        {{#if hasMonday}}
+                        {{#if hasSaturday}}
                             {{> day}}
                         {{/if}}
                     {{/each}}
                 </ul>
             </li>
 </div>
-<div>
-    <strong>Sunday:</strong>
-                <ul>
-                    {{#each activities}}
-                        {{#if hasMonday}}
-                            {{> day}}
-                        {{/if}}
-                    {{/each}}
-                </ul>
-            </li>
-</div>  
+
 
 
 
