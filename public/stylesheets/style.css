@@ -1,3 +1,12 @@
+/*--------------------------------------------------------------
+# Import Bootstrap icons
+--------------------------------------------------------------*/
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+/*--------------------------------------------------------------
+# Global Styles
+--------------------------------------------------------------*/
+
 body {
   background-color: #fff;
   color: #333;
@@ -41,8 +50,6 @@ p {
 }
 
 footer {
-  background-color: white;
-  color: #222;
   padding: 20px;
   left: 0;
   right: 0;
@@ -50,18 +57,25 @@ footer {
   position: fixed;
 }
 
+.btn {
+  border: none;
+  background-color: #212529;
+}
+
+.btn:focus {
+  border: none;
+  background-color: #212529;
+}
+
+#menu-button {
+  display: flex;
+  flex-direction: column;
+}
+
 /*
   (To be continued)
 
-.btn {
-  border: 1px solid #555;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 15px 40px;
-  transition: all 0.5s ease-in-out 0s;
-}
+
 
 .btn-default:hover {
   border: 1px solid #555;
@@ -106,7 +120,7 @@ footer {
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: none;
   color: #222;
   white-space: nowrap;
@@ -132,34 +146,25 @@ footer {
 # Footer Navigation
 --------------------------------------------------------------*/
 
-.bottom-nav {
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navbar-nav .nav-item {
+  text-align: center;
 }
 
-.bottom-nav ul {
-  margin: 0;
-  padding: 0;
+#bottom-nav {
   display: flex;
-  list-style: none;
-  align-items: center;
-}
-
-.bottom-nav li {
-  position: relative;
-}
-
-.bottom-nav a {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  text-decoration: none;
-  color: #222;
-  white-space: nowrap;
-  transition: 0.3s;
+  width: 100%;
+}
+
+#bottom-nav a {
+  color: white;
+  gap: 10px;
+}
+
+#bottom-nav i {
+  font-size: 26px;
+}
+
+#menu-button {
+  min-width: 100px;
 }
