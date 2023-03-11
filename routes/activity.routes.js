@@ -129,5 +129,35 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 });
 
 
+router.get('/schedule', async (req, res, next) => {
+	// Get the current date and the date of the next week
+	const currentDate = new Date();
+	const nextWeek = new Date();
+	nextWeek.setDate(currentDate.getDate() + 7);
+
+	try {
+		// Find all activities that have a specific date within the next two weeks
+		const activities = await Activity.find({
+			specificDate: {
+				$gte: currentDate,
+				$lte: nextWeek,
+			},
+		});
+
+		// Filter the activities to only include those within the coming week
+		const comingWeekActivities = activities.filter((activity) => {
+			const activityDate = new Date(activity.specificDate);
+			return activityDate >= currentDate && activityDate < nextWeek;
+		});
+
+		// Send the coming week activities as the response
+		res.send(comingWeekActivities);
+	} catch (error) {
+		console.error(error);
+		next(error)
+		res.status(500).send('Server error');
+	}
+});
+
 
 module.exports = router;
