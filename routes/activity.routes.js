@@ -134,30 +134,44 @@ router.get('/schedule', async (req, res, next) => {
 	const currentDate = new Date();
 	const nextWeek = new Date();
 	nextWeek.setDate(currentDate.getDate() + 7);
-
+  
 	try {
-		// Find all activities that have a specific date within the next two weeks
-		const activities = await Activity.find({
-			specificDate: {
-				$gte: currentDate,
-				$lte: nextWeek,
-			},
-		});
-
-		// Filter the activities to only include those within the coming week
-		const comingWeekActivities = activities.filter((activity) => {
-			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < nextWeek;
-		});
-
-		// Send the coming week activities as the response
-		res.send(comingWeekActivities);
+	  // Find all activities that have a specific date within the next two weeks
+	  const activities = await Activity.find({
+		specificDate: {
+		  $gte: currentDate,
+		  $lte: nextWeek,
+		},
+	  });
+  
+	  // Filter the activities to only include those within the coming week
+	  const comingWeekActivities = activities.filter((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		return activityDate >= currentDate && activityDate < nextWeek;
+	  });
+  
+	  // Add hasMonday, hasTuesday, etc. properties to each activity
+	  comingWeekActivities.forEach((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		const dayOfWeek = activityDate.getDay();
+  
+		activity.hasMonday = (dayOfWeek === 1);
+		activity.hasTuesday = (dayOfWeek === 2);
+		activity.hasWednesday = (dayOfWeek === 3);
+		activity.hasThursday = (dayOfWeek === 4);
+		activity.hasFriday = (dayOfWeek === 5);
+		activity.hasSaturday = (dayOfWeek === 6);
+		activity.hasSunday = (dayOfWeek === 0);
+	  });
+  
+	  // Send the coming week activities as the response
+	  res.render('schedule', { activities: comingWeekActivities });
 	} catch (error) {
-		console.error(error);
-		next(error)
-		res.status(500).send('Server error');
+	  console.error(error);
+	  next(error)
+	  res.status(500).send('Server error');
 	}
-});
+  });
 
 
 module.exports = router;

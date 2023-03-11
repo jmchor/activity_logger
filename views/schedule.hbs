@@ -1,0 +1,66 @@
+<ul>
+  <li><strong>Monday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasMonday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Tuesday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasTuesday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Wednesday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasWednesday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Thursday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasThursday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Friday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasFriday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Saturday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasSaturday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+  <li><strong>Sunday:</strong>
+    <ul>
+      {{#each activities}}
+        {{#if hasSunday}}
+          <li>{{title}} - {{description}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </li>
+</ul>
+
