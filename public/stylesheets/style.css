@@ -41,8 +41,6 @@ p {
 }
 
 footer {
-  background-color: white;
-  color: #222;
   padding: 20px;
   left: 0;
   right: 0;
@@ -151,15 +149,6 @@ footer {
   position: relative;
 }
 
-.bottom-nav a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 15px;
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  text-decoration: none;
-  color: #222;
-  white-space: nowrap;
-  transition: 0.3s;
+#bottom-nav a {
+  color: white;
 }

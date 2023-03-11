@@ -29,6 +29,7 @@
         {{{body}}}
       </main>
       <footer>Developed by Johannes, Lukas and Nana</footer>
+
     {{else}}
       <!-- Display header and footer navigation for logged in users -->
 
@@ -62,11 +63,14 @@
         {{{body}}}
       </main>
       <footer>
-        <nav id="bottom-nav" class="bottom-nav">
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/schedule">View Schedule</a></li>
-            <li><a href="/create">New Activity</a></li>
+        <nav
+          id="bottom-nav"
+          class="navbar fixed-bottom navbar-dark bg-dark justify-content-center"
+        >
+          <ul class="nav justify-content-center text-center">
+            <li class="nav-item mx-2"><a href="/home">Home</a></li>
+            <li class="nav-item mx-2"><a href="/schedule">View Schedule</a></li>
+            <li class="nav-item mx-2"><a href="/create">New Activity</a></li>
           </ul>
         </nav>
       </footer>
