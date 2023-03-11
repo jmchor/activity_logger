@@ -131,4 +131,10 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.post('/logout', isLoggedIn, (req,res) => {
+  req.session.destroy();
+  res.redirect("/");
+
+})
+
 module.exports = router;
