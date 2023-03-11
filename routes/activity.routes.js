@@ -71,10 +71,10 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						now.getFullYear(),
 						now.getMonth(),
 						now.getDate() +
-							daysUntilNextDayOfWeek +
-							1 +
-							i * 7 +
-							(daysUntilNextDayOfWeek < 0 ? 7 : 0)
+						daysUntilNextDayOfWeek +
+						i * 7 +
+						(daysUntilNextDayOfWeek < 0 ? 7 : 0),
+						now.getHours() + 1
 					);
 					const newActivity = new Activity({
 						userId,
@@ -100,10 +100,10 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					now.getFullYear(),
 					now.getMonth(),
 					now.getDate() +
-						1 +
 						daysUntilNextDayOfWeek +
 						i * 7 +
-						(daysUntilNextDayOfWeek < 0 ? 7 : 0)
+						(daysUntilNextDayOfWeek < 0 ? 7 : 0),
+						now.getHours() + 1
 				);
 
 				const newActivity = new Activity({
