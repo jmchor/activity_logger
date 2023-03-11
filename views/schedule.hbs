@@ -1,90 +1,57 @@
 <ul>
-  <li><strong>Monday:</strong>
-    <ul>
       {{#each activities}}
         {{#if hasMonday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
-            </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Tuesday:</strong>
-    <ul>
-      {{#each activities}}
+          <li><strong>Monday:</strong>
+
+            {{> day}}
+
+          </li>
+          {{/if}}
+
         {{#if hasTuesday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
+          <li><strong>Tuesday:</strong>
+
+            {{> day}}
+
             </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Wednesday:</strong>
-    <ul>
-      {{#each activities}}
+            {{/if}}
         {{#if hasWednesday}}
-          <li>{{title}} - {{description}}</li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Thursday:</strong>
-    <ul>
-      {{#each activities}}
+          <li><strong>Wednesday:</strong>
+
+            {{> day}}
+
+            </li>
+            {{/if}}
         {{#if hasThursday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
+          <li><strong>Thursday:</strong>
+
+            {{> day}}
+
             </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Friday:</strong>
-    <ul>
-      {{#each activities}}
+            {{/if}}
         {{#if hasFriday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
+          <li><strong>Friday:</strong>
+
+            {{> day}}
+
             </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Saturday:</strong>
-    <ul>
-      {{#each activities}}
+            {{/if}}
         {{#if hasSaturday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
+          <li><strong>Saturday:</strong>
+
+            {{> day}}
+
             </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </li>
-  <li><strong>Sunday:</strong>
-    <ul>
-      {{#each activities}}
+            {{/if}}
         {{#if hasSunday}}
-            <li>
-                <input type="checkbox" id="{{this._id}}">
-                <label for="{{this._id}}">
-                {{title}} - {{description}}
+          <li><strong>Sunday:</strong>
+
+            {{> day}}
+
             </li>
-        {{/if}}
+            {{/if}}
+
       {{/each}}
-    </ul>
-  </li>
 </ul>
+
 
