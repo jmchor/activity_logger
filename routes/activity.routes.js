@@ -129,7 +129,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 });
 
 
-router.get('/schedule', async (req, res) => {
+router.get('/schedule', async (req, res, next) => {
 	// Get the current date and the date of the next week
 	const currentDate = new Date();
 	const nextWeek = new Date();
@@ -154,6 +154,7 @@ router.get('/schedule', async (req, res) => {
 		res.send(comingWeekActivities);
 	} catch (error) {
 		console.error(error);
+		next(error)
 		res.status(500).send('Server error');
 	}
 });
