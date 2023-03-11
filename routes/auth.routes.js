@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
+const Activity = require("../models/Activity.model");
 const mongoose = require("mongoose");
 // Import the middleware for authentication here
 const { isLoggedIn } = require("../middleware/routeguard");
@@ -9,8 +10,46 @@ const bcryptjs = require("bcryptjs");
 const { userInfo } = require("os");
 const saltRounds = 10;
 
-router.get("/home", isLoggedIn, (req, res, next) => {
-  res.render("home");
+router.get("/home", isLoggedIn, async (req, res, next) => {
+
+  const userId = req.session.currentUser._id;
+  const currentDate = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(currentDate.getDate() - 1);
+	const nextWeek = new Date();
+	nextWeek.setDate(currentDate.getDate() + 1);
+
+	try {
+
+    console.log(yesterday)
+		// Find all activities that have a specific date within the next two weeks
+		const activities = await Activity.find({
+			userId: userId,
+			specificDate: {
+				$gte: yesterday,
+				$lte: nextWeek,
+			},
+		});
+
+		// Filter the activities to only include those within the coming week
+		const comingWeekActivities = activities.filter((activity) => {
+			const activityDate = new Date(activity.specificDate);
+			return activityDate >= yesterday && activityDate < nextWeek;
+		});
+
+		// Send the coming week activities as the response
+
+
+		// Send the coming week activities as the response
+		res.render('home', {comingWeekActivities: comingWeekActivities});
+
+  } catch (error) {
+next(error)
+
+
+  }
+
+
 });
 
 router.get("/signup", (req, res, next) => {

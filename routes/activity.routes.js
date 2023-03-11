@@ -33,7 +33,8 @@ router.get('/create', (req, res) => {
 
 router.post('/create', isLoggedIn, async (req, res, next) => {
 	try {
-		const { userId, title, description, category, daysOfWeek, repeat, specificDate } = req.body;
+		const { title, description, category, daysOfWeek, repeat, specificDate } = req.body;
+		const userId = req.session.currentUser._id;
 
 		// If the activity is a one-time activity, create it and return ==> require the user to click once AND the date
 		if (specificDate && repeat === 'once') {
@@ -48,7 +49,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 				specificDate,
 			});
 			await newActivity.save();
-			return res.status(201).send({ message: 'Activity created successfully' });
+			return res.redirect('/home');
 		}
 
 		// Calculate the number of weeks left in the year ==> limit the number of activities created until end of year
@@ -131,6 +132,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 router.get('/schedule', async (req, res, next) => {
 	// Get the current date and the date of the next week
+	const userId = req.session.currentUser._id;
 	const currentDate = new Date();
 	const nextWeek = new Date();
 	nextWeek.setDate(currentDate.getDate() + 7);
@@ -138,10 +140,11 @@ router.get('/schedule', async (req, res, next) => {
 	try {
 	  // Find all activities that have a specific date within the next two weeks
 	  const activities = await Activity.find({
-		specificDate: {
-		  $gte: currentDate,
-		  $lte: nextWeek,
-		},
+	  specificDate: {
+			userId:userId,
+	  $gte: currentDate,
+	  $lte: nextWeek,
+	  },
 	  });
 
 	  // Filter the activities to only include those within the coming week
@@ -163,15 +166,35 @@ router.get('/schedule', async (req, res, next) => {
 		activity.hasSaturday = (dayOfWeek === 6);
 		activity.hasSunday = (dayOfWeek === 0);
 	  });
+		// Filter the activities to only include those within the coming week
+		const comingWeekActivities = activities.filter((activity) => {
+		  const activityDate = new Date(activity.specificDate);
+		  return activityDate >= currentDate && activityDate < nextWeek;
+		});
 
-	  // Send the coming week activities as the response
-	  res.render('schedule', { activities: comingWeekActivities });
+		// Add hasMonday, hasTuesday, etc. properties to each activity
+		comingWeekActivities.forEach((activity) => {
+		  const activityDate = new Date(activity.specificDate);
+		  const dayOfWeek = activityDate.getDay();
+
+		  activity.hasMonday = (dayOfWeek === 1);
+		  activity.hasTuesday = (dayOfWeek === 2);
+		  activity.hasWednesday = (dayOfWeek === 3);
+		  activity.hasThursday = (dayOfWeek === 4);
+		  activity.hasFriday = (dayOfWeek === 5);
+		  activity.hasSaturday = (dayOfWeek === 6);
+		  activity.hasSunday = (dayOfWeek === 0);
+		});
+
+		// Send the coming week activities as the response
+		res.send(comingWeekActivities);
 	} catch (error) {
-	  console.error(error);
-	  next(error)
-	  res.status(500).send('Server error');
+		console.error(error);
+		next(error)
+		res.status(500).send('Server error');
 	}
-  });
+});
+
 
 
 module.exports = router;
