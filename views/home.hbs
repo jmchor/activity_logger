@@ -1,3 +1,17 @@
 <div>
-  <h2> Welcome back, {{{user.name}}}!</h2>
+	<h2> Welcome back, {{{user.username}}}!</h2>
+
+	{{#if comingWeekActivities}}
+
+		<h3>Activities for today</h3>
+		<ul>
+			{{#each comingWeekActivities}}
+				<li>{{{this.title}}}</li>
+			{{/each}}
+		</ul>
+
+	{{else}}
+		<h3>There are no activities for today</h3>
+	{{/if}}
+
 </div>

@@ -33,7 +33,8 @@ router.get('/create', (req, res) => {
 
 router.post('/create', isLoggedIn, async (req, res, next) => {
 	try {
-		const { userId, title, description, category, daysOfWeek, repeat, specificDate } = req.body;
+		const { title, description, category, daysOfWeek, repeat, specificDate } = req.body;
+		const userId = req.session.currentUser._id;
 
 		// If the activity is a one-time activity, create it and return ==> require the user to click once AND the date
 		if (specificDate && repeat === 'once') {
@@ -48,7 +49,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 				specificDate,
 			});
 			await newActivity.save();
-			return res.status(201).send({ message: 'Activity created successfully' });
+			return res.redirect('/home');
 		}
 
 		// Calculate the number of weeks left in the year ==> limit the number of activities created until end of year
@@ -131,6 +132,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 router.get('/schedule', async (req, res, next) => {
 	// Get the current date and the date of the next week
+	const userId = req.session.currentUser._id;
 	const currentDate = new Date();
 	const nextWeek = new Date();
 	nextWeek.setDate(currentDate.getDate() + 7);
@@ -138,6 +140,7 @@ router.get('/schedule', async (req, res, next) => {
 	try {
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
+			userId: userId,
 			specificDate: {
 				$gte: currentDate,
 				$lte: nextWeek,
