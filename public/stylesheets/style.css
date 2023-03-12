@@ -62,8 +62,13 @@ footer {
   background-color: #212529;
 }
 
-.btn:focus {
+.btn:hover {
   border: none;
+  background-color: #616971;
+}
+
+.btn:focus {
+  outline: none;
   background-color: #212529;
 }
 
