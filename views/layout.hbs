@@ -50,9 +50,20 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul class="navbar-nav ms-auto text-center">
-            <li><a href="#">User Profile</a></li>
-            <li><a href="#">Log Out</a></li>
+          <ul id="mobile-menu" class="navbar-nav ms-auto text-center">
+            <li>
+              <a href="#" id="menu-button" class="btn btn-primary">Profile</a>
+            </li>
+            <li>
+              <form action="/logout" method="POST" id="mobile-menu">
+                <input
+                  type="submit"
+                  value="Log Out"
+                  id="menu-button"
+                  class="btn btn-primary"
+                />
+              </form>
+            </li>
           </ul>
         </div>
       </nav>
