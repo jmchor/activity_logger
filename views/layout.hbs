@@ -19,7 +19,7 @@
 
     {{#if loggedOut}}
       <!-- Logged out HEADER w/o navigation -->
-      <nav id="top-nav" class="navbar navbar-expand-md navbar-light">
+      <nav id="top-nav" class="navbar navbar-expand-md navbar-light bg-white">
         <div id="logo">
           <h1>
             <a href="/" id="logo" class="navbar-brand">logo</a>
@@ -30,11 +30,19 @@
         {{{body}}}
       </main>
       <!-- Logged out FOOTER w/ credits -->
-      <footer>Developed by Johannes, Lukas and Nana</footer>
+      <footer
+        id="bottom-nav"
+        class="navbar fixed-bottom navbar-dark bg-dark justify-content-center text-light"
+      >
+        Developed by Johannes, Lukas and Nana
+      </footer>
 
     {{else}}
       <!-- Logged in HEADER w/ navigation -->
-      <nav id="top-nav" class="navbar navbar-expand-md navbar-light">
+      <nav
+        id="top-nav"
+        class="navbar fixed-top navbar-expand-md navbar-light bg-white"
+      >
         <div id="logo">
           <h1><a href="/" id="logo" class="navbar-brand">logo</a></h1>
         </div>

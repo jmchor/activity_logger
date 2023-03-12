@@ -1,43 +1,58 @@
+{{! <div class="col-md-12">
+  <div class="col-md-1">
+
+  </div>
+</div> }}
+
 {{#if this.isDone}}
-<ul>
-    <li>
+  <div class="row row-cols-auto">
+    <form class="col-12">
+      <div class="col-10">
+        <input
+          type="checkbox"
+          id="{{this._id}}"
+          name="_id"
+          value="{{this._id}}"
+          checked
+        />
+        <label id="{{this._id}}" for="{{this._id}}">
+          {{title}}
+        </label>
+        –
+        {{description}}
+      </div>
+    </form>
+  </div>
 
-        <input type="checkbox" id="{{this._id}}" name="_id" value="{{this._id}}" checked>
-        <label for="{{this._id}}">
-        <p class="view">{{title}} - {{description}}</p>
-
-
-    </li>
-</ul>
 {{else}}
+  <div class="row row-cols-auto">
 
-<ul>
-    <li>
-        <form action="/schedule", method="POST">
-        <input type="checkbox" id="{{this._id}}" name="_id" value="{{this._id}}">
-        <label id ="{{this._id}}"for="{{this._id}}">
-        <p>{{title}} - {{description}}</p>
-        </form>
+    <form class="col-12" action="/schedule" method="POST">
+      <div class="col-10">
+        <input
+          type="checkbox"
+          id="{{this._id}}"
+          name="_id"
+          value="{{this._id}}"
+        />
+        <label id="{{this._id}}" for="{{this._id}}">
+          {{title}}
+        </label>
+        –
+        {{description}}
+      </div>
 
-    </li>
-</ul>
+    </form>
+  </div>
+
 {{/if}}
 
-
 <script>
-//submits the form and sends the id of the checkbox to the POST route
-window.onload = function () {
-	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-	checkboxes.forEach((checkbox) => {
-		checkbox.addEventListener('change', function () {
-			if (this.checked) {
-				console.log(this.id);
-				const form = checkbox.closest('form');
-				form.submit();
-			}
-		});
-	});
-};
+  // Submits the form and sends the id of the checkbox to the POST route
+  window.onload = function () { const checkboxes =
+  document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => { checkbox.addEventListener('change',
+  function () { if (this.checked) { console.log(this.id); const form =
+  checkbox.closest('form'); form.submit(); } }); }); };
 
 </script>
