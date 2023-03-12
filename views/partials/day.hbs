@@ -1,18 +1,33 @@
+{{#if this.isDone}}
+<ul>
+    <li>
+
+        <input type="checkbox" id="{{this._id}}" name="_id" value="{{this._id}}" checked>
+        <label for="{{this._id}}">
+        <p class="view">{{title}} - {{description}}</p>
+
+
+    </li>
+</ul>
+{{else}}
+
 <ul>
     <li>
         <form action="/schedule", method="POST">
         <input type="checkbox" id="{{this._id}}" name="_id" value="{{this._id}}">
-        <label for="{{this._id}}">
-        {{title}} - {{description}}
+        <label id ="{{this._id}}"for="{{this._id}}">
+        <p>{{title}} - {{description}}</p>
         </form>
 
     </li>
 </ul>
+{{/if}}
+
 
 <script>
 //submits the form and sends the id of the checkbox to the POST route
 window.onload = function () {
-	var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 	checkboxes.forEach((checkbox) => {
 		checkbox.addEventListener('change', function () {
