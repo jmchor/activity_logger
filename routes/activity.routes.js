@@ -193,4 +193,30 @@ router.post('/schedule', isLoggedIn, async (req, res, next) => {
 
 });
 
+router.get('/schedule/:id', isLoggedIn, async (req, res, next) => {
+
+	const { id } = req.params
+
+	try {
+		const findActivity = await Activity.findById(id)
+		res.render('edit-activity', { findActivity })
+	} catch (error) {
+next(error)
+	}
+})
+router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
+
+	const { id } = req.params
+	const { title, description, category, daysOfWeek, repeat, specificDate } = req.body
+
+	console.log(req.body)
+
+	try {
+		const updateActivity = await Activity.findByIdAndUpdate(id, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
+		res.redirect('/schedule')
+	} catch (error) {
+next(error)
+	}
+})
+
 module.exports = router;
