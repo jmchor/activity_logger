@@ -39,4 +39,7 @@ app.use("/", activityRoutes);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 module.exports = app;
