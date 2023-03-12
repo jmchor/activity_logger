@@ -28,8 +28,9 @@
 				<label id='{{this._id}}' for='{{this._id}}'>
 					<a href='/schedule/{{this._id}}'>{{title}}</a>
 				</label>
-				–
+
 				{{description}}
+
 			</div>
 
 		</form>
@@ -37,10 +38,21 @@
 
 {{/if}}
 
+
 <script>
-	// Submits the form and sends the id of the checkbox to the POST route window.onload = function () { const
-	checkboxes = document.querySelectorAll('input[type="checkbox"]'); checkboxes.forEach((checkbox) => {
-	checkbox.addEventListener('change', function () { if (this.checked) { console.log(this.id); const form =
-	checkbox.closest('form'); form.submit(); } }); }); };
+	// Submits the form and sends the id of the checkbox to the POST route 
+	window.onload = function () { 
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]'); 
+		checkboxes.forEach((checkbox) => {
+			checkbox.addEventListener('change', function () { 
+				if (this.checked) { 
+					console.log(this.id); 
+					const form = checkbox.closest('form');
+					form.submit(); 
+				} 
+			}); 
+		}); 
+	};
 
 </script>
+
