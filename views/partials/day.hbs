@@ -38,21 +38,22 @@
 
 {{/if}}
 
-
+{{!-- prettier-ignore --}}
 <script>
-	// Submits the form and sends the id of the checkbox to the POST route 
-	window.onload = function () { 
-		const checkboxes = document.querySelectorAll('input[type="checkbox"]'); 
+
+	// Submits the form and sends the id of the checkbox to the POST route
+
+	window.onload = function () {
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 		checkboxes.forEach((checkbox) => {
-			checkbox.addEventListener('change', function () { 
-				if (this.checked) { 
-					console.log(this.id); 
+			checkbox.addEventListener('change', function () {
+				if (this.checked) {
+					console.log(this.id);
 					const form = checkbox.closest('form');
-					form.submit(); 
-				} 
-			}); 
-		}); 
+					form.submit();
+				}
+			});
+		});
 	};
 
 </script>
-
