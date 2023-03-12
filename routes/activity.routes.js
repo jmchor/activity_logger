@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 // Import the middleware for authentication here
 const { isLoggedIn } = require('../middleware/routeguard');
 const Activity = require('../models/Activity.model');
+const methodOverride = require('method-override');
+
+// middleware to override HTTP methods
+router.use(methodOverride('_method'));
 
 //Since we display a day's name in the form we need to convert it to a number for the calculation in the POST route
 function convertDayOfWeekToNumber(day) {
@@ -203,7 +207,8 @@ router.get('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	} catch (error) {
 next(error)
 	}
-})
+});
+
 router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 
 	const { id } = req.params
@@ -217,6 +222,21 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	} catch (error) {
 next(error)
 	}
-})
+});
+
+router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
+	const { id } = req.params;
+  
+	try {
+	  const deletedActivity = await Activity.findByIdAndDelete(id);
+	  if (!deletedActivity) {
+		return res.status(404).send('Activity not found');
+	  }
+	  res.redirect('/schedule');
+	} catch (error) {
+	  next(error);
+	}
+  });
+  
 
 module.exports = router;
