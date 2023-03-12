@@ -1,0 +1,21 @@
+<h1>Edit the activity "{{findActivity.title}}"</h1>
+
+<form action='/schedule/{{findActivity._id}}' method='POST'>
+
+	<label for='title'>Title</label>
+	<input type='text' id='title' name='title' value='{{findActivity.title}}' />
+	<br />
+	<label for='description'>Description</label>
+	<input type='text' id='description' name='description' value='{{findActivity.description}}' />
+	<br />
+	{{!-- {{#unless findActivity.daysOfWeek}}
+		<label for='date'>Date</label>
+		<input type='date' id='date' name='specificDate' value='{{findActivity.specificDate}}' />
+	{{/unless}} --}}
+	<br />
+	<label for='category'>Category</label>
+	<input type='text' id='category' name='category' value='{{findActivity.category}}' />
+	<br />
+	<input type='submit' value='Submit' />
+
+</form>
