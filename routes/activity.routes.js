@@ -178,4 +178,19 @@ router.get('/schedule', async (req, res, next) => {
 	}
 });
 
+router.post('/schedule', isLoggedIn, async (req, res, next) => {
+
+	const { _id } = req.body;
+
+	try {
+		const activity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
+		console.log(activity);
+	} catch (error) {
+		console.error(error);
+		next(error);
+		res.status(500).send('Server error');
+	}
+
+});
+
 module.exports = router;
