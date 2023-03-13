@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { isLoggedIn } = require('../middleware/routeguard');
 const Activity = require('../models/Activity.model');
 const methodOverride = require('method-override');
+const crypto = require('crypto');
 
 // middleware to override HTTP methods
 router.use(methodOverride('_method'));
@@ -64,8 +65,14 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 		// Create a new activity and repeat it on every weekday for the number of weeks left in the year
 		for (let i = 0; i < weeksLeftInYear; i++) {
+
+
+
+
 			//If more than one day is selected for repetition
 			if (Array.isArray(daysOfWeek)) {
+				const groupString = `${title}${description}${daysOfWeek.join(',')}`;
+				const groupId = crypto.createHash('md5').update(groupString).digest('hex');
 				for (const day of daysOfWeek) {
 					const now = new Date();
 
@@ -91,10 +98,13 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						daysOfWeek: [day],
 						repeat,
 						specificDate: date,
+						groupId
 					});
 					await newActivity.save();
 				}
 			} else {
+				const groupString = `${title}${description}${daysOfWeek}`;
+			const groupId = crypto.createHash('md5').update(groupString).digest('hex');
 				//if only one day is selected for repetition
 				const now = new Date();
 				const dayOfWeek = now.getDay();
@@ -121,6 +131,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					daysOfWeek: [daysOfWeek],
 					repeat,
 					specificDate: date,
+					groupId
 				});
 				await newActivity.save();
 			}
