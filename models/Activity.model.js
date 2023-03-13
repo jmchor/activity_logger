@@ -40,6 +40,11 @@ const activitySchema = new Schema(
 				return this.repeat === 'once';
 			},
 		},
+		groupId: {
+			type: String,
+			required: true,
+			default: ''
+		}
 	},
 	{
 		// this second object adds extra properties: `createdAt` and `updatedAt`
