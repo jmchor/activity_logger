@@ -147,12 +147,9 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 router.get('/schedule', async (req, res, next) => {
 	// Get the current date and the date of the next week
-	const userId = req.session.currentUser._id;
-	const currentDate = new Date(new Date().setHours(1, 0, 0, 0));
-	const nextWeek = new Date();
-	nextWeek.setDate(currentDate.getDate() + 6);
 
-	// Get the current date
+	const userId = req.session.currentUser._id;
+
 	const now = new Date();
 	// Get the year of the current date
 	const year = now.getFullYear();
@@ -162,9 +159,45 @@ router.get('/schedule', async (req, res, next) => {
 	// Calculate the date of the first Thursday of the year
 	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
 	// Calculate the week number by subtracting the first Thursday of the year from the current date and dividing by 7
-	const weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+	let weekNumber;
+	const {week, lastWeek} = req.query
+	today = new Date(new Date().setHours(1, 0, 0, 0));
+	let currentDate = new Date()
+	let nextWeek = new Date();
+	let i;
+
+	let rightNow = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2
+
+	if(!week && !lastWeek) {
+		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+		currentDate.setDate(today.getDate())
+		currentDate.setHours(1, 0, 0, 0);
+
+
+	} else {
+
+		if(week){
+		weekNumber = Number(week) + 1
+		i = weekNumber - rightNow
+		currentDate.setDate(today.getDate() + 7 * i)
+		currentDate.setHours(1, 0, 0, 0);
+
+
+	} else {
+		weekNumber = Number(lastWeek) - 1
+		i = (weekNumber - rightNow) * (- 1)
+		currentDate.setDate(today.getDate() - (7 * i))
+		currentDate.setHours(1, 0, 0, 0);
+
+
+
+	}}
+	nextWeek.setDate(currentDate.getDate() + 6);
 
 	try {
+
+		console.log(currentDate)
+		console.log(nextWeek)
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
 			userId: userId,
@@ -173,6 +206,7 @@ router.get('/schedule', async (req, res, next) => {
 				$lte: nextWeek,
 			},
 		});
+
 
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
@@ -193,7 +227,6 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
 
-			console.log(activity.hasSunday);
 		});
 
 		// Send the coming week activities as the response
@@ -262,13 +295,13 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 
 
 
-  
+
 router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
 	const { terminate } = req.body;
 
 	try {
-	
+
 	  const activityToDelete = await Activity.findById(id);
 	  console.log(activityToDelete);
 
@@ -276,7 +309,7 @@ router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 		return res.status(404).send('Activity not found');
 	  }
 
-	
+
 	  if ( terminate === 'Delete Activity') {
 
 	  		await Activity.findByIdAndDelete(id);
