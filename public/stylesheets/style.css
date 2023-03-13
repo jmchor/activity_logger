@@ -21,8 +21,23 @@ h6 {
   margin: 0;
 }
 
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: x-large;
+}
+
+h3 {
+  font-size: larger;
+}
+
 h4 {
-  font-size: 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #494949;
 }
 
 a {
@@ -47,8 +62,12 @@ li {
 p {
   color: #505050;
   font-weight: 300;
-  line-height: 2;
-  margin-bottom: 20px;
+  margin: 0px;
+}
+
+form {
+  margin: 0px;
+  font-size: 1rem;
 }
 
 footer {
@@ -59,21 +78,8 @@ footer {
   position: fixed;
 }
 
-form {
-  margin: 0px;
-  font-size: 1rem;
-}
-
 .btn {
   border: none;
-}
-
-.btn-primary {
-  background-color: #212529;
-}
-
-.btn-primary:hover {
-  background-color: #212529;
 }
 
 .btn:hover {
@@ -88,25 +94,13 @@ form {
   border: none;
 }
 
-/*
-  (To be continued)
-
-
-
-.btn-default:hover {
-  border: 1px solid #555;
-  color: #fff;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+.btn-primary {
+  background-color: #212529;
 }
 
- .landing {
-  background-image: url(/images/background.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-} */
+.btn-primary:hover {
+  background-color: #212529;
+}
 
 /*--------------------------------------------------------------
 # Header Logo
@@ -125,6 +119,10 @@ form {
 # Header Navigation
 --------------------------------------------------------------*/
 
+.navbar {
+  padding: 10px;
+}
+
 .navbar ul {
   margin: 0;
   display: flex;
@@ -132,9 +130,6 @@ form {
   align-items: center;
 }
 
-.navbar {
-  padding: 10px;
-}
 .navbar a input {
   display: flex;
   align-items: center;
@@ -157,7 +152,12 @@ form {
   margin-block-end: 0;
 }
 
-#menu-button {
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
 }
 
 /*--------------------------------------------------------------
@@ -175,15 +175,42 @@ main {
   font-size: 20px;
 }
 
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.text-success a {
+  font-weight: 700;
+  color: #3a8340;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 45px;
+}
+
+input[type="date"] {
+  text-transform: uppercase;
+  text-align: center;
+  padding-right: 0em;
+  padding-left: 1.2em;
+  background: url("https://cdn3.iconfinder.com/data/icons/faticons/32/calendar-01-512.png")
+    no-repeat center right;
+  background-size: 1.5em;
+}
+
 /*--------------------------------------------------------------
 # Footer Navigation
 --------------------------------------------------------------*/
 
 #bottom-nav a {
   color: white;
-  gap: 10px;
 }
 
 #bottom-nav i {
   font-size: 20px;
+}
+
+#menu-button {
+  padding-top: 9px;
+  font-size: 14px;
 }

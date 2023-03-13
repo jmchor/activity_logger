@@ -1,72 +1,142 @@
-<html>
+<div class="row justify-content-center">
+  <div class="col-md-10 my-3">
+    <h2>Add a new task</h2>
+  </div>
+</div>
 
-	<head>
-		<title>Create Activity</title>
-	</head>
+{{! Add a title }}
+<form action="/create" method="POST">
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <label for="title">Title</label>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        name="title"
+        required
+      />
+    </div>
+  </div>
 
-	<body>
-		<h1>Create Activity</h1>
-		<form action='/create' method='POST'>
-			<br />
-			<label for='repeat'>Repeat:</label>
+  {{! Add a description }}
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <label for="description">Description</label>
+    </div>
+  </div>
 
-			<select id='repeat' name='repeat' oninput='selectRecurrence()'>
-				<option disabled selected> -- select an option -- </option>
-				<option value='weekly'>Weekly</option>
-				<option value='once'>Once</option>
-			</select>
-			<br />
-			<label for='title'>Title:</label>
-			<input type='text' id='title' name='title' required />
-			<br />
-			<label for='description'>Description:</label>
-			<textarea id='description' name='description' required></textarea>
-			<br />
-			<div id='days'>
-				<label for='daysOfWeek'>Days of Week:</label>
-				<br />
-				<input type='checkbox' id='Sunday' name='daysOfWeek' value='Sunday' />
-				<label for='Sunday'>Sunday</label>
-				<br />
-				<input type='checkbox' id='Monday' name='daysOfWeek' value='Monday' />
-				<label for='Monday'>Monday</label>
-				<br />
-				<input type='checkbox' id='Tuesday' name='daysOfWeek' value='Tuesday' />
-				<label for='Tuesday'>Tuesday</label>
-				<br />
-				<input type='checkbox' id='Wednesday' name='daysOfWeek' value='Wednesday' />
-				<label for='Wednesday'>Wednesday</label>
-				<br />
-				<input type='checkbox' id='Thursday' name='daysOfWeek' value='Thursday' />
-				<label for='Thursday'>Thursday</label>
-				<br />
-				<input type='checkbox' id='Friday' name='daysOfWeek' value='Friday' />
-				<label for='Friday'>Friday</label>
-				<br />
-				<input type='checkbox' id='Saturday' name='daysOfWeek' value='Saturday' />
-				<label for='Saturday'>Saturday</label>
-				<br />
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <textarea
+        id="description"
+        class="form-control"
+        name="description"
+        required
+      ></textarea>
+    </div>
+  </div>
 
-				<input type='submit' value='Create Activity' />
-			</div>
+  {{! Select whether the task is to be added once or recurringly }}
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <label for="repeat">Repeat</label>
+    </div>
+  </div>
 
-			<div id='specific-day'>
-				<br />
-				<label for='specificDate'>Specific Date:</label>
-				<input type='date' id='specificDate' name='specificDate' />
-				<br />
-				<input type='submit' value='Create Activity' />
-			</div>
-		</form>
-	</body>
+  <div class="row justify-content-center">
+    <div class="col-md-10 my-1">
+      <select id="repeat" name="repeat" oninput="selectRecurrence()">
+        <option disabled selected> -- select an option -- </option>
+        <option value="once">Once</option>
+        <option value="weekly">Weekly</option>
+      </select>
+    </div>
+  </div>
 
-	<script src='/js/script.js'></script>
+  {{! This block only shows when "once" was selected }}
+  <div id="specific-day" class="row justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-md-4 my-1">
+        <label for="specificDate">Choose a date</label>
+      </div>
+    </div>
 
-	<script>
-		window.onload = function () { const repeat = document.getElementById('repeat'); const days =
-		document.getElementById('days'); const specificDay = document.getElementById('specific-day');
-		specificDay.style.display = 'none'; days.style.display = 'none'; }
+    <div class="row justify-content-center">
+      <div class="col-md-4 my-1">
+        <input type="date" id="specificDate" name="specificDate" />
+      </div>
+    </div>
 
-	</script>
+    <div class="row justify-content-center">
+      <div class="col-md-4 my-4">
+        <input type="submit" value="Add Task" class="btn btn-primary" />
+      </div>
+    </div>
+  </div>
 
-</html>
+  {{! This block only shows when "repeat" was selected }}
+  <div id="days" class="row justify-content-center">
+    <div class="col-md-4 m-1">
+      <label for="daysOfWeek"><p>For which days do you want to add this task?</p></label>
+    </div>
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Sunday" name="daysOfWeek" value="Sunday" />
+      <label for="Sunday">Sunday</label>
+    </div>
+
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Monday" name="daysOfWeek" value="Monday" />
+      <label for="Monday">Monday</label>
+    </div>
+
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Tuesday" name="daysOfWeek" value="Tuesday" />
+      <label for="Tuesday">Tuesday</label>
+    </div>
+    <div class="col-md-4 m-1">
+      <input
+        type="checkbox"
+        id="Wednesday"
+        name="daysOfWeek"
+        value="Wednesday"
+      />
+      <label for="Wednesday">Wednesday</label>
+    </div>
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Thursday" name="daysOfWeek" value="Thursday" />
+      <label for="Thursday">Thursday</label>
+    </div>
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Friday" name="daysOfWeek" value="Friday" />
+      <label for="Friday">Friday</label>
+    </div>
+    <div class="col-md-4 m-1">
+      <input type="checkbox" id="Saturday" name="daysOfWeek" value="Saturday" />
+      <label for="Saturday">Saturday</label>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4 my-4">
+        <input
+          type="submit"
+          value="Add recurring task"
+          class="btn btn-primary"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+
+{{! Script to toggle display of specific date selection or weekdays }}
+<script>
+  window.onload = function () { const repeat =
+  document.getElementById('repeat'); const days =
+  document.getElementById('days'); const specificDay =
+  document.getElementById('specific-day'); specificDay.style.display = 'none';
+  days.style.display = 'none'; }
+</script>
