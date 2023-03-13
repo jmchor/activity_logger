@@ -21,8 +21,12 @@ h6 {
   margin: 0;
 }
 
+h4 {
+  font-size: 16px;
+}
+
 a {
-  color: #71c55d;
+  color: #494949;
   text-decoration: none;
 }
 
@@ -36,14 +40,12 @@ ul {
 
 li {
   color: #626262;
-  font-size: 13px;
   font-weight: 400;
   line-height: 30px;
 }
 
 p {
   color: #505050;
-  font-size: 14px;
   font-weight: 300;
   line-height: 2;
   margin-bottom: 20px;
@@ -57,6 +59,11 @@ footer {
   position: fixed;
 }
 
+form {
+  margin: 0px;
+  font-size: 1rem;
+}
+
 .btn {
   border: none;
 }
@@ -65,19 +72,20 @@ footer {
   background-color: #212529;
 }
 
+.btn-primary:hover {
+  background-color: #212529;
+}
+
 .btn:hover {
   border: none;
-  background-color: #212529;
 }
 
 .btn:focus {
   outline: none;
-  background-color: #212529;
 }
 
 .btn:active {
   border: none;
-  background-color: #212529;
 }
 
 /*
