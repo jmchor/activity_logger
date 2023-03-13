@@ -146,64 +146,56 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 });
 
 router.get('/schedule', async (req, res, next) => {
-	// Get the current date and the date of the next week
-	const userId = req.session.currentUser._id;
-	const currentDate = new Date(new Date().setHours(1, 0, 0, 0));
-	const nextWeek = new Date();
-	nextWeek.setDate(currentDate.getDate() + 6);
-
-	// Get the current date
-	const now = new Date();
-	// Get the year of the current date
-	const year = now.getFullYear();
-	// Get the day of the week of January 4th of the year, which is always in the first week of the year
-	const jan4th = new Date(year, 0, 4, 1);
-	const jan4thDay = jan4th.getDay();
-	// Calculate the date of the first Thursday of the year
-	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
-	// Calculate the week number by subtracting the first Thursday of the year from the current date and dividing by 7
-	const weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
-
 	try {
-		// Find all activities that have a specific date within the next two weeks
-		const activities = await Activity.find({
-			userId: userId,
-			specificDate: {
-				$gte: currentDate,
-				$lte: nextWeek,
-			},
-		});
-
-		// Filter the activities to only include those within the coming week
-		const comingWeekActivities = activities.filter((activity) => {
-			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < nextWeek;
-		});
-
-		// Add hasMonday, hasTuesday, etc. properties to each activity
-		comingWeekActivities.forEach((activity) => {
-			const activityDate = new Date(activity.specificDate);
-			const dayOfWeek = activityDate.getDay();
-
-			activity.hasMonday = dayOfWeek === 1;
-			activity.hasTuesday = dayOfWeek === 2;
-			activity.hasWednesday = dayOfWeek === 3;
-			activity.hasThursday = dayOfWeek === 4;
-			activity.hasFriday = dayOfWeek === 5;
-			activity.hasSaturday = dayOfWeek === 6;
-			activity.hasSunday = dayOfWeek === 0;
-
-			console.log(activity.hasSunday);
-		});
-
-		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber  });
+	  const userId = req.session.currentUser._id;
+  
+	  // Determine which week to display based on the "week" query parameter
+	  const weekParam = req.query.week || 0; // Default to the current week
+	  const weekOffset = parseInt(weekParam);
+	  const currentDate = new Date();
+	  const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + weekOffset * 7));
+	  const lastDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 6 + weekOffset * 7));
+  
+	  // Find all activities that fall within the current week
+	  const activities = await Activity.find({
+		userId: userId,
+		specificDate: {
+		  $gte: firstDayOfWeek,
+		  $lte: lastDayOfWeek
+		}
+	  });
+  
+	  // Add hasMonday, hasTuesday, etc. properties to each activity
+	  activities.forEach((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		const dayOfWeek = activityDate.getDay();
+  
+		activity.hasMonday = dayOfWeek === 1;
+		activity.hasTuesday = dayOfWeek === 2;
+		activity.hasWednesday = dayOfWeek === 3;
+		activity.hasThursday = dayOfWeek === 4;
+		activity.hasFriday = dayOfWeek === 5;
+		activity.hasSaturday = dayOfWeek === 6;
+		activity.hasSunday = dayOfWeek === 0;
+	  });
+  
+	  // Calculate the week number based on the current date
+	  const firstThursdayOfYear = new Date(new Date().getFullYear(), 0, 4 + (4 - new Date(new Date().getFullYear(), 0, 1).getDay() + 7) % 7);
+	  const weekNumber = Math.floor((firstDayOfWeek - firstThursdayOfYear) / (7 * 24 * 60 * 60 * 1000)) + 1;
+  
+	  res.render('schedule', {
+		activities: activities,
+		week: weekNumber,
+		prevWeek: weekOffset - 1, // Calculate the previous week number
+		nextWeek: weekOffset + 1 // Calculate the next week number
+	  });
 	} catch (error) {
-		console.error(error);
-		next(error);
-		res.status(500).send('Server error');
+	  console.error(error);
+	  next(error);
+	  res.status(500).send('Server error');
 	}
-});
+  });
+  
 
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
 
