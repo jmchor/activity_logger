@@ -66,7 +66,14 @@ router.post("/signup", async (req, res, next) => {
     res.render("auth/sign-up", { errorMessage: "Passwords do not match", loggedOut: loggedOut });
   }
 
-  //TODO include regex here to make password restrictive?
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+  if (!regex.test(password)) {
+    res.status(500).render("auth/signup", {
+      errorMessage:
+        "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
+    });
+    return;
+  }
 
   try {
     //create Salt
