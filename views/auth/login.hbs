@@ -1,22 +1,55 @@
-<h1>Login</h1>
-<form action="/login" method="POST">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required />
+<div class="row justify-content-center mb-4 py-4">
+  <h1>Welcome</h1>
+  <h1>Back</h1>
+</div>
 
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required />
+<div class="row justify-content-center">
+  <form action="/login" method="POST">
+    <div class="col-md-10 my-1">
+      <label for="username">Username</label>
+    </div>
+    <div class="col-md-10 mb-3">
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-control"
+        required
+      />
+    </div>
 
-  <input
-    class="btn btn-primary btn-lg btn-block"
-    type="submit"
-    value="Log in"
-  />
-  <div class="divider d-flex align-items-center my-4">
-    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-  </div>
-  <a class="btn btn-primary btn-lg btn-block" href="/signup">Sign up</a>
+    <div class="col-md-10 my-1">
+      <label for="password">Password</label>
+    </div>
+    <div class="col-md-10 mb-5">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        required
+      />
+    </div>
 
-</form>
+    <div class="row d-flex justify-content-center">
+      <div class="btn-group w-100">
+        <input class="btn btn-primary flex-fill" type="submit" value="Log in" />
+      </div>
+    </div>
+
+    <div class="divider d-flex align-items-center my-4">
+      <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="btn-group w-100">
+        <a class="btn btn-secondary flex-fill" href="/signup">Sign up</a>
+      </div>
+    </div>
+
+  </form>
+
+</div>
 
 {{#if errorMessage}}
   <p>{{errorMessage}}</p>

@@ -81,24 +81,24 @@
 
   {{! This block only shows when "repeat" was selected }}
   <div id="days" class="row justify-content-center">
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <label for="daysOfWeek"><p>For which days do you want to add this task?</p></label>
     </div>
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Sunday" name="daysOfWeek" value="Sunday" />
       <label for="Sunday">Sunday</label>
     </div>
 
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Monday" name="daysOfWeek" value="Monday" />
       <label for="Monday">Monday</label>
     </div>
 
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Tuesday" name="daysOfWeek" value="Tuesday" />
       <label for="Tuesday">Tuesday</label>
     </div>
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input
         type="checkbox"
         id="Wednesday"
@@ -107,15 +107,15 @@
       />
       <label for="Wednesday">Wednesday</label>
     </div>
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Thursday" name="daysOfWeek" value="Thursday" />
       <label for="Thursday">Thursday</label>
     </div>
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Friday" name="daysOfWeek" value="Friday" />
       <label for="Friday">Friday</label>
     </div>
-    <div class="col-md-1 m-1">
+    <div class="col-md-4 m-1">
       <input type="checkbox" id="Saturday" name="daysOfWeek" value="Saturday" />
       <label for="Saturday">Saturday</label>
     </div>
@@ -132,6 +132,7 @@
   </div>
 </form>
 
+{{! Script to toggle display of specific date selection or weekdays }}
 <script>
   window.onload = function () { const repeat =
   document.getElementById('repeat'); const days =
