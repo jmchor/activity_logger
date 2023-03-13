@@ -141,6 +141,18 @@ router.get('/schedule', async (req, res, next) => {
 	const nextWeek = new Date();
 	nextWeek.setDate(currentDate.getDate() + 7);
 
+	// Get the current date
+	const now = new Date();
+	// Get the year of the current date
+	const year = now.getFullYear();
+	// Get the day of the week of January 4th of the year, which is always in the first week of the year
+	const jan4th = new Date(year, 0, 4, 1);
+	const jan4thDay = jan4th.getDay();
+	// Calculate the date of the first Thursday of the year
+	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
+	// Calculate the week number by subtracting the first Thursday of the year from the current date and dividing by 7
+	const weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+
 	try {
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
@@ -174,7 +186,7 @@ router.get('/schedule', async (req, res, next) => {
 		});
 
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities });
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber  });
 	} catch (error) {
 		console.error(error);
 		next(error);
