@@ -183,9 +183,13 @@ main {
 
 #bottom-nav a {
   color: white;
-  gap: 10px;
 }
 
 #bottom-nav i {
   font-size: 20px;
+}
+
+#menu-button {
+  padding-top: 9px;
+  font-size: 14px;
 }
