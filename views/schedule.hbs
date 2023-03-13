@@ -16,8 +16,10 @@
 
 
 
+<div class="row justify-content-center mb-4">
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Monday</h4>
     {{#each activities}}
         {{#if hasMonday}}
@@ -26,7 +28,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Tuesday</h4>
     {{#each activities}}
         {{#if hasTuesday}}
@@ -35,7 +37,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Wednesday</h4>
     {{#each activities}}
         {{#if hasWednesday}}
@@ -44,7 +46,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Thursday</h4>
     {{#each activities}}
         {{#if hasThursday}}
@@ -53,7 +55,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Friday</h4>
     {{#each activities}}
         {{#if hasFriday}}
@@ -62,7 +64,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Saturday</h4>
     {{#each activities}}
         {{#if hasSaturday}}
@@ -71,7 +73,7 @@
     {{/each}}
 </div>
 
-<div class="row border rounded m-4 p-2">
+<div class="row border rounded m-3 p-2">
     <h4>Sunday</h4>
     {{#each activities}}
         {{#if hasSunday}}
@@ -80,5 +82,11 @@
     {{/each}}
 </div>
 
-	{{> randomfact}}
+  </div>
+</div>
 
+<div class="row justify-content-center mb-4 px-2">
+    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+	{{> randomfact}}
+    </div>
+</div>
