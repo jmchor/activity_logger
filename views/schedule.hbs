@@ -15,14 +15,7 @@
 </div>
 
 
-<div class="row border rounded m-4 p-2">
-    <h4>Sunday</h4>
-    {{#each activities}}
-        {{#if hasSunday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
-</div>
+
 
 <div class="row border rounded m-4 p-2">
     <h4>Monday</h4>
@@ -73,6 +66,15 @@
     <h4>Saturday</h4>
     {{#each activities}}
         {{#if hasSaturday}}
+            {{> day}}
+        {{/if}}
+    {{/each}}
+</div>
+
+<div class="row border rounded m-4 p-2">
+    <h4>Sunday</h4>
+    {{#each activities}}
+        {{#if hasSunday}}
             {{> day}}
         {{/if}}
     {{/each}}
