@@ -139,7 +139,7 @@ router.get('/schedule', async (req, res, next) => {
 	const userId = req.session.currentUser._id;
 	const currentDate = new Date(new Date().setHours(1, 0, 0, 0));
 	const nextWeek = new Date();
-	nextWeek.setDate(currentDate.getDate() + 7);
+	nextWeek.setDate(currentDate.getDate() + 6);
 
 	// Get the current date
 	const now = new Date();
