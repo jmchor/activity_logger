@@ -1,17 +1,28 @@
-<div>
-	<h2> Welcome back, {{{user.username}}}!</h2>
-
-	{{#if comingWeekActivities}}
-
-		<h3>Activities for today</h3>
-		<ul>
-			{{#each comingWeekActivities}}
-				<li>{{{this.title}}}</li>
-			{{/each}}
-		</ul>
-
-	{{else}}
-		<h3>There are no activities for today</h3>
-	{{/if}}
-
+<div class="row justify-content-center">
+  <div class="col-md-10 my-3">
+    <h2> Welcome back, {{{user.username}}}!</h2>
+  </div>
 </div>
+{{#if comingWeekActivities}}
+  <div class="row justify-content-center">
+    <h3 class="col-md-10 my-2">Here's your agenda for today <i class="bi bi-arrow-down-short"></i></h3>
+  </div>
+
+  {{#each comingWeekActivities}}
+    <div class="row justify-content-center row border rounded m-4 p-2">
+    <div class="col-md-9 my-1">
+		{{> day}}
+    </div>
+	</div>
+  {{/each}}
+
+{{else}}
+	<div class="row justify-content-center">
+		<h3 class="col-auto my-4">There's nothing planned yet for today.</h3>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<a href="/create" class="btn btn-primary">Add a new task</a>
+		</div>
+	</div>
+{{/if}}
