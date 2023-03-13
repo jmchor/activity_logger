@@ -59,12 +59,15 @@ footer {
 
 .btn {
   border: none;
+}
+
+.btn-primary {
   background-color: #212529;
 }
 
 .btn:hover {
   border: none;
-  background-color: #616971;
+  background-color: #212529;
 }
 
 .btn:focus {
@@ -72,9 +75,9 @@ footer {
   background-color: #212529;
 }
 
-#menu-button {
-  display: flex;
-  flex-direction: column;
+.btn:active {
+  border: none;
+  background-color: #212529;
 }
 
 /*
@@ -146,6 +149,9 @@ footer {
   margin-block-end: 0;
 }
 
+#menu-button {
+}
+
 /*--------------------------------------------------------------
 # Main Content
 --------------------------------------------------------------*/
@@ -165,26 +171,11 @@ main {
 # Footer Navigation
 --------------------------------------------------------------*/
 
-.navbar-nav .nav-item {
-  text-align: center;
-}
-
-#bottom-nav {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 #bottom-nav a {
   color: white;
   gap: 10px;
 }
 
 #bottom-nav i {
-  font-size: 26px;
-}
-
-#menu-button {
-  min-width: 100px;
-  align-items: center;
+  font-size: 20px;
 }
