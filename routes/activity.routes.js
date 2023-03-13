@@ -235,31 +235,65 @@ next(error)
 router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 
 	const { id } = req.params
-	const { title, description, category, daysOfWeek, repeat, specificDate } = req.body
-
-	console.log(req.body)
+	const { title, description, category, daysOfWeek, repeat, specificDate, update } = req.body
 
 	try {
-		const updateActivity = await Activity.findByIdAndUpdate(id, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
+
+		const updateActivity = await Activity.findById(id);
+
+		if ( update === 'Edit One'){
+			await Activity.findByIdAndUpdate(id, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
+		}
+		else if (update === 'Edit All'){
+			await Activity.updateMany({ groupId: updateActivity.groupId }, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
+		}
+		else {
+			return res.status(404).send('Activity not found');
+		}
+
 		res.redirect('/schedule')
+
 	} catch (error) {
-next(error)
+		next(error)
 	}
 });
 
+
+
+
+
+  
 router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
+	const { terminate } = req.body;
 
 	try {
-	  const deletedActivity = await Activity.findByIdAndDelete(id);
-	  if (!deletedActivity) {
+	
+	  const activityToDelete = await Activity.findById(id);
+	  console.log(activityToDelete);
+
+	  if (!activityToDelete) {
 		return res.status(404).send('Activity not found');
 	  }
+
+	
+	  if ( terminate === 'Delete Activity') {
+
+	  		await Activity.findByIdAndDelete(id);
+
+	  } else if (terminate === 'Delete Activity and Group'){
+
+			await Activity.deleteMany({ groupId: activityToDelete.groupId });
+
+	  } else {
+		return res.status(404).send('Activity not found');
+	  }
+
 	  res.redirect('/schedule');
 	} catch (error) {
 	  next(error);
 	}
-  });
+});
 
   router.get('/profile', isLoggedIn, (req, res) => {
 	res.render('profile', { user: req.session.currentUser });

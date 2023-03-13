@@ -17,19 +17,22 @@
 		<label for='date'>Date</label>
 		<input type='date' id='date' name='specificDate' value='{{findActivity.specificDate}}' />
 	{{/unless}} --}}
-  <br />
-  <label for="category">Category</label>
-  <input
-    type="text"
-    id="category"
-    name="category"
-    value="{{findActivity.category}}"
-  />
-  <br />
-  <input type="submit" value="Submit" />
+
+	<br />
+	<label for='category'>Category</label>
+	<input type='text' id='category' name='category' value='{{findActivity.category}}' />
+	<br />
+	<input type='submit' value='Edit One' name="update" />
+	<br />
+	<input type='submit' value='Edit All' name="update" />
 
 </form>
 
-<form action="/schedule/{{findActivity._id}}?_method=DELETE" method="POST">
-  <input type="submit" value="Delete Activity" />
+
+<form action='/schedule/{{findActivity._id}}?_method=DELETE' method='POST'>
+	<input type='submit' value='Delete Activity' name="terminate">
+</form>
+
+<form action='/schedule/{{findActivity._id}}?_method=DELETE' method='POST'>
+	<input type='submit' value='Delete Activity and Group' name="terminate">
 </form>
