@@ -1,17 +1,16 @@
-
 <h1>Profile</h1>
 
-<p>Name: {{user.name}}</p>
+<p>Name: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
 
-<form action="/profile/delete-activities" method="POST">
-  <label for="password">Password:</label>
-  <input type="password" name="password">
-  <button type="submit">Delete All Activities</button>
+<form action='/profile/delete-activities' method='POST'>
+	<label for='password'>Password:</label>
+	<input type='password' name='password' />
+	<button type='submit'>Delete All Activities</button>
 </form>
 
-<form action="/profile/delete-account" method="POST">
-  <label for="password">Password:</label>
-  <input type="password" name="password">
-  <button type="submit">Delete Account</button>
+<form action='/profile/delete-account' method='POST'>
+	<label for='password'>Password:</label>
+	<input type='password' name='password' />
+	<button type='submit'>Delete Account</button>
 </form>

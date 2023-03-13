@@ -226,7 +226,7 @@ next(error)
 
 router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
-  
+
 	try {
 	  const deletedActivity = await Activity.findByIdAndDelete(id);
 	  if (!deletedActivity) {
@@ -237,9 +237,9 @@ router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	  next(error);
 	}
   });
-  
+
   router.get('/profile', isLoggedIn, (req, res) => {
-	res.render('profile', { user: req.user })
+	res.render('profile', { user: req.session.currentUser });
   })
 
 module.exports = router;
