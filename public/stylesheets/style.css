@@ -62,8 +62,7 @@ li {
 p {
   color: #505050;
   font-weight: 300;
-  line-height: 2;
-  margin-bottom: 20px;
+  margin: 0px;
 }
 
 form {
