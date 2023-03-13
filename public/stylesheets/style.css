@@ -49,10 +49,6 @@ a:hover {
   color: #92d283;
 }
 
-ul {
-  letter-spacing: 1px;
-}
-
 li {
   color: #626262;
   font-weight: 400;
@@ -67,7 +63,6 @@ p {
 
 form {
   margin: 0px;
-  font-size: 1rem;
 }
 
 footer {
@@ -127,11 +122,6 @@ footer {
   margin: 0;
   display: flex;
   list-style: none;
-  align-items: center;
-}
-
-.navbar a input {
-  display: flex;
   align-items: center;
 }
 
