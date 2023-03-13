@@ -1,9 +1,3 @@
-{{! <div class="col-md-12">
-  <div class="col-md-1">
-
-  </div>
-</div> }}
-
 {{#if this.isDone}}
   <div class="row row-cols-auto">
     <form class="col-12">
@@ -37,7 +31,10 @@
           value="{{this._id}}"
         />
         <label id="{{this._id}}" for="{{this._id}}">
-          <a href="/schedule/{{this._id}}">{{title}}</a>
+          <a
+            href="/schedule/{{this._id}}"
+            class="font-weight-bold"
+          >{{title}}</a>
         </label>
         –
         {{description}}
