@@ -19,13 +19,15 @@
 
     {{#if loggedOut}}
       <!-- Logged out HEADER w/o navigation -->
-      <nav id="top-nav" class="navbar navbar-expand-md navbar-light bg-white">
+      <nav
+        id="top-nav"
+        class="navbar row container-md justify-content-center fixed-top navbar-expand-md navbar-light bg-white"
+      >
         <div id="logo">
-          <h1>
-            <a href="/" id="logo" class="navbar-brand">logo</a>
-          </h1>
+          <h1><a href="/" id="logo" class="navbar-brand">logo</a></h1>
         </div>
       </nav>
+
       <main id="main" class="container">
         {{{body}}}
       </main>
@@ -41,73 +43,69 @@
       <!-- Logged in HEADER w/ navigation -->
       <nav
         id="top-nav"
-        class="navbar fixed-top navbar-expand-md navbar-light bg-white"
+        class="navbar container-md navbar-expand-md navbar-light bg-white fixed-top"
       >
-        <div id="logo">
-          <h1><a href="/" id="logo" class="navbar-brand">logo</a></h1>
-        </div>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#toggleMobileMenu"
-          aria-control="toggleMobileMenu"
-          aria-expanded="false"
-          aria-table="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul id="mobile-menu" class="navbar-nav ms-auto text-center">
-            <li>
-              <a href="/profile" id="menu-button" class="btn btn-primary">Profile</a>
-            </li>
-            <li>
-              <form action="/logout" method="POST" id="mobile-menu">
-                <input
-                  type="submit"
-                  value="Log Out"
+        <div class="container-fluid">
+          <a href="/" id="logo" class="navbar-brand">logo</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#toggleMobileMenu"
+            aria-controls="toggleMobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse ms-auto" id="toggleMobileMenu">
+            <ul class="navbar-nav ms-auto text-center">
+              <li class="nav-item">
+                <a
+                  href="/profile"
                   id="menu-button"
-                  class="btn btn-primary"
-                />
-              </form>
-            </li>
-          </ul>
+                  class="nav-link btn"
+                >Profile</a>
+              </li>
+              <li class="nav-item">
+                <form action="/logout" method="POST" id="menu-button">
+                  <input type="submit" value="Log Out" class="nav-link btn" />
+                </form>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
-
-      <main id="main" class="container">
+      <main id="main" class="container-md">
         {{{body}}}
       </main>
 
       <!-- Logged in FOOTER w/ navigation -->
-      <footer>
-        <nav
-          id="bottom-nav"
-          class="navbar fixed-bottom navbar-dark bg-dark justify-content-center"
-        >
-          <ul class="nav justify-content-center text-center">
-            <div class="nav-item mx-2">
-              <a href="/home" id="menu-button" class="btn btn-primary">
-                <div><i class="bi bi-house"></i></div>
-                <div>Home</div>
-              </a>
-            </div>
-            <div class="nav-item mx-2">
-              <a href="/schedule" id="menu-button" class="btn btn-primary">
-                <div><i class="bi bi-calendar-week"></i></div>
-                <div>Schedule</div>
-              </a>
-            </div>
-            <div class="nav-item mx-2">
-              <a href="/create" id="menu-button" class="btn btn-primary">
-                <div><i class="bi bi-plus-square"></i></div>
-                <div>Add Task</div>
-              </a>
-            </div>
-          </ul>
-        </nav>
-      </footer>
+      <nav
+        id="bottom-nav"
+        class="navbar row row-cols-3 fixed-bottom navbar-dark bg-dark justify-content-center"
+      >
+
+        <div class="nav-item col-md-3 col-sm-1 text-center">
+          <a href="/home" id="menu-button" class="btn btn-primary">
+            <div><i class="bi bi-house"></i></div>
+            <div>Home</div>
+          </a>
+        </div>
+        <div class="nav-item col-md-3 col-sm-1 text-center">
+          <a href="/schedule" id="menu-button" class="btn btn-primary">
+            <div><i class="bi bi-calendar-week"></i></div>
+            <div>Schedule</div>
+          </a>
+        </div>
+        <div class="nav-item col-md-3 col-sm-1 text-center">
+          <a href="/create" id="menu-button" class="btn btn-primary">
+            <div><i class="bi bi-plus-square"></i></div>
+            <div>Add Task</div>
+          </a>
+        </div>
+
+      </nav>
     {{/if}}
 
     <script src="/js/script.js"></script>
