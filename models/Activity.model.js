@@ -12,6 +12,7 @@ const activitySchema = new Schema(
 		},
 		description: {
 			type: String,
+			required: true,
 		},
 		category: {
 			type: String,
@@ -40,7 +41,8 @@ const activitySchema = new Schema(
 			},
 		},
 		groupId: {
-			type: String ,
+			type: String,
+			required: true,
 			default: ''
 		}
 	},
