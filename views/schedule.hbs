@@ -1,6 +1,6 @@
 <div class="row row-cols-3 justify-content-center">
     <div class="col-sm-1 text-center">
-        <a href="/last-week" id="week-button" class="btn btn-secondary">
+        <a href="/schedule?lastWeek={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-left-square"></i>
         </a>
     </div>
@@ -8,7 +8,7 @@
         Week {{week}}
     </div>
     <div class="col-sm-1 text-center">
-        <a href="/next-week" id="week-button" class="btn btn-secondary">
+        <a href="/schedule?week={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-right-square"></i>
         </a>
     </div>

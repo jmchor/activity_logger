@@ -65,10 +65,6 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 		// Create a new activity and repeat it on every weekday for the number of weeks left in the year
 		for (let i = 0; i < weeksLeftInYear; i++) {
-
-
-
-
 			//If more than one day is selected for repetition
 			if (Array.isArray(daysOfWeek)) {
 				const groupString = `${title}${description}${daysOfWeek.join(',')}`;
@@ -88,7 +84,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 							(daysUntilNextDayOfWeek < 0 ? 7 : 0),
 						now.getHours() + 1
 					);
-					date.setHours(1, 0, 0, 0)
+					date.setHours(1, 0, 0, 0);
 					const newActivity = new Activity({
 						userId,
 						title,
@@ -98,13 +94,13 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						daysOfWeek: [day],
 						repeat,
 						specificDate: date,
-						groupId
+						groupId,
 					});
 					await newActivity.save();
 				}
 			} else {
 				const groupString = `${title}${description}${daysOfWeek}`;
-			const groupId = crypto.createHash('md5').update(groupString).digest('hex');
+				const groupId = crypto.createHash('md5').update(groupString).digest('hex');
 				//if only one day is selected for repetition
 				const now = new Date();
 				const dayOfWeek = now.getDay();
@@ -131,7 +127,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					daysOfWeek: [daysOfWeek],
 					repeat,
 					specificDate: date,
-					groupId
+					groupId,
 				});
 				await newActivity.save();
 			}
@@ -147,12 +143,9 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 
 router.get('/schedule', async (req, res, next) => {
 	// Get the current date and the date of the next week
-	const userId = req.session.currentUser._id;
-	const currentDate = new Date(new Date().setHours(1, 0, 0, 0));
-	const nextWeek = new Date();
-	nextWeek.setDate(currentDate.getDate() + 6);
 
-	// Get the current date
+	const userId = req.session.currentUser._id;
+
 	const now = new Date();
 	// Get the year of the current date
 	const year = now.getFullYear();
@@ -162,7 +155,58 @@ router.get('/schedule', async (req, res, next) => {
 	// Calculate the date of the first Thursday of the year
 	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
 	// Calculate the week number by subtracting the first Thursday of the year from the current date and dividing by 7
-	const weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+	let weekNumber;
+	const { week, lastWeek } = req.query;
+	today = new Date(new Date().setHours(1, 0, 0, 0));
+	let currentDate = new Date();
+	let nextWeek;
+	let i;
+
+	let rightNow = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+
+	if (!week && !lastWeek) {
+		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+		currentDate.setDate(today.getDate());
+		currentDate.setHours(1, 0, 0, 0);
+		nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 6);
+		nextWeek.setHours(1, 0, 0, 0);
+	} else {
+		if (week) {
+			weekNumber = Number(week) + 1;
+			i = weekNumber - rightNow;
+			currentDate.setDate(today.getDate() + 7 * i);
+
+			let daylightSavings = currentDate.getTimezoneOffset();
+
+			console.log(daylightSavings);
+			if (daylightSavings === -60) {
+				currentDate.setHours(1, 0, 0, 0);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + 6
+				);
+				nextWeek.setHours(2, 0, 0, 0);
+				console.log('Current date', currentDate, 'Next week', nextWeek);
+			} else if (daylightSavings === -120) {
+				currentDate.setHours(2, 0, 0, 0);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + 6
+				);
+				nextWeek.setHours(2, 0, 0, 0);
+				console.log('Current date', currentDate, 'Next week', nextWeek);
+			}
+		} else {
+			weekNumber = Number(lastWeek) - 1;
+			i = (weekNumber - rightNow) * -1;
+			currentDate.setDate(today.getDate() - 7 * i);
+			currentDate.setHours(1, 0, 0, 0);
+			nextWeek.setDate(currentDate.getDate() + 6);
+			nextWeek.setHours(1, 0, 0, 0);
+		}
+	}
 
 	try {
 		// Find all activities that have a specific date within the next two weeks
@@ -192,12 +236,10 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasFriday = dayOfWeek === 5;
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
-
-			console.log(activity.hasSunday);
 		});
 
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber  });
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber });
 	} catch (error) {
 		console.error(error);
 		next(error);
@@ -206,7 +248,6 @@ router.get('/schedule', async (req, res, next) => {
 });
 
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
-
 	const { _id } = req.body;
 
 	try {
@@ -217,86 +258,76 @@ router.post('/schedule', isLoggedIn, async (req, res, next) => {
 		next(error);
 		res.status(500).send('Server error');
 	}
-
 });
 
 router.get('/schedule/:id', isLoggedIn, async (req, res, next) => {
-
-	const { id } = req.params
+	const { id } = req.params;
 
 	try {
-		const findActivity = await Activity.findById(id)
-		res.render('edit-activity', { findActivity })
+		const findActivity = await Activity.findById(id);
+		res.render('edit-activity', { findActivity });
 	} catch (error) {
-next(error)
+		next(error);
 	}
 });
 
 router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
-
-	const { id } = req.params
-	const { title, description, category, daysOfWeek, repeat, specificDate, update } = req.body
+	const { id } = req.params;
+	const { title, description, category, daysOfWeek, repeat, specificDate, update } = req.body;
 
 	try {
-
 		const updateActivity = await Activity.findById(id);
 
-		if ( update === 'Edit One'){
-			await Activity.findByIdAndUpdate(id, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
-		}
-		else if (update === 'Edit All'){
-			await Activity.updateMany({ groupId: updateActivity.groupId }, { title, description, category, daysOfWeek, repeat, specificDate }, { new: true })
-		}
-		else {
+		if (update === 'Edit One') {
+			await Activity.findByIdAndUpdate(
+				id,
+				{ title, description, category, daysOfWeek, repeat, specificDate },
+				{ new: true }
+			);
+		} else if (update === 'Edit All') {
+			await Activity.updateMany(
+				{ groupId: updateActivity.groupId },
+				{ title, description, category, daysOfWeek, repeat, specificDate },
+				{ new: true }
+			);
+		} else {
 			return res.status(404).send('Activity not found');
 		}
 
-		res.redirect('/schedule')
-
+		res.redirect('/schedule');
 	} catch (error) {
-		next(error)
+		next(error);
 	}
 });
 
-
-
-
-
-  
 router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
 	const { terminate } = req.body;
 
 	try {
-	
-	  const activityToDelete = await Activity.findById(id);
-	  console.log(activityToDelete);
+		const activityToDelete = await Activity.findById(id);
+		console.log(activityToDelete);
 
-	  if (!activityToDelete) {
-		return res.status(404).send('Activity not found');
-	  }
+		if (!activityToDelete) {
+			return res.status(404).send('Activity not found');
+		}
 
-	
-	  if ( terminate === 'Delete Activity') {
-
-	  		await Activity.findByIdAndDelete(id);
-
-	  } else if (terminate === 'Delete Activity and Group'){
-
+		if (terminate === 'Delete Activity') {
+			await Activity.findByIdAndDelete(id);
+		} else if (terminate === 'Delete Activity and Group') {
 			await Activity.deleteMany({ groupId: activityToDelete.groupId });
+		} else {
+			return res.status(404).send('Activity not found');
+		}
 
-	  } else {
-		return res.status(404).send('Activity not found');
-	  }
-
-	  res.redirect('/schedule');
+		res.redirect('/schedule');
 	} catch (error) {
-	  next(error);
+		next(error);
 	}
 });
 
-  router.get('/profile', isLoggedIn, (req, res) => {
+router.get('/profile', isLoggedIn, (req, res) => {
 	res.render('profile', { user: req.session.currentUser });
-  })
+});
 
 module.exports = router;
