@@ -1,52 +1,36 @@
 {{#if this.isDone}}
-  <div class="row row-cols-auto">
-    <form class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
-      <div class="col-10 text-success">
-        <input
-          type="checkbox"
-          id="{{this._id}}"
-          name="_id"
-          value="{{this._id}}"
-          checked
-        />
-        <label id="{{this._id}}" for="{{this._id}}">
-          <a href="/schedule/{{this._id}}">{{title}}</a>
-        </label>
-        –
-        {{description}}
+	<div class='row row-cols-auto'>
+		<form class='col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3'>
+			<div class='col-10 text-success'>
+				<p>{{this.todaysDate}}</p>
+				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' checked />
+				<label id='{{this._id}}' for='{{this._id}}'>
+					<a href='/schedule/{{this._id}}'>{{title}}</a>
+				</label>
+				–
+				{{description}}
 
-      </div>
-    </form>
-  </div>
+			</div>
+		</form>
+	</div>
 
 {{else}}
-  <div class="row row-cols-auto">
+	<div class='row row-cols-auto'>
 
-    <form
-      class="col-xxl-8 col-xl-8 col-lg-10 col-md-10"
-      action="/schedule"
-      method="POST"
-    >
-      <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
-        <input
-          type="checkbox"
-          id="{{this._id}}"
-          name="_id"
-          value="{{this._id}}"
-        />
-        <label id="{{this._id}}" for="{{this._id}}">
-          <a
-            href="/schedule/{{this._id}}"
-            class="font-weight-bold"
-          >{{title}}</a>
-        </label>
-        –
-        {{description}}
+		<form class='col-xxl-8 col-xl-8 col-lg-10 col-md-10' action='/schedule' method='POST'>
+			<div class='col-xxl-8 col-xl-8 col-lg-10 col-md-10'>
+				<p>{{this.todaysDate}}</p>
+				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' />
+				<label id='{{this._id}}' for='{{this._id}}'>
+					<a href='/schedule/{{this._id}}' class='font-weight-bold'>{{title}}</a>
+				</label>
+				–
+				{{description}}
 
-      </div>
+			</div>
 
-    </form>
-  </div>
+		</form>
+	</div>
 
 {{/if}}
 

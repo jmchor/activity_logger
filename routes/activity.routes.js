@@ -282,6 +282,9 @@ router.get('/schedule', async (req, res, next) => {
 			const activityDate = new Date(activity.specificDate);
 			const dayOfWeek = activityDate.getDay();
 
+			activity.todaysDate = `${activityDate.getDate() < 10 ? '0' : ''}${activityDate.getDate()}.${activityDate.getMonth() + 1 < 10 ? '0' : ''}${activityDate.getMonth() + 1}.${activityDate.getFullYear()}`
+
+
 			activity.hasMonday = dayOfWeek === 1;
 			activity.hasTuesday = dayOfWeek === 2;
 			activity.hasWednesday = dayOfWeek === 3;
