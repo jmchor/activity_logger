@@ -8,7 +8,7 @@ const activitySchema = new Schema(
 		},
 		title: {
 			type: String,
-			required: true
+			required: true,
 		},
 		description: {
 			type: String,
@@ -16,12 +16,11 @@ const activitySchema = new Schema(
 		},
 		category: {
 			type: String,
-
 		},
 		isDone: {
 			type: Boolean,
 			required: true,
-			default: false
+			default: false,
 		},
 		daysOfWeek: [
 			{
@@ -42,9 +41,8 @@ const activitySchema = new Schema(
 		},
 		groupId: {
 			type: String,
-			required: true,
-			default: ''
-		}
+			default: '',
+		},
 	},
 	{
 		// this second object adds extra properties: `createdAt` and `updatedAt`
