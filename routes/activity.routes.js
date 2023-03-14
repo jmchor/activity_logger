@@ -193,7 +193,7 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
 
-			console.log(activity.hasSunday);
+			activity.todaysDate = `${activityDate.getDate() < 10 ? '0' : ''}${activityDate.getDate()}.${activityDate.getMonth() + 1 < 10 ? '0' : ''}${activityDate.getMonth() + 1}.${activityDate.getFullYear()}`
 		});
 
 		// Send the coming week activities as the response
@@ -262,13 +262,13 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 
 
 
-  
+
 router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
 	const { terminate } = req.body;
 
 	try {
-	
+
 	  const activityToDelete = await Activity.findById(id);
 	  console.log(activityToDelete);
 
@@ -276,7 +276,7 @@ router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 		return res.status(404).send('Activity not found');
 	  }
 
-	
+
 	  if ( terminate === 'Delete Activity') {
 
 	  		await Activity.findByIdAndDelete(id);
