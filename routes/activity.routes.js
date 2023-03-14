@@ -152,27 +152,24 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 });
 
 router.get('/schedule', async (req, res, next) => {
-	// Get the current date and the date of the next week
 	const userId = req.session.currentUser._id;
+	const { week, lastWeek } = req.query;
 
-	// Get the current date
 	const now = new Date();
-	// Get the year of the current date
 	const year = now.getFullYear();
-	// Get the day of the week of January 4th of the year, which is always in the first week of the year
 	const jan4th = new Date(year, 0, 4, 1);
 	const jan4thDay = jan4th.getDay();
-	// Calculate the date of the first Thursday of the year
 	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
-	// Calculate the week number by subtracting the first Thursday of the year from the current date and dividing by 7
 	let weekNumber;
-	const { week, lastWeek } = req.query;
+
 	const today = new Date(new Date().setHours(1, 0, 0, 0));
 	let currentDate = new Date();
 	let nextWeek;
 	let i;
+	let flexWeekStart;
+	let currentWeekFromView;
 
-	let rightNow = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+	let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
 
 	if (!week && !lastWeek) {
 		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
@@ -191,15 +188,15 @@ router.get('/schedule', async (req, res, next) => {
 			currentDate.getDate() + (7 - currentDate.getDay())
 		);
 		nextWeek.setHours(1, 0, 0, 0);
-		let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-		currentDate.setDate(currentDate.getDate() - newValue);
-		console.log('HHHHEEELLOOO ', currentDate.getDay());
+		flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+		currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
 	} else {
 		if (week) {
-			let value = (Number(week) + 1) % 53;
-			weekNumber = value === 0 ? 1 : value;
+			currentWeekFromView = (Number(week) + 1) % 53;
+			weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
 
-			i = weekNumber - rightNow;
+			i = weekNumber - currentMoment;
 			currentDate.setDate(today.getDate() + 7 * i);
 
 			let daylightSavings = currentDate.getTimezoneOffset();
@@ -212,9 +209,9 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				nextWeek.setHours(2, 0, 0, 0);
-				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - newValue);
-				console.log('Current date', currentDate, 'Next week', nextWeek);
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
 			} else if (daylightSavings === -120) {
 				currentDate.setHours(2, 0, 0, 0);
 				nextWeek = new Date(
@@ -222,16 +219,16 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getMonth(),
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
-				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - newValue);
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 				nextWeek.setHours(2, 0, 0, 0);
-				console.log('Current date', currentDate, 'Next week', nextWeek);
+
 			}
 		} else {
-			let value = Number(lastWeek) - 1;
+			currentWeekFromView = Number(lastWeek) - 1;
 
-			weekNumber = value === 0 ? 52 : value;
-			i = (weekNumber - rightNow) * -1;
+			weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
+			i = (weekNumber - currentMoment) * -1;
 			currentDate.setDate(today.getDate() - 7 * i);
 			let daylightSavings = currentDate.getTimezoneOffset();
 
@@ -243,9 +240,9 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				nextWeek.setHours(2, 0, 0, 0);
-				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - newValue);
-				console.log('A week before', currentDate, 'The week after', nextWeek);
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
 			} else if (daylightSavings === -120) {
 				currentDate.setHours(2, 0, 0, 0);
 				nextWeek = new Date(
@@ -254,9 +251,9 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				nextWeek.setHours(2, 0, 0, 0);
-				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - newValue);
-				console.log('A week before', currentDate, 'The week after', nextWeek);
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
 			}
 		}
 	}
