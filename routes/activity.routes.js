@@ -243,7 +243,9 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				nextWeek.setHours(2, 0, 0, 0);
-				// console.log('A week before', currentDate, 'The week after', nextWeek);
+				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - newValue);
+				console.log('A week before', currentDate, 'The week after', nextWeek);
 			} else if (daylightSavings === -120) {
 				currentDate.setHours(2, 0, 0, 0);
 				nextWeek = new Date(
@@ -252,6 +254,8 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				nextWeek.setHours(2, 0, 0, 0);
+				let newValue = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - newValue);
 				console.log('A week before', currentDate, 'The week after', nextWeek);
 			}
 		}
