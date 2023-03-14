@@ -172,13 +172,14 @@ router.get('/schedule', async (req, res, next) => {
 		nextWeek.setHours(1, 0, 0, 0);
 	} else {
 		if (week) {
-			weekNumber = Number(week) + 1;
+			let value = (Number(week) + 1) % 53;
+			weekNumber = value === 0 ? 1 : value;
+
 			i = weekNumber - rightNow;
 			currentDate.setDate(today.getDate() + 7 * i);
 
 			let daylightSavings = currentDate.getTimezoneOffset();
 
-			console.log(daylightSavings);
 			if (daylightSavings === -60) {
 				currentDate.setHours(1, 0, 0, 0);
 				nextWeek = new Date(
@@ -199,12 +200,33 @@ router.get('/schedule', async (req, res, next) => {
 				console.log('Current date', currentDate, 'Next week', nextWeek);
 			}
 		} else {
-			weekNumber = Number(lastWeek) - 1;
+
+			let value = Number(lastWeek) - 1;
+
+			weekNumber = value === 0 ? 52 : value;
 			i = (weekNumber - rightNow) * -1;
 			currentDate.setDate(today.getDate() - 7 * i);
-			currentDate.setHours(1, 0, 0, 0);
-			nextWeek.setDate(currentDate.getDate() + 6);
-			nextWeek.setHours(1, 0, 0, 0);
+			let daylightSavings = currentDate.getTimezoneOffset();
+
+			if (daylightSavings === -60) {
+				currentDate.setHours(1, 0, 0, 0);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + 6
+				);
+				nextWeek.setHours(2, 0, 0, 0);
+				console.log('A week before', currentDate, 'The week after', nextWeek);
+			} else if (daylightSavings === -120) {
+				currentDate.setHours(2, 0, 0, 0);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + 6
+				);
+				nextWeek.setHours(2, 0, 0, 0);
+				console.log('A week before', currentDate, 'The week after', nextWeek);
+			}
 		}
 	}
 
