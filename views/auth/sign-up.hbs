@@ -1,14 +1,18 @@
 <div class="row justify-content-center mb-4 py-4">
-  <h1>Create a new account</h1>
-</div>
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+    <h1>Create a new account</h1>
+  </div>
 
-<div class="row justify-content-center">
-  <form action="/signup" method="POST">
-    <div class="col-md-10 my-3">
+  <form
+    action="/signup"
+    method="POST"
+    class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3"
+  >
+    <div class="col-auto my-3">
       <label for="username">Username</label>
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <input
         type="text"
         id="username"
@@ -18,11 +22,11 @@
       />
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <label for="password">Password</label>
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <input
         type="password"
         id="password"
@@ -32,11 +36,11 @@
       />
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <label for="confirm">Confirm Password</label>
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <input
         type="password"
         id="confirm"

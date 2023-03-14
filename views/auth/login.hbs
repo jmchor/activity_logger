@@ -1,15 +1,18 @@
 <div class="row justify-content-center mb-4 py-4">
-  <h1>Welcome</h1>
-  <h1>Back</h1>
-</div>
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-auto my-3">
+    <h1>Log In</h1>
+  </div>
 
-<div class="row justify-content-center">
-  <form action="/login" method="POST">
+  <form
+    action="/login"
+    method="POST"
+    class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3"
+  >
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <label for="username">Username</label>
     </div>
-    <div class="col-md-10 mb-3">
+    <div class="col-auto mb-3">
       <input
         type="text"
         id="username"
@@ -19,10 +22,10 @@
       />
     </div>
 
-    <div class="col-md-10 my-3">
+    <div class="col-auto my-3">
       <label for="password">Password</label>
     </div>
-    <div class="col-md-10 mb-5">
+    <div class="col-auto mb-5">
       <input
         type="password"
         id="password"
