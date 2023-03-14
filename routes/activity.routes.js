@@ -84,7 +84,12 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 							(daysUntilNextDayOfWeek < 0 ? 7 : 0),
 						now.getHours() + 1
 					);
-					date.setHours(1, 0, 0, 0);
+					let daylightSavings = date.getTimezoneOffset();
+					if(daylightSavings >= -60) {
+						date.setHours(1, 0, 0, 0);
+					} else {
+					date.setHours(2, 0, 0, 0);
+					}
 					const newActivity = new Activity({
 						userId,
 						title,
@@ -116,7 +121,12 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						i * 7 +
 						(daysUntilNextDayOfWeek < 0 ? 7 : 0)
 				);
-				date.setHours(1, 0, 0, 0);
+				let daylightSavings = date.getTimezoneOffset();
+					if(daylightSavings >= -60) {
+						date.setHours(1, 0, 0, 0);
+					} else {
+					date.setHours(2, 0, 0, 0);
+					}
 
 				const newActivity = new Activity({
 					userId,
@@ -167,9 +177,16 @@ router.get('/schedule', async (req, res, next) => {
 	if (!week && !lastWeek) {
 		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
 		currentDate.setDate(today.getDate());
-		currentDate.setHours(1, 0, 0, 0);
-		nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 6);
+		let daylightSavings = currentDate.getTimezoneOffset();
+
+			if (daylightSavings === -60) {
+				currentDate.setHours(1, 0, 0, 0);
+			} else {
+		currentDate.setHours(2, 0, 0, 0);
+			}
+		nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + (6 - currentDate.getDay()) );
 		nextWeek.setHours(1, 0, 0, 0);
+		console.log("HHHHEEELLOOO ", currentDate.getDay())
 	} else {
 		if (week) {
 			let value = (Number(week) + 1) % 53;
@@ -215,8 +232,8 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getMonth(),
 					currentDate.getDate() + 6
 				);
-				nextWeek.setHours(2, 0, 0, 0);
-				console.log('A week before', currentDate, 'The week after', nextWeek);
+				nextWeek.setHours(1, 0, 0, 0);
+				// console.log('A week before', currentDate, 'The week after', nextWeek);
 			} else if (daylightSavings === -120) {
 				currentDate.setHours(2, 0, 0, 0);
 				nextWeek = new Date(
@@ -224,13 +241,15 @@ router.get('/schedule', async (req, res, next) => {
 					currentDate.getMonth(),
 					currentDate.getDate() + 6
 				);
-				nextWeek.setHours(2, 0, 0, 0);
+				nextWeek.setHours(1, 0, 0, 0);
 				console.log('A week before', currentDate, 'The week after', nextWeek);
 			}
 		}
 	}
 
 	try {
+
+		console.log('Current date', currentDate, 'Next week', nextWeek);
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
 			userId: userId,
@@ -243,7 +262,7 @@ router.get('/schedule', async (req, res, next) => {
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < nextWeek;
+			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
 
 		// Add hasMonday, hasTuesday, etc. properties to each activity
