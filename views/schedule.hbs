@@ -20,7 +20,7 @@
   <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
 
 <div class="row border rounded m-3 p-2">
-    <h4>Monday</h4>
+    <h4>Monday, {{weekDates.Monday}}</h4>
     {{#each activities}}
         {{#if hasMonday}}
             {{> day}}
@@ -29,7 +29,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Tuesday</h4>
+    <h4>Tuesday, {{weekDates.Tuesday}}</h4>
     {{#each activities}}
         {{#if hasTuesday}}
             {{> day}}
@@ -38,7 +38,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Wednesday</h4>
+    <h4>Wednesday, {{weekDates.Wednesday}}</h4>
     {{#each activities}}
         {{#if hasWednesday}}
             {{> day}}
@@ -47,7 +47,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Thursday</h4>
+    <h4>Thursday, {{weekDates.Thursday}}</h4>
     {{#each activities}}
         {{#if hasThursday}}
             {{> day}}
@@ -56,7 +56,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Friday</h4>
+    <h4>Friday, {{weekDates.Friday}}</h4>
     {{#each activities}}
         {{#if hasFriday}}
             {{> day}}
@@ -65,7 +65,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Saturday</h4>
+    <h4>Saturday, {{weekDates.Saturday}}</h4>
     {{#each activities}}
         {{#if hasSaturday}}
             {{> day}}
@@ -74,7 +74,7 @@
 </div>
 
 <div class="row border rounded m-3 p-2">
-    <h4>Sunday</h4>
+    <h4>Sunday, {{weekDates.Sunday}}</h4>
     {{#each activities}}
         {{#if hasSunday}}
             {{> day}}
