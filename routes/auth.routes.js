@@ -68,7 +68,7 @@ router.post("/signup", async (req, res, next) => {
 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
   if (!regex.test(password)) {
-    res.status(500).render("auth/signup", {
+    res.status(500).render("auth/sign-up", {
       errorMessage:
         "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
     });
