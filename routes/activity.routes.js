@@ -184,7 +184,7 @@ router.get('/schedule', async (req, res, next) => {
 			} else {
 		currentDate.setHours(2, 0, 0, 0);
 			}
-		nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + (6 - currentDate.getDay()) );
+		nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + (7 - currentDate.getDay()) );
 		nextWeek.setHours(1, 0, 0, 0);
 		console.log("HHHHEEELLOOO ", currentDate.getDay())
 	} else {
