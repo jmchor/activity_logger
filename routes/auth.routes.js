@@ -51,11 +51,11 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-  const { username, password, confirm } = req.body;
+  const { username, email, password, confirm } = req.body;
   const loggedOut = "You are still logged out"
 
   //make sure the user provides both required inputs
-  if (!username || !password || !confirm) {
+  if (!username || !email || !password || !confirm) {
     res.render("auth/sign-up", {
       errorMessage:
         "All fields are mandatory. Please provide username and password.",
@@ -75,13 +75,15 @@ router.post("/signup", async (req, res, next) => {
     return;
   }
 
+
+
   try {
     //create Salt
     const salt = await bcryptjs.genSalt(saltRounds);
     //create a Hash from the Salt and the user's password
     const passwordHash = await bcryptjs.hash(password, salt);
     //create a new User in the DB with the Username and the password hash
-    const newUser = await User.create({ username, password: passwordHash });
+    const newUser = await User.create({ username, email, password: passwordHash });
     //redirect the new User directly to the login page
     res.redirect("/login");
   } catch (error) {
@@ -143,5 +145,48 @@ router.post('/logout', isLoggedIn, (req,res) => {
   res.redirect("/");
 
 })
+
+router.get('/profile', isLoggedIn, (req, res) => {
+	res.render('profile', { user: req.session.currentUser });
+});
+
+router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
+	const { _id } = req.session.currentUser;
+	const { password } = req.body;
+  const user = req.session.currentUser;
+
+  if (!password) {
+    res.render("profile", {
+      errorMessage: "Please enter your password to delete your account.", user: req.session.currentUser
+    });
+    return;
+  }
+
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+    if (!regex.test(password)) {
+      res.status(500).render("profile", {
+        errorMessage:
+          "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
+      });
+      return;}
+
+	try {
+
+  if (bcryptjs.compareSync(password, user.password)) {
+    await User.findByIdAndDelete(_id);
+		req.session.destroy();
+		res.redirect('/');
+
+    } else {
+      res.render("profile", {
+        errorMessage: "Incorrect password.", user: user
+      });
+    }
+
+
+	} catch (error) {
+		next(error);
+	}
+});
 
 module.exports = router;
