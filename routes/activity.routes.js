@@ -6,6 +6,7 @@ const { isLoggedIn } = require('../middleware/routeguard');
 const Activity = require('../models/Activity.model');
 const methodOverride = require('method-override');
 const crypto = require('crypto');
+const axios = require('axios');
 
 // middleware to override HTTP methods
 router.use(methodOverride('_method'));
@@ -155,11 +156,13 @@ router.get('/schedule', async (req, res, next) => {
 	const userId = req.session.currentUser._id;
 	const { week, lastWeek } = req.query;
 
+	try {
+
 	const now = new Date();
-	const year = now.getFullYear();
-	const jan4th = new Date(year, 0, 4, 1);
+	const testYear = now.getFullYear();
+	const jan4th = new Date(testYear, 0, 4, 1);
 	const jan4thDay = jan4th.getDay();
-	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
+	const firstThursday = new Date(testYear, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
 	let weekNumber;
 
 	const today = new Date(new Date().setHours(1, 0, 0, 0));
@@ -258,7 +261,7 @@ router.get('/schedule', async (req, res, next) => {
 		}
 	}
 
-	try {
+
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
 			userId: userId,
@@ -322,13 +325,21 @@ router.get('/schedule', async (req, res, next) => {
 
 		  };
 
+		  const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
+		headers: {
+			'X-Api-Key': process.env.FACT_API_KEY,
+		},
+    });
+    const data = await response.data;
+    const fact = data[0].fact;
+
 
 
 
 
 
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates });
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates, fact:fact });
 	} catch (error) {
 		console.error(error);
 		next(error);

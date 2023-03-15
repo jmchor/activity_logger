@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Activity = require("../models/Activity.model");
 const mongoose = require("mongoose");
+const axios = require("axios");
 // Import the middleware for authentication here
 const { isLoggedIn } = require("../middleware/routeguard");
 
@@ -35,8 +36,18 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 			return activityDate >= currentDate && activityDate < tomorrowMidnight;
 		});
 
+    const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
+		headers: {
+			'X-Api-Key': process.env.FACT_API_KEY,
+		},
+    });
+    const data = await response.data;
+    const fact = data[0].fact;
+
+
+
 		// Send the coming week activities as the response
-		res.render('home', { user, comingWeekActivities: comingWeekActivities});
+		res.render('home', { user, comingWeekActivities: comingWeekActivities, fact:fact});
 
   } catch (error) {
 next(error)
@@ -44,6 +55,7 @@ next(error)
   }
 
 });
+
 
 router.get("/signup", (req, res, next) => {
   const loggedOut = "You are still logged out"
