@@ -21,65 +21,94 @@
 
 <div class="row border rounded m-3 p-2">
     <h4>Monday, {{weekDates.Monday}}</h4>
-    {{#each activities}}
-        {{#if hasMonday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+
+    {{#if noActivities.Monday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasMonday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Tuesday, {{weekDates.Tuesday}}</h4>
-    {{#each activities}}
-        {{#if hasTuesday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Tuesday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasTuesday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Wednesday, {{weekDates.Wednesday}}</h4>
-    {{#each activities}}
-        {{#if hasWednesday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Wednesday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasWednesday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Thursday, {{weekDates.Thursday}}</h4>
-    {{#each activities}}
-        {{#if hasThursday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Thursday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasThursday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Friday, {{weekDates.Friday}}</h4>
-    {{#each activities}}
-        {{#if hasFriday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Friday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasFriday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Saturday, {{weekDates.Saturday}}</h4>
-    {{#each activities}}
-        {{#if hasSaturday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Saturday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasSaturday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <div class="row border rounded m-3 p-2">
     <h4>Sunday, {{weekDates.Sunday}}</h4>
-    {{#each activities}}
-        {{#if hasSunday}}
-            {{> day}}
-        {{/if}}
-    {{/each}}
+    {{#if noActivities.Sunday}}
+        <p>no activities today</p>
+    {{else}}
+        {{#each activities}}
+            {{#if hasSunday}}
+                {{> day}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
 </div>
 
   </div>
