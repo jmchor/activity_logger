@@ -277,6 +277,25 @@ router.get('/schedule', async (req, res, next) => {
 			return activityDate >= currentDate && activityDate < nextWeek;
 		});
 
+		let noMonday = true;
+		let noTuesday = true;
+		let noWednesday = true;
+		let noThursday = true;
+		let noFriday = true;
+		let noSaturday = true;
+		let noSunday = true;
+
+		const noActivities = {
+			Monday: noMonday,
+			Tuesday: noTuesday,
+			Wednesday: noWednesday,
+			Thursday: noThursday,
+			Friday: noFriday,
+			Saturday: noSaturday,
+			Sunday: noSunday
+		  };
+
+
 		// Add hasMonday, hasTuesday, etc. properties to each activity
 		comingWeekActivities.forEach((activity) => {
 			const activityDate = new Date(activity.specificDate);
@@ -290,6 +309,13 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
 
+			activity.hasMonday ? noActivities.Monday = false : 0;
+			activity.hasTuesday ? noActivities.Tuesday = false : 0;
+			activity.hasWednesday ? noActivities.Wednesday = false : 0;
+			activity.hasThursday ? noActivities.Thursday = false : 0;
+			activity.hasFriday ? noActivities.Friday = false : 0;
+			activity.hasSaturday ? noActivities.Saturday = false : 0;
+			activity.hasSunday ? noActivities.Sunday = false : 0;
 
 		});
 
@@ -339,7 +365,7 @@ router.get('/schedule', async (req, res, next) => {
 
 
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates, fact:fact });
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates, fact:fact,  noActivities: noActivities  });
 	} catch (error) {
 		console.error(error);
 		next(error);
