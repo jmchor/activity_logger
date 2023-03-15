@@ -6,6 +6,7 @@ const { isLoggedIn } = require('../middleware/routeguard');
 const Activity = require('../models/Activity.model');
 const methodOverride = require('method-override');
 const crypto = require('crypto');
+const axios = require('axios');
 
 // middleware to override HTTP methods
 router.use(methodOverride('_method'));
@@ -155,110 +156,105 @@ router.get('/schedule', async (req, res, next) => {
 	const userId = req.session.currentUser._id;
 	const { week, lastWeek } = req.query;
 
-	const now = new Date();
-	const year = now.getFullYear();
-	const jan4th = new Date(year, 0, 4, 1);
-	const jan4thDay = jan4th.getDay();
-	const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
-	let weekNumber;
-
-	const today = new Date(new Date().setHours(1, 0, 0, 0));
-	let currentDate = new Date();
-	let nextWeek;
-	let i;
-	let flexWeekStart;
-	let currentWeekFromView;
-
-	let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
-
-	if (!week && !lastWeek) {
-		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
-		currentDate.setDate(today.getDate());
-		let daylightSavings = currentDate.getTimezoneOffset();
-
-		if (daylightSavings === -60) {
-			currentDate.setHours(1, 0, 0, 0);
-		} else {
-			currentDate.setHours(2, 0, 0, 0);
-		}
-
-		nextWeek = new Date(
-			currentDate.getFullYear(),
-			currentDate.getMonth(),
-			currentDate.getDate() + (7 - currentDate.getDay())
-		);
-		nextWeek.setHours(1, 0, 0, 0);
-		flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-		currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-	} else {
-		if (week) {
-			currentWeekFromView = (Number(week) + 1) % 53;
-			weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
-
-			i = weekNumber - currentMoment;
-			currentDate.setDate(today.getDate() + 7 * i);
-
-			let daylightSavings = currentDate.getTimezoneOffset();
-
-			if (daylightSavings === -60) {
-				currentDate.setHours(1, 0, 0, 0);
-				nextWeek = new Date(
-					currentDate.getFullYear(),
-					currentDate.getMonth(),
-					currentDate.getDate() + (7 - currentDate.getDay())
-				);
-				nextWeek.setHours(2, 0, 0, 0);
-				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-			} else if (daylightSavings === -120) {
-				currentDate.setHours(2, 0, 0, 0);
-				nextWeek = new Date(
-					currentDate.getFullYear(),
-					currentDate.getMonth(),
-					currentDate.getDate() + (7 - currentDate.getDay())
-				);
-				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - flexWeekStart);
-				nextWeek.setHours(2, 0, 0, 0);
-
-			}
-		} else {
-			currentWeekFromView = Number(lastWeek) - 1;
-
-			weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
-			i = (weekNumber - currentMoment) * -1;
-			currentDate.setDate(today.getDate() - 7 * i);
-			let daylightSavings = currentDate.getTimezoneOffset();
-
-			if (daylightSavings === -60) {
-				currentDate.setHours(1, 0, 0, 0);
-				nextWeek = new Date(
-					currentDate.getFullYear(),
-					currentDate.getMonth(),
-					currentDate.getDate() + (7 - currentDate.getDay())
-				);
-				nextWeek.setHours(2, 0, 0, 0);
-				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-			} else if (daylightSavings === -120) {
-				currentDate.setHours(2, 0, 0, 0);
-				nextWeek = new Date(
-					currentDate.getFullYear(),
-					currentDate.getMonth(),
-					currentDate.getDate() + (7 - currentDate.getDay())
-				);
-				nextWeek.setHours(2, 0, 0, 0);
-				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-			}
-		}
-	}
-
 	try {
+		const now = new Date();
+		const year = now.getFullYear();
+		const jan4th = new Date(year, 0, 4, 1);
+		const jan4thDay = jan4th.getDay();
+		const firstThursday = new Date(year, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
+		let weekNumber;
+
+		const today = new Date(new Date().setHours(1, 0, 0, 0));
+		let currentDate = new Date();
+		let nextWeek;
+		let i;
+		let flexWeekStart;
+		let currentWeekFromView;
+
+		let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+
+		if (!week && !lastWeek) {
+			weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+			currentDate.setDate(today.getDate());
+			let daylightSavings = currentDate.getTimezoneOffset();
+
+			if (daylightSavings === -60) {
+				currentDate.setHours(1, 0, 0, 0);
+			} else {
+				currentDate.setHours(2, 0, 0, 0);
+			}
+
+			nextWeek = new Date(
+				currentDate.getFullYear(),
+				currentDate.getMonth(),
+				currentDate.getDate() + (7 - currentDate.getDay())
+			);
+			nextWeek.setHours(1, 0, 0, 0);
+			flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+			currentDate.setDate(currentDate.getDate() - flexWeekStart);
+		} else {
+			if (week) {
+				currentWeekFromView = (Number(week) + 1) % 53;
+				weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
+
+				i = weekNumber - currentMoment;
+				currentDate.setDate(today.getDate() + 7 * i);
+
+				let daylightSavings = currentDate.getTimezoneOffset();
+
+				if (daylightSavings === -60) {
+					currentDate.setHours(1, 0, 0, 0);
+					nextWeek = new Date(
+						currentDate.getFullYear(),
+						currentDate.getMonth(),
+						currentDate.getDate() + (7 - currentDate.getDay())
+					);
+					nextWeek.setHours(2, 0, 0, 0);
+					flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+					currentDate.setDate(currentDate.getDate() - flexWeekStart);
+				} else if (daylightSavings === -120) {
+					currentDate.setHours(2, 0, 0, 0);
+					nextWeek = new Date(
+						currentDate.getFullYear(),
+						currentDate.getMonth(),
+						currentDate.getDate() + (7 - currentDate.getDay())
+					);
+					flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+					currentDate.setDate(currentDate.getDate() - flexWeekStart);
+					nextWeek.setHours(2, 0, 0, 0);
+				}
+			} else {
+				currentWeekFromView = Number(lastWeek) - 1;
+
+				weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
+				i = (weekNumber - currentMoment) * -1;
+				currentDate.setDate(today.getDate() - 7 * i);
+				let daylightSavings = currentDate.getTimezoneOffset();
+
+				if (daylightSavings === -60) {
+					currentDate.setHours(1, 0, 0, 0);
+					nextWeek = new Date(
+						currentDate.getFullYear(),
+						currentDate.getMonth(),
+						currentDate.getDate() + (7 - currentDate.getDay())
+					);
+					nextWeek.setHours(2, 0, 0, 0);
+					flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+					currentDate.setDate(currentDate.getDate() - flexWeekStart);
+				} else if (daylightSavings === -120) {
+					currentDate.setHours(2, 0, 0, 0);
+					nextWeek = new Date(
+						currentDate.getFullYear(),
+						currentDate.getMonth(),
+						currentDate.getDate() + (7 - currentDate.getDay())
+					);
+					nextWeek.setHours(2, 0, 0, 0);
+					flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+					currentDate.setDate(currentDate.getDate() - flexWeekStart);
+				}
+			}
+		}
+
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
 			userId: userId,
@@ -288,8 +284,17 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasSunday = dayOfWeek === 0;
 		});
 
-		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber });
+		// Get a random fact from the API
+		const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
+			headers: {
+				'X-Api-Key': process.env.FACT_API_KEY,
+			},
+		});
+		const data = await response.data;
+		const fact = data[0].fact;
+
+		// Send the coming week activities, the week number, and the fact to the schedule view
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, fact: fact });
 	} catch (error) {
 		console.error(error);
 		next(error);
