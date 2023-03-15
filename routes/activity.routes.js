@@ -286,10 +286,49 @@ router.get('/schedule', async (req, res, next) => {
 			activity.hasFriday = dayOfWeek === 5;
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
+
+
 		});
 
+		const year = currentDate.getFullYear();
+		const scheduleDate = new Date(year, 0, 1);
+		scheduleDate.setDate(scheduleDate.getDate() + (weekNumber - 1) * 7 - scheduleDate.getDay() + 1);
+		let daylightSavings = scheduleDate.getTimezoneOffset();
+
+		if (daylightSavings === -60) {
+			scheduleDate.setHours(1, 0, 0, 0);
+		} else if (daylightSavings === -120) {
+			scheduleDate.setHours(2, 0, 0, 0);
+		}
+
+		let mondayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate(), scheduleDate.getHours());
+		let tuesdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 1, scheduleDate.getHours());
+		let wednesdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 2, scheduleDate.getHours());
+		let thursdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 3, scheduleDate.getHours());
+		let fridayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 4, scheduleDate.getHours());
+		let saturdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 5, scheduleDate.getHours());
+		let sundayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 6, scheduleDate.getHours());
+
+
+
+		let weekDates = {
+			Monday: `${mondayDate.getDate() < 10 ? '0' : ''}${mondayDate.getDate()}.${mondayDate.getMonth() + 1 < 10 ? '0' : ''}${mondayDate.getMonth() + 1}.${mondayDate.getFullYear()}`,
+			Tuesday: `${tuesdayDate.getDate() < 10 ? '0' : ''}${tuesdayDate.getDate()}.${tuesdayDate.getMonth() + 1 < 10 ? '0' : ''}${tuesdayDate.getMonth() + 1}.${tuesdayDate.getFullYear()}`,
+			Wednesday: `${wednesdayDate.getDate() < 10 ? '0' : ''}${wednesdayDate.getDate()}.${wednesdayDate.getMonth() + 1 < 10 ? '0' : ''}${wednesdayDate.getMonth() + 1}.${wednesdayDate.getFullYear()}`,
+			Thursday: `${thursdayDate.getDate() < 10 ? '0' : ''}${thursdayDate.getDate()}.${thursdayDate.getMonth() + 1 < 10 ? '0' : ''}${thursdayDate.getMonth() + 1}.${thursdayDate.getFullYear()}`,
+			Friday: `${fridayDate.getDate() < 10 ? '0' : ''}${fridayDate.getDate()}.${fridayDate.getMonth() + 1 < 10 ? '0' : ''}${fridayDate.getMonth() + 1}.${fridayDate.getFullYear()}`,
+			Saturday: `${saturdayDate.getDate() < 10 ? '0' : ''}${saturdayDate.getDate()}.${saturdayDate.getMonth() + 1 < 10 ? '0' : ''}${saturdayDate.getMonth() + 1}.${saturdayDate.getFullYear()}`,
+			Sunday: `${sundayDate.getDate() < 10 ? '0' : ''}${sundayDate.getDate()}.${sundayDate.getMonth() + 1 < 10 ? '0' : ''}${sundayDate.getMonth() + 1}.${sundayDate.getFullYear()}`,
+
+		  };
+
+
+
+
+
+
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber });
+		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates });
 	} catch (error) {
 		console.error(error);
 		next(error);
