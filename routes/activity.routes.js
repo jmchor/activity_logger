@@ -7,6 +7,7 @@ const Activity = require('../models/Activity.model');
 const methodOverride = require('method-override');
 const crypto = require('crypto');
 const axios = require('axios');
+const { isDate } = require('util/types');
 
 // middleware to override HTTP methods
 router.use(methodOverride('_method'));
@@ -277,7 +278,7 @@ router.get('/schedule', async (req, res, next) => {
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < nextWeek;
+			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
 
 		let noMonday = true;
@@ -403,6 +404,8 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	const { id } = req.params;
 	const { title, description, category, daysOfWeek, repeat, specificDate, update } = req.body;
 
+	console.log(specificDate)
+
 	try {
 		const updateActivity = await Activity.findById(id);
 
@@ -418,7 +421,20 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 				{ title, description, category, daysOfWeek, repeat, specificDate },
 				{ new: true }
 			);
-		} else {
+		} else if (update === 'Procrastinate') {
+
+			console.log("specificDate", specificDate)
+
+			let date = new Date(specificDate);
+			date.setDate(date.getDate() + 1);
+
+			await Activity.findByIdAndUpdate(
+				id,
+				{specificDate: date },
+				{ new: true })
+		}
+
+		else {
 			return res.status(404).send('Activity not found');
 		}
 
