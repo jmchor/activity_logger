@@ -274,10 +274,11 @@ router.get('/schedule', async (req, res, next) => {
 			},
 		});
 
+
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < nextWeek;
+			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
 
 		let noMonday = true;
@@ -376,11 +377,28 @@ router.get('/schedule', async (req, res, next) => {
 });
 
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
-	const { _id } = req.body;
+	const { _id , update, specificDate } = req.body;
+	console.log(req.body);
+
+
+
 
 	try {
-		const activity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
-		console.log(activity);
+
+		if (update === '+') {
+
+			let date = new Date(specificDate);
+			date.setDate(date.getDate() + 1);
+
+			const activity= await Activity.findByIdAndUpdate(_id, { specificDate: date }, { new: true });
+			console.log(activity);
+
+		} else {const activity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
+		console.log(activity);}
+
+
+
+
 	} catch (error) {
 		console.error(error);
 		next(error);
