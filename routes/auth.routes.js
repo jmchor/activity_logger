@@ -78,7 +78,7 @@ router.post("/signup", async (req, res, next) => {
     res.render("auth/sign-up", { errorMessage: "Passwords do not match", loggedOut: loggedOut });
   }
 
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
   if (!regex.test(password)) {
     res.status(500).render("auth/sign-up", {
       errorMessage:
