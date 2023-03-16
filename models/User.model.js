@@ -22,6 +22,14 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    securityQuestion: {
+      type: String,
+      required: true,
+    },
+    passwordResetAnswer: {
+      type: String,
+      required: true,
+    },
     activities: [
       {
       type: Schema.Types.ObjectId,
