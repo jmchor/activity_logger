@@ -165,6 +165,8 @@ router.get('/schedule', async (req, res, next) => {
 	const firstThursday = new Date(testYear, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
 	let weekNumber;
 
+
+
 	const today = new Date(new Date().setHours(1, 0, 0, 0));
 	let currentDate = new Date();
 	let nextWeek;
@@ -172,10 +174,11 @@ router.get('/schedule', async (req, res, next) => {
 	let flexWeekStart;
 	let currentWeekFromView;
 
-	let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+	let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1;
 
 	if (!week && !lastWeek) {
-		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 2;
+		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1
+
 		currentDate.setDate(today.getDate());
 		let daylightSavings = currentDate.getTimezoneOffset();
 
@@ -358,7 +361,6 @@ router.get('/schedule', async (req, res, next) => {
     });
     const data = await response.data;
     const fact = data[0].fact;
-
 
 
 
