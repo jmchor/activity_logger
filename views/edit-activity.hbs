@@ -29,6 +29,13 @@
 
 </form>
 
+<form action='/schedule/{{findActivity._id}}' method='POST'>
+	<input type='hidden' name='_id' value='{{findActivity._id}}' />
+	<input type='hidden' name='specificDate' value='{{findActivity.specificDate}}' />
+	<input type='submit' name='update' value='Procrastinate' />
+
+</form>
+
 <form action='/schedule/{{findActivity._id}}?_method=DELETE' method='POST'>
 	<input type='submit' value='Delete Activity' name='terminate' />
 </form>
