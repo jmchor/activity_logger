@@ -104,7 +104,7 @@ router.post("/signup", async (req, res, next) => {
     } else if (error.code === 11000) {
       res.status(500).render("auth/sign-up", {
         errorMessage:
-          "The username needs to be unique. Username already in use.", loggedOut: loggedOut
+          "The username and email need to be unique. Username or email already in use.", loggedOut: loggedOut
       });
     } else {
       next(error);
