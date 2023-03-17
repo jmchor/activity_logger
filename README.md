@@ -42,8 +42,9 @@ Most important middleware functions and packages include:
 - crypto
 - axios
 - hbs
+- authentication middleware function (to discern logged-in/out states)
 
-as well as routeguard middleware and the Ironlauncher generator
+Base structure organization using [Ironlauncher](https://www.npmjs.com/package/ironlauncher) generator by Ironhack.
 
 ## Installation
 
