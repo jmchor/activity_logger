@@ -1,59 +1,49 @@
-<div class="row justify-content-center mb-4 py-4">
-  <div class="col-xxl-8 col-xl-8 col-lg-10 col-auto my-3">
-    <h1>Log In</h1>
-  </div>
+<div class='row justify-content-center mb-4 py-4'>
+	<div class='col-xxl-8 col-xl-8 col-lg-10 col-auto my-3'>
+		<h1>Log In</h1>
+	</div>
 
-  <form
-    action="/login"
-    method="POST"
-    class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3"
-  >
+	<form action='/login' method='POST' class='col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3'>
 
-    <div class="col-auto my-3">
-      <label for="username">Username</label>
-    </div>
-    <div class="col-auto mb-3">
-      <input
-        type="text"
-        id="username"
-        name="username"
-        class="form-control"
-        required
-      />
-    </div>
+		<div class='col-auto my-3'>
+			<label for='username'>Username</label>
+		</div>
+		<div class='col-auto mb-3'>
+			<input type='text' id='username' name='username' class='form-control' required />
+		</div>
 
-    <div class="col-auto my-3">
-      <label for="password">Password</label>
-    </div>
-    <div class="col-auto mb-5">
-      <input
-        type="password"
-        id="password"
-        name="password"
-        class="form-control"
-        required
-      />
-    </div>
+		<div class='col-auto my-3'>
+			<label for='password'>Password</label>
+		</div>
+		<div class='col-auto mb-5'>
+			<input type='password' id='password' name='password' class='form-control' required />
 
-    <div class="row d-flex justify-content-center">
-      <div class="btn-group w-100">
-        <input class="btn btn-primary flex-fill" type="submit" value="Log in" />
-      </div>
-    </div>
+		</div>
+		<div class='col-auto mb-5'>
+			<input type='checkbox' name='rememberMe' id='rememberMe' value='Remember Me' />
+			<label for='rememberMe'>Remember Me</label>
 
-    <div class="divider d-flex align-items-center my-4">
-      <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-    </div>
+		</div>
 
-    <div class="row justify-content-center">
-      <div class="btn-group w-100">
-        <a class="btn btn-secondary flex-fill" href="/signup">Sign up</a>
-      </div>
-    </div>
+		<div class='row d-flex justify-content-center'>
+			<div class='btn-group w-100'>
+				<input class='btn btn-primary flex-fill' type='submit' value='Log in' />
+			</div>
+		</div>
 
-  </form>
+		<div class='divider d-flex align-items-center my-4'>
+			<p class='text-center fw-bold mx-3 mb-0 text-muted'>OR</p>
+		</div>
+
+		<div class='row justify-content-center'>
+			<div class='btn-group w-100'>
+				<a class='btn btn-secondary flex-fill' href='/signup'>Sign up</a>
+			</div>
+		</div>
+
+	</form>
 </div>
 
 {{#if errorMessage}}
-  <p>{{errorMessage}}</p>
+	<p>{{errorMessage}}</p>
 {{/if}}
