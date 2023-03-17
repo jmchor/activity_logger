@@ -123,6 +123,8 @@ router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   const loggedOut = "You are still logged out"
 
+  console.log(password)
+
   if (username === "" || password === "") {
     res.render("auth/login", {
       errorMessage: "Please enter both username and password to log in.", loggedOut: loggedOut
@@ -203,107 +205,108 @@ router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 });
 
 router.get('/find-user', (req, res, next) => {
-  const loggedOut = "You are still logged out"
-  res.render('auth/find-user', {loggedOut: loggedOut});
- })
+	const loggedOut = 'You are still logged out';
+	res.render('auth/find-user', { loggedOut: loggedOut });
+});
 
 router.post('/find-user', async (req, res, next) => {
-  const loggedOut = "You are still logged out"
+	const loggedOut = 'You are still logged out';
 
-  const { email } = req.body;
+	const { email } = req.body;
 
-  try {
-     const findUser = await User.findOne({ email });
-      if (!findUser) {
-        //user isn't found
-        res.render("auth/find-user", {
-          errorMessage: "Email is not registered. Try with other email.", loggedOut: loggedOut
-        });
-        return;
-      } else {
-        let message;
+	try {
+		const findUser = await User.findOne({ email });
+		if (!findUser) {
+			//user isn't found
+			res.render('auth/find-user', {
+				errorMessage: 'Email is not registered. Try with other email.',
+				loggedOut: loggedOut,
+			});
+			return;
+		} else {
+			let message;
 
-        if(findUser.securityQuestion === "animal") {
-          message = "What is your pets name?"
-        } else if (findUser.securityQuestion === "color") {
-          message = "What is your father's last name?"
-        } else if (findUser.securityQuestion === "food") {
-          message = "What is your favorite place in the world?"
-        }
+			if (findUser.securityQuestion === 'animal') {
+				message = 'What is your pets name?';
+			} else if (findUser.securityQuestion === 'color') {
+				message = "What is your father's last name?";
+			} else if (findUser.securityQuestion === 'food') {
+				message = 'What is your favorite place in the world?';
+			}
 
-        res.render('auth/reset-password', {user: findUser, loggedOut: loggedOut, message:message});
-      }
-  } catch (error) {
-    console.log("Error with POST find-user route", error);
-    next(error);
-  }
+			res.render('auth/answer-question', { user: findUser, loggedOut: loggedOut, message: message });
+		}
+	} catch (error) {
+		console.log('Error with POST find-user route', error);
+		next(error);
+	}
+});
 
-})
+router.post('/answer', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	const { _id, passwordResetAnswer } = req.body;
+
+	console.log(passwordResetAnswer);
+
+	try {
+		const user = await User.findById(_id);
+
+		if (bcryptjs.compareSync(passwordResetAnswer, user.passwordResetAnswer)) {
+			res.render('auth/reset-password', { user: user, loggedOut: loggedOut });
+		} else {
+			res.render('auth/answer-question', {
+				errorMessage: 'Incorrect answer.',
+				user: user,
+				loggedOut: loggedOut,
+			});
+		}
+	} catch (error) {
+		console.log('Error with POST answer route', error);
+		next(error);
+	}
+});
 
 router.post('/reset-password', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	const { _id, password, confirm, passwordResetAnswer } = req.body;
 
-  const loggedOut = "You are still logged out"
-  const { _id, password, confirm, passwordResetAnswer } = req.body;
+	if (password === '' || confirm === '' || passwordResetAnswer === '') {
+		res.render('auth/reset-password', {
+			errorMessage: 'Please enter all fields to reset your password.',
+			loggedOut: loggedOut,
+		});
+		return;
+	}
 
+	if (password !== confirm) {
+		res.render('auth/reset-password', {
+			errorMessage: "Passwords don't match.",
+			loggedOut: loggedOut,
+		});
+		return;
+	}
+	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+	if (!regex.test(password)) {
+		res.status(500).render('auth/reset-password', {
+			errorMessage:
+				'Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.',
+			loggedOut: loggedOut,
+		});
+		return;
+	}
 
-
-
-  if (password === "" || confirm === "" || passwordResetAnswer === "") {
-    res.render("auth/reset-password", {
-      errorMessage: "Please enter all fields to reset your password.", loggedOut: loggedOut
-    });
-    return;
-  }
-
-
-  if (password !== confirm) {
-    res.render("auth/reset-password", {
-      errorMessage: "Passwords don't match.", loggedOut: loggedOut
-    });
-    return;
-  }
-
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
-    if (!regex.test(password)) {
-      res.status(500).render("auth/reset-password", {
-        errorMessage:
-          "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.", loggedOut: loggedOut
-      });
-      return;}
-
- try {
-
-    const user = await User.findById(_id);
-    if (bcryptjs.compareSync(passwordResetAnswer, user.passwordResetAnswer)) {
-
-
-    const salt = await bcryptjs.genSalt(saltRounds);
-    //create a Hash from the Salt and the user's password
-    const passwordHash = await bcryptjs.hash(password, salt);
-    //create a new User in the DB with the Username and the password hash
-    const updatePassword = await User.findByIdAndUpdate({_id}, {password: passwordHash });
-    //redirect the new User directly to the login page
-    res.redirect("/login");}
-    else {
-      res.render("auth/reset-password", {
-        errorMessage: "Incorrect answer.", loggedOut: loggedOut
-      });
-    }
-
-
- } catch (error) {
-
- }
-
-
-
-  res.render('auth/reset-password', {loggedOut: loggedOut});
- })
-
-
-
-
-
+	try {
+		const salt = await bcryptjs.genSalt(saltRounds);
+		//create a Hash from the Salt and the user's password
+		const passwordHash = await bcryptjs.hash(password, salt);
+		//create a new User in the DB with the Username and the password hash
+		const updatePassword = await User.findByIdAndUpdate({ _id }, { password: passwordHash });
+		//redirect the new User directly to the login page
+		res.redirect('/login');
+	} catch (error) {
+		next(error);
+	}
+});
 
 
 module.exports = router;
