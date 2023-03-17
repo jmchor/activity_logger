@@ -2,7 +2,9 @@
 
 ## Project Description
 
-TaskTastrophe is an app where users can log activities, plan recurring activities for every week or just for once occurrence. Build habits using this app - and learn a thing or two!
+TaskTastrophe is an app to help you plan recurring activities for every week or just a single task.
+
+With a calendar view on the weeks tasks, organize what you want to do. Build habits using this app - and learn a thing or two!
 
 ### Basic Functionalities
 
