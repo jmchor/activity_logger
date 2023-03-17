@@ -23,7 +23,7 @@ require("./config/session.config")(app);
 const capitalize = require("./utils/capitalize");
 const projectName = "TaskTastrophe";
 
-app.locals.appTitle = `${capitalize(projectName)} created by JLN with IronLauncher`;
+app.locals.appTitle = `${capitalize(projectName)}`;
 
 // 👇 Start handling routes here
 
