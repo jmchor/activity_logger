@@ -232,9 +232,9 @@ router.post('/find-user', async (req, res, next) => {
 
 			if (findUser.securityQuestion === 'animal') {
 				message = 'What is your pets name?';
-			} else if (findUser.securityQuestion === 'color') {
+			} else if (findUser.securityQuestion === 'father') {
 				message = "What is your father's last name?";
-			} else if (findUser.securityQuestion === 'food') {
+			} else if (findUser.securityQuestion === 'place') {
 				message = 'What is your favorite place in the world?';
 			}
 
