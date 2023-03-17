@@ -63,7 +63,7 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-  const { username, email, password, confirm } = req.body;
+  const { username, email, password, confirm, securityQuestion, passwordResetAnswer } = req.body;
   const loggedOut = "You are still logged out"
 
   //make sure the user provides both required inputs
@@ -94,8 +94,9 @@ router.post("/signup", async (req, res, next) => {
     const salt = await bcryptjs.genSalt(saltRounds);
     //create a Hash from the Salt and the user's password
     const passwordHash = await bcryptjs.hash(password, salt);
+    const answerHash = await bcryptjs.hash(passwordResetAnswer, salt);
     //create a new User in the DB with the Username and the password hash
-    const newUser = await User.create({ username, email, password: passwordHash });
+    const newUser = await User.create({ username, email, securityQuestion, passwordResetAnswer: answerHash, password: passwordHash });
     //redirect the new User directly to the login page
     res.redirect("/login");
   } catch (error) {
@@ -121,6 +122,8 @@ router.post("/login", async (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   const { username, password } = req.body;
   const loggedOut = "You are still logged out"
+
+
 
   if (username === "" || password === "") {
     res.render("auth/login", {
@@ -200,5 +203,110 @@ router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 		next(error);
 	}
 });
+
+router.get('/find-user', (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	res.render('auth/find-user', { loggedOut: loggedOut });
+});
+
+router.post('/find-user', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+
+	const { email } = req.body;
+
+	try {
+		const findUser = await User.findOne({ email });
+		if (!findUser) {
+			//user isn't found
+			res.render('auth/find-user', {
+				errorMessage: 'Email is not registered. Try with other email.',
+				loggedOut: loggedOut,
+			});
+			return;
+		} else {
+			let message;
+
+			if (findUser.securityQuestion === 'animal') {
+				message = 'What is your pets name?';
+			} else if (findUser.securityQuestion === 'color') {
+				message = "What is your father's last name?";
+			} else if (findUser.securityQuestion === 'food') {
+				message = 'What is your favorite place in the world?';
+			}
+
+			res.render('auth/answer-question', { user: findUser, loggedOut: loggedOut, message: message });
+		}
+	} catch (error) {
+		console.log('Error with POST find-user route', error);
+		next(error);
+	}
+});
+
+router.post('/answer', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	const { _id, passwordResetAnswer } = req.body;
+
+
+
+	try {
+		const user = await User.findById(_id);
+
+		if (bcryptjs.compareSync(passwordResetAnswer, user.passwordResetAnswer)) {
+			res.render('auth/reset-password', { user: user, loggedOut: loggedOut });
+		} else {
+			res.render('auth/answer-question', {
+				errorMessage: 'Incorrect answer.',
+				user: user,
+				loggedOut: loggedOut,
+			});
+		}
+	} catch (error) {
+		console.log('Error with POST answer route', error);
+		next(error);
+	}
+});
+
+router.post('/reset-password', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	const { _id, password, confirm, passwordResetAnswer } = req.body;
+
+	if (password === '' || confirm === '' || passwordResetAnswer === '') {
+		res.render('auth/reset-password', {
+			errorMessage: 'Please enter all fields to reset your password.',
+			loggedOut: loggedOut,
+		});
+		return;
+	}
+
+	if (password !== confirm) {
+		res.render('auth/reset-password', {
+			errorMessage: "Passwords don't match.",
+			loggedOut: loggedOut,
+		});
+		return;
+	}
+	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+	if (!regex.test(password)) {
+		res.status(500).render('auth/reset-password', {
+			errorMessage:
+				'Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.',
+			loggedOut: loggedOut,
+		});
+		return;
+	}
+
+	try {
+		const salt = await bcryptjs.genSalt(saltRounds);
+		//create a Hash from the Salt and the user's password
+		const passwordHash = await bcryptjs.hash(password, salt);
+		//create a new User in the DB with the Username and the password hash
+		const updatePassword = await User.findByIdAndUpdate({ _id }, { password: passwordHash });
+		//redirect the new User directly to the login page
+		res.redirect('/login');
+	} catch (error) {
+		next(error);
+	}
+});
+
 
 module.exports = router;
