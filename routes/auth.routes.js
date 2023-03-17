@@ -123,7 +123,7 @@ router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   const loggedOut = "You are still logged out"
 
-  console.log(password)
+
 
   if (username === "" || password === "") {
     res.render("auth/login", {
@@ -246,7 +246,7 @@ router.post('/answer', async (req, res, next) => {
 	const loggedOut = 'You are still logged out';
 	const { _id, passwordResetAnswer } = req.body;
 
-	console.log(passwordResetAnswer);
+
 
 	try {
 		const user = await User.findById(_id);
