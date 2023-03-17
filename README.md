@@ -1,4 +1,4 @@
-# TaskTastrophe - So your task don't become a desaster
+# TaskTastrophe - Don't let your tasks become a desaster
 
 ## Project Description
 
