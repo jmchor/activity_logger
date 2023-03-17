@@ -120,7 +120,7 @@ router.get("/login", (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   console.log("SESSION =====> ", req.session);
-  const { username, password } = req.body;
+  const { username, password, rememberMe } = req.body;
   const loggedOut = "You are still logged out"
 
 
@@ -142,7 +142,11 @@ router.post("/login", async (req, res, next) => {
       return;
     } else if (bcryptjs.compareSync(password, user.password)) {
       //if password hashes match, user is the current User and can proceed to home screen
+
+      const cookieExpiration = rememberMe ? 24 * 60 * 60000 : 30 * 60 * 1000;
+      req.session.cookie.maxAge = cookieExpiration;
       req.session.currentUser = user;
+
       res.redirect("/home");
     } else {
       res.render("auth/login", {

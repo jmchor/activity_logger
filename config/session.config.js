@@ -11,7 +11,7 @@ module.exports = (app) => {
 			saveUninitialized: false,
 			cookie: {
 				httpOnly: true,
-				maxAge: 48 * 60 * 60000, // 48 hours
+				maxAge: 30 * 60 * 1000, // default 30 Minutes
 			},
 			store: MongoStore.create({
 				mongoUrl: process.env.MONGODB_URI || 'mongodb://127.0.0.1/activity-logger',
