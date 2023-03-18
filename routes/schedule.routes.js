@@ -27,7 +27,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 
 
-	const today = new Date(new Date().setHours(1, 0, 0, 0));
+	const today = new Date(new Date().setHours(0, 0, 0, 0));
 	let currentDate = new Date();
 	let nextWeek;
 	let i;
@@ -40,20 +40,20 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1
 
 		currentDate.setDate(today.getDate());
-		let daylightSavings = currentDate.getTimezoneOffset();
+		// let daylightSavings = currentDate.getTimezoneOffset();
 
-		if (daylightSavings === -60) {
-			currentDate.setHours(1, 0, 0, 0);
-		} else {
-			currentDate.setHours(2, 0, 0, 0);
-		}
+		// if (daylightSavings === -60) {
+		// 	currentDate.setHours(1, 0, 0, 0);
+		// } else {
+		// 	currentDate.setHours(2, 0, 0, 0);
+		// }
 
 		nextWeek = new Date(
 			currentDate.getFullYear(),
 			currentDate.getMonth(),
 			currentDate.getDate() + (7 - currentDate.getDay())
 		);
-		nextWeek.setHours(1, 0, 0, 0);
+		// nextWeek.setHours(1, 0, 0, 0);
 		flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 		currentDate.setDate(currentDate.getDate() - flexWeekStart);
 
