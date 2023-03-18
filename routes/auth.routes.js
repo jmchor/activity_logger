@@ -169,6 +169,76 @@ router.get('/profile', isLoggedIn, (req, res) => {
 	res.render('profile', { user: req.session.currentUser });
 });
 
+
+
+router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
+	const  userId  = req.session.currentUser._id;
+
+  console.log(userId)
+
+	try {
+		const today = new Date();
+		const dayOfWeek = today.getDay();
+		const mondayDate = new Date(
+			today.getTime() - (dayOfWeek - 1) * 86400000 - today.getTimezoneOffset() * 60000
+		);
+		mondayDate.setHours(1, 0, 0, 0);
+		const dstOffset = today.getTimezoneOffset()
+
+		const weekDates = [];
+		for (let i = 0; i < 7; i++) {
+			const currentDate = new Date(mondayDate.getTime() + i * 86400000);
+			if(dstOffset === -60) {
+      currentDate.setHours(1, 0, 0, 0);
+      } else if (dstOffset === -120) {
+        currentDate.setHours(2, 0, 0, 0);
+      }
+			weekDates.push(currentDate);
+		}
+
+    const activities = await Activity.find({
+			userId: userId,
+			specificDate: {
+				$gte: weekDates[0],
+				$lte: weekDates[6],
+			},
+		});
+
+
+    const todaysActivities = activities.filter((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		return activityDate === weekDates[0];
+    });
+
+    const doneTodaysActivities = todaysActivities.filter((activity) => {
+		return activity.isDone === true;
+    });
+    const doneTodaysActivitiesCount = doneTodaysActivities.length;
+    const messageToday = 'You have ' + doneTodaysActivitiesCount + ' activities today.';
+
+    // Filter the activities to only include those within the coming week
+    const currentWeekActivities = activities.filter((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		return activityDate >= weekDates[0] && activityDate <= weekDates[6];
+    });
+
+    const doneWeekActivities = currentWeekActivities.filter((activity) => {
+		return activity.isDone === true;
+    });
+    const doneWeekActivitiesCount = doneWeekActivities.length;
+    const messageWeek = 'You have completed ' + doneWeekActivitiesCount + ' activities this week.';
+
+    const message = { messageToday, messageWeek };
+
+    res.send(message);
+	} catch (error) {
+		next(error);
+	}
+});
+
+
+
+
 router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 	const { _id } = req.session.currentUser;
 	const { password } = req.body;
