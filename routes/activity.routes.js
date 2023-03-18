@@ -44,7 +44,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 		const userId = req.session.currentUser._id;
 
 		// If the activity is a one-time activity, create it and return ==> require the user to click once AND the date
-		if (specificDate && repeat === 'once') {
+		if (specificDate) {
 			const newActivity = await Activity.create({
 				userId,
 				title,
