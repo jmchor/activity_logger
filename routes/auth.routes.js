@@ -119,7 +119,7 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
-  console.log("SESSION =====> ", req.session);
+
   const { username, password, rememberMe } = req.body;
   const loggedOut = "You are still logged out"
 
@@ -146,6 +146,8 @@ router.post("/login", async (req, res, next) => {
       const cookieExpiration = rememberMe ? 24 * 60 * 60000 : 30 * 60 * 1000;
       req.session.cookie.maxAge = cookieExpiration;
       req.session.currentUser = user;
+
+      console.log("SESSION =====> ", req.session);
 
       res.redirect("/home");
     } else {

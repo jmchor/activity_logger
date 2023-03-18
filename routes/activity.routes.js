@@ -84,14 +84,16 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 							daysUntilNextDayOfWeek +
 							i * 7 +
 							(daysUntilNextDayOfWeek < 0 ? 7 : 0),
-						now.getHours() + 1
+						now.getHours()
+						//  +1 for development here
 					);
-					let daylightSavings = date.getTimezoneOffset();
-					if (daylightSavings >= -60) {
-						date.setHours(1, 0, 0, 0);
-					} else {
-						date.setHours(2, 0, 0, 0);
-					}
+					date.setHours(0, 0, 0, 0);
+					// let daylightSavings = date.getTimezoneOffset();
+					// if (daylightSavings >= -60) {
+					// 	date.setHours(1, 0, 0, 0);
+					// } else {
+					// 	date.setHours(2, 0, 0, 0);
+					// }
 					const newActivity = new Activity({
 						userId,
 						title,
@@ -104,6 +106,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						groupId,
 					});
 					await newActivity.save();
+					console.log(newActivity)
 				}
 			} else {
 				const groupString = `${title}${description}${daysOfWeek}`;
@@ -123,12 +126,14 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						i * 7 +
 						(daysUntilNextDayOfWeek < 0 ? 7 : 0)
 				);
-				let daylightSavings = date.getTimezoneOffset();
-				if (daylightSavings >= -60) {
-					date.setHours(1, 0, 0, 0);
-				} else {
-					date.setHours(2, 0, 0, 0);
-				}
+				date.setHours(0, 0, 0, 0);
+
+				// let daylightSavings = date.getTimezoneOffset();
+				// if (daylightSavings >= -60) {
+				// 	date.setHours(1, 0, 0, 0);
+				// } else {
+				// 	date.setHours(2, 0, 0, 0);
+				// }
 
 				const newActivity = new Activity({
 					userId,
@@ -142,8 +147,13 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					groupId,
 				});
 				await newActivity.save();
+				console.log(newActivity)
 			}
+
 		}
+
+
+
 
 		console.log('Activity created successfully');
 		res.redirect('/home');
