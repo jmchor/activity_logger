@@ -65,6 +65,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 			i = weekNumber - currentMoment;
 			currentDate.setDate(today.getDate() + 7 * i);
+			currentDate.setHours(0, 0, 0, 0);
 
 			// let daylightSavings = currentDate.getTimezoneOffset();
 
@@ -97,7 +98,8 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
 			i = (weekNumber - currentMoment) * -1;
 			currentDate.setDate(today.getDate() - 7 * i);
-			let daylightSavings = currentDate.getTimezoneOffset();
+			currentDate.setHours(0, 0, 0, 0);
+			// let daylightSavings = currentDate.getTimezoneOffset();
 
 			// if (daylightSavings === -60) {
 			// 	currentDate.setHours(1, 0, 0, 0);

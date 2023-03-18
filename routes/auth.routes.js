@@ -15,7 +15,7 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 
   const userId = req.session.currentUser._id;
   //set to Midnight of the current day so the gte checks return something
-  const currentDate = new Date(new Date().setHours(1, 0, 0, 0))
+  const currentDate = new Date(new Date().setHours(0, 0, 0, 0))
   const tomorrow = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
   const tomorrowMidnight = new Date(tomorrow.setHours(0, 0, 0, 0));
 
@@ -33,7 +33,7 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
 			const activityDate = new Date(activity.specificDate);
-			return activityDate >= currentDate && activityDate < tomorrowMidnight;
+			return activityDate >= currentDate && activityDate <= tomorrowMidnight;
 		});
 
     const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
