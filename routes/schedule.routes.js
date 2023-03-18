@@ -47,6 +47,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		// } else {
 		// 	currentDate.setHours(2, 0, 0, 0);
 		// }
+        currentDate.setHours(0, 0, 0, 0);
 
 		nextWeek = new Date(
 			currentDate.getFullYear(),
@@ -80,11 +81,11 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 			// } else if (daylightSavings === -120) {
 			// 	currentDate.setHours(2, 0, 0, 0);
-			// 	nextWeek = new Date(
-			// 		currentDate.getFullYear(),
-			// 		currentDate.getMonth(),
-			// 		currentDate.getDate() + (7 - currentDate.getDay())
-			// 	);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + (7 - currentDate.getDay())
+				);
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 				// nextWeek.setHours(2, 0, 0, 0);
@@ -111,11 +112,11 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 			// } else if (daylightSavings === -120) {
 			// 	currentDate.setHours(2, 0, 0, 0);
-			// 	nextWeek = new Date(
-			// 		currentDate.getFullYear(),
-			// 		currentDate.getMonth(),
-			// 		currentDate.getDate() + (7 - currentDate.getDay())
-			// 	);
+				nextWeek = new Date(
+					currentDate.getFullYear(),
+					currentDate.getMonth(),
+					currentDate.getDate() + (7 - currentDate.getDay())
+				);
 			// 	nextWeek.setHours(2, 0, 0, 0);
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
