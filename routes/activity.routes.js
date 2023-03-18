@@ -409,6 +409,8 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 	try {
 		const updateActivity = await Activity.findById(id);
 
+		if (specificDate) {
+
 		if (update === 'Edit One') {
 			await Activity.findByIdAndUpdate(
 				id,
@@ -437,8 +439,24 @@ router.post('/schedule/:id', isLoggedIn, async (req, res, next) => {
 		else {
 			return res.status(404).send('Activity not found');
 		}
-
 		res.redirect('/schedule');
+	}
+		else {
+			if (update === 'Edit One') {
+				await Activity.findByIdAndUpdate(
+					id,
+					{ title, description, category, daysOfWeek, repeat },
+					{ new: true }
+				);
+			} else if (update === 'Edit All') {
+				await Activity.updateMany(
+					{ groupId: updateActivity.groupId },
+					{ title, description, category, daysOfWeek, repeat },
+					{ new: true }
+				);
+			}
+
+		res.redirect('/schedule');}
 	} catch (error) {
 		next(error);
 	}
