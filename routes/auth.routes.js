@@ -210,7 +210,6 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 			},
 		});
 
-    console.log("activities", activities)
 
     // Filter the activities to only include the activities of today
     const todaysActivities = activities.filter((activity) => {
@@ -241,12 +240,45 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
     //Number of all done activities of the week
     const doneWeekActivitiesCount = doneWeekActivities.length;
 
+//monthly statistics
+
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    const monthDates = [];
+
+    for (let i = 0; i < lastDayOfMonth.getDate(); i++) {
+		const currentDate = new Date(year, month, i + 1);
+		monthDates.push(currentDate);
+    }
+
+    const monthActivities = await Activity.find({
+            userId: userId,
+            specificDate: {
+                $gte: monthDates[0],
+                $lte: monthDates[monthDates.length - 1],
+            },
+        });
+
+    const allMonthActivities = monthActivities.length;
+
+    const doneMonthActivities = monthActivities.filter((activity) => {
+        return activity.isDone === true;
+    });
+
+    const doneMonthActivitiesCount = doneMonthActivities.length;
+
+
+
 
 
     /* Following block is only for displaying the percentage and a message */
 
     let todayMessage = "";
     let weekMessage = "";
+    let monthMessage = "";
     let percentDone;
     let percentageStringWithPercent;
 
@@ -270,13 +302,27 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 		weekMessage = `${percentageStringWithPercent} -  You did it!`;
     }
 
+    if (doneMonthActivitiesCount / allMonthActivities < 1) {
+          percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
+          percentageStringWithPercent = percentDone.toFixed(0) + '%';
+          monthMessage = `${percentageStringWithPercent} -  Keep going!`;
+    } else if (doneMonthActivitiesCount / allMonthActivities === 1) {
+          percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
+          percentageStringWithPercent = percentDone.toFixed(0) + '%';
+          monthMessage = `${percentageStringWithPercent} -  You did it!`;
+    }
+
     const statistic = {
       today: allTodaysActivities,
       doneToday: doneTodaysActivitiesCount,
       week: allCurrentWeekActivities,
       doneWeek: doneWeekActivitiesCount,
       todayMessage: todayMessage,
-      weekMessage: weekMessage
+      weekMessage: weekMessage,
+      month: allMonthActivities,
+      doneMonth: doneMonthActivitiesCount,
+      monthMessage: monthMessage,
+
 
     }
 
