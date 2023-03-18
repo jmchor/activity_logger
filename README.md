@@ -48,6 +48,8 @@ Most important middleware functions and packages include:
 
 Base structure organization using [Ironlauncher](https://www.npmjs.com/package/ironlauncher) generator by Ironhack.
 
+The [Random Fact API](https://api-ninjas.com/api/facts) is used to improve the user experience even further.
+
 ## Installation
 
 After cloning the repository
@@ -101,13 +103,13 @@ in the projects root directory (nodemon needs to be installed as well)
 - GET /home
      - renders the home page
 - GET /profile
-
      - renders the profile page
-
 - POST /logout
      - Deletes the session cookie and redirects to /login
 - POST /profile/delete-account
      - compares user password and deletes the user
+- GET /profile/statistic
+     - receives a statistics object and renders the auth/statistics view
 
 #### Activity Route
 
@@ -115,16 +117,19 @@ in the projects root directory (nodemon needs to be installed as well)
      - renders the create-activity form
 - POST /create
      - creates a new activity and redirects to /home
-- GET /schedule
-     - renders the weekly schedule with objects containing activity and date data
-- POST /schedule
-     - finds an activity and sets the isDone property to "true"
 - GET /schedule/:id
      - renders activity detail view and form
 - POST /schedule/:id
      - Edits an activity according to the input data
 - DELETE /schedule/:id
      - deletes an activity after password comparison
+
+#### Schedule Routes
+
+- GET /schedule
+     - renders the weekly schedule with objects containing activity and date data
+- POST /schedule
+     - finds an activity and sets the isDone property to "true"
 
 ### Models
 
@@ -148,6 +153,14 @@ username: {
     password: {
       type: String,
       required: true
+    },
+    securityQuestion: {
+      type: String,
+      required: true,
+    },
+    passwordResetAnswer: {
+      type: String,
+      required: true,
     },
     activities: [
       {
