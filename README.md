@@ -1,8 +1,8 @@
-# TaskTastrophe - Don't let your tasks become a desaster
+# Taskmeister - Show your tasks who's in charge
 
 ## Project Description
 
-TaskTastrophe is an app to help you plan recurring activities for every week or just a single task.
+Taskmeister is an app to help you plan recurring activities for every week or just a single task.
 
 With a calendar view on the weeks tasks, organize what you want to do. Build habits using this app - and learn a thing or two!
 
