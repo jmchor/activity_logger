@@ -184,25 +184,22 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 		const mondayDate = new Date(
 			today.getTime() - (dayOfWeek - 1) * 86400000 - today.getTimezoneOffset() * 60000
 		);
-		mondayDate.setHours(1, 0, 0, 0);
+		mondayDate.setHours(0, 0, 0, 0);
 		const dstOffset = today.getTimezoneOffset()
 
 		const weekDates = [];
 		for (let i = 0; i < 7; i++) {
 			const currentDate = new Date(mondayDate.getTime() + i * 86400000);
-			if(dstOffset === -60) {
-      currentDate.setHours(1, 0, 0, 0);
-      } else if (dstOffset === -120) {
-        currentDate.setHours(2, 0, 0, 0);
-      }
+			// if(dstOffset === -60) {
+      // currentDate.setHours(1, 0, 0, 0);
+      // } else if (dstOffset === -120) {
+      //   currentDate.setHours(2, 0, 0, 0);
+      // }
+      currentDate.setHours(0, 0, 0, 0);
 			weekDates.push(currentDate);
 		}
 
-    if(dstOffset === -60) {
-      todayMidnight.setHours(1, 0, 0, 0);
-      } else if (dstOffset === -120) {
-        todayMidnight.setHours(2, 0, 0, 0);
-      }
+    todayMidnight.setHours(0, 0, 0, 0);
 
     const activities = await Activity.find({
 			userId: userId,
