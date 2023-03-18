@@ -177,7 +177,9 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
   console.log(userId)
 
 	try {
+
 		const today = new Date();
+    const todayMidnight = new Date();
 		const dayOfWeek = today.getDay();
 		const mondayDate = new Date(
 			today.getTime() - (dayOfWeek - 1) * 86400000 - today.getTimezoneOffset() * 60000
@@ -196,6 +198,12 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 			weekDates.push(currentDate);
 		}
 
+    if(dstOffset === -60) {
+      todayMidnight.setHours(1, 0, 0, 0);
+      } else if (dstOffset === -120) {
+        todayMidnight.setHours(2, 0, 0, 0);
+      }
+
     const activities = await Activity.find({
 			userId: userId,
 			specificDate: {
@@ -204,11 +212,14 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 			},
 		});
 
+    console.log("activities", activities)
 
+    // Filter the activities to only include the activities of today
     const todaysActivities = activities.filter((activity) => {
-		const activityDate = new Date(activity.specificDate);
-		return activityDate === weekDates[0];
+          const activityDate = new Date(activity.specificDate);
+          return activityDate >= todayMidnight && activityDate <= today;
     });
+
 
     const doneTodaysActivities = todaysActivities.filter((activity) => {
 		return activity.isDone === true;
