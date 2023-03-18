@@ -1,3 +1,10 @@
+<p align="center">
+        <img src="https://img.shields.io/badge/contributors-3-informational" />
+        <img src="https://img.shields.io/badge/dependecies-up%20to%20date-success" />
+        <img src="https://img.shields.io/badge/deployment-successful-success" />
+
+</p>
+
 # Taskmeister - Show your tasks who's in charge
 
 ## Project Description
@@ -93,43 +100,43 @@ in the projects root directory (nodemon needs to be installed as well)
 #### Auth Routes
 
 - GET /signup
-     - renders sign-up form
+  - renders sign-up form
 - POST /signup
-     - creates the user according to the User model
+  - creates the user according to the User model
 - GET /login
-     - renders login form
+  - renders login form
 - POST /login
-     - finds a user, compares passwords and redirects to /home
+  - finds a user, compares passwords and redirects to /home
 - GET /home
-     - renders the home page
+  - renders the home page
 - GET /profile
-     - renders the profile page
+  - renders the profile page
 - POST /logout
-     - Deletes the session cookie and redirects to /login
+  - Deletes the session cookie and redirects to /login
 - POST /profile/delete-account
-     - compares user password and deletes the user
+  - compares user password and deletes the user
 - GET /profile/statistics
-     - receives a statistics object and renders the auth/statistics view
+  - receives a statistics object and renders the auth/statistics view
 
 #### Activity Route
 
 - GET /create
-     - renders the create-activity form
+  - renders the create-activity form
 - POST /create
-     - creates a new activity and redirects to /home
+  - creates a new activity and redirects to /home
 - GET /schedule/:id
-     - renders activity detail view and form
+  - renders activity detail view and form
 - POST /schedule/:id
-     - Edits an activity according to the input data
+  - Edits an activity according to the input data
 - DELETE /schedule/:id
-     - deletes an activity after password comparison
+  - deletes an activity after password comparison
 
 #### Schedule Routes
 
 - GET /schedule
-     - renders the weekly schedule with objects containing activity and date data
+  - renders the weekly schedule with objects containing activity and date data
 - POST /schedule
-     - finds an activity and sets the isDone property to "true"
+  - finds an activity and sets the isDone property to "true"
 
 ### Models
 
