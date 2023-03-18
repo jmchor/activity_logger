@@ -5,7 +5,7 @@
     {{! Add a title }}
     <form action="/create" method="POST">
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12 mt-3 mb-1">
           <label for="title">Title</label>
         </div>
       </div>
@@ -23,7 +23,7 @@
 
       {{! Add a description }}
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12 mt-3 mb-1">
           <label for="description">Description</label>
         </div>
       </div>
@@ -39,10 +39,9 @@
         </div>
       </div>
 
-      {{! Select whether the task is to be added once or recurringly }}
-
+      {{! Tabs }}
       <ul class="nav nav-tabs" id="new-task-tab" role="tablist">
-        <li class="nav-item" role="presentation">
+        <li class="nav-item mt-3" role="presentation">
           <button
             class="nav-link active"
             id="once-tab"
@@ -54,7 +53,7 @@
             aria-selected="true"
           >Add task once</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item mt-3" role="presentation">
           <button
             class="nav-link"
             id="weekly-tab"
@@ -68,7 +67,7 @@
         </li>
       </ul>
 
-      {{! This block only shows when "once" was selected }}
+      {{! This block only shows when the "once" tab is active }}
       <div class="tab-content mx-4 my-2" id="new-task-tab-content">
         <div
           class="tab-pane fade show active"
@@ -96,7 +95,7 @@
           </div>
         </div>
 
-        {{! This block only shows when "repeat" was selected }}
+        {{! This block only shows when "weekly" tab is active }}
         <div
           class="tab-pane fade"
           id="weekly"
