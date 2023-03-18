@@ -1,0 +1,31 @@
+<h1>Hello, {{user.username}}</h1>
+
+<br />
+
+<h3>Here is what you achieved so far</h3>
+<br />
+<br />
+
+{{#if monthActivities}}
+	<h4>Today's activities</h4>
+	{{#with statistic}}
+		<br />
+		<p>{{doneToday}} of {{today}}</p>
+		<p>{{todayMessage}}</p>
+		<br />
+		<h4>This week's activities</h4>
+		<br />
+		<p>{{doneWeek}} of {{week}}</p>
+		<p>{{weekMessage}}</p>
+		<br />
+		<h4>This month's activities</h4>
+		<br />
+		<p>{{doneMonth}} of {{month}}</p>
+		<p>{{monthMessage}}</p>
+		<br />
+
+	{{/with}}
+
+{{else}}
+	<h4>There is no activity to show</h4>
+{{/if}}

@@ -171,6 +171,172 @@ router.get('/profile', isLoggedIn, (req, res) => {
 	res.render('profile', { user: req.session.currentUser });
 });
 
+
+
+router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
+	const  userId  = req.session.currentUser._id;
+
+  console.log(userId)
+
+	try {
+
+		const today = new Date();
+    const todayMidnight = new Date();
+		const dayOfWeek = today.getDay();
+		const mondayDate = new Date(
+			today.getTime() - (dayOfWeek - 1) * 86400000 - today.getTimezoneOffset() * 60000
+		);
+		mondayDate.setHours(0, 0, 0, 0);
+		const weekDates = [];
+		for (let i = 0; i < 7; i++) {
+			const currentDate = new Date(mondayDate.getTime() + i * 86400000);
+      //only for development
+			// if(dstOffset === -60) {
+      // currentDate.setHours(1, 0, 0, 0);
+      // } else if (dstOffset === -120) {
+      //   currentDate.setHours(2, 0, 0, 0);
+      // }
+      currentDate.setHours(1, 0, 0, 0);
+			weekDates.push(currentDate);
+		}
+
+    console.log("weekDates", weekDates)
+
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    const activities = await Activity.find({
+			userId: userId,
+			specificDate: {
+				$gte: weekDates[0],
+				$lte: weekDates[6],
+			},
+		});
+
+
+    // Filter the activities to only include the activities of today
+    const todaysActivities = activities.filter((activity) => {
+          const activityDate = new Date(activity.specificDate);
+          return activityDate >= todayMidnight && activityDate <= today;
+    });
+    //Number of all activities today
+    const allTodaysActivities = todaysActivities.length;
+
+
+    const doneTodaysActivities = todaysActivities.filter((activity) => {
+		return activity.isDone === true;
+    });
+    //number of all activities done today
+    const doneTodaysActivitiesCount = doneTodaysActivities.length;
+
+    // Filter the activities to only include those within the coming week
+    const currentWeekActivities = activities.filter((activity) => {
+		const activityDate = new Date(activity.specificDate);
+		return activityDate >= weekDates[0] && activityDate <= weekDates[6];
+    });
+    //Number of all activities of the week
+    const allCurrentWeekActivities = currentWeekActivities.length;
+
+    const doneWeekActivities = currentWeekActivities.filter((activity) => {
+		return activity.isDone === true;
+    });
+    //Number of all done activities of the week
+    const doneWeekActivitiesCount = doneWeekActivities.length;
+
+//monthly statistics
+
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    const monthDates = [];
+
+    for (let i = 0; i < lastDayOfMonth.getDate(); i++) {
+		const currentDate = new Date(year, month, i + 1);
+		monthDates.push(currentDate);
+    }
+
+    const monthActivities = await Activity.find({
+            userId: userId,
+            specificDate: {
+                $gte: monthDates[0],
+                $lte: monthDates[monthDates.length - 1],
+            },
+        });
+
+    const allMonthActivities = monthActivities.length;
+
+    const doneMonthActivities = monthActivities.filter((activity) => {
+        return activity.isDone === true;
+    });
+
+    const doneMonthActivitiesCount = doneMonthActivities.length;
+
+
+
+
+
+    /* Following block is only for displaying the percentage and a message */
+
+    let todayMessage = "";
+    let weekMessage = "";
+    let monthMessage = "";
+    let percentDone;
+    let percentageStringWithPercent;
+
+    if (doneTodaysActivitiesCount / allTodaysActivities < 1) {
+		percentDone = (doneTodaysActivitiesCount / allTodaysActivities) * 100;
+		percentageStringWithPercent = percentDone.toFixed(0) + '%';
+		todayMessage = `${percentageStringWithPercent} -  Keep going!`;
+    } else if (doneTodaysActivitiesCount / allTodaysActivities === 1) {
+		percentDone = (doneTodaysActivitiesCount / allTodaysActivities) * 100;
+		percentageStringWithPercent = percentDone.toFixed(0) + '%';
+		todayMessage = `${percentageStringWithPercent} -  You did it!`;
+    }
+
+    if (doneWeekActivitiesCount / allCurrentWeekActivities < 1) {
+		percentDone = (doneWeekActivitiesCount / allCurrentWeekActivities) * 100;
+		percentageStringWithPercent = percentDone.toFixed(0) + '%';
+		weekMessage = `${percentageStringWithPercent} -  Keep going!`;
+    } else if (doneWeekActivitiesCount / allCurrentWeekActivities === 1) {
+		percentDone = (doneWeekActivitiesCount / allCurrentWeekActivities) * 100;
+		percentageStringWithPercent = percentDone.toFixed(0) + '%';
+		weekMessage = `${percentageStringWithPercent} -  You did it!`;
+    }
+
+    if (doneMonthActivitiesCount / allMonthActivities < 1) {
+          percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
+          percentageStringWithPercent = percentDone.toFixed(0) + '%';
+          monthMessage = `${percentageStringWithPercent} -  Keep going!`;
+    } else if (doneMonthActivitiesCount / allMonthActivities === 1) {
+          percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
+          percentageStringWithPercent = percentDone.toFixed(0) + '%';
+          monthMessage = `${percentageStringWithPercent} -  You did it!`;
+    }
+
+    const statistic = {
+      today: allTodaysActivities,
+      doneToday: doneTodaysActivitiesCount,
+      week: allCurrentWeekActivities,
+      doneWeek: doneWeekActivitiesCount,
+      todayMessage: todayMessage,
+      weekMessage: weekMessage,
+      month: allMonthActivities,
+      doneMonth: doneMonthActivitiesCount,
+      monthMessage: monthMessage,
+
+
+    }
+
+    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic });
+	} catch (error) {
+		next(error);
+	}
+});
+
+
+
+
 router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 	const { _id } = req.session.currentUser;
 	const { password } = req.body;
