@@ -101,7 +101,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						category,
 						isDone: false,
 						daysOfWeek: [day],
-						repeat,
+						repeat: "weekly",
 						specificDate: date,
 						groupId,
 					});
@@ -142,7 +142,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					category,
 					isDone: false,
 					daysOfWeek: [daysOfWeek],
-					repeat,
+					repeat: "weekly",
 					specificDate: date,
 					groupId,
 				});
