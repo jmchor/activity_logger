@@ -108,7 +108,7 @@ in the projects root directory (nodemon needs to be installed as well)
      - Deletes the session cookie and redirects to /login
 - POST /profile/delete-account
      - compares user password and deletes the user
-- GET /profile/statistic
+- GET /profile/statistics
      - receives a statistics object and renders the auth/statistics view
 
 #### Activity Route
