@@ -1,0 +1,20 @@
+<h1>Hello, {{user.username}}</h1>
+
+<br />
+
+<h3>Here is what you achieved so far</h3>
+<br />
+<br />
+<h4>Today's activities</h4>
+{{#with statistic}}
+	<p>{{doneToday}} of {{today}}</p>
+	<br />
+	<p>{{todayMessage}}</p>
+	<br />
+	<h4>This week's activities</h4>
+	<p>{{doneWeek}} of {{week}}</p>
+	<br />
+	<p>{{weekMessage}}</p>
+	<br />
+
+{{/with}}
