@@ -87,7 +87,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			// 	);
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
-				nextWeek.setHours(2, 0, 0, 0);
+				// nextWeek.setHours(2, 0, 0, 0);
                 console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 			// }
 		} else {
