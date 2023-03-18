@@ -56,7 +56,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		// nextWeek.setHours(1, 0, 0, 0);
 		flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 		currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
+        console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 	} else {
 		if (week) {
 			currentWeekFromView = (Number(week) + 1) % 53;
@@ -85,10 +85,10 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			// 		currentDate.getMonth(),
 			// 		currentDate.getDate() + (7 - currentDate.getDay())
 			// 	);
-			// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-			// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
-			// 	nextWeek.setHours(2, 0, 0, 0);
-
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
+				nextWeek.setHours(2, 0, 0, 0);
+                console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 			// }
 		} else {
 			currentWeekFromView = Number(lastWeek) - 1;
@@ -117,13 +117,14 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			// 		currentDate.getDate() + (7 - currentDate.getDay())
 			// 	);
 			// 	nextWeek.setHours(2, 0, 0, 0);
-			// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-			// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
+				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 
+                console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 			// }
 		}
 	}
-
+    console.log('Activity finding for', currentDate, 'and', nextWeek)
 
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
