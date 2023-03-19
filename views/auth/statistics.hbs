@@ -10,15 +10,18 @@
 	<h4>Today's activities</h4>
 	{{#with statistic}}
 		<br />
+		<canvas id="todayChart" width="200" height="200"></canvas>
 		<p>{{doneToday}} of {{today}}</p>
 		<p>{{todayMessage}}</p>
 		<br />
 		<h4>This week's activities</h4>
+		<canvas id="weeklyChart" width="200" height="200"></canvas>
 		<br />
 		<p>{{doneWeek}} of {{week}}</p>
 		<p>{{weekMessage}}</p>
 		<br />
 		<h4>This month's activities</h4>
+		<canvas id="MonthlyChart" width="200" height="200"></canvas>
 		<br />
 		<p>{{doneMonth}} of {{month}}</p>
 		<p>{{monthMessage}}</p>
@@ -29,10 +32,13 @@
 {{else}}
 	<h4>There is no activity to show</h4>
 {{/if}}
+<h1>This Weeks Activities by Category</h1>
+<canvas id="weeklyCategoryChart" width="400" height="400"></canvas>
+<h1>This Months Activities by Category</h1>
+<canvas id="monthlyCategoryChart" width="400" height="400"></canvas>
 
-<canvas id="todayChart" width="200" height="200"></canvas>
-<canvas id="weeklyChart" width="200" height="200"></canvas>
-<canvas id="MonthlyChart" width="200" height="200"></canvas>
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {{#with statistic}}
@@ -78,7 +84,7 @@
 		// get the context of the canvas element we want to select
 		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
 		// set the data for the chart
-		const data = {
+		const weeklyData = {
 		labels: ['Completed this Week', 'Remaining this Week'],
 		datasets: [{
 			label: 'Activities',
@@ -95,7 +101,7 @@
 		}]
 		};
 		// set the options for the chart
-		const options = {
+		const weeklyOptions = {
 		responsive: false,
 		maintainAspectRatio: false,
 		title: {
@@ -107,8 +113,8 @@
 		// create the chart
 		const weeklyChart = new Chart(weeklyCtx, {
 		type: 'pie',
-		data: data,
-		options: options
+		data: weeklyData,
+		options: weeklyOptions
 		});
 		
 		//MONTHLY CHART
@@ -147,6 +153,91 @@
 			type: 'pie',
 			data: monthlyData,
 			options: monthlyOptions
+		});
+
+		// WEEKLY CATEGORY CHART
+		// get the context of the canvas element we want to select
+		const weeklyCategoryCtx = document.getElementById('weeklyCategoryChart').getContext('2d');
+		// set the data for the chart
+		const weeklyCategoryData = {
+			labels: ['Work', 'Study', 'Sports', 'Social', 'Other'],
+			datasets: [{
+				label: 'Activities',
+				data: [{{weekCategory.work}}, {{weekCategory.study}}, {{weekCategory.exercise}}, {{weekCategory.social}}, {{weekCategory.other}}],
+				backgroundColor: [
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)'
+				],
+				borderColor: [
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 99, 132, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)'
+				],
+				borderWidth: 1
+			}]
+		};
+		// set the options for the chart
+		const weeklyCategoryOptions = {
+			responsive: false,
+			maintainAspectRatio: false,
+			title: {
+				display: true,
+				text: 'This week\'s activities',
+				maintainAspectRatio: true
+			}
+		};
+		// create the chart
+		const weeklyCategoryChart = new Chart(weeklyCategoryCtx, {
+			type: 'pie',
+			data: weeklyCategoryData,
+			options: weeklyCategoryOptions
+		});
+		// MONTHLY CATEGORY CHART
+		// get the context of the canvas element we want to select
+		const monthlyCategoryCtx = document.getElementById('monthlyCategoryChart').getContext('2d');
+		// set the data for the chart
+		const monthlyCategoryData = {
+		labels: ['Work', 'Study', 'Sports', 'Social', 'Other'],
+		datasets: [{
+			label: 'Activities',
+			data: [{{monthCategory.work}}, {{monthCategory.study}}, {{monthCategory.exercise}}, {{monthCategory.social}}, {{monthCategory.other}}],
+			backgroundColor: [
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 99, 132, 0.2)',
+			'rgba(255, 206, 86, 0.2)',
+			'rgba(75, 192, 192, 0.2)',
+			'rgba(153, 102, 255, 0.2)'
+			],
+			borderColor: [
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 99, 132, 1)',
+			'rgba(255, 206, 86, 1)',
+			'rgba(75, 192, 192, 1)',
+			'rgba(153, 102, 255, 1)'
+			],
+			borderWidth: 1
+		}]
+		};
+		// set the options for the chart
+		const monthlyCategoryOptions = {
+		responsive: false,
+		maintainAspectRatio: false,
+		title: {
+			display: true,
+			text: 'This month\'s activities',
+			maintainAspectRatio: true
+		}
+		};
+		// create the chart
+		const monthlyCategoryChart = new Chart(monthlyCategoryCtx, {
+		type: 'pie',
+		data: monthlyCategoryData,
+		options: monthlyCategoryOptions
 		});
 	</script>
 {{/with}}

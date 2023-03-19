@@ -184,11 +184,21 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
     const dayOfTheWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
     const daysSinceMonday = dayOfTheWeek === 0 ? 6 : dayOfTheWeek - 1; // adjust for Sunday
     const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysSinceMonday);
-    //Just for development purposes
-    // monday.setHours(1, 0, 0, 0);
     const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (6 - daysSinceMonday));
+
     //Just for development purposes
-    // sunday.setHours(1, 0, 0, 0);
+
+    //  let dls = now.getTimezoneOffset();
+
+    //   if (dls === -60) {
+    //     monday.setHours(1, 0, 0, 0);
+    //     sunday.setHours(1, 0, 0, 0);
+    //   } else if (dls === -120) {
+    //     monday.setHours(2, 0, 0, 0);
+    //     sunday.setHours(2, 0, 0, 0);
+    //   }
+
+
     const weekDates = [];
 
     for (let date = new Date(monday); date <= sunday; date.setDate(date.getDate() + 1)) {
@@ -208,6 +218,8 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 				$lte: weekDates[6],
 			},
 		});
+
+    console.log(weekDates)
 
     // Filter the activities to only include the activities of today
     const todaysActivities = activities.filter((activity) => {
@@ -238,6 +250,8 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
     });
     //Number of all done activities of the week
     const doneWeekActivitiesCount = doneWeekActivities.length;
+
+
 
 //monthly statistics
 
@@ -311,6 +325,45 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
           monthMessage = `${percentageStringWithPercent} -  You did it!`;
     }
 
+    // Function that filters the activities by category
+      function filterByCategory(activities, categoryToSearch) {
+          return activities.filter((activity) => {
+              return activity.category === categoryToSearch;
+          });
+      }
+
+
+      const allCurrentWeekActivitiesWithWork = filterByCategory(currentWeekActivities, "Work");
+      const allCurrentWeekActivitiesWithStudy = filterByCategory(currentWeekActivities, "Studying");
+      const allCurrentWeekActivitiesWithExercise = filterByCategory(currentWeekActivities, "Sports");
+      const allCurrentWeekActivitiesWithSocial = filterByCategory(currentWeekActivities, "Social Life");
+      const allCurrentWeekActivitiesWithOther = filterByCategory(currentWeekActivities, "Other");
+
+
+      const thisWeekActivitiesWithCategory = {
+          work: allCurrentWeekActivitiesWithWork.length,
+          study: allCurrentWeekActivitiesWithStudy.length,
+          exercise: allCurrentWeekActivitiesWithExercise.length,
+          social: allCurrentWeekActivitiesWithSocial.length,
+          other: allCurrentWeekActivitiesWithOther.length,
+      };
+
+      const allMonthActivitiesWithWork = filterByCategory(monthActivities, "Work");
+      const allMonthActivitiesWithStudy = filterByCategory(monthActivities, "Studying");
+      const allMonthActivitiesWithExercise = filterByCategory(monthActivities, "Sports");
+      const allMonthActivitiesWithSocial = filterByCategory(monthActivities, "Social Life");
+      const allMonthActivitiesWithOther = filterByCategory(monthActivities, "Other");
+
+      const thisMonthActivitiesWithCategory = {
+          work: allMonthActivitiesWithWork.length,
+          study: allMonthActivitiesWithStudy.length,
+          exercise: allMonthActivitiesWithExercise.length,
+          social: allMonthActivitiesWithSocial.length,
+          other: allMonthActivitiesWithOther.length,
+      };
+
+      console.log(thisWeekActivitiesWithCategory, thisMonthActivitiesWithCategory);
+
     const statistic = {
       today: allTodaysActivities,
       doneToday: doneTodaysActivitiesCount,
@@ -321,11 +374,11 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
       month: allMonthActivities,
       doneMonth: doneMonthActivitiesCount,
       monthMessage: monthMessage,
-
-
+      weekCategory: thisWeekActivitiesWithCategory,
+      monthCategory: thisMonthActivitiesWithCategory,
     }
 
-    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic, title: 'My Chart'});
+    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic});
 	} catch (error) {
 		next(error);
 	}
