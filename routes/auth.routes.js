@@ -239,6 +239,8 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
     //Number of all done activities of the week
     const doneWeekActivitiesCount = doneWeekActivities.length;
 
+
+
 //monthly statistics
 
     const year = today.getFullYear();
@@ -310,6 +312,44 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
           percentageStringWithPercent = percentDone.toFixed(0) + '%';
           monthMessage = `${percentageStringWithPercent} -  You did it!`;
     }
+    
+    // Function that filters the activities by category
+      function filterByCategory(activities, categoryToSearch) {
+          return activities.filter((activity) => {
+              return activity.category === categoryToSearch;
+          });
+      }
+    
+  
+      const allCurrentWeekActivitiesWithWork = filterByCategory(currentWeekActivities, "Work");
+      const allCurrentWeekActivitiesWithStudy = filterByCategory(currentWeekActivities, "Study");
+      const allCurrentWeekActivitiesWithExercise = filterByCategory(currentWeekActivities, "Sports");
+      const allCurrentWeekActivitiesWithSocial = filterByCategory(currentWeekActivities, "Social");
+      const allCurrentWeekActivitiesWithOther = filterByCategory(currentWeekActivities, "Other");
+    
+      const thisWeekActivitiesWithCategory = {
+          work: allCurrentWeekActivitiesWithWork.length,
+          study: allCurrentWeekActivitiesWithStudy.length,
+          exercise: allCurrentWeekActivitiesWithExercise.length,
+          social: allCurrentWeekActivitiesWithSocial.length,
+          other: allCurrentWeekActivitiesWithOther.length,
+      };
+
+      const allMonthActivitiesWithWork = filterByCategory(monthActivities, "Work");
+      const allMonthActivitiesWithStudy = filterByCategory(monthActivities, "Study");
+      const allMonthActivitiesWithExercise = filterByCategory(monthActivities, "Sports");
+      const allMonthActivitiesWithSocial = filterByCategory(monthActivities, "Social");
+      const allMonthActivitiesWithOther = filterByCategory(monthActivities, "Other");
+
+      const thisMonthActivitiesWithCategory = {
+          work: allMonthActivitiesWithWork.length,
+          study: allMonthActivitiesWithStudy.length,
+          exercise: allMonthActivitiesWithExercise.length,
+          social: allMonthActivitiesWithSocial.length,
+          other: allMonthActivitiesWithOther.length,
+      };
+
+      console.log(thisWeekActivitiesWithCategory, thisMonthActivitiesWithCategory);
 
     const statistic = {
       today: allTodaysActivities,
@@ -321,11 +361,11 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
       month: allMonthActivities,
       doneMonth: doneMonthActivitiesCount,
       monthMessage: monthMessage,
-
-
+      weekCategory: thisWeekActivitiesWithCategory,
+      monthCategory: thisMonthActivitiesWithCategory,
     }
 
-    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic, title: 'My Chart'});
+    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic});
 	} catch (error) {
 		next(error);
 	}
