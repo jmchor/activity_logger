@@ -180,29 +180,26 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 
 	try {
 
-		const today = new Date();
+    const now = new Date();
+    const dayOfTheWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const daysSinceMonday = dayOfTheWeek === 0 ? 6 : dayOfTheWeek - 1; // adjust for Sunday
+    const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysSinceMonday);
+    //Just for development purposes
+    // monday.setHours(1, 0, 0, 0);
+    const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (6 - daysSinceMonday));
+    //Just for development purposes
+    // sunday.setHours(1, 0, 0, 0);
+    const weekDates = [];
+
+    for (let date = new Date(monday); date <= sunday; date.setDate(date.getDate() + 1)) {
+      weekDates.push(new Date(date));
+    }
+
     const todayMidnight = new Date();
-		const dayOfWeek = today.getDay();
-		const mondayDate = new Date(
-			today.getTime() - (dayOfWeek - 1) * 86400000 - today.getTimezoneOffset() * 60000
-		);
-		mondayDate.setHours(0, 0, 0, 0);
-		const weekDates = [];
-		for (let i = 0; i < 7; i++) {
-			const currentDate = new Date(mondayDate.getTime() + i * 86400000);
-      //only for development
-			// if(dstOffset === -60) {
-      // currentDate.setHours(1, 0, 0, 0);
-      // } else if (dstOffset === -120) {
-      //   currentDate.setHours(2, 0, 0, 0);
-      // }
-      currentDate.setHours(1, 0, 0, 0);
-			weekDates.push(currentDate);
-		}
-
-    console.log("weekDates", weekDates)
-
     todayMidnight.setHours(0, 0, 0, 0);
+
+
+	  const today = new Date();
 
     const activities = await Activity.find({
 			userId: userId,
@@ -212,12 +209,12 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 			},
 		});
 
-
     // Filter the activities to only include the activities of today
     const todaysActivities = activities.filter((activity) => {
           const activityDate = new Date(activity.specificDate);
           return activityDate >= todayMidnight && activityDate <= today;
     });
+
     //Number of all activities today
     const allTodaysActivities = todaysActivities.length;
 
@@ -328,7 +325,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 
     }
 
-    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic });
+    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic, title: 'My Chart'});
 	} catch (error) {
 		next(error);
 	}
