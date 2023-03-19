@@ -336,9 +336,9 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
       };
 
       const allMonthActivitiesWithWork = filterByCategory(monthActivities, "Work");
-      const allMonthActivitiesWithStudy = filterByCategory(monthActivities, "Study");
+      const allMonthActivitiesWithStudy = filterByCategory(monthActivities, "Studying");
       const allMonthActivitiesWithExercise = filterByCategory(monthActivities, "Sports");
-      const allMonthActivitiesWithSocial = filterByCategory(monthActivities, "Social");
+      const allMonthActivitiesWithSocial = filterByCategory(monthActivities, "Social Life");
       const allMonthActivitiesWithOther = filterByCategory(monthActivities, "Other");
 
       const thisMonthActivitiesWithCategory = {
