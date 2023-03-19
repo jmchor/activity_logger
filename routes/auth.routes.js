@@ -328,7 +328,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 
     }
 
-    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic });
+    res.render('auth/statistics', { user: req.session.currentUser, monthActivities, statistic: statistic, title: 'My Chart'});
 	} catch (error) {
 		next(error);
 	}

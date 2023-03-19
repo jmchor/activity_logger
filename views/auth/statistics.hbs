@@ -29,3 +29,124 @@
 {{else}}
 	<h4>There is no activity to show</h4>
 {{/if}}
+
+<canvas id="todayChart" width="200" height="200"></canvas>
+<canvas id="weeklyChart" width="200" height="200"></canvas>
+<canvas id="MonthlyChart" width="200" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{{#with statistic}}
+	<script>
+		// TODAY CHART
+		// get the context of the canvas element we want to select
+		const todayCtx = document.getElementById('todayChart').getContext('2d');
+		// set the data for the chart
+		const todayData = {
+		labels: ['Completed today', 'Remaining today'],
+		datasets: [{
+			label: 'Activities',
+			data: [{{doneToday}},{{today}} - {{doneToday}}],
+			backgroundColor: [
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 99, 132, 0.2)'
+			],
+			borderColor: [
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 99, 132, 1)'
+			],
+			borderWidth: 1
+		}]
+		};
+		// set the options for the chart
+		const todayOptions = {
+			responsive: false,
+			maintainAspectRatio: false,
+			title: {
+				display: true,
+				text: 'Today\'s activities',
+				maintainAspectRatio: true
+		}
+		};
+		// create the chart
+		const todayChart = new Chart(todayCtx, {
+			type: 'pie',
+			data: todayData,
+			options: todayOptions
+		});
+
+		// WEEKLY CHART
+		// get the context of the canvas element we want to select
+		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+		// set the data for the chart
+		const data = {
+		labels: ['Completed this Week', 'Remaining this Week'],
+		datasets: [{
+			label: 'Activities',
+			data: [{{doneWeek}},{{week}} - {{doneWeek}}],
+			backgroundColor: [
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 99, 132, 0.2)'
+			],
+			borderColor: [
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 99, 132, 1)'
+			],
+			borderWidth: 1
+		}]
+		};
+		// set the options for the chart
+		const options = {
+		responsive: false,
+		maintainAspectRatio: false,
+		title: {
+			display: true,
+			text: 'This week\'s activities',
+			maintainAspectRatio: true
+		}
+		};
+		// create the chart
+		const weeklyChart = new Chart(weeklyCtx, {
+		type: 'pie',
+		data: data,
+		options: options
+		});
+		
+		//MONTHLY CHART
+		// get the context of the canvas element for the monthly chart
+		const monthlyCtx = document.getElementById('MonthlyChart').getContext('2d');
+		// set the data for the monthly chart
+		const monthlyData = {
+			labels: ['Completed this Month', 'Remaining this Month'],
+		// {{doneMonth}},{{month}} - {{doneMonth}}
+			datasets: [{
+				label: 'Activities',
+				data: [{{doneMonth}},{{month}} - {{doneMonth}}],
+				backgroundColor: [
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 99, 132, 0.2)'
+				],
+				borderColor: [
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 99, 132, 1)'
+				],
+				borderWidth: 1
+			}]
+		};
+		// set the options for the monthly chart
+		const monthlyOptions = {
+			responsive: false,
+			maintainAspectRatio: false,
+			title: {
+				display: true,
+				text: 'This month\'s activities',
+				maintainAspectRatio: true
+			}
+		};
+		// create the monthly chart
+		const monthlyChart = new Chart(monthlyCtx, {
+			type: 'pie',
+			data: monthlyData,
+			options: monthlyOptions
+		});
+	</script>
+{{/with}}
