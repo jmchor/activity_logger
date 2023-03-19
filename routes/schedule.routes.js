@@ -63,6 +63,8 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			currentWeekFromView = (Number(week) + 1) % 53;
 			weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
 
+			console.log("weekNumber", weekNumber);
+
 			i = weekNumber - currentMoment;
 			currentDate.setDate(today.getDate() + 7 * i);
 			currentDate.setHours(0, 0, 0, 0);
@@ -90,7 +92,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 				// nextWeek.setHours(2, 0, 0, 0);
-                // console.log('currentDate', currentDate, 'nextWeek', nextWeek)
+                console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 			// }
 		} else {
 			currentWeekFromView = Number(lastWeek) - 1;
@@ -143,6 +145,8 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			const activityDate = new Date(activity.specificDate);
 			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
+
+		console.log("comingWeekActivities", comingWeekActivities);
 
 		let noMonday = true;
 		let noTuesday = true;
