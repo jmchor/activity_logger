@@ -184,11 +184,21 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
     const dayOfTheWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
     const daysSinceMonday = dayOfTheWeek === 0 ? 6 : dayOfTheWeek - 1; // adjust for Sunday
     const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysSinceMonday);
-    //Just for development purposes
-    // monday.setHours(1, 0, 0, 0);
     const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (6 - daysSinceMonday));
+
     //Just for development purposes
-    // sunday.setHours(1, 0, 0, 0);
+
+    //  let dls = now.getTimezoneOffset();
+
+    //   if (dls === -60) {
+    //     monday.setHours(1, 0, 0, 0);
+    //     sunday.setHours(1, 0, 0, 0);
+    //   } else if (dls === -120) {
+    //     monday.setHours(2, 0, 0, 0);
+    //     sunday.setHours(2, 0, 0, 0);
+    //   }
+
+
     const weekDates = [];
 
     for (let date = new Date(monday); date <= sunday; date.setDate(date.getDate() + 1)) {
@@ -208,6 +218,8 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 				$lte: weekDates[6],
 			},
 		});
+
+    console.log(weekDates)
 
     // Filter the activities to only include the activities of today
     const todaysActivities = activities.filter((activity) => {
@@ -312,21 +324,22 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
           percentageStringWithPercent = percentDone.toFixed(0) + '%';
           monthMessage = `${percentageStringWithPercent} -  You did it!`;
     }
-    
+
     // Function that filters the activities by category
       function filterByCategory(activities, categoryToSearch) {
           return activities.filter((activity) => {
               return activity.category === categoryToSearch;
           });
       }
-    
-  
+
+
       const allCurrentWeekActivitiesWithWork = filterByCategory(currentWeekActivities, "Work");
-      const allCurrentWeekActivitiesWithStudy = filterByCategory(currentWeekActivities, "Study");
+      const allCurrentWeekActivitiesWithStudy = filterByCategory(currentWeekActivities, "Studying");
       const allCurrentWeekActivitiesWithExercise = filterByCategory(currentWeekActivities, "Sports");
-      const allCurrentWeekActivitiesWithSocial = filterByCategory(currentWeekActivities, "Social");
+      const allCurrentWeekActivitiesWithSocial = filterByCategory(currentWeekActivities, "Social Life");
       const allCurrentWeekActivitiesWithOther = filterByCategory(currentWeekActivities, "Other");
-    
+
+
       const thisWeekActivitiesWithCategory = {
           work: allCurrentWeekActivitiesWithWork.length,
           study: allCurrentWeekActivitiesWithStudy.length,
