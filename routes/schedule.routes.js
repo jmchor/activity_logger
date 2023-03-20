@@ -17,74 +17,87 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 	const { week, lastWeek } = req.query;
 
 	try {
+		let currentDate = new Date();
 
-	const now = new Date();
-	const testYear = now.getFullYear();
-	const jan4th = new Date(testYear, 0, 4, 1);
-	const jan4thDay = jan4th.getDay();
-	const firstThursday = new Date(testYear, 0, 4 + ((4 - jan4thDay + 7) % 7), 1);
-	let weekNumber;
-
-
-
-	const today = new Date(new Date().setHours(0, 0, 0, 0));
-	let currentDate = new Date();
-	let nextWeek;
-	let i;
-	let flexWeekStart;
-	let currentWeekFromView;
-
-	let currentMoment = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1;
-
-	if (!week && !lastWeek) {
-		weekNumber = Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1
-
-		currentDate.setDate(today.getDate());
-		// let daylightSavings = currentDate.getTimezoneOffset();
-
-		// if (daylightSavings === -60) {
-		// 	currentDate.setHours(1, 0, 0, 0);
-		// } else {
-		// 	currentDate.setHours(2, 0, 0, 0);
-		// }
-        currentDate.setHours(0, 0, 0, 0);
-
-
-		// nextWeek.setHours(1, 0, 0, 0);
-		flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-		console.log(currentDate.getDay())
-		currentDate.setDate(currentDate.getDate() - flexWeekStart);
-		nextWeek = new Date(
-			currentDate.getFullYear(),
-			currentDate.getMonth(),
-			currentDate.getDate() + (7 - currentDate.getDay())
+		// Set the first day of the week to Monday
+		const firstDayOfWeek = new Date(
+			currentDate.setDate(
+				currentDate.getDate() - currentDate.getDay() + (currentDate.getDay() === 0 ? -6 : 1)
+			)
 		);
-	} else {
-		if (week) {
-			currentWeekFromView = (Number(week) + 1) % 53;
-			weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
+		// Set the last day of the week to Sunday
+		const lastDayOfWeek = new Date(
+			firstDayOfWeek.getFullYear(),
+			firstDayOfWeek.getMonth(),
+			firstDayOfWeek.getDate() + 6
+		);
+		let weekNumber;
 
+		const today = new Date(new Date().setHours(0, 0, 0, 0));
+		let nextWeek;
+		let i;
+		let flexWeekStart;
+		let currentWeekFromView;
 
-			i = weekNumber - currentMoment;
-			console.log("i", i)
-			currentDate.setDate(today.getDate() + 7 * i);
-			currentDate.setHours(0, 0, 0, 0);
+		// Calculate the number of the current week
 
+		let currentMoment = Math.ceil(
+			((firstDayOfWeek.getTime() - new Date(firstDayOfWeek.getFullYear(), 0, 1).getTime()) /
+				86400000 + 1) / 7
+		);
+
+		if (!week && !lastWeek) {
+			weekNumber = Math.ceil(
+				((firstDayOfWeek.getTime() - new Date(firstDayOfWeek.getFullYear(), 0, 1).getTime()) /
+					86400000 + 1) / 7
+			);
+
+			currentDate.setDate(today.getDate());
 			// let daylightSavings = currentDate.getTimezoneOffset();
 
 			// if (daylightSavings === -60) {
 			// 	currentDate.setHours(1, 0, 0, 0);
-			// 	nextWeek = new Date(
-			// 		currentDate.getFullYear(),
-			// 		currentDate.getMonth(),
-			// 		currentDate.getDate() + (7 - currentDate.getDay())
-			// 	);
-			// 	nextWeek.setHours(2, 0, 0, 0);
-			// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-			// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-			// } else if (daylightSavings === -120) {
+			// } else {
 			// 	currentDate.setHours(2, 0, 0, 0);
+			// }
+			currentDate.setHours(0, 0, 0, 0);
+
+			// nextWeek.setHours(1, 0, 0, 0);
+			flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+			console.log(currentDate.getDay());
+			currentDate.setDate(currentDate.getDate() - flexWeekStart);
+			nextWeek = new Date(
+				currentDate.getFullYear(),
+				currentDate.getMonth(),
+				currentDate.getDate() + (7 - currentDate.getDay())
+			);
+
+
+		} else {
+			if (week) {
+				currentWeekFromView = (Number(week) + 1) % 53;
+				weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
+
+				i = weekNumber - currentMoment;
+				console.log('i', i);
+				currentDate.setDate(today.getDate() + 7 * i);
+				currentDate.setHours(0, 0, 0, 0);
+
+				// let daylightSavings = currentDate.getTimezoneOffset();
+
+				// if (daylightSavings === -60) {
+				// 	currentDate.setHours(1, 0, 0, 0);
+				// 	nextWeek = new Date(
+				// 		currentDate.getFullYear(),
+				// 		currentDate.getMonth(),
+				// 		currentDate.getDate() + (7 - currentDate.getDay())
+				// 	);
+				// 	nextWeek.setHours(2, 0, 0, 0);
+				// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
+				// } else if (daylightSavings === -120) {
+				// 	currentDate.setHours(2, 0, 0, 0);
 
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
@@ -94,31 +107,33 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 				// nextWeek.setHours(2, 0, 0, 0);
-			// }
-		} else {
-			currentWeekFromView = Number(lastWeek) - 1;
+				// }
 
-			weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
-			i = (weekNumber - currentMoment) * -1;
-			currentDate.setDate(today.getDate() - 7 * i);
-			currentDate.setHours(0, 0, 0, 0);
-			// let daylightSavings = currentDate.getTimezoneOffset();
 
-			// if (daylightSavings === -60) {
-			// 	currentDate.setHours(1, 0, 0, 0);
-			// 	nextWeek = new Date(
-			// 		currentDate.getFullYear(),
-			// 		currentDate.getMonth(),
-			// 		currentDate.getDate() + (7 - currentDate.getDay())
-			// 	);
-			// 	nextWeek.setHours(2, 0, 0, 0);
-			// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-			// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
+			} else {
+				currentWeekFromView = Number(lastWeek) - 1;
 
-			// } else if (daylightSavings === -120) {
-			// 	currentDate.setHours(2, 0, 0, 0);
+				weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
+				i = (weekNumber - currentMoment) * -1;
+				currentDate.setDate(today.getDate() - 7 * i);
+				currentDate.setHours(0, 0, 0, 0);
+				// let daylightSavings = currentDate.getTimezoneOffset();
 
-			// 	nextWeek.setHours(2, 0, 0, 0);
+				// if (daylightSavings === -60) {
+				// 	currentDate.setHours(1, 0, 0, 0);
+				// 	nextWeek = new Date(
+				// 		currentDate.getFullYear(),
+				// 		currentDate.getMonth(),
+				// 		currentDate.getDate() + (7 - currentDate.getDay())
+				// 	);
+				// 	nextWeek.setHours(2, 0, 0, 0);
+				// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
+				// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
+
+				// } else if (daylightSavings === -120) {
+				// 	currentDate.setHours(2, 0, 0, 0);
+
+				// 	nextWeek.setHours(2, 0, 0, 0);
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 				nextWeek = new Date(
@@ -127,11 +142,12 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 
-                // console.log('currentDate', currentDate, 'nextWeek', nextWeek)
-			// }
+				// console.log('currentDate', currentDate, 'nextWeek', nextWeek)
+				// }
+
+			}
 		}
-	}
-    // console.log('Activity finding for', currentDate, 'and', nextWeek)
+		// console.log('Activity finding for', currentDate, 'and', nextWeek)
 
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
@@ -148,7 +164,6 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
 
-
 		let noMonday = true;
 		let noTuesday = true;
 		let noWednesday = true;
@@ -164,9 +179,8 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			Thursday: noThursday,
 			Friday: noFriday,
 			Saturday: noSaturday,
-			Sunday: noSunday
-		  };
-
+			Sunday: noSunday,
+		};
 
 		// Add hasMonday, hasTuesday, etc. properties to each activity
 		comingWeekActivities.forEach((activity) => {
@@ -181,14 +195,13 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			activity.hasSaturday = dayOfWeek === 6;
 			activity.hasSunday = dayOfWeek === 0;
 
-			activity.hasMonday ? noActivities.Monday = false : 0;
-			activity.hasTuesday ? noActivities.Tuesday = false : 0;
-			activity.hasWednesday ? noActivities.Wednesday = false : 0;
-			activity.hasThursday ? noActivities.Thursday = false : 0;
-			activity.hasFriday ? noActivities.Friday = false : 0;
-			activity.hasSaturday ? noActivities.Saturday = false : 0;
-			activity.hasSunday ? noActivities.Sunday = false : 0;
-
+			activity.hasMonday ? (noActivities.Monday = false) : 0;
+			activity.hasTuesday ? (noActivities.Tuesday = false) : 0;
+			activity.hasWednesday ? (noActivities.Wednesday = false) : 0;
+			activity.hasThursday ? (noActivities.Thursday = false) : 0;
+			activity.hasFriday ? (noActivities.Friday = false) : 0;
+			activity.hasSaturday ? (noActivities.Saturday = false) : 0;
+			activity.hasSunday ? (noActivities.Sunday = false) : 0;
 		});
 
 		const year = currentDate.getFullYear();
@@ -202,37 +215,89 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			scheduleDate.setHours(2, 0, 0, 0);
 		}
 
-		let mondayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate(), scheduleDate.getHours());
-		let tuesdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 1, scheduleDate.getHours());
-		let wednesdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 2, scheduleDate.getHours());
-		let thursdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 3, scheduleDate.getHours());
-		let fridayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 4, scheduleDate.getHours());
-		let saturdayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 5, scheduleDate.getHours());
-		let sundayDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate() + 6, scheduleDate.getHours());
-
-
+		let mondayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate(),
+			scheduleDate.getHours()
+		);
+		let tuesdayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 1,
+			scheduleDate.getHours()
+		);
+		let wednesdayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 2,
+			scheduleDate.getHours()
+		);
+		let thursdayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 3,
+			scheduleDate.getHours()
+		);
+		let fridayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 4,
+			scheduleDate.getHours()
+		);
+		let saturdayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 5,
+			scheduleDate.getHours()
+		);
+		let sundayDate = new Date(
+			scheduleDate.getFullYear(),
+			scheduleDate.getMonth(),
+			scheduleDate.getDate() + 6,
+			scheduleDate.getHours()
+		);
 
 		let weekDates = {
-			Monday: `${mondayDate.getDate() < 10 ? '0' : ''}${mondayDate.getDate()}.${mondayDate.getMonth() + 1 < 10 ? '0' : ''}${mondayDate.getMonth() + 1}.${mondayDate.getFullYear()}`,
-			Tuesday: `${tuesdayDate.getDate() < 10 ? '0' : ''}${tuesdayDate.getDate()}.${tuesdayDate.getMonth() + 1 < 10 ? '0' : ''}${tuesdayDate.getMonth() + 1}.${tuesdayDate.getFullYear()}`,
-			Wednesday: `${wednesdayDate.getDate() < 10 ? '0' : ''}${wednesdayDate.getDate()}.${wednesdayDate.getMonth() + 1 < 10 ? '0' : ''}${wednesdayDate.getMonth() + 1}.${wednesdayDate.getFullYear()}`,
-			Thursday: `${thursdayDate.getDate() < 10 ? '0' : ''}${thursdayDate.getDate()}.${thursdayDate.getMonth() + 1 < 10 ? '0' : ''}${thursdayDate.getMonth() + 1}.${thursdayDate.getFullYear()}`,
-			Friday: `${fridayDate.getDate() < 10 ? '0' : ''}${fridayDate.getDate()}.${fridayDate.getMonth() + 1 < 10 ? '0' : ''}${fridayDate.getMonth() + 1}.${fridayDate.getFullYear()}`,
-			Saturday: `${saturdayDate.getDate() < 10 ? '0' : ''}${saturdayDate.getDate()}.${saturdayDate.getMonth() + 1 < 10 ? '0' : ''}${saturdayDate.getMonth() + 1}.${saturdayDate.getFullYear()}`,
-			Sunday: `${sundayDate.getDate() < 10 ? '0' : ''}${sundayDate.getDate()}.${sundayDate.getMonth() + 1 < 10 ? '0' : ''}${sundayDate.getMonth() + 1}.${sundayDate.getFullYear()}`,
+			Monday: `${mondayDate.getDate() < 10 ? '0' : ''}${mondayDate.getDate()}.${
+				mondayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${mondayDate.getMonth() + 1}.${mondayDate.getFullYear()}`,
+			Tuesday: `${tuesdayDate.getDate() < 10 ? '0' : ''}${tuesdayDate.getDate()}.${
+				tuesdayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${tuesdayDate.getMonth() + 1}.${tuesdayDate.getFullYear()}`,
+			Wednesday: `${wednesdayDate.getDate() < 10 ? '0' : ''}${wednesdayDate.getDate()}.${
+				wednesdayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${wednesdayDate.getMonth() + 1}.${wednesdayDate.getFullYear()}`,
+			Thursday: `${thursdayDate.getDate() < 10 ? '0' : ''}${thursdayDate.getDate()}.${
+				thursdayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${thursdayDate.getMonth() + 1}.${thursdayDate.getFullYear()}`,
+			Friday: `${fridayDate.getDate() < 10 ? '0' : ''}${fridayDate.getDate()}.${
+				fridayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${fridayDate.getMonth() + 1}.${fridayDate.getFullYear()}`,
+			Saturday: `${saturdayDate.getDate() < 10 ? '0' : ''}${saturdayDate.getDate()}.${
+				saturdayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${saturdayDate.getMonth() + 1}.${saturdayDate.getFullYear()}`,
+			Sunday: `${sundayDate.getDate() < 10 ? '0' : ''}${sundayDate.getDate()}.${
+				sundayDate.getMonth() + 1 < 10 ? '0' : ''
+			}${sundayDate.getMonth() + 1}.${sundayDate.getFullYear()}`,
+		};
 
-		  };
-
-		  const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
-		headers: {
-			'X-Api-Key': process.env.FACT_API_KEY,
-		},
-    });
-    const data = await response.data;
-    const fact = data[0].fact;
+		const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
+			headers: {
+				'X-Api-Key': process.env.FACT_API_KEY,
+			},
+		});
+		const data = await response.data;
+		const fact = data[0].fact;
 
 		// Send the coming week activities as the response
-		res.render('schedule', { activities: comingWeekActivities, week: weekNumber, weekDates, fact:fact,  noActivities: noActivities  });
+		res.render('schedule', {
+			activities: comingWeekActivities,
+			week: weekNumber,
+			weekDates,
+			fact: fact,
+			noActivities: noActivities,
+		});
 	} catch (error) {
 		console.error(error);
 		next(error);
