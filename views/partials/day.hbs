@@ -1,6 +1,6 @@
 {{#if this.isDone}}
-  <div class="row row-cols-auto">
-    <form class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1">
+  <div class="row">
+    <form class="col-12 my-1">
       <div class="col-10 text-success">
         <input
           type="checkbox"
@@ -20,14 +20,10 @@
   </div>
 
 {{else}}
-  <div class="row row-cols-auto">
+  <div class="row">
 
-    <form
-      class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1"
-      action="/schedule"
-      method="POST"
-    >
-      <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+    <form class="col-12 my-1" action="/schedule" method="POST">
+      <div class="col-12">
         <input
           type="checkbox"
           id="{{this._id}}"
