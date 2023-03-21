@@ -282,6 +282,8 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			}${sundayDate.getMonth() + 1}.${sundayDate.getFullYear()}`,
 		};
 
+		/* Uncomment if you want to use the fact API on the schedule page
+
 		const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
 			headers: {
 				'X-Api-Key': process.env.FACT_API_KEY,
@@ -289,13 +291,13 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		});
 		const data = await response.data;
 		const fact = data[0].fact;
+		*/
 
 		// Send the coming week activities as the response
 		res.render('schedule', {
 			activities: comingWeekActivities,
 			week: weekNumber,
 			weekDates,
-			fact: fact,
 			noActivities: noActivities,
 		});
 	} catch (error) {
