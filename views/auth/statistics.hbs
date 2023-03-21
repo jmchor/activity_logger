@@ -2,57 +2,82 @@
 
 <br />
 
-<h3>Here is what you achieved so far</h3>
+<h3>Here is what you've achieved so far</h3>
 <br />
 <br />
 
 {{#if monthActivities}}
 
-	{{#with statistic}}
-		<div class='row mx-auto text-center'>
-			<br />
-			<div class='col p-2'>
-				<h4>Today's activities</h4>
-				<canvas id='todayChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneToday}} of {{today}}</p>
-				<p>{{todayMessage}}</p>
-			</div>
-			<div class='col p-2'>
-				<h4>This week's activities</h4>
-				<canvas id='weeklyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneWeek}} of {{week}}</p>
-				<p>{{weekMessage}}</p>
-			</div>
+  {{#with statistic}}
+    <div class="row mx-auto text-center">
+      <br />
+      <div class="col p-2">
+        <h4>Today's activities</h4>
+        <canvas
+          id="todayChart"
+          width="200"
+          height="200"
+          class="mx-auto mb-3"
+        ></canvas>
+        <p>{{doneToday}} of {{today}}</p>
+        <p>{{todayMessage}}</p>
+      </div>
+      <div class="col p-2">
+        <h4>This week's activities</h4>
+        <canvas
+          id="weeklyChart"
+          width="200"
+          height="200"
+          class="mx-auto mb-3"
+        ></canvas>
+        <p>{{doneWeek}} of {{week}}</p>
+        <p>{{weekMessage}}</p>
+      </div>
 
-			<div class='col p-2'>
-				<h4>This month's activities</h4>
-				<canvas id='MonthlyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneMonth}} of {{month}}</p>
-				<p>{{monthMessage}}</p>
-			</div>
-		</div>
+      <div class="col p-2">
+        <h4>This month's activities</h4>
+        <canvas
+          id="MonthlyChart"
+          width="200"
+          height="200"
+          class="mx-auto mb-3"
+        ></canvas>
+        <p>{{doneMonth}} of {{month}}</p>
+        <p>{{monthMessage}}</p>
+      </div>
+    </div>
 
-	{{/with}}
+  {{/with}}
 
 {{else}}
-	<h4>There is no activity to show</h4>
+  <h4>There is no activity to show</h4>
 {{/if}}
-<div class='row mt-5 mx-auto'>
-	<div class='col text-center p-2'>
-		<h3>This Weeks Activities by Category</h3>
-		<canvas id='weeklyCategoryChart' width='320' height='320' class='mx-auto'></canvas>
-	</div>
-	<div class='col text-center p-2'>
-		<h3>This Months Activities by Category</h3>
-		<canvas id='monthlyCategoryChart' width='320' height='320' class='mx-auto'></canvas>
-	</div>
+<div class="row mt-5 mx-auto">
+  <div class="col text-center p-2">
+    <h3>This Weeks Activities by Category</h3>
+    <canvas
+      id="weeklyCategoryChart"
+      width="320"
+      height="320"
+      class="mx-auto"
+    ></canvas>
+  </div>
+  <div class="col text-center p-2">
+    <h3>This Months Activities by Category</h3>
+    <canvas
+      id="monthlyCategoryChart"
+      width="320"
+      height="320"
+      class="mx-auto"
+    ></canvas>
+  </div>
 </div>
 
-<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {{#with statistic}}
-	{{!-- prettier-ignore --}}
-	<script>
+  {{!-- prettier-ignore --}}
+  <script>
 		// TODAY CHART
 		// get the context of the canvas element we want to select
 		const todayCtx = document.getElementById('todayChart').getContext('2d');
