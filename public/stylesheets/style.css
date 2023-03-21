@@ -102,12 +102,12 @@ footer {
 --------------------------------------------------------------*/
 
 #logo {
-  font-size: 30px;
-  font-weight: 500;
+  font-size: 32px;
+  font-weight: 400;
   color: #505050;
   display: inline-block;
   text-decoration: none;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 /*--------------------------------------------------------------
