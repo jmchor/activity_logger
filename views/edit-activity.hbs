@@ -110,19 +110,17 @@
     </div>
 
     {{! More otions buttons group }}
-    <div
-      class="d-flex col-md-12 justify-content-center align-items-center mx-auto my-3"
-    >
+    <div class="row row-cols-auto justify-content-center">
+
       {{! Procrastinate button }}
       <form action="/schedule/{{findActivity._id}}" method="POST" class="m-3">
-
         <input type="hidden" name="_id" value="{{findActivity._id}}" />
         <input
           type="hidden"
           name="specificDate"
           value="{{findActivity.specificDate}}"
         />
-        <div class="col-auto mx-auto">
+        <div class="col">
           <input
             type="submit"
             name="update"
@@ -138,7 +136,7 @@
         method="POST"
         class="m-3"
       >
-        <div class="col-auto mx-auto">
+        <div class="col">
           <input
             type="submit"
             value="Delete this task"
@@ -154,7 +152,7 @@
         method="POST"
         class="m-3"
       >
-        <div class="col-auto mx-auto">
+        <div class="col">
           <input
             type="submit"
             value="Delete task group"
@@ -164,5 +162,6 @@
         </div>
       </form>
     </div>
+
   </div>
 </div>
