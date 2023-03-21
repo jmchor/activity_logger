@@ -43,13 +43,17 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 		let currentMoment = Math.ceil(
 			((firstDayOfWeek.getTime() - new Date(firstDayOfWeek.getFullYear(), 0, 1).getTime()) /
-				86400000 + 1) / 7
+				86400000 +
+				1) /
+				7
 		);
 
 		if (!week && !lastWeek) {
 			weekNumber = Math.ceil(
 				((firstDayOfWeek.getTime() - new Date(firstDayOfWeek.getFullYear(), 0, 1).getTime()) /
-					86400000 + 1) / 7
+					86400000 +
+					1) /
+					7
 			);
 
 			currentDate.setDate(today.getDate());
@@ -71,8 +75,6 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				currentDate.getMonth(),
 				currentDate.getDate() + (7 - currentDate.getDay())
 			);
-
-
 		} else {
 			if (week) {
 				currentWeekFromView = (Number(week) + 1) % 53;
@@ -108,8 +110,6 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				);
 				// nextWeek.setHours(2, 0, 0, 0);
 				// }
-
-
 			} else {
 				currentWeekFromView = Number(lastWeek) - 1;
 
@@ -144,7 +144,6 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 
 				// console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 				// }
-
 			}
 		}
 		// console.log('Activity finding for', currentDate, 'and', nextWeek)
@@ -282,26 +281,56 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			}${sundayDate.getMonth() + 1}.${sundayDate.getFullYear()}`,
 		};
 
-		const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=1', {
-			headers: {
-				'X-Api-Key': process.env.FACT_API_KEY,
-			},
-		});
-		const data = await response.data;
-		const fact = data[0].fact;
+		let facts = [];
+		if (!req.session.facts || req.session.facts.length === 0) {
+			const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=30', {
+				headers: {
+					'X-Api-Key': process.env.FACT_API_KEY,
+				},
+			});
+			facts = response.data.map((item) => item.fact);
+			req.session.facts = facts;
+		} else {
+			facts = req.session.facts;
+		}
+
+		// Use a fact from the array
+		const fact = facts.shift();
+
+		// Refetch 30 facts when the array is empty
+		if (facts.length === 1) {
+			const response = await axios.get('https://api.api-ninjas.com/v1/facts?limit=30', {
+				headers: {
+					'X-Api-Key': process.env.FACT_API_KEY,
+				},
+			});
+			facts = response.data.map((item) => item.fact);
+			req.session.facts = facts;
+		}
 
 		// Send the coming week activities as the response
 		res.render('schedule', {
 			activities: comingWeekActivities,
 			week: weekNumber,
 			weekDates,
-			fact: fact,
+			fact:fact,
 			noActivities: noActivities,
 		});
 	} catch (error) {
-		console.error(error);
+		const user = req.session.currentUser;
+		const defaultFact = [
+			'The first computer mouse was made out of wood? It was invented by Douglas Engelbart in 1964.',
+			'If you sneeze too hard, you could fracture a rib',
+			'The average person falls asleep in seven minutes',
+			'Wearing headphones for just an hour could increase the bacteria in your ear by 700 times',
+			'In the course of an average lifetime, while sleeping you might eat around 70 assorted insects and 10 spiders, or more',
+		];
+
+		let randomFact = Math.floor(Math.random() * defaultFact.length);
+		const fact = defaultFact[randomFact];
+
+		res.render('home', { fact: fact, user: user, errorMessage: errorMessage });
 		next(error);
-		res.status(500).send('Server error');
 	}
 });
 
