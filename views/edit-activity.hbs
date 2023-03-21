@@ -20,13 +20,15 @@
 
 	<br />
 	<label for='category'>Category</label>
-		<select id='category' name='category'>
-			<option value='Sports' selected>Sports</option>
-			<option value='Studying' selected>Studying</option>
-			<option value='Work' selected>Work</option>
-			<option value='Social Life'selected>Social Life</option>
-			<option value='Other'selected>Other</option>
-		</select>
+	<select id='category' name='category'>
+		<option value='Sports'>Sports</option>
+		<option value='Studying'>Studying</option>
+		<option value='Work'>Work</option>
+		<option value='Social Life'>Social Life</option>
+		<option value='Other'>Other</option>
+		<option hidden value='{{findActivity.category}}' selected>{{findActivity.category}}</option>
+
+	</select>
 	<br />
 	<input type='submit' value='Edit One' name='update' />
 	<br />
