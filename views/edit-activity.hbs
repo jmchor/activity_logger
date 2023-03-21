@@ -82,7 +82,9 @@
       </div>
 
       {{! Submit form buttons }}
-      <div class="d-flex justify-content-center align-items-center m-3">
+      <div
+        class="d-flex col-md-6 justify-content-center align-items-center mx-auto my-3"
+      >
         <div class="col-auto mx-auto my-3">
           <input
             type="submit"
@@ -101,6 +103,11 @@
         </div>
       </div>
     </form>
+
+    {{! More options divider }}
+    <div class="divider d-flex align-items-center">
+      <p class="text-center mx-3 mb-0 text-muted">More options</p>
+    </div>
 
     {{! Procrastinate button }}
     <form action="/schedule/{{findActivity._id}}" method="POST">
