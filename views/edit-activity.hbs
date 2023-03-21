@@ -58,11 +58,13 @@
 	</div>
 
 	<select id='category' name='category' class='form-select form-select-sm' aria-label='.form-select-sm example'>
-		<option value='Sports' selected>Sports</option>
-		<option value='Studying' selected>Studying</option>
-		<option value='Work' selected>Work</option>
-		<option value='Social Life' selected>Social Life</option>
-		<option value='Other' selected>Other</option>
+		<option value='Sports'>Sports</option>
+		<option value='Studying'>Studying</option>
+		<option value='Work'>Work</option>
+		<option value='Social Life'>Social Life</option>
+		<option value='Other'>Other</option>
+		<option hidden value='{{findActivity.category}}' selected>{{findActivity.category}}</option>
+
 	</select>
 
 	<div class='d-grid gap-2 col-10 mx-auto my-3'>
