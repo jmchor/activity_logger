@@ -74,7 +74,8 @@
 {{#with statistic}}
 	{{!-- prettier-ignore --}}
 	<script>
-		if ({{today}}){// TODAY CHART
+		if ({{today}}){
+		// TODAY CHART
 		// get the context of the canvas element we want to select
 		const todayCtx = document.getElementById('todayChart').getContext('2d');
 		// set the data for the chart
@@ -113,7 +114,8 @@
 
 		// WEEKLY CHART
 		// get the context of the canvas element we want to select
-		if ({{week}}){const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+		if ({{week}}){
+		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
 		// set the data for the chart
 		const weeklyData = {
 		labels: ['Completed this Week', 'Remaining this Week'],
@@ -148,7 +150,8 @@
 		options: weeklyOptions
 		});}
 
-		if({{month}}){//MONTHLY CHART
+		if({{month}}){
+		//MONTHLY CHART
 		// get the context of the canvas element for the monthly chart
 		const monthlyCtx = document.getElementById('MonthlyChart').getContext('2d');
 		// set the data for the monthly chart
