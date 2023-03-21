@@ -17,13 +17,13 @@
 
 
 <div class="row justify-content-center mb-4">
-  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+  <div class="col-xl-8 col-lg-9 col-md-10">
 
-<div class="row border rounded m-3 p-2">
-    <h4>Monday, {{weekDates.Monday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Monday, {{weekDates.Monday}}</h4></div>
 
     {{#if noActivities.Monday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasMonday}}
@@ -33,10 +33,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Tuesday, {{weekDates.Tuesday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Tuesday, {{weekDates.Tuesday}}</h4></div>
     {{#if noActivities.Tuesday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasTuesday}}
@@ -46,10 +46,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Wednesday, {{weekDates.Wednesday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Wednesday, {{weekDates.Wednesday}}</h4></div>
     {{#if noActivities.Wednesday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasWednesday}}
@@ -59,10 +59,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Thursday, {{weekDates.Thursday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Thursday, {{weekDates.Thursday}}</h4></div>
     {{#if noActivities.Thursday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasThursday}}
@@ -72,10 +72,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Friday, {{weekDates.Friday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Friday, {{weekDates.Friday}}</h4></div>
     {{#if noActivities.Friday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasFriday}}
@@ -85,10 +85,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Saturday, {{weekDates.Saturday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Saturday, {{weekDates.Saturday}}</h4></div>
     {{#if noActivities.Saturday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasSaturday}}
@@ -98,10 +98,10 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 p-2">
-    <h4>Sunday, {{weekDates.Sunday}}</h4>
+<div class="row border rounded m-3 p-2 justify-content-center">
+    <div class="col my-2"><h4>Sunday, {{weekDates.Sunday}}</h4></div>
     {{#if noActivities.Sunday}}
-        <p>no activities today</p>
+        <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasSunday}}
@@ -115,8 +115,8 @@
 </div>
 
 
-<div class="row justify-content-center mb-4 px-2">
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+<div class="row justify-content-center mb-4 px-5">
+    <div class="col">
 	{{> randomfact}}
     </div>
 </div>
