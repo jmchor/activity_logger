@@ -11,25 +11,46 @@
 	{{#with statistic}}
 		<div class='row mx-auto text-center'>
 			<br />
+		{{#if today}}
 			<div class='col p-2'>
 				<h4>Today's activities</h4>
 				<canvas id='todayChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneToday}} of {{today}}</p>
 				<p>{{todayMessage}}</p>
+			{{else}}
+				<br>
+				<h6>No activities today</h6>
+				<hr>
+				<br>
 			</div>
+		{{/if}}
+			{{#if week}}
 			<div class='col p-2'>
 				<h4>This week's activities</h4>
 				<canvas id='weeklyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneWeek}} of {{week}}</p>
 				<p>{{weekMessage}}</p>
+			{{else}}
+				<br>
+				<h6>No activities this week</h6>
+				<hr>
+				<br>
 			</div>
+			{{/if}}
 
+		{{#if month}}
 			<div class='col p-2'>
 				<h4>This month's activities</h4>
 				<canvas id='MonthlyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneMonth}} of {{month}}</p>
 				<p>{{monthMessage}}</p>
+			{{else}}
+				<br>
+				<h6>No activities this month</h6>
+				<hr>
+				<br>
 			</div>
+		{{/if}}
 		</div>
 
 	{{/with}}
@@ -53,7 +74,7 @@
 {{#with statistic}}
 	{{!-- prettier-ignore --}}
 	<script>
-		// TODAY CHART
+		if ({{today}}){// TODAY CHART
 		// get the context of the canvas element we want to select
 		const todayCtx = document.getElementById('todayChart').getContext('2d');
 		// set the data for the chart
@@ -88,11 +109,11 @@
 			type: 'pie',
 			data: todayData,
 			options: todayOptions
-		});
+		});}
 
 		// WEEKLY CHART
 		// get the context of the canvas element we want to select
-		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+		if ({{week}}){const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
 		// set the data for the chart
 		const weeklyData = {
 		labels: ['Completed this Week', 'Remaining this Week'],
@@ -125,9 +146,9 @@
 		type: 'pie',
 		data: weeklyData,
 		options: weeklyOptions
-		});
+		});}
 
-		//MONTHLY CHART
+		if({{month}}){//MONTHLY CHART
 		// get the context of the canvas element for the monthly chart
 		const monthlyCtx = document.getElementById('MonthlyChart').getContext('2d');
 		// set the data for the monthly chart
@@ -164,7 +185,7 @@
 			data: monthlyData,
 			options: monthlyOptions
 		});
-
+}
 		// WEEKLY CATEGORY CHART
 		// get the context of the canvas element we want to select
 		const weeklyCategoryCtx = document.getElementById('weeklyCategoryChart').getContext('2d');
