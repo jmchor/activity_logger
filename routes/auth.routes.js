@@ -167,8 +167,22 @@ router.post('/logout', isLoggedIn, (req,res) => {
 
 })
 
-router.get('/profile', isLoggedIn, (req, res) => {
-	res.render('profile', { user: req.session.currentUser });
+router.get('/profile', isLoggedIn, async (req, res) => {
+
+ const userId = req.session.currentUser._id;
+
+  try {
+    const findUser = await User.findById(userId);
+    const date = findUser.createdAt;
+    const memberDate = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    res.render('profile', { user: findUser, memberDate: memberDate });
+  } catch (error) {
+next(error)
+  }
+
+
+
 });
 
 
