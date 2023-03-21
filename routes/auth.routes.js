@@ -42,16 +42,17 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 		},
     });
     const data = await response.data;
-    const defaultFact = [
-        "The first computer mouse was made out of wood? It was invented by Douglas Engelbart in 1964.",
-        "If you sneeze too hard, you could fracture a rib",
-        "The average person falls asleep in seven minutes",
-        "Wearing headphones for just an hour could increase the bacteria in your ear by 700 times",
-        "In the course of an average lifetime, while sleeping you might eat around 70 assorted insects and 10 spiders, or more"
-      ];
-    
-    let randomFact = Math.floor(Math.random() * defaultFact.length);
-    const fact = data[0]?.fact || defaultFact[randomFact];
+    // const defaultFact = [
+    //     "The first computer mouse was made out of wood? It was invented by Douglas Engelbart in 1964.",
+    //     "If you sneeze too hard, you could fracture a rib",
+    //     "The average person falls asleep in seven minutes",
+    //     "Wearing headphones for just an hour could increase the bacteria in your ear by 700 times",
+    //     "In the course of an average lifetime, while sleeping you might eat around 70 assorted insects and 10 spiders, or more"
+    //   ];
+
+    // let randomFact = Math.floor(Math.random() * defaultFact.length);
+    const fact = data[0].fact
+    // || defaultFact[randomFact];
 
 		// Send the coming week activities as the response
 		res.render('home', { user, comingWeekActivities: comingWeekActivities, fact:fact});
@@ -68,7 +69,7 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
     let randomFact = Math.floor(Math.random() * defaultFact.length);
     const fact = defaultFact[randomFact];
 
-    res.render('home', { fact: fact} );
+    res.render('home', { fact: fact, user: user, errorMessage: errorMessage} );
     next(error);
   }
 
