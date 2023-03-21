@@ -109,57 +109,60 @@
       <p class="text-center mx-3 mb-0 text-muted">More options</p>
     </div>
 
-    {{! Procrastinate button }}
-    <form action="/schedule/{{findActivity._id}}" method="POST">
-      <div
-        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
-      >
+    {{! More otions buttons group }}
+    <div
+      class="d-flex col-md-12 justify-content-center align-items-center mx-auto my-3"
+    >
+      {{! Procrastinate button }}
+      <form action="/schedule/{{findActivity._id}}" method="POST" class="m-3">
+
         <input type="hidden" name="_id" value="{{findActivity._id}}" />
         <input
           type="hidden"
           name="specificDate"
           value="{{findActivity.specificDate}}"
         />
+        <div class="col-auto mx-auto">
+          <input
+            type="submit"
+            name="update"
+            value="Move to next day"
+            class="btn btn-warning px-5"
+          />
+        </div>
+      </form>
 
-        <input
-          type="submit"
-          name="update"
-          value="Move to next day"
-          class="btn btn-warning mt-3"
-        />
-
-      </div>
-    </form>
-
-    {{! Delete buttons }}
-    <form action="/schedule/{{findActivity._id}}?_method=DELETE" method="POST">
-      <div
-        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      {{! Delete ONE button }}
+      <form
+        action="/schedule/{{findActivity._id}}?_method=DELETE"
+        method="POST"
+        class="m-3"
       >
+        <div class="col-auto mx-auto">
+          <input
+            type="submit"
+            value="Delete this task"
+            name="terminate"
+            class="btn btn-danger px-5"
+          />
+        </div>
+      </form>
 
-        <input
-          type="submit"
-          value="Delete this task"
-          name="terminate"
-          class="btn btn-danger mt-2 me-md-2"
-        />
-
-      </div>
-    </form>
-
-    <form action="/schedule/{{findActivity._id}}?_method=DELETE" method="POST">
-      <div
-        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      {{! Delete GROUP button }}
+      <form
+        action="/schedule/{{findActivity._id}}?_method=DELETE"
+        method="POST"
+        class="m-3"
       >
-
-        <input
-          type="submit"
-          value="Delete task group"
-          name="terminate"
-          class="btn btn-danger mt-2 me-md-2"
-        />
-
-      </div>
-    </form>
+        <div class="col-auto mx-auto">
+          <input
+            type="submit"
+            value="Delete task group"
+            name="terminate"
+            class="btn btn-danger px-5"
+          />
+        </div>
+      </form>
+    </div>
   </div>
 </div>
