@@ -22,6 +22,31 @@
         </div>
       </div>
 
+      {{! Choose Category dropdown }}
+      <div class="row justify-content-center">
+        <div class="col-12 mt-3 mb-1">
+          <label for="category">Category</label>
+        </div>
+      </div>
+
+      <select
+        id="category"
+        name="category"
+        class="form-select form-select-sm"
+        aria-label=".form-select-sm example"
+      >
+        <option value="Sports">Sports</option>
+        <option value="Studying">Studying</option>
+        <option value="Work">Work</option>
+        <option value="Social Life">Social Life</option>
+        <option value="Other">Other</option>
+        <option
+          hidden
+          value="{{findActivity.category}}"
+          selected
+        >{{findActivity.category}}</option>
+      </select>
+
       {{! Edit Descrition }}
       <div class="row justify-content-center">
         <div class="col-12 mt-3 mb-1">
@@ -56,33 +81,10 @@
         </div>
       </div>
 
-      {{! Choose Category dropdown }}
-      <div class="row justify-content-center">
-        <div class="col-12 mt-3 mb-1">
-          <label for="category">Category</label>
-        </div>
-      </div>
-
-      <select
-        id="category"
-        name="category"
-        class="form-select form-select-sm"
-        aria-label=".form-select-sm example"
-      >
-        <option value="Sports">Sports</option>
-        <option value="Studying">Studying</option>
-        <option value="Work">Work</option>
-        <option value="Social Life">Social Life</option>
-        <option value="Other">Other</option>
-        <option
-          hidden
-          value="{{findActivity.category}}"
-          selected
-        >{{findActivity.category}}</option>
-      </select>
-
       {{! Submit form buttons }}
-      <div class="d-grid gap-2 col-10 mx-auto my-3">
+      <div
+        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      >
 
         <input
           type="submit"
@@ -101,49 +103,54 @@
 
     {{! Procrastinate button }}
     <form action="/schedule/{{findActivity._id}}" method="POST">
-      <div class="d-grid gap-2 col-10 mx-auto my-3">
+      <div
+        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      >
         <input type="hidden" name="_id" value="{{findActivity._id}}" />
         <input
           type="hidden"
           name="specificDate"
           value="{{findActivity.specificDate}}"
         />
-        <div class="col-6">
-          <input
-            type="submit"
-            name="update"
-            value="Procrastinate"
-            class="btn btn-warning mt-3"
-          />
-        </div>
+
+        <input
+          type="submit"
+          name="update"
+          value="Procrastinate"
+          class="btn btn-warning mt-3"
+        />
+
       </div>
     </form>
 
     {{! Delete buttons }}
     <form action="/schedule/{{findActivity._id}}?_method=DELETE" method="POST">
-      <div class="d-grid gap-2 col-10 mx-auto my-3">
-        <div class="col-6">
+      <div
+        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      >
 
-          <input
-            type="submit"
-            value="Delete Activity"
-            name="terminate"
-            class="btn btn-danger mt-2 me-md-2"
-          />
-        </div>
+        <input
+          type="submit"
+          value="Delete this task"
+          name="terminate"
+          class="btn btn-danger mt-2 me-md-2"
+        />
+
       </div>
     </form>
 
     <form action="/schedule/{{findActivity._id}}?_method=DELETE" method="POST">
-      <div class="d-grid gap-2 col-10 mx-auto my-3">
-        <div class="col-6">
-          <input
-            type="submit"
-            value="Delete Activity Group"
-            name="terminate"
-            class="btn btn-danger mt-2 me-md-2"
-          />
-        </div>
+      <div
+        class="d-grid gap-2 col-md-6 col-8 mx-auto my-3 justify-content-center"
+      >
+
+        <input
+          type="submit"
+          value="Delete task group"
+          name="terminate"
+          class="btn btn-danger mt-2 me-md-2"
+        />
+
       </div>
     </form>
   </div>
