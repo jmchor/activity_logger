@@ -2,6 +2,13 @@
 
 <p>Name: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
+<br />
+<br />
+
+<h5>Member since {{memberDate}}</h5>
+<br />
+<br />
+<br />
 
 <form action='/profile/delete-activities' method='POST'>
 	<label for='password'>Password:</label>
@@ -14,5 +21,3 @@
 	<input type='password' name='password' />
 	<button type='submit'>Delete Account</button>
 </form>
-
-<a href='/profile/statistics'> <button>Statistics</button></a>
