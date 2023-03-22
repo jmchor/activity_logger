@@ -93,11 +93,21 @@ footer {
 }
 
 .btn-primary {
-  background-color: #212529;
+  background-color: white;
+  color: #4c9aef;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.btn-secondary {
+  border: solid 2px white;
+  font-size: 18px;
+  font-weight: 500;
+  background: none;
 }
 
 .btn-primary:hover {
-  background-color: #212529;
+  background-color: #4460ff;
 }
 
 /*--------------------------------------------------------------
