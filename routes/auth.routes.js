@@ -63,8 +63,12 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 		req.session.facts = facts;
     }
 
-		// Send the coming week activities as the response
-		res.render('home', { user, comingWeekActivities: comingWeekActivities, fact:fact});
+
+    const date = new Date();
+    const greetingDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+
+		res.render('home', { user, comingWeekActivities: comingWeekActivities, fact:fact, date: greetingDate});
 
   } catch (error) {
     const user = req.session.currentUser;
@@ -78,6 +82,8 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 
     let randomFact = Math.floor(Math.random() * defaultFact.length);
     const fact = defaultFact[randomFact];
+
+    const errorMessage = "Something went wrong. Please reload the page.";
 
     res.render('home', { fact: fact, user: user, errorMessage: errorMessage} );
     next(error);

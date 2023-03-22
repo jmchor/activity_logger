@@ -329,6 +329,10 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		let randomFact = Math.floor(Math.random() * defaultFact.length);
 		const fact = defaultFact[randomFact];
 
+		const errorMessage = "Something went wrong. Please reload the page.";
+
+
+
 		res.render('home', { fact: fact, user: user, errorMessage: errorMessage });
 		next(error);
 	}
@@ -337,9 +341,20 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
 	const { _id } = req.body;
 
+
 	try {
-		const activity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
-		console.log(activity);
+		const activity = await Activity.findById(_id);
+
+		if (activity.isDone) {
+		const updatedActivity = await Activity.findByIdAndUpdate(_id, { isDone: false }, { new: true });
+		console.log(updatedActivity);
+		} else {
+		const updatedActivity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
+		console.log(updatedActivity);
+		}
+		// Redirect to the page the user was on before
+		res.redirect(req.headers.referer);
+
 	} catch (error) {
 		console.error(error);
 		next(error);
