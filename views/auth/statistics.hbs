@@ -55,10 +55,7 @@
 
   {{/with}}
 
-{{else}}
-  <h4>There is no activity to show</h4>
-{{/if}}
-<div class="row mt-5 mx-auto">
+  <div class="row mt-5 mx-auto">
   <div class="col text-center p-2">
     <h3>This Weeks Activities by Category</h3>
     <canvas
@@ -78,6 +75,11 @@
     ></canvas>
   </div>
 </div>
+
+{{else}}
+  <h4>There is no activity to show</h4>
+{{/if}}
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
