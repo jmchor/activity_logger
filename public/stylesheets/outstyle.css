@@ -23,9 +23,9 @@ h6 {
 
 h1 {
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
   color: white;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 h2 {
@@ -68,14 +68,6 @@ form {
   margin: 0px;
 }
 
-footer {
-  padding: 20px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-}
-
 .btn {
   border: none;
 }
@@ -93,24 +85,27 @@ footer {
 }
 
 .btn-primary {
-  background-color: #212529;
+  background-color: white;
+  color: #4c9aef;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.btn-secondary {
+  border: solid 1px white;
+  font-size: 18px;
+  font-weight: 500;
+  background: none;
 }
 
 .btn-primary:hover {
-  background-color: #212529;
+  background-color: #4460ff;
+  color: white;
 }
 
-/*--------------------------------------------------------------
-# Header Logo
---------------------------------------------------------------*/
-
-#logo {
-  font-size: 32px;
-  font-weight: 400;
-  color: #505050;
-  display: inline-block;
-  text-decoration: none;
-  letter-spacing: 1px;
+.btn-secondary:hover {
+  background-color: #4460ff;
+  color: white;
 }
 
 /*--------------------------------------------------------------
@@ -118,31 +113,7 @@ footer {
 --------------------------------------------------------------*/
 
 .navbar {
-  padding: 10px;
-}
-
-.navbar ul {
-  margin: 0;
-  display: flex;
-  list-style: none;
-  align-items: center;
-}
-
-.navbar-light .navbar-toggler {
-  outline: none;
-  box-shadow: none;
-  border: 0;
-}
-
-.navbar-light .navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
-  border: 0;
-}
-
-#mobile-menu {
-  gap: 10px;
-  margin-block-end: 0;
+  padding: 20px;
 }
 
 .divider:after,
@@ -154,24 +125,18 @@ footer {
 }
 
 #index-container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-image: url(/images/background.jpg);
+  filter: brightness(90%);
   background-size: cover;
   background-position: center;
+  overflow-x: hidden;
 }
 
 /*--------------------------------------------------------------
 # Main Content
 --------------------------------------------------------------*/
-
-main {
-  margin-top: 0px;
-  padding-top: 80px;
-  padding-bottom: 110px;
-}
 
 #week-button {
   background-color: white;
@@ -213,9 +178,7 @@ input[type="date"] {
 }
 
 input[type="checkbox"] {
-  /* Not removed via appearance */
   margin: 0 3 0 0;
-
   font: inherit;
   color: black;
   width: 1.15em;
@@ -226,18 +189,50 @@ input[type="checkbox"] {
 }
 
 /*--------------------------------------------------------------
-# Footer Navigation
+# Mobile exclusive styles
 --------------------------------------------------------------*/
 
-#bottom-nav a {
-  color: white;
+@media (max-width: 575px) {
+  #index-content {
+    padding: 0px 20px 60px 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
+  #slogan {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
 }
 
-#bottom-nav i {
-  font-size: 20px;
-}
+/*--------------------------------------------------------------
+# Larger viewport styles
+--------------------------------------------------------------*/
 
-#menu-button {
-  padding-top: 9px;
-  font-size: 14px;
+@media (min-width: 576px) {
+  #app-name {
+    color: white;
+    font-size: 80px;
+    text-align: center;
+  }
+
+  #slogan {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-align: center;
+    transform: skew(-10deg);
+    background-color: #4460ff;
+    padding: 8px 20px;
+  }
+
+  #index-content {
+    padding-top: 100px;
+    overflow: hidden;
+  }
 }
