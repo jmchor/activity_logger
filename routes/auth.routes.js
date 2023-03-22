@@ -11,6 +11,10 @@ const bcryptjs = require("bcryptjs");
 const { userInfo } = require("os");
 const saltRounds = 10;
 
+/*--------------------------------------------------------------
+# Home route
+--------------------------------------------------------------*/
+
 router.get("/home", isLoggedIn, async (req, res, next) => {
 
   const userId = req.session.currentUser._id;
@@ -91,6 +95,9 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
 
 });
 
+/*--------------------------------------------------------------
+# Signup routes
+--------------------------------------------------------------*/
 
 router.get("/signup", (req, res, next) => {
   const loggedOut = "You are still logged out"
@@ -122,8 +129,6 @@ router.post("/signup", async (req, res, next) => {
     return;
   }
 
-
-
   try {
     //create Salt
     const salt = await bcryptjs.genSalt(saltRounds);
@@ -148,10 +153,16 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
+/*--------------------------------------------------------------
+# Login routes
+--------------------------------------------------------------*/
+
 router.get("/login", (req, res, next) => {
   const loggedOut = "You are still logged out"
   res.render("auth/login", {loggedOut: loggedOut});
 });
+
+
 
 router.post("/login", async (req, res, next) => {
 
@@ -196,11 +207,19 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+/*--------------------------------------------------------------
+# Logout route
+--------------------------------------------------------------*/
+
 router.post('/logout', isLoggedIn, (req,res) => {
   req.session.destroy();
   res.redirect("/");
 
 })
+
+/*--------------------------------------------------------------
+# Profile page
+--------------------------------------------------------------*/
 
 router.get('/profile', isLoggedIn, async (req, res) => {
 
@@ -216,11 +235,11 @@ router.get('/profile', isLoggedIn, async (req, res) => {
 next(error)
   }
 
-
-
 });
 
-
+/*--------------------------------------------------------------
+# User statistics
+--------------------------------------------------------------*/
 
 router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 	const  userId  = req.session.currentUser._id;
@@ -334,8 +353,6 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 
 
 
-
-
     /* Following block is only for displaying the percentage and a message */
 
     let todayMessage = "";
@@ -434,7 +451,9 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
 });
 
 
-
+/*--------------------------------------------------------------
+# Deleting the User account
+--------------------------------------------------------------*/
 
 router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 	const { _id } = req.session.currentUser;
@@ -474,6 +493,69 @@ router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
 		next(error);
 	}
 });
+
+/*--------------------------------------------------------------
+# Updating the password when logged in
+--------------------------------------------------------------*/
+
+router.post('/update-password', isLoggedIn, async (req, res, next) => {
+  const user = req.session.currentUser;
+  const { password } = req.body;
+
+  try {
+
+    if (bcryptjs.compareSync(password, user.password)) {
+      res.render("auth/update-password", { user: user });
+      } else {
+        res.render("profile", {
+          errorMessage: "Incorrect password.", user: user
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
+});
+
+router.post('/new-password', isLoggedIn, async (req, res, next) => {
+	const { _id, password, confirm } = req.body;
+  console.log(req.body);
+
+  const user = await User.findById(_id);
+  console.log(user)
+
+	if (password === '') {
+		res.render('profile', {
+			errorMessage: 'Please enter all fields to reset your password.'		});
+		return;
+	}
+
+	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
+	if (!regex.test(password)) {
+		res.status(500).render('auth/reset-password', {
+			errorMessage:
+				'Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.'
+		});
+		return;
+	}
+
+	try {
+		const salt = await bcryptjs.genSalt(saltRounds);
+		const passwordHash = await bcryptjs.hash(password, salt);
+		const updatePassword = await User.findByIdAndUpdate(_id , { password: passwordHash }, { new: true });
+
+    const date = new Date();
+    const greetingDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+
+    res.render("profile", { user: user, successMessage: "Password updated successfully.", date: greetingDate });
+	} catch (error) {
+		next(error);
+	}
+});
+
+/*--------------------------------------------------------------
+# Resetting the password when logged out (forgot password)
+--------------------------------------------------------------*/
 
 router.get('/find-user', (req, res, next) => {
 	const loggedOut = 'You are still logged out';
@@ -523,7 +605,7 @@ router.post('/answer', async (req, res, next) => {
 		const user = await User.findById(_id);
 
 		if (bcryptjs.compareSync(passwordResetAnswer, user.passwordResetAnswer)) {
-			res.render('auth/reset-password', { user: user, loggedOut: loggedOut });
+			res.redirect(`/reset-password/${_id}`);
 		} else {
 			res.render('auth/answer-question', {
 				errorMessage: 'Incorrect answer.',
@@ -537,11 +619,23 @@ router.post('/answer', async (req, res, next) => {
 	}
 });
 
-router.post('/reset-password', async (req, res, next) => {
-	const loggedOut = 'You are still logged out';
-	const { _id, password, confirm, passwordResetAnswer } = req.body;
+router.get('/reset-password/:id', async (req, res, next) => {
+  const loggedOut = 'You are still logged out';
+  const { id } = req.params;
+  const user = await  User.findById(id);
+  res.render('auth/reset-password', { loggedOut: loggedOut, user:user });
+});
 
-	if (password === '' || confirm === '' || passwordResetAnswer === '') {
+router.post('/reset-password/:id', async (req, res, next) => {
+	const loggedOut = 'You are still logged out';
+	const { password, confirm } = req.body;
+  const { id } = req.params;
+
+  const user = await User.findById(id);
+  console.log("user", user)
+  console.log(req.body)
+
+	if (password === '' || confirm === '') {
 		res.render('auth/reset-password', {
 			errorMessage: 'Please enter all fields to reset your password.',
 			loggedOut: loggedOut,
@@ -567,11 +661,12 @@ router.post('/reset-password', async (req, res, next) => {
 	}
 
 	try {
+    console.log()
 		const salt = await bcryptjs.genSalt(saltRounds);
 		//create a Hash from the Salt and the user's password
 		const passwordHash = await bcryptjs.hash(password, salt);
 		//create a new User in the DB with the Username and the password hash
-		const updatePassword = await User.findByIdAndUpdate({ _id }, { password: passwordHash });
+		await User.findByIdAndUpdate(id, { password: passwordHash }, { new: true });
 		//redirect the new User directly to the login page
 		res.redirect('/login');
 	} catch (error) {
