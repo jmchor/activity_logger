@@ -188,6 +188,12 @@ main {
   padding-bottom: 110px;
 }
 
+#slogan {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
 #week-button {
   background-color: white;
   color: #333;
