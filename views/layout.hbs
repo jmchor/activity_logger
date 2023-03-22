@@ -13,12 +13,13 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    {{#if loggedOut}}
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/outstyle.css" />
   </head>
   <body>
 
-    {{#if loggedOut}}
+
       <!-- Logged out HEADER w/o navigation -->
       <div id="index-container">
 
@@ -27,7 +28,6 @@
           class="navbar row justify-content-center fixed-top navbar-expand-md"
         >
           <div id="logo" class="col-xl-6 col-lg-9 col-md-10 px-3">
-
             <a href="/" id="logo" class="navbar-brand">
               <img
                 src="/images/logo.png"
@@ -52,8 +52,11 @@
         </footer>
       </div>
     {{else}}
+<!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
       <!-- Logged in HEADER w/ navigation -->
-
       <nav
         id="top-nav"
         class="navbar row justify-content-center fixed-top navbar-expand-md navbar-light bg-white fixed-top"
