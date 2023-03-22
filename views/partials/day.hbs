@@ -1,33 +1,37 @@
 {{#if this.isDone}}
-  <div class="row row-cols-auto">
-    <form class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1">
-      <div class="col-10 text-success">
-        <input
-          type="checkbox"
-          id="{{this._id}}"
-          name="_id"
-          value="{{this._id}}"
-          checked
-        />
-        <label id="{{this._id}}" for="{{this._id}}">
-          <a href="/schedule/{{this._id}}">{{title}}</a>
-        </label>
-        –
-        {{description}}
 
-      </div>
-    </form>
+  <div class="row justify-content-center">
+    <div class="row">
+      <form class="col my-1">
+        <div class="col text-success">
+          <input
+            type="checkbox"
+            id="{{this._id}}"
+            name="_id"
+            value="{{this._id}}"
+            checked
+          />
+          <label id="{{this._id}}" for="{{this._id}}">
+            <a href="/schedule/{{this._id}}">{{title}}</a>
+          </label>
+        </div>
+
+        <div class="row">
+          <div class="col" id="task-description">
+            {{description}}
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
 
 {{else}}
-  <div class="row row-cols-auto">
+  <div class="row justify-content-center">
 
-    <form
-      class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1"
-      action="/schedule"
-      method="POST"
-    >
-      <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+    <form class="col my-1" action="/schedule" method="POST">
+      <div class="col">
+
         <input
           type="checkbox"
           id="{{this._id}}"
@@ -38,11 +42,14 @@
           <a
             href="/schedule/{{this._id}}"
             class="font-weight-bold"
+            id="task-title"
           >{{title}}</a>
         </label>
-        –
-        {{description}}
-
+        <div class="row">
+          <div class="col" id="task-description">
+            {{description}}
+          </div>
+        </div>
       </div>
 
     </form>
