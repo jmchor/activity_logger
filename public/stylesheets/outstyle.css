@@ -68,14 +68,6 @@ form {
   margin: 0px;
 }
 
-footer {
-  padding: 20px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-}
-
 .btn {
   border: none;
 }
@@ -100,7 +92,7 @@ footer {
 }
 
 .btn-secondary {
-  border: solid 2px white;
+  border: solid 1px white;
   font-size: 18px;
   font-weight: 500;
   background: none;
@@ -261,4 +253,18 @@ input[type="checkbox"] {
 #menu-button {
   padding-top: 9px;
   font-size: 14px;
+}
+
+/*--------------------------------------------------------------
+# Mobile exclusive styles
+--------------------------------------------------------------*/
+
+@media (max-width: 1250px) {
+  #index-content {
+    padding: 20px 20px 60px 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
 }
