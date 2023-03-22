@@ -108,6 +108,12 @@ footer {
 
 .btn-primary:hover {
   background-color: #4460ff;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #4460ff;
+  color: white;
 }
 
 /*--------------------------------------------------------------
