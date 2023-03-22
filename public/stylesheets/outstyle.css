@@ -166,7 +166,7 @@ form {
   width: 100%;
   height: 100vh;
   background-image: url(/images/background.jpg);
-  filter: brightness(95%);
+  filter: brightness(90%);
   background-size: cover;
   background-position: center;
 }
@@ -179,13 +179,6 @@ main {
   margin-top: 0px;
   padding-top: 80px;
   padding-bottom: 110px;
-}
-
-#slogan {
-  color: white;
-  font-size: 18px;
-  letter-spacing: 1px;
-  font-weight: 300;
 }
 
 #week-button {
@@ -261,12 +254,46 @@ input[type="checkbox"] {
 # Mobile exclusive styles
 --------------------------------------------------------------*/
 
-@media (max-width: 992px) {
+@media (max-width: 575px) {
   #index-content {
     padding: 20px 20px 60px 20px;
     left: 0;
     right: 0;
     bottom: 0;
     position: fixed;
+  }
+
+  #slogan {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+}
+
+/*--------------------------------------------------------------
+# Larger viewport styles
+--------------------------------------------------------------*/
+
+@media (min-width: 576px) {
+  #app-name {
+    color: white;
+    font-size: 80px;
+    text-align: center;
+  }
+
+  #slogan {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-align: center;
+    transform: skew(-10deg);
+    background-color: #4460ff;
+    padding: 8px 20px;
+  }
+
+  #index-content {
+    padding-top: 100px;
   }
 }
