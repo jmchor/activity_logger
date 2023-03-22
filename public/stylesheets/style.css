@@ -195,7 +195,20 @@ input[type="date"] {
 }
 
 #task-description {
-  margin-left: 17px;
+  margin-left: 25px;
+}
+
+input[type="checkbox"] {
+  /* Not removed via appearance */
+  margin: 0 3 0 0;
+
+  font: inherit;
+  color: black;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(0.1em);
 }
 
 /*--------------------------------------------------------------
