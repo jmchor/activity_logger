@@ -1,39 +1,28 @@
 {{#if this.isDone}}
 
 	<div class='row justify-content-center'>
-		<div class='row'>
-			<form class='col my-1' action='/schedule' method='POST'>
-				<div class='col text-success'>
-					<input
-						type='checkbox'
-						id='{{this._id}}'
-						name='_id'
-						value='{{this._id}}'
-						checked
-					/>
-					<label id='{{this._id}}' for='{{this._id}}'>
-						<a href='/schedule/{{this._id}}'>{{title}}</a>
-					</label>
-				</div>
+		<form class='col my-1' action='/schedule' method='POST'>
+			<div class='col text-success'>
+				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' checked />
+				<input type='hidden' name='_id' value='{{this._id}}' />
+				<label id='{{this._id}}' for='{{this._id}}'>
+					<a href='/schedule/{{this._id}}'>{{title}}</a>
+				</label>
+			</div>
 
-				<div class='row'>
-					<div class='col' id='task-description'>
-						{{description}}
-					</div>
+			<div class='row'>
+				<div class='col' id='task-description'>
+					{{description}}
 				</div>
-			</form>
-		</div>
-
+			</div>
+		</form>
 	</div>
 
 {{else}}
 	<div class='row justify-content-center'>
-
 		<form class='col my-1' action='/schedule' method='POST'>
 			<div class='col'>
-
 				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' />
-				<input type='hidden' name='isDone' value='{{this.isDone}}' />
 				<label id='{{this._id}}' for='{{this._id}}'>
 					<a
 						href='/schedule/{{this._id}}'
@@ -47,7 +36,6 @@
 					</div>
 				</div>
 			</div>
-
 		</form>
 	</div>
 
@@ -65,15 +53,10 @@
       console.log(this.id);
       const form = checkbox.closest('form');
       if (this.checked) {
+        //for use case: checkbox gets checked
         form.submit();
       } else {
-        // create a hidden input with the same name and value as the checkbox
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = checkbox.name;
-        hiddenInput.value = checkbox.value;
-        // append the hidden input to the form and submit it
-        form.appendChild(hiddenInput);
+        //for use case: checkbox gets unchecked
         form.submit();
       }
     });
