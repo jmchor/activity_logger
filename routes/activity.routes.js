@@ -250,9 +250,9 @@ router.delete('/schedule/:id', isLoggedIn, async (req, res, next) => {
 			return res.status(404).send('Activity not found');
 		}
 
-		if (terminate === 'Delete Activity') {
+		if (terminate === 'Delete this task') {
 			await Activity.findByIdAndDelete(id);
-		} else if (terminate === 'Delete Activity and Group') {
+		} else if (terminate === 'Delete task group') {
 			await Activity.deleteMany({ groupId: activityToDelete.groupId });
 		} else {
 			return res.status(404).send('Activity not found');
