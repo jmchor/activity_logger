@@ -166,6 +166,7 @@ form {
   width: 100%;
   height: 100vh;
   background-image: url(/images/background.jpg);
+  filter: brightness(95%);
   background-size: cover;
   background-position: center;
 }
