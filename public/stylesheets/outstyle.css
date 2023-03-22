@@ -201,6 +201,14 @@ input[type="checkbox"] {
     position: fixed;
   }
 
+  #login-content {
+    padding: 0px 20px 60px 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
   #slogan {
     color: white;
     font-size: 18px;
@@ -234,5 +242,10 @@ input[type="checkbox"] {
   #index-content {
     padding-top: 28vh;
     overflow: hidden;
+  }
+
+  #login-box {
+    border: solid 1px white;
+    margin: 14vh 0px 0px 0px;
   }
 }

@@ -1,77 +1,78 @@
-<div class="row justify-content-center mb-4 py-4">
-  <div class="col-xl-8 col-lg-9 col-md-10 my-3">
-    <h1>Log In</h1>
+<div id="login-content" class="row justify-content-center mb-4 py-4">
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 py-3" id="login-box">
+    <div class="row justify-content-center px-3 pt-4">
+      <h1>Welcome</h1>
+      <h1>Back</h1>
+    </div>
+    <form action="/login" method="POST">
+
+      <div class="col-auto my-3">
+        <label for="username">Username</label>
+      </div>
+      <div class="col-auto mb-3">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="col-auto my-3">
+        <label for="password">Password</label>
+      </div>
+      <div class="col-auto mb-5">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+        />
+
+      </div>
+      <div class="col-auto mb-5">
+        <input
+          type="checkbox"
+          name="rememberMe"
+          id="rememberMe"
+          value="Remember Me"
+        />
+        <label for="rememberMe">Remember Me</label>
+
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <a href="/find-user" class="mb-1">Forgot Password? Answer Security
+          Question</a>
+        <div class="btn-group w-100">
+          <input
+            class="btn btn-primary flex-fill"
+            type="submit"
+            value="Log in"
+          />
+        </div>
+      </div>
+
+      <div class="divider d-flex align-items-center my-4">
+        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="btn-group w-100">
+          <a class="btn btn-secondary flex-fill" href="/signup">Sign up</a>
+        </div>
+      </div>
+    </form>
   </div>
 
-  <form
-    action="/login"
-    method="POST"
-    class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3"
-  >
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
 
-    <div class="col-auto my-3">
-      <label for="username">Username</label>
-    </div>
-    <div class="col-auto mb-3">
-      <input
-        type="text"
-        id="username"
-        name="username"
-        class="form-control"
-        required
-      />
-    </div>
-
-    <div class="col-auto my-3">
-      <label for="password">Password</label>
-    </div>
-    <div class="col-auto mb-5">
-      <input
-        type="password"
-        id="password"
-        name="password"
-        class="form-control"
-        required
-      />
-
-    </div>
-    <div class="col-auto mb-5">
-      <input
-        type="checkbox"
-        name="rememberMe"
-        id="rememberMe"
-        value="Remember Me"
-      />
-      <label for="rememberMe">Remember Me</label>
-
-    </div>
-
-    <div class="row d-flex justify-content-center">
-      <a href="/find-user" class="mb-1">Forgot Password? Answer Security
-        Question</a>
-      <div class="btn-group w-100">
-        <input class="btn btn-primary flex-fill" type="submit" value="Log in" />
-      </div>
-    </div>
-
-    <div class="divider d-flex align-items-center my-4">
-      <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="btn-group w-100">
-        <a class="btn btn-secondary flex-fill" href="/signup">Sign up</a>
-      </div>
-    </div>
-
-  </form>
+  {{#if successMessage}}
+    <p>{{successMessage}}</p>
+  {{/if}}
 
 </div>
-
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
-
-{{#if successMessage}}
-  <p>{{successMessage}}</p>
-{{/if}}
