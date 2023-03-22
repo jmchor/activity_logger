@@ -1,0 +1,47 @@
+{
+	"badgeTemplate": "<img alt=\"All Contributors: <%= contributors.length %>\" src=\"https://img.shields.io/badge/all_contributors-<%= contributors.length %>-21bb42.svg\" />",
+	"commit": false,
+	"contributors": [
+		{
+			"login": "jmchor",
+			"name": "Johannes Chorzempa",
+			"avatar_url": "https://avatars.githubusercontent.com/u/110151013?v=4",
+			"profile": "https://github.com/jmchor",
+			"contributions": [
+				"bug",
+				"code",
+				"doc",
+				"design"
+			]
+		},
+		{
+			"login": "nncht",
+			"name": "Nana Chuto",
+			"avatar_url": "https://avatars.githubusercontent.com/u/105007117?v=4",
+			"profile": "https://github.com/nncht",
+			"contributions": [
+				"code",
+				"design"
+			]
+		},
+		{
+			"login": "lukasmerlin",
+			"name": "Lukas Merlin Jürgens",
+			"avatar_url": "https://avatars.githubusercontent.com/u/108548830?v=4",
+			"profile": "https://github.com/lukasmerlin",
+			"contributions": [
+				"code",
+				"bug"
+			]
+		}
+	],
+	"contributorsPerLine": 7,
+	"files": [
+		"README.md"
+	],
+	"imageSize": 100,
+	"projectName": "activity_logger",
+	"projectOwner": "jmchor",
+	"repoHost": "https://github.com",
+	"repoType": "github"
+}
