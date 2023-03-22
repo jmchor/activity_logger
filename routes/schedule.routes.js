@@ -335,11 +335,21 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
-	const { _id } = req.body;
+	const { _id, isDone } = req.body;
+
 
 	try {
-		const activity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
-		console.log(activity);
+		const activity = await Activity.findById(_id);
+
+		if (activity.isDone) {
+		const updatedActivity = await Activity.findByIdAndUpdate(_id, { isDone: false }, { new: true });
+		console.log(updatedActivity);
+		} else {
+		const updatedActivity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
+		console.log(updatedActivity);
+		}
+		res.redirect('/schedule');
+
 	} catch (error) {
 		console.error(error);
 		next(error);
