@@ -329,13 +329,17 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		let randomFact = Math.floor(Math.random() * defaultFact.length);
 		const fact = defaultFact[randomFact];
 
+		const errorMessage = "Something went wrong. Please reload the page.";
+
+
+
 		res.render('home', { fact: fact, user: user, errorMessage: errorMessage });
 		next(error);
 	}
 });
 
 router.post('/schedule', isLoggedIn, async (req, res, next) => {
-	const { _id, isDone } = req.body;
+	const { _id } = req.body;
 
 
 	try {
@@ -348,7 +352,8 @@ router.post('/schedule', isLoggedIn, async (req, res, next) => {
 		const updatedActivity = await Activity.findByIdAndUpdate(_id, { isDone: true }, { new: true });
 		console.log(updatedActivity);
 		}
-		res.redirect('/schedule');
+		// Redirect to the page the user was on before
+		res.redirect(req.headers.referer);
 
 	} catch (error) {
 		console.error(error);
