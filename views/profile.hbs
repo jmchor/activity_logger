@@ -10,6 +10,12 @@
 <br />
 <br />
 
+<form action='/update-password' method='POST'>
+	<label for='password'>Current Password:</label>
+	<input type='password' name='password' />
+	<button type='submit'>Update Password</button>
+</form>
+
 <form action='/profile/delete-activities' method='POST'>
 	<label for='password'>Password:</label>
 	<input type='password' name='password' />
@@ -21,3 +27,11 @@
 	<input type='password' name='password' />
 	<button type='submit'>Delete Account</button>
 </form>
+
+{{#if errorMessage}}
+	<p>{{errorMessage}}</p>
+{{/if}}
+
+{{#if successMessage}}
+	<p>{{successMessage}}</p>
+{{/if}}
