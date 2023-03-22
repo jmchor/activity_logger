@@ -544,11 +544,11 @@ router.post('/new-password', isLoggedIn, async (req, res, next) => {
 		const passwordHash = await bcryptjs.hash(password, salt);
 		const updatePassword = await User.findByIdAndUpdate(_id , { password: passwordHash }, { new: true });
 
-    const date = new Date();
-    const greetingDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 
+    req.session.destroy();
+    const loggedOut = 'You are still logged out';
 
-    res.render("profile", { user: user, successMessage: "Password updated successfully.", date: greetingDate });
+    res.render("auth/login", {successMessage: "Password updated successfully.", loggedOut: loggedOut});
 	} catch (error) {
 		next(error);
 	}
