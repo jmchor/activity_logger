@@ -47,7 +47,8 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-      <a href="/find-user">Forgot Password? Answer Security Question</a>
+      <a href="/find-user" class="mb-1">Forgot Password? Answer Security
+        Question</a>
       <div class="btn-group w-100">
         <input class="btn btn-primary flex-fill" type="submit" value="Log in" />
       </div>
@@ -68,9 +69,9 @@
 </div>
 
 {{#if errorMessage}}
-	<p>{{errorMessage}}</p>
+  <p>{{errorMessage}}</p>
 {{/if}}
 
 {{#if successMessage}}
-	<p>{{successMessage}}</p>
+  <p>{{successMessage}}</p>
 {{/if}}
