@@ -467,13 +467,14 @@ router.post('/profile/delete-account', isLoggedIn, async (req, res, next) => {
     return;
   }
 
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
-    if (!regex.test(password)) {
-      res.status(500).render("profile", {
-        errorMessage:
-          "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
-      });
-      return;}
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
+  if (!regex.test(password)) {
+    res.status(500).render("auth/sign-up", {
+      errorMessage:
+        "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
+    });
+    return;
+  }
 
 	try {
 
@@ -529,14 +530,14 @@ router.post('/new-password', isLoggedIn, async (req, res, next) => {
 		return;
 	}
 
-	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
-	if (!regex.test(password)) {
-		res.status(500).render('auth/reset-password', {
-			errorMessage:
-				'Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.'
-		});
-		return;
-	}
+	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
+  if (!regex.test(password)) {
+    res.status(500).render("auth/sign-up", {
+      errorMessage:
+        "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
+    });
+    return;
+  }
 
 	try {
 		const salt = await bcryptjs.genSalt(saltRounds);
@@ -650,15 +651,14 @@ router.post('/reset-password/:id', async (req, res, next) => {
 		});
 		return;
 	}
-	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{6,}/;
-	if (!regex.test(password)) {
-		res.status(500).render('auth/reset-password', {
-			errorMessage:
-				'Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.',
-			loggedOut: loggedOut,
-		});
-		return;
-	}
+	const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
+  if (!regex.test(password)) {
+    res.status(500).render("auth/sign-up", {
+      errorMessage:
+        "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter."
+    });
+    return;
+  }
 
 	try {
     console.log()
