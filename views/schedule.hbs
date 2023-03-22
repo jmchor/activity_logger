@@ -1,3 +1,17 @@
+{{#if errorMessage}}
+    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+      <div class="alert alert-danger" role="alert">
+        {{{errorMessage}}}
+      </div>
+    </div>
+
+
+
+
+{{else}}
+
+
+
 <div class="row row-cols-3 justify-content-center">
     <div class="col-sm-1 text-center">
         <a href="/schedule?lastWeek={{week}}" id="week-button" class="btn btn-secondary">
@@ -113,6 +127,8 @@
 
   </div>
 </div>
+
+{{/if}}
 
 
 <div class="row justify-content-center mb-4 px-5">
