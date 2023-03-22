@@ -79,6 +79,8 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
     let randomFact = Math.floor(Math.random() * defaultFact.length);
     const fact = defaultFact[randomFact];
 
+    const errorMessage = "Something went wrong. Please reload the page.";
+
     res.render('home', { fact: fact, user: user, errorMessage: errorMessage} );
     next(error);
   }

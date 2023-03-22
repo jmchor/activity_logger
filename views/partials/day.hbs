@@ -1,59 +1,43 @@
 {{#if this.isDone}}
 
-  <div class="row justify-content-center">
-    <div class="row">
-      <form class="col my-1">
-        <div class="col text-success">
-          <input
-            type="checkbox"
-            id="{{this._id}}"
-            name="_id"
-            value="{{this._id}}"
-            checked
-          />
-          <label id="{{this._id}}" for="{{this._id}}">
-            <a href="/schedule/{{this._id}}">{{title}}</a>
-          </label>
-        </div>
+	<div class='row justify-content-center'>
+		<form class='col my-1' action='/schedule' method='POST'>
+			<div class='col text-success'>
+				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' checked />
+				<input type='hidden' name='_id' value='{{this._id}}' />
+				<label id='{{this._id}}' for='{{this._id}}'>
+					<a href='/schedule/{{this._id}}'>{{title}}</a>
+				</label>
+			</div>
 
-        <div class="row">
-          <div class="col" id="task-description">
-            {{description}}
-          </div>
-        </div>
-      </form>
-    </div>
-
-  </div>
+			<div class='row'>
+				<div class='col' id='task-description'>
+					{{description}}
+				</div>
+			</div>
+		</form>
+	</div>
 
 {{else}}
-  <div class="row justify-content-center">
-
-    <form class="col my-1" action="/schedule" method="POST">
-      <div class="col">
-
-        <input
-          type="checkbox"
-          id="{{this._id}}"
-          name="_id"
-          value="{{this._id}}"
-        />
-        <label id="{{this._id}}" for="{{this._id}}">
-          <a
-            href="/schedule/{{this._id}}"
-            class="font-weight-bold"
-            id="task-title"
-          >{{title}}</a>
-        </label>
-        <div class="row">
-          <div class="col" id="task-description">
-            {{description}}
-          </div>
-        </div>
-      </div>
-
-    </form>
-  </div>
+	<div class='row justify-content-center'>
+		<form class='col my-1' action='/schedule' method='POST'>
+			<div class='col'>
+				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' />
+				<label id='{{this._id}}' for='{{this._id}}'>
+					<a
+						href='/schedule/{{this._id}}'
+						class='font-weight-bold'
+						id='task-title'
+					>{{title}}</a>
+				</label>
+				<div class='row'>
+					<div class='col' id='task-description'>
+						{{description}}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
 {{/if}}
 
@@ -63,16 +47,21 @@
 	// Submits the form and sends the id of the checkbox to the POST route
 
 	window.onload = function () {
-		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-		checkboxes.forEach((checkbox) => {
-			checkbox.addEventListener('change', function () {
-				if (this.checked) {
-					console.log(this.id);
-					const form = checkbox.closest('form');
-					form.submit();
-				}
-			});
-		});
-	};
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', function () {
+      console.log(this.id);
+      const form = checkbox.closest('form');
+      if (this.checked) {
+        //for use case: checkbox gets checked
+        form.submit();
+      } else {
+        //for use case: checkbox gets unchecked
+        form.submit();
+      }
+    });
+  });
+};
+
 
 </script>
