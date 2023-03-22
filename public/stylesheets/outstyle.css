@@ -109,47 +109,11 @@ form {
 }
 
 /*--------------------------------------------------------------
-# Header Logo
---------------------------------------------------------------*/
-
-#logo {
-  font-size: 32px;
-  font-weight: 400;
-  display: inline-block;
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-
-/*--------------------------------------------------------------
 # Header Navigation
 --------------------------------------------------------------*/
 
 .navbar {
-  padding: 10px;
-}
-
-.navbar ul {
-  margin: 0;
-  display: flex;
-  list-style: none;
-  align-items: center;
-}
-
-.navbar-light .navbar-toggler {
-  outline: none;
-  box-shadow: none;
-  border: 0;
-}
-
-.navbar-light .navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
-  border: 0;
-}
-
-#mobile-menu {
-  gap: 10px;
-  margin-block-end: 0;
+  padding: 20px;
 }
 
 .divider:after,
@@ -161,25 +125,18 @@ form {
 }
 
 #index-container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-image: url(/images/background.jpg);
   filter: brightness(90%);
   background-size: cover;
   background-position: center;
+  overflow-x: hidden;
 }
 
 /*--------------------------------------------------------------
 # Main Content
 --------------------------------------------------------------*/
-
-main {
-  margin-top: 0px;
-  padding-top: 80px;
-  padding-bottom: 110px;
-}
 
 #week-button {
   background-color: white;
@@ -221,9 +178,7 @@ input[type="date"] {
 }
 
 input[type="checkbox"] {
-  /* Not removed via appearance */
   margin: 0 3 0 0;
-
   font: inherit;
   color: black;
   width: 1.15em;
@@ -234,29 +189,12 @@ input[type="checkbox"] {
 }
 
 /*--------------------------------------------------------------
-# Footer Navigation
---------------------------------------------------------------*/
-
-#bottom-nav a {
-  color: white;
-}
-
-#bottom-nav i {
-  font-size: 20px;
-}
-
-#menu-button {
-  padding-top: 9px;
-  font-size: 14px;
-}
-
-/*--------------------------------------------------------------
 # Mobile exclusive styles
 --------------------------------------------------------------*/
 
 @media (max-width: 575px) {
   #index-content {
-    padding: 20px 20px 60px 20px;
+    padding: 0px 20px 60px 20px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -295,5 +233,6 @@ input[type="checkbox"] {
 
   #index-content {
     padding-top: 100px;
+    overflow: hidden;
   }
 }
