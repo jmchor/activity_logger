@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
       "Surf through your tasks with our Taskmeister productivity app",
       "Don’t let your productivity sink - use Taskmeister",
       "Swim through your tasks with ease using Taskmeister",
-      "Taskmeister is the lifesaver for your productivity needs",
+      "The lifesaver for your productivity needs",
       "Let Taskmeister keep you on track and above water",
     ];
 

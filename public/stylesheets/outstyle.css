@@ -23,9 +23,9 @@ h6 {
 
 h1 {
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
   color: white;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 h2 {
@@ -182,8 +182,9 @@ main {
 
 #slogan {
   color: white;
-  font-size: 22px;
+  font-size: 18px;
   letter-spacing: 1px;
+  font-weight: 300;
 }
 
 #week-button {
@@ -259,7 +260,7 @@ input[type="checkbox"] {
 # Mobile exclusive styles
 --------------------------------------------------------------*/
 
-@media (max-width: 1250px) {
+@media (max-width: 992px) {
   #index-content {
     padding: 20px 20px 60px 20px;
     left: 0;
