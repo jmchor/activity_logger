@@ -1,7 +1,43 @@
-<form action='/find-user' method='post'>
-	<label for='email'>Email</label>
-	<input type='email' id='email' name='email' />
+<div id="login-content" class="row justify-content-center">
+  <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3" id="login-box">
+    <div class="row justify-content-center px-3 py-5">
+      <h1>Password</h1>
+      <h1>Recovery</h1>
+    </div>
 
-	<button type='submit'>Find me!</button>
+    {{! Pool ladder image }}
+    <div id="ladder-container" class="px-3">
+      <img id="ladder-img" src="/images/icons/pool-ladder.png" />
+    </div>
+    <div id="login-lower-half" class="row justify-content-center px-3 py-5">
+      <h5 class="mb-3">Enter the email address for your account</h5>
 
-</form>
+      {{! Email input }}
+      <form action="/find-user" method="post">
+        <input
+          class="form-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
+
+        {{! Find me button }}
+        <div class="row d-flex justify-content-center my-3">
+          <div class="btn-group w-100">
+            <button class="btn btn-secondary" type="submit">Find me</button>
+          </div>
+        </div>
+      </form>
+
+      {{! Error message for non-existent email }}
+      {{#if errorMessage}}
+        <h5 class="text-danger text-center">{{errorMessage}}</h5>
+      {{/if}}
+
+      {{#if successMessage}}
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      {{/if}}
+    </div>
+  </div>
+</div>

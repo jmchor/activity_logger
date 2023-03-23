@@ -43,13 +43,18 @@ h4 {
   color: #005f92;
 }
 
+h5 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
 a {
-  color: #494949;
+  color: #4460ff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #92d283;
+  color: #5fb8f4;
 }
 
 li {
@@ -60,13 +65,54 @@ li {
 
 p {
   color: #505050;
-  font-weight: 300;
   margin: 0px;
 }
 
 form {
   margin: 0px;
 }
+
+select {
+  background-color: white;
+  border: 1px solid #4460ff;
+  color: #333;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select.dropdown-style {
+  background-image: linear-gradient(45deg, transparent 50%, white 50%),
+    linear-gradient(135deg, white 50%, transparent 50%),
+    linear-gradient(to right, #4460ff, #4460ff);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+select.dropdown-style:focus {
+  background-image: linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, #5fb8f4, #5fb8f4);
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  border-color: #5fb8f4;
+  outline: 0;
+}
+
+/*--------------------------------------------------------------
+# Button styles
+--------------------------------------------------------------*/
 
 .btn {
   border: none;
@@ -91,20 +137,45 @@ form {
   font-weight: 500;
 }
 
-.btn-secondary {
+.btn-outline-primary {
   border: solid 1px white;
+  color: white;
   font-size: 18px;
   font-weight: 500;
   background: none;
 }
 
 .btn-primary:hover {
-  background-color: #ffbe2e;
+  background-color: #4460ff;
   color: white;
 }
 
+.btn-outline-primary:hover {
+  background-color: #4460ff;
+  border: solid 1px #4460ff;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #4460ff;
+  color: white;
+  padding: 10px;
+}
+
 .btn-secondary:hover {
-  background-color: #ffbe2e;
+  background-color: #5fb8f4;
+  color: white;
+}
+
+.btn-outline-secondary {
+  border: solid 1px #4460ff;
+  color: #4460ff;
+  padding: 10px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #5fb8f4;
+  border: solid 1px #5fb8f4;
   color: white;
 }
 
@@ -121,17 +192,57 @@ form {
   content: "";
   flex: 1;
   height: 1px;
-  background: #eee;
+  background: #d2d2d2;
+}
+
+/*--------------------------------------------------------------
+# Main Content
+--------------------------------------------------------------*/
+
+.container {
+  animation: fadeInAnimation ease 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #index-container {
   width: 100vw;
   height: 100vh;
   background-image: url(/images/background.jpg);
-  filter: brightness(90%);
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
+}
+
+/*--------------------------------------------------------------
+# Form Input
+--------------------------------------------------------------*/
+
+.form-input {
+  width: 100%;
+  border: 0px solid transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #aaa;
+  padding: 0.5em 0.5em 0.5em;
+  padding-left: 2em;
+  outline: none;
+  margin: 0.5em auto;
+  transition: all 0.5s ease;
+  letter-spacing: 1px;
+}
+.form-input:focus {
+  border-bottom-color: #5fb8f4;
+  box-shadow: 0 0 5px rgba(0, 89, 255, 0.4);
+  border-radius: 4px;
 }
 
 /*--------------------------------------------------------------
@@ -188,6 +299,15 @@ input[type="checkbox"] {
   transform: translateY(0.1em);
 }
 
+#ladder-container {
+  text-align: right;
+}
+
+#ladder-img {
+  width: 100px;
+  height: auto;
+}
+
 /*--------------------------------------------------------------
 # Mobile exclusive styles
 --------------------------------------------------------------*/
@@ -201,11 +321,24 @@ input[type="checkbox"] {
     position: fixed;
   }
 
+  #login-content {
+    padding: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
+
   #slogan {
     color: white;
     font-size: 18px;
     letter-spacing: 1px;
     font-weight: 300;
+  }
+
+  #login-lower-half {
+    background-color: white;
+    border-radius: 10px;
   }
 }
 
@@ -234,5 +367,26 @@ input[type="checkbox"] {
   #index-content {
     padding-top: 28vh;
     overflow: hidden;
+  }
+
+  #login-box {
+    border: solid 1px white;
+    border-radius: 10px;
+    margin: 14vh 0px 0px 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+
+  #register-box {
+    border: solid 1px white;
+    border-radius: 10px;
+    margin: 10vh 0px 0px 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+
+  #login-lower-half {
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
   }
 }

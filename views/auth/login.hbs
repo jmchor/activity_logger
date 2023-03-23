@@ -1,77 +1,84 @@
-<div class="row justify-content-center mb-4 py-4">
-  <div class="col-xl-8 col-lg-9 col-md-10 my-3">
-    <h1>Log In</h1>
+<div id="login-content" class="row justify-content-center">
+  <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3" id="login-box">
+    <div class="row justify-content-center px-3 py-5">
+      <h1>Log</h1>
+      <h1>In</h1>
+    </div>
+
+    {{! Pool ladder image }}
+    <div id="ladder-container" class="px-3">
+      <img id="ladder-img" src="/images/icons/pool-ladder.png" />
+    </div>
+    <div id="login-lower-half" class="row justify-content-center px-3 py-5">
+
+      {{! Error message for wrong password }}
+      {{#if errorMessage}}
+        <h5 class="text-danger text-center">{{errorMessage}}</h5>
+      {{/if}}
+
+      {{#if successMessage}}
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      {{/if}}
+
+      {{! Username and password input }}
+      <form action="/login" method="POST">
+
+        <div class="col-auto">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            class="form-input"
+            required
+          />
+        </div>
+
+        <div class="col-auto">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            class="form-input"
+            required
+          />
+        </div>
+
+        {{! Forgot password link }}
+        <a href="/find-user">Forgot password?</a>
+        <div class="col-auto mt-5 mb-2 text-center">
+          <input
+            type="checkbox"
+            name="rememberMe"
+            id="rememberMe"
+            value="Remember Me"
+          />
+          <label for="rememberMe">Remember Me</label>
+        </div>
+
+        {{! Button group }}
+        <div class="row d-flex justify-content-center">
+          <div class="btn-group w-100">
+            <input
+              class="btn btn-secondary flex-fill"
+              type="submit"
+              value="Log in"
+            />
+          </div>
+        </div>
+
+        <div class="divider d-flex align-items-center my-2">
+          <p class="text-center mx-3 mb-0 text-muted">OR</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="btn-group w-100">
+            <a class="btn btn-outline-secondary flex-fill" href="/signup">Sign
+              up</a>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-
-  <form
-    action="/login"
-    method="POST"
-    class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3"
-  >
-
-    <div class="col-auto my-3">
-      <label for="username">Username</label>
-    </div>
-    <div class="col-auto mb-3">
-      <input
-        type="text"
-        id="username"
-        name="username"
-        class="form-control"
-        required
-      />
-    </div>
-
-    <div class="col-auto my-3">
-      <label for="password">Password</label>
-    </div>
-    <div class="col-auto mb-5">
-      <input
-        type="password"
-        id="password"
-        name="password"
-        class="form-control"
-        required
-      />
-
-    </div>
-    <div class="col-auto mb-5">
-      <input
-        type="checkbox"
-        name="rememberMe"
-        id="rememberMe"
-        value="Remember Me"
-      />
-      <label for="rememberMe">Remember Me</label>
-
-    </div>
-
-    <div class="row d-flex justify-content-center">
-      <a href="/find-user" class="mb-1">Forgot Password? Answer Security
-        Question</a>
-      <div class="btn-group w-100">
-        <input class="btn btn-primary flex-fill" type="submit" value="Log in" />
-      </div>
-    </div>
-
-    <div class="divider d-flex align-items-center my-4">
-      <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="btn-group w-100">
-        <a class="btn btn-secondary flex-fill" href="/signup">Sign up</a>
-      </div>
-    </div>
-
-  </form>
-
 </div>
-
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
-
-{{#if successMessage}}
-  <p>{{successMessage}}</p>
-{{/if}}
