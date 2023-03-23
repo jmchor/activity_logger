@@ -264,15 +264,17 @@ In order to cut loading times for the Random Fact API call down to a minimum, we
 
 ___
 
-## Contributors
+</br>
+<h2 align="center"> Contributors </h2>
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+</br>
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+<div align="center">
+  <a  href="https://github.com/jmchor/activity_logger/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=jmchor/activity_logger" />
+  </a>
+</div>
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+</br>
 
-This project was realized by [Johannes Chorzempa](https://github.com/jmchor), [Nana Chuto](https://github.com/nncht) & [Lukas Jürgens](https://github.com/lukasmerlin) for the second module of Ironhack Bootcamp.
+<p align="center">This project was realized by <a href="https://github.com/jmchor">Johannes Chorzempa</a>, <a href="https://github.com/nncht" target="_blank">Nana Chuto</a> & <a href="https://github.com/lukasmerlin" target="_blank">Lukas Jürgens</a> for the second module of Ironhack Bootcamp.</p>
