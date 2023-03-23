@@ -32,7 +32,7 @@
 
 - Create a user with password and email authentication, security question and answer
 - Create a task with a title, a description - chose between a recurrence (on one or multiple weekdays for the remainder of the year) or a task that only happens once
-- mark a task as done
+- mark a task as done/undone
 - View the weeks schedule which displays all of the current weeks tasks
 - View the weeks after or before the current week
 - See today's tasks on the home screen
@@ -62,9 +62,15 @@ This project uses Node.js, Express and MongoDB
 Most important middleware functions and packages include:
 
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+  - hashing passwords
 - [express-session](https://www.npmjs.com/package/express-session)
+  - session middleware
 - [connect-mongo](https://www.npmjs.com/package/connect-mongo)
+  - MongoDB session store
 - [axios](https://www.npmjs.com/package/axios)
+  - HTTP client based on Promises
+- [chartjs](https://www.chartjs.org/)
+  - JavaScript charting library
 - crypto
 - hbs
 - authentication middleware function (to discern logged-in/out states)
