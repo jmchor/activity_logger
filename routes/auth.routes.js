@@ -39,6 +39,12 @@ router.get("/home", isLoggedIn, async (req, res, next) => {
       return activityDate >= currentDate && activityDate <= tomorrowMidnight;
     });
 
+    // Change Category Social Life into Social
+
+		comingWeekActivities.forEach((activity) => {
+			activity.category === 'Social Life' ? activity.category = 'Social' : false;
+		});
+
     let facts = [];
     if (!req.session.facts || req.session.facts.length === 0) {
       const response = await axios.get(
