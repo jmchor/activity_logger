@@ -161,6 +161,8 @@ main {
   margin-top: 0px;
   padding-top: 80px;
   padding-bottom: 110px;
+  background-color: white;
+  height: 100vh;
 }
 
 #members-area {
@@ -171,6 +173,10 @@ main {
   background-position: center;
   overflow-x: hidden;
 }
+
+/* #members-box {
+  background-color: white;
+} */
 
 #week-button {
   background-color: white;
