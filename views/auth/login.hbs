@@ -1,83 +1,103 @@
-<div id="login-content" class="row justify-content-center">
-  <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3" id="login-box">
-    <div class="row justify-content-center px-3 py-5">
-      <h1>Log in</h1>
-    </div>
+<div id='login-content' class='row justify-content-center'>
+	<div class='col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3' id='login-box'>
+		<div class='row justify-content-center px-3 py-5'>
+			<h1>Log in</h1>
+		</div>
 
-    {{! Pool ladder image }}
-    <div id="ladder-container" class="px-3">
-      <img id="ladder-img" src="/images/icons/pool-ladder.png" />
-    </div>
-    <div id="login-lower-half" class="row justify-content-center px-3 py-5">
+		{{! Pool ladder image }}
+		<div id='ladder-container' class='px-3'>
+			<img id='ladder-img' src='/images/icons/pool-ladder.png' />
+		</div>
+		<div id='login-lower-half' class='row justify-content-center px-3 py-5'>
 
-      {{! Error message for wrong password }}
-      {{#if errorMessage}}
-        <h5 class="text-danger text-center">{{errorMessage}}</h5>
-      {{/if}}
+			{{! Error message for wrong password }}
+			{{#if errorMessage}}
+				<h5 class='text-danger text-center'>{{errorMessage}}</h5>
+			{{/if}}
 
-      {{#if successMessage}}
-        <h5 class="text-success text-center">{{successMessage}}</h5>
-      {{/if}}
+			{{#if successMessage}}
+				<h5 class='text-success text-center'>{{successMessage}}</h5>
+			{{/if}}
 
-      {{! Username and password input }}
-      <form action="/login" method="POST">
+			{{! Username and password input }}
+			<form action='/login' method='POST'>
 
-        <div class="col-auto">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Username"
-            class="form-input"
-            required
-          />
-        </div>
+				<div class='col-auto'>
+					<input
+						type='text'
+						id='username'
+						name='username'
+						placeholder='Username'
+						class='form-input'
+						required
+					/>
+				</div>
 
-        <div class="col-auto">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            class="form-input"
-            required
-          />
-        </div>
+				<div class='row'>
+					<div class='col-11'>
+						<input
+							type='password'
+							id='password'
+							name='password'
+							placeholder='Password '
+							class='form-input'
+							required
+						/>
+					</div>
+					<div class='col-1 my-auto pe-auto'>
+						<i
+							class='bi bi-eye-slash pe-auto'
+							role='button'
+							id='togglePassword'
+						></i>
+					</div>
+				</div>
 
-        {{! Forgot password link }}
-        <a href="/find-user">Forgot password?</a>
-        <div class="col-auto mt-5 mb-2 text-center">
-          <input
-            type="checkbox"
-            name="rememberMe"
-            id="rememberMe"
-            value="Remember Me"
-          />
-          <label for="rememberMe">Remember Me</label>
-        </div>
+				{{! Forgot password link }}
+				<a href='/find-user'>Forgot password?</a>
+				<div class='col-auto mt-5 mb-2 text-center'>
+					<input type='checkbox' name='rememberMe' id='rememberMe' value='Remember Me' />
+					<label for='rememberMe'>Remember Me</label>
+				</div>
 
-        {{! Button group }}
-        <div class="row d-flex justify-content-center">
-          <div class="btn-group w-100">
-            <input
-              class="btn btn-secondary flex-fill"
-              type="submit"
-              value="Log in"
-            />
-          </div>
-        </div>
+				{{! Button group }}
+				<div class='row d-flex justify-content-center'>
+					<div class='btn-group w-100'>
+						<input
+							class='btn btn-secondary flex-fill'
+							type='submit'
+							value='Log in'
+						/>
+					</div>
+				</div>
 
-        <div class="divider d-flex align-items-center my-2">
-          <p class="text-center mx-3 mb-0 text-muted">OR</p>
-        </div>
+				<div class='divider d-flex align-items-center my-2'>
+					<p class='text-center mx-3 mb-0 text-muted'>OR</p>
+				</div>
 
-        <div class="row justify-content-center">
-          <div class="btn-group w-100">
-            <a class="btn btn-outline-secondary flex-fill" href="/signup">Sign
-              up</a>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+				<div class='row justify-content-center'>
+					<div class='btn-group w-100'>
+						<a class='btn btn-outline-secondary flex-fill' href='/signup'>Sign up</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
+
+{{!-- prettier-ignore --}}
+<script>
+        const togglePassword = document.getElementById("togglePassword");
+        const password = document.getElementById("password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+
+    </script>
