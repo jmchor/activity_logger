@@ -7,32 +7,21 @@
 			"name": "Johannes Chorzempa",
 			"avatar_url": "https://avatars.githubusercontent.com/u/110151013?v=4",
 			"profile": "https://github.com/jmchor",
-			"contributions": [
-				"bug",
-				"code",
-				"doc",
-				"design"
-			]
+			"contributions": []
 		},
 		{
 			"login": "nncht",
 			"name": "Nana Chuto",
 			"avatar_url": "https://avatars.githubusercontent.com/u/105007117?v=4",
 			"profile": "https://github.com/nncht",
-			"contributions": [
-				"code",
-				"design"
-			]
+			"contributions": []
 		},
 		{
 			"login": "lukasmerlin",
 			"name": "Lukas Merlin Jürgens",
 			"avatar_url": "https://avatars.githubusercontent.com/u/108548830?v=4",
 			"profile": "https://github.com/lukasmerlin",
-			"contributions": [
-				"code",
-				"bug"
-			]
+			"contributions": []
 		}
 	],
 	"contributorsPerLine": 7,
