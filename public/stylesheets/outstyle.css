@@ -167,7 +167,7 @@ form {
   padding: 0.5em 0.5em 0.5em;
   padding-left: 2em;
   outline: none;
-  margin: 1em auto;
+  margin: 0.5em auto;
   transition: all 0.5s ease;
   letter-spacing: 1px;
 }
@@ -245,7 +245,7 @@ input[type="checkbox"] {
   }
 
   #login-content {
-    padding: 0px 20px 60px 20px;
+    padding: 0px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -295,7 +295,7 @@ input[type="checkbox"] {
   #login-box {
     border: solid 1px white;
     border-radius: 10px;
-    margin: 10vh 0px 0px 0px;
+    margin: 14vh 0px 0px 0px;
   }
 
   #login-lower-half {
