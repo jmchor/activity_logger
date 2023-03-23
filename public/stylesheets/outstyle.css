@@ -195,6 +195,25 @@ select.dropdown-style:focus {
   background: #d2d2d2;
 }
 
+/*--------------------------------------------------------------
+# Main Content
+--------------------------------------------------------------*/
+
+.container {
+  animation: fadeInAnimation ease 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 #index-container {
   width: 100vw;
   height: 100vh;
