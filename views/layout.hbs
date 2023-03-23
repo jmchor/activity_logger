@@ -54,65 +54,59 @@
         id="top-nav"
         class="navbar row justify-content-center fixed-top navbar-expand-md navbar-light bg-white fixed-top"
       >
-        <div class="row justify-content-center">
-          <div class="col-12 m-0 p-0">
-            <div class="container mr-auto px-2">
-              <div class="row justify-content-center">
-                <div class="col-md-6 col-9">
-                  <a href="/" id="logo" class="navbar-brand">
-                    <img
-                      src="/images/logo.png"
-                      alt="Logo"
-                      width="37"
-                      height="45"
-                      class="d-inline-block align-text-top"
-                    />
-                    Taskmeister</a>
-                </div>
-                <div class="col-md-6 col-3 justify-content-center">
-                  <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#toggleMobileMenu"
-                    aria-controls="toggleMobileMenu"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div
-                    class="collapse navbar-collapse ms-auto py-2"
-                    id="toggleMobileMenu"
-                  >
-                    <ul class="navbar-nav ms-auto text-center">
-                      <li class="nav-item">
-                        <a
-                          href="/profile"
+        <div class="container-fluid col-xl-6 col-lg-9 col-md-10">
+          <a href="/" id="logo" class="navbar-brand">
+            <img
+              src="/images/logo.png"
+              alt="Logo"
+              width="37"
+              height="45"
+              class="d-inline-block align-text-top"
+            />
+            Taskmeister</a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#toggleMobileMenu"
+                  aria-controls="toggleMobileMenu"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                  class="collapse navbar-collapse ms-auto"
+                  id="toggleMobileMenu"
+                >
+                  <ul class="navbar-nav ms-auto text-center">
+                    <li class="nav-item">
+                      <a
+                        href="/profile"
+                        id="menu-button"
+                        class="nav-link btn"
+                      >Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="/profile/statistics"
+                        id="menu-button"
+                        class="nav-link btn"
+                      >Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                      <form action="/logout" method="POST">
+                        <input
+                          type="submit"
+                          value="Log Out"
                           id="menu-button"
                           class="nav-link btn"
-                        >Profile</a>
-                      </li>
-                      <li class="nav-item">
-                        <a
-                          href="/profile/statistics"
-                          id="menu-button"
-                          class="nav-link btn"
-                        >Statistics</a>
-                      </li>
-                      <li class="nav-item">
-                        <form action="/logout" method="POST">
-                          <input
-                            type="submit"
-                            value="Log Out"
-                            id="menu-button"
-                            class="nav-link btn"
-                          />
-                        </form>
-                      </li>
-                    </ul>
-                  </div>
+                        />
+                      </form>
+                    </li>
+                  </ul>
                 </div>
+
               </div>
             </div>
           </div>
