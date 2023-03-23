@@ -1,17 +1,32 @@
 <p align="center">
-        <img src="https://img.shields.io/badge/contributors-3-informational" />
-        <img src="https://img.shields.io/badge/dependecies-up%20to%20date-success" />
-        <img src="https://img.shields.io/badge/deployment-successful-success" />
+        <img src="https://img.shields.io/github/deployments/jmchor/activity_logger/cyclic:prod" />
+        <img src="https://img.shields.io/github/all-contributors/jmchor/activity_logger" />
+        <img src="https://img.shields.io/github/commit-activity/w/jmchor/activity_logger" />
+        <img src="https://img.shields.io/github/issues-pr-closed/jmchor/activity_logger" />
 
 </p>
 
-# Taskmeister - Show your tasks who's in charge
+<p align="center">
+<img src="public/images/taskmeister1.png" alt="The Taskmeister app login screen"/>
+</p>
+</br>
+
+ <h1 align="center">Taskmeister - The lifesaver for your productivity needs</h1>
+
+ <div align="center">
+   Taskmeister is an app to help you plan recurring activities for every week or just a single task.
+
+   With a calendar view on the weeks tasks, organize what you want to do. Build habits using this app - and learn a thing or two!
+
+   This app was deployed using MongoDB Atlas for database handling as well as [cyclic.sh](https://cyclic.sh/) for the Node processes.
+ </div>
+
+ <p align="center"> <b>Take me to <a href="https://taskmeister.cyclic.app" target="_blank">Taskmeister</a></b></p>
+
+---
+</br>
 
 ## Project Description
-
-Taskmeister is an app to help you plan recurring activities for every week or just a single task.
-
-With a calendar view on the weeks tasks, organize what you want to do. Build habits using this app - and learn a thing or two!
 
 ### Basic Functionalities
 
@@ -30,12 +45,13 @@ With a calendar view on the weeks tasks, organize what you want to do. Build hab
 - Procrastinate: postpone any given task by a day!
 - Learn something new with the Random Fact API on the home screen!
 - Forgot your password? Answer a security question and create a new one?
+- Want a new password? Update it from the profile!
 - Want to stay logged in? Don't forget to "Remember me"!
 - Don't want to use the app anymore? Go ahead and delete your profile!
 
 ### Backlog
 
-- Statistics page for User Profile
+- Advanced UI design (header / footer)
 
 ---
 
@@ -45,11 +61,11 @@ This project uses Node.js, Express and MongoDB
 
 Most important middleware functions and packages include:
 
-- bcryptjs
-- express-session
-- connect-mongo
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [express-session](https://www.npmjs.com/package/express-session)
+- [connect-mongo](https://www.npmjs.com/package/connect-mongo)
+- [axios](https://www.npmjs.com/package/axios)
 - crypto
-- axios
 - hbs
 - authentication middleware function (to discern logged-in/out states)
 
@@ -93,9 +109,13 @@ in the projects root directory (nodemon needs to be installed as well)
 
 ### Routes
 
-#### Index
+#### Index Route
 
 - GET /
+
+  - Redirects the logged-in user to /home
+  - Renders the login page
+  - Loads the slogan array
 
 #### Auth Routes
 
@@ -117,6 +137,20 @@ in the projects root directory (nodemon needs to be installed as well)
   - compares user password and deletes the user
 - GET /profile/statistics
   - receives a statistics object and renders the auth/statistics view
+- POST /update-password
+  - compares password hashes; uses route guard
+- POST /new-password
+  - updates the session.currentUsers password
+- GET /find-user
+  - renders the find-user view
+- POST /find-user
+  - identify a user by e-mail
+- POST /answer
+  - compares the hashed answer to the security question
+- GET /reset-password/:id
+  - renders reset-password form with user object
+- POST /reset-password/:id
+  - resets the users password
 
 #### Activity Route
 
@@ -224,6 +258,23 @@ userId: {
 
 ---
 
-## Contributors
+### Trivia
 
-This project was realized by [Johannes Chorzempa](https://github.com/jmchor), [Nana Chuto](https://github.com/nncht) & [Lukas Jürgens](https://github.com/lukasmerlin) for the second module of Ironhack Bootcamp.
+In order to cut loading times for the Random Fact API call down to a minimum, we followed a "get many, show one" approach: the API call fetches as many facts as possible, while only one gets shown on page load. When there are no more facts - new ones will be fetched.
+
+___
+
+</br>
+<h2 align="center"> Contributors </h2>
+
+</br>
+
+<div align="center">
+  <a  href="https://github.com/jmchor/activity_logger/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=jmchor/activity_logger" />
+  </a>
+</div>
+
+</br>
+
+<p align="center">This project was realized by <a href="https://github.com/jmchor">Johannes Chorzempa</a>, <a href="https://github.com/nncht" target="_blank">Nana Chuto</a> & <a href="https://github.com/lukasmerlin" target="_blank">Lukas Jürgens</a> for the second module of Ironhack Bootcamp.</p>

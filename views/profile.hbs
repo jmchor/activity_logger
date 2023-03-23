@@ -1,37 +1,72 @@
-<h1>Profile</h1>
+<div class='row justify-content-center'>
+	<div class='col-xl-8 col-lg-9 col-md-10 my-3'>
+		<h2>{{user.username}}'s Profile</h2>
+		<br />
+		<img src='images/rubberduck.png' alt='' />
 
-<p>Name: {{user.username}}</p>
-<p>Email: {{user.email}}</p>
-<br />
-<br />
+		<div class='row justify-content-center'>
+			<div class='col-12 mt-3 mb-1'>
 
-<h5>Member since {{memberDate}}</h5>
-<br />
-<br />
-<br />
+				<p>Name: {{user.username}}</p>
+				<p>Email: {{user.email}}</p>
+			</div>
+		</div>
 
-<form action='/update-password' method='POST'>
-	<label for='password'>Current Password:</label>
-	<input type='password' name='password' />
-	<button type='submit'>Update Password</button>
-</form>
+		<div class='row justify-content-center'>
+			<div class='col-12 mt-3 mb-1'>
+				<p class='text-center mx-3 mb-3 text-muted'>Member since {{memberDate}}</p>
+			</div>
+		</div>
 
-<form action='/profile/delete-activities' method='POST'>
-	<label for='password'>Password:</label>
-	<input type='password' name='password' />
-	<button type='submit'>Delete All Activities</button>
-</form>
+		<div class='divider d-flex align-items-center'>
+			<p class='text-center mx-3 mb-0 text-muted'>Options</p>
+		</div>
 
-<form action='/profile/delete-account' method='POST'>
-	<label for='password'>Password:</label>
-	<input type='password' name='password' />
-	<button type='submit'>Delete Account</button>
-</form>
+		<div class='row row-cols-auto justify-content-center'>
 
-{{#if errorMessage}}
-	<p>{{errorMessage}}</p>
-{{/if}}
+			<form action='/update-password' method='POST' class='m-3'>
 
-{{#if successMessage}}
-	<p>{{successMessage}}</p>
-{{/if}}
+				<div class='row justify-content-center'>
+					<div class='col-12 my-1 text-center'>
+						<input type='password' name='password' placeholder='Enter Password' />
+					</div>
+				</div>
+				<div class='col-auto mx-auto'>
+					<button class='btn btn-dark px-5' type='submit'>Update Password</button>
+				</div>
+			</form>
+
+			<form action='/profile/delete-activities' method='POST' class='m-3'>
+				<div class='row justify-content-center'>
+					<div class='col-12 my-1 text-center'>
+						<input type='password' name='password' placeholder='Enter Password' />
+					</div>
+				</div>
+				<div class='col-auto mx-auto'>
+					<button class='btn btn-danger px-5' type='submit'>Delete All Activities</button>
+				</div>
+			</form>
+
+			<form action='/profile/delete-account' method='POST' class='m-3'>
+				<div class='row justify-content-center'>
+					<div class='col-12 my-1 text-center'>
+						<input type='password' name='password' placeholder='Enter Password' />
+					</div>
+				</div>
+				<div class='col-auto mx-auto'>
+					<button class='btn btn-danger px-5' type='submit'>Delete Account</button>
+				</div>
+			</form>
+
+		</div>
+
+		{{#if errorMessage}}
+			<p>{{errorMessage}}</p>
+		{{/if}}
+
+		{{#if successMessage}}
+			<p>{{successMessage}}</p>
+		{{/if}}
+
+	</div>
+</div>

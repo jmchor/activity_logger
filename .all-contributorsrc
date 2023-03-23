@@ -8,10 +8,11 @@
 			"avatar_url": "https://avatars.githubusercontent.com/u/110151013?v=4",
 			"profile": "https://github.com/jmchor",
 			"contributions": [
-				"bug",
 				"code",
 				"doc",
-				"design"
+				"design",
+				"ideas",
+				"review"
 			]
 		},
 		{
@@ -21,7 +22,8 @@
 			"profile": "https://github.com/nncht",
 			"contributions": [
 				"code",
-				"design"
+				"design",
+				"review"
 			]
 		},
 		{
@@ -31,7 +33,8 @@
 			"profile": "https://github.com/lukasmerlin",
 			"contributions": [
 				"code",
-				"bug"
+				"ideas",
+				"review"
 			]
 		}
 	],
@@ -43,5 +46,6 @@
 	"projectName": "activity_logger",
 	"projectOwner": "jmchor",
 	"repoHost": "https://github.com",
-	"repoType": "github"
+	"repoType": "github",
+	"commitConvention": "angular"
 }

@@ -208,23 +208,25 @@
 		const weeklyCategoryCtx = document.getElementById('weeklyCategoryChart').getContext('2d');
 		// set the data for the chart
 		const weeklyCategoryData = {
-			labels: ['Work', 'Study', 'Sports', 'Social', 'Other'],
+			labels: ['Work', 'Study', 'Sports', 'Social', 'Hobbies', 'Other'],
 			datasets: [{
 				label: 'Activities',
-				data: [{{weekCategory.work}}, {{weekCategory.study}}, {{weekCategory.exercise}}, {{weekCategory.social}}, {{weekCategory.other}}],
+				data: [{{weekCategory.work}}, {{weekCategory.study}}, {{weekCategory.exercise}}, {{weekCategory.social}}, {{weekCategory.hobbies}}, {{weekCategory.other}}],
 				backgroundColor: [
 					'rgba(54, 162, 235, 0.2)',
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(255, 206, 86, 0.2)',
 					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)'
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
 				],
 				borderColor: [
 					'rgba(54, 162, 235, 1)',
 					'rgba(255, 99, 132, 1)',
 					'rgba(255, 206, 86, 1)',
 					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)'
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
 				],
 				borderWidth: 1
 			}]
@@ -250,23 +252,25 @@
 		const monthlyCategoryCtx = document.getElementById('monthlyCategoryChart').getContext('2d');
 		// set the data for the chart
 		const monthlyCategoryData = {
-		labels: ['Work', 'Study', 'Sports', 'Social', 'Other'],
+		labels: ['Work', 'Study', 'Sports', 'Social','Hobbies', 'Other', ],
 		datasets: [{
 			label: 'Activities',
-			data: [{{monthCategory.work}}, {{monthCategory.study}}, {{monthCategory.exercise}}, {{monthCategory.social}}, {{monthCategory.other}}],
+			data: [{{monthCategory.work}}, {{monthCategory.study}}, {{monthCategory.exercise}}, {{monthCategory.social}}, {{monthCategory.hobbies}}, {{monthCategory.other}}],
 			backgroundColor: [
 			'rgba(54, 162, 235, 0.2)',
 			'rgba(255, 99, 132, 0.2)',
 			'rgba(255, 206, 86, 0.2)',
 			'rgba(75, 192, 192, 0.2)',
-			'rgba(153, 102, 255, 0.2)'
+			'rgba(153, 102, 255, 0.2)',
+			'rgba(255, 159, 64, 0.2)'
 			],
 			borderColor: [
 			'rgba(54, 162, 235, 1)',
 			'rgba(255, 99, 132, 1)',
 			'rgba(255, 206, 86, 1)',
 			'rgba(75, 192, 192, 1)',
-			'rgba(153, 102, 255, 1)'
+			'rgba(153, 102, 255, 1)',
+			'rgba(255, 159, 64, 1)'
 			],
 			borderWidth: 1
 		}]
