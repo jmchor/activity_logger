@@ -161,17 +161,8 @@ main {
   margin-top: 0px;
   padding-top: 80px;
   padding-bottom: 110px;
-  background-color: white;
+  background-color: #eee;
   height: 100vh;
-}
-
-#members-area {
-  width: 100vw;
-  height: 100vh;
-  background-image: url(/images/background.jpg);
-  background-size: cover;
-  background-position: center;
-  overflow-x: hidden;
 }
 
 #week-button {
