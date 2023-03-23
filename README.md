@@ -21,7 +21,7 @@
    This app was deployed using MongoDB Atlas for database handling as well as [cyclic.sh](https://cyclic.sh/) for the Node processes.
  </div>
 
- <p align="center"> <b>Take me to <a href="https://taskmeister.cyclic.app" target="_blank">Taskmeister</a><b></p>
+ <p align="center"> <b>Take me to <a href="https://taskmeister.cyclic.app" target="_blank">Taskmeister</a></b></p>
 
 ---
 </br>
@@ -265,5 +265,14 @@ In order to cut loading times for the Random Fact API call down to a minimum, we
 ___
 
 ## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project was realized by [Johannes Chorzempa](https://github.com/jmchor), [Nana Chuto](https://github.com/nncht) & [Lukas Jürgens](https://github.com/lukasmerlin) for the second module of Ironhack Bootcamp.
