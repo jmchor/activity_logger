@@ -168,12 +168,10 @@ router.post("/signup", async (req, res, next) => {
     res.redirect("/login");
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      res
-        .status(500)
-        .render("auth/sign-up", {
-          errorMessage: error.message,
-          loggedOut: loggedOut,
-        });
+      res.status(500).render("auth/sign-up", {
+        errorMessage: error.message,
+        loggedOut: loggedOut,
+      });
     } else if (error.code === 11000) {
       res.status(500).render("auth/sign-up", {
         errorMessage:
@@ -651,7 +649,7 @@ router.post("/find-user", async (req, res, next) => {
     if (!findUser) {
       //user isn't found
       res.render("auth/find-user", {
-        errorMessage: "Email is not registered. Try with other email.",
+        errorMessage: "This email address is not registered",
         loggedOut: loggedOut,
       });
       return;
