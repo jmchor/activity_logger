@@ -115,22 +115,24 @@ form {
   color: white;
 }
 
-#login-btn-primary {
+.btn-secondary {
   background-color: #4460ff;
   color: white;
+  padding: 10px;
 }
 
-#login-btn-primary:hover {
+.btn-secondary:hover {
   background-color: #5fb8f4;
   color: white;
 }
 
-#login-btn-secondary {
+.btn-outline-secondary {
   border: solid 1px #4460ff;
   color: #4460ff;
+  padding: 10px;
 }
 
-#login-btn-secondary:hover {
+.btn-outline-secondary:hover {
   background-color: #5fb8f4;
   border: solid 1px #5fb8f4;
   color: white;
@@ -149,7 +151,7 @@ form {
   content: "";
   flex: 1;
   height: 1px;
-  background: #eee;
+  background: #d2d2d2;
 }
 
 #index-container {

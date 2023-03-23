@@ -12,21 +12,20 @@
     <div id="login-lower-half" class="row justify-content-center px-3 py-5">
       <h5 class="mb-3">Enter the email address for your account</h5>
 
+      {{! Email input }}
       <form action="/find-user" method="post">
         <input
           class="form-input"
           type="email"
           id="email"
           name="email"
-          placeholder="Your email address"
+          placeholder="Email"
         />
-        <div class="row d-flex justify-content-center">
+
+        {{! Find me button }}
+        <div class="row d-flex justify-content-center my-3">
           <div class="btn-group w-100">
-            <button
-              id="login-btn-prinmary"
-              class="btn btn-primary"
-              type="submit"
-            >Find me</button>
+            <button class="btn btn-secondary" type="submit">Find me</button>
           </div>
         </div>
       </form>
