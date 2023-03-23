@@ -231,6 +231,15 @@ input[type="checkbox"] {
   transform: translateY(0.1em);
 }
 
+#ladder-container {
+  text-align: right;
+}
+
+#ladder-img {
+  width: 100px;
+  height: auto;
+}
+
 /*--------------------------------------------------------------
 # Mobile exclusive styles
 --------------------------------------------------------------*/
