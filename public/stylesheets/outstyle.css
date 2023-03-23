@@ -99,12 +99,34 @@ form {
 }
 
 .btn-primary:hover {
-  background-color: #ffbe2e;
+  background-color: #5fb8f4;
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #ffbe2e;
+  background-color: #5fb8f4;
+  border: solid 1px #5fb8f4;
+  color: white;
+}
+
+#login-btn-primary {
+  background-color: #4460ff;
+  color: white;
+}
+
+#login-btn-primary:hover {
+  background-color: #5fb8f4;
+  color: white;
+}
+
+#login-btn-secondary {
+  border: solid 1px #4460ff;
+  color: #4460ff;
+}
+
+#login-btn-secondary:hover {
+  background-color: #5fb8f4;
+  border: solid 1px #5fb8f4;
   color: white;
 }
 
@@ -128,7 +150,6 @@ form {
   width: 100vw;
   height: 100vh;
   background-image: url(/images/background.jpg);
-  filter: brightness(90%);
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
@@ -218,6 +239,7 @@ input[type="checkbox"] {
 
   #login-lower-half {
     background-color: white;
+    border-radius: 10px;
   }
 }
 
@@ -256,5 +278,6 @@ input[type="checkbox"] {
 
   #login-lower-half {
     background-color: white;
+    border-radius: 0px 0px 10px 10px;
   }
 }
