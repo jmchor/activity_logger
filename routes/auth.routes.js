@@ -459,70 +459,14 @@ router.get("/profile/statistics", isLoggedIn, async (req, res, next) => {
       const allMonthActivitiesWithHobbies = filterByCategory(monthActivities, "Hobbies");
       const allMonthActivitiesWithOther = filterByCategory(monthActivities, "Other");
 
-      const thisMonthActivitiesWithCategory = {
-          work: allMonthActivitiesWithWork.length,
-          study: allMonthActivitiesWithStudy.length,
-          exercise: allMonthActivitiesWithExercise.length,
-          social: allMonthActivitiesWithSocial.length,
-          hobbies: allMonthActivitiesWithHobbies.length,
-          other: allMonthActivitiesWithOther.length,
-      };
 
-    const allCurrentWeekActivitiesWithWork = filterByCategory(
-      currentWeekActivities,
-      "Work"
-    );
-    const allCurrentWeekActivitiesWithStudy = filterByCategory(
-      currentWeekActivities,
-      "Studying"
-    );
-    const allCurrentWeekActivitiesWithExercise = filterByCategory(
-      currentWeekActivities,
-      "Sports"
-    );
-    const allCurrentWeekActivitiesWithSocial = filterByCategory(
-      currentWeekActivities,
-      "Social Life"
-    );
-    const allCurrentWeekActivitiesWithOther = filterByCategory(
-      currentWeekActivities,
-      "Other"
-    );
-
-    const thisWeekActivitiesWithCategory = {
-      work: allCurrentWeekActivitiesWithWork.length,
-      study: allCurrentWeekActivitiesWithStudy.length,
-      exercise: allCurrentWeekActivitiesWithExercise.length,
-      social: allCurrentWeekActivitiesWithSocial.length,
-      other: allCurrentWeekActivitiesWithOther.length,
-    };
-
-    const allMonthActivitiesWithWork = filterByCategory(
-      monthActivities,
-      "Work"
-    );
-    const allMonthActivitiesWithStudy = filterByCategory(
-      monthActivities,
-      "Studying"
-    );
-    const allMonthActivitiesWithExercise = filterByCategory(
-      monthActivities,
-      "Sports"
-    );
-    const allMonthActivitiesWithSocial = filterByCategory(
-      monthActivities,
-      "Social Life"
-    );
-    const allMonthActivitiesWithOther = filterByCategory(
-      monthActivities,
-      "Other"
-    );
 
     const thisMonthActivitiesWithCategory = {
       work: allMonthActivitiesWithWork.length,
       study: allMonthActivitiesWithStudy.length,
       exercise: allMonthActivitiesWithExercise.length,
       social: allMonthActivitiesWithSocial.length,
+      hobbies: allMonthActivitiesWithHobbies.length,
       other: allMonthActivitiesWithOther.length,
     };
 
