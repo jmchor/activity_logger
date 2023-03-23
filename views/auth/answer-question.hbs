@@ -1,10 +1,18 @@
-<h3>Please answer the following question, {{user.username}}</h3>
+<div id="login-content" class="row justify-content-center">
+  <div
+    class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3 shadow-lg"
+    id="login-box"
+  >
+    <h3>Please answer the following question, {{user.username}}</h3>
 
-<h4>{{message}}</h4>
+    <h4>{{message}}</h4>
 
-<form action='/answer' method='POST'>
-	<label for='answer'>Answer</label>
-	<input type='text' id='answer' name='passwordResetAnswer' />
-	<input type='hidden' name='_id' value='{{user._id}}' />
-	<button type='submit'>Submit</button>
-</form>
+    <form action="/answer" method="POST">
+      <label for="answer">Answer</label>
+      <input type="text" id="answer" name="passwordResetAnswer" />
+      <input type="hidden" name="_id" value="{{user._id}}" />
+      <button type="submit">Submit</button>
+    </form>
+
+  </div>
+</div>
