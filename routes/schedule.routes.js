@@ -163,22 +163,14 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			return activityDate >= currentDate && activityDate <= nextWeek;
 		});
 
-		let noMonday = true;
-		let noTuesday = true;
-		let noWednesday = true;
-		let noThursday = true;
-		let noFriday = true;
-		let noSaturday = true;
-		let noSunday = true;
-
 		const noActivities = {
-			Monday: noMonday,
-			Tuesday: noTuesday,
-			Wednesday: noWednesday,
-			Thursday: noThursday,
-			Friday: noFriday,
-			Saturday: noSaturday,
-			Sunday: noSunday,
+			Monday: true,
+			Tuesday: true,
+			Wednesday: true,
+			Thursday: true,
+			Friday: true,
+			Saturday: true,
+			Sunday: true,
 		};
 
 		// Add hasMonday, hasTuesday, etc. properties to each activity
@@ -201,6 +193,12 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			activity.hasFriday ? (noActivities.Friday = false) : 0;
 			activity.hasSaturday ? (noActivities.Saturday = false) : 0;
 			activity.hasSunday ? (noActivities.Sunday = false) : 0;
+		});
+
+		// Change Category Social Life into Social
+
+		comingWeekActivities.forEach((activity) => {
+			activity.category === 'Social Life' ? activity.category = 'Social' : false;
 		});
 
 		const year = currentDate.getFullYear();
