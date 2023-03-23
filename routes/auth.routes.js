@@ -217,7 +217,7 @@ router.post("/login", async (req, res, next) => {
     } else if (bcryptjs.compareSync(password, user.password)) {
       //if password hashes match, user is the current User and can proceed to home screen
 
-      const cookieExpiration = rememberMe ? 24 * 60 * 60000 : 30 * 60 * 1000;
+      const cookieExpiration = rememberMe ? 14 * 24 * 60 * 60000 : 30 * 60 * 1000;
       req.session.cookie.maxAge = cookieExpiration;
       req.session.currentUser = user;
 
