@@ -4,8 +4,8 @@
     id="login-box"
   >
     <div class="row justify-content-center px-3 py-5">
-      <h1>Welcome</h1>
-      <h1>Back</h1>
+      <h1>Security</h1>
+      <h1>Question</h1>
     </div>
 
     {{! Pool ladder image }}
@@ -14,7 +14,28 @@
     </div>
     <div id="login-lower-half" class="row justify-content-center px-3 py-5">
 
-      {{! Error message for wrong password }}
+      <div class="row justify-content-center">
+        <div class="col">
+          <p>Howdy, {{user.username}}!</p>
+          <p>To reset your password, please answer your personal security
+            question.</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col">
+          <h4>{{message}}</h4>
+
+          <form action="/answer" method="POST">
+            <label for="answer">Answer</label>
+            <input type="text" id="answer" name="passwordResetAnswer" />
+            <input type="hidden" name="_id" value="{{user._id}}" />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      {{! Error message for wrong answer }}
       {{#if errorMessage}}
         <h5 class="text-danger text-center">{{errorMessage}}</h5>
       {{/if}}
@@ -22,17 +43,6 @@
       {{#if successMessage}}
         <h5 class="text-success text-center">{{successMessage}}</h5>
       {{/if}}
-
-      <h3>Please answer the following question, {{user.username}}</h3>
-
-      <h4>{{message}}</h4>
-
-      <form action="/answer" method="POST">
-        <label for="answer">Answer</label>
-        <input type="text" id="answer" name="passwordResetAnswer" />
-        <input type="hidden" name="_id" value="{{user._id}}" />
-        <button type="submit">Submit</button>
-      </form>
 
     </div>
   </div>

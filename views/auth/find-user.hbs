@@ -29,7 +29,14 @@
           </div>
         </div>
       </form>
+      {{! Error message for non-existent email }}
+      {{#if errorMessage}}
+        <h5 class="text-danger text-center">{{errorMessage}}</h5>
+      {{/if}}
 
+      {{#if successMessage}}
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      {{/if}}
     </div>
   </div>
 </div>
