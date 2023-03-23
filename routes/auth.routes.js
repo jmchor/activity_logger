@@ -403,6 +403,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
       const allCurrentWeekActivitiesWithStudy = filterByCategory(currentWeekActivities, "Studying");
       const allCurrentWeekActivitiesWithExercise = filterByCategory(currentWeekActivities, "Sports");
       const allCurrentWeekActivitiesWithSocial = filterByCategory(currentWeekActivities, "Social Life");
+      const allCurrentWeekActivitiesWithHobbies = filterByCategory(currentWeekActivities, "Hobbies");
       const allCurrentWeekActivitiesWithOther = filterByCategory(currentWeekActivities, "Other");
 
 
@@ -411,6 +412,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
           study: allCurrentWeekActivitiesWithStudy.length,
           exercise: allCurrentWeekActivitiesWithExercise.length,
           social: allCurrentWeekActivitiesWithSocial.length,
+          hobbies: allCurrentWeekActivitiesWithHobbies.length,
           other: allCurrentWeekActivitiesWithOther.length,
       };
 
@@ -418,6 +420,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
       const allMonthActivitiesWithStudy = filterByCategory(monthActivities, "Studying");
       const allMonthActivitiesWithExercise = filterByCategory(monthActivities, "Sports");
       const allMonthActivitiesWithSocial = filterByCategory(monthActivities, "Social Life");
+      const allMonthActivitiesWithHobbies = filterByCategory(monthActivities, "Hobbies");
       const allMonthActivitiesWithOther = filterByCategory(monthActivities, "Other");
 
       const thisMonthActivitiesWithCategory = {
@@ -425,6 +428,7 @@ router.get('/profile/statistics', isLoggedIn, async (req, res, next) => {
           study: allMonthActivitiesWithStudy.length,
           exercise: allMonthActivitiesWithExercise.length,
           social: allMonthActivitiesWithSocial.length,
+          hobbies: allMonthActivitiesWithHobbies.length,
           other: allMonthActivitiesWithOther.length,
       };
 
