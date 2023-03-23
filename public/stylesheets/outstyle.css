@@ -96,21 +96,22 @@ form {
   font-weight: 500;
 }
 
-.btn-secondary {
+.btn-outline-primary {
   border: solid 1px white;
+  color: white;
   font-size: 18px;
   font-weight: 500;
   background: none;
 }
 
 .btn-primary:hover {
-  background-color: #5fb8f4;
+  background-color: #4460ff;
   color: white;
 }
 
-.btn-secondary:hover {
-  background-color: #5fb8f4;
-  border: solid 1px #5fb8f4;
+.btn-outline-primary:hover {
+  background-color: #4460ff;
+  border: solid 1px #4460ff;
   color: white;
 }
 
