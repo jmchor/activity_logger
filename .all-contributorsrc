@@ -7,21 +7,36 @@
 			"name": "Johannes Chorzempa",
 			"avatar_url": "https://avatars.githubusercontent.com/u/110151013?v=4",
 			"profile": "https://github.com/jmchor",
-			"contributions": []
+			"contributions": [
+				"bug",
+				"code",
+				"doc",
+				"design",
+				"ideas",
+				"review"
+			]
 		},
 		{
 			"login": "nncht",
 			"name": "Nana Chuto",
 			"avatar_url": "https://avatars.githubusercontent.com/u/105007117?v=4",
 			"profile": "https://github.com/nncht",
-			"contributions": []
+			"contributions": [
+				"code",
+				"design"
+			]
 		},
 		{
 			"login": "lukasmerlin",
 			"name": "Lukas Merlin Jürgens",
 			"avatar_url": "https://avatars.githubusercontent.com/u/108548830?v=4",
 			"profile": "https://github.com/lukasmerlin",
-			"contributions": []
+			"contributions": [
+				"code",
+				"bug",
+				"ideas",
+				"review"
+			]
 		}
 	],
 	"contributorsPerLine": 7,
@@ -32,5 +47,6 @@
 	"projectName": "activity_logger",
 	"projectOwner": "jmchor",
 	"repoHost": "https://github.com",
-	"repoType": "github"
+	"repoType": "github",
+	"commitConvention": "angular"
 }
