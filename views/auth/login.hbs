@@ -11,6 +11,13 @@
       <img id="ladder-img" src="/images/icons/pool-ladder.png" />
     </div>
     <div id="login-lower-half" class="row justify-content-center px-3 py-5">
+      {{#if errorMessage}}
+        <h5 class="text-danger text-center">{{errorMessage}}</h5>
+      {{/if}}
+
+      {{#if successMessage}}
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      {{/if}}
       <form action="/login" method="POST">
 
         <div class="col-auto">
@@ -72,13 +79,4 @@
       </form>
     </div>
   </div>
-
-  {{#if errorMessage}}
-    <p>{{errorMessage}}</p>
-  {{/if}}
-
-  {{#if successMessage}}
-    <p>{{successMessage}}</p>
-  {{/if}}
-
 </div>
