@@ -215,6 +215,10 @@ input[type="checkbox"] {
     letter-spacing: 1px;
     font-weight: 300;
   }
+
+  #login-lower-half {
+    background-color: white;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -247,6 +251,10 @@ input[type="checkbox"] {
   #login-box {
     border: solid 1px white;
     border-radius: 10px;
-    margin: 14vh 0px 0px 0px;
+    margin: 10vh 0px 0px 0px;
+  }
+
+  #login-lower-half {
+    background-color: white;
   }
 }
