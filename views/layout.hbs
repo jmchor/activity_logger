@@ -13,10 +13,10 @@
       crossorigin="anonymous"
     />
     {{#if loggedOut}}
-      <!-- Stylesheet -->
+      <!-- Logged OUT stylesheet -->
       <link rel="stylesheet" href="/stylesheets/outstyle.css" />
     {{else}}
-      <!-- Stylesheet -->
+      <!-- Logged IN stylesheet -->
       <link rel="stylesheet" href="/stylesheets/style.css" />
     {{/if}}
   </head>
@@ -47,18 +47,18 @@
           {{{body}}}
         </main>
       </div>
-    {{else}}
 
+    {{else}}
       <!-- Logged in HEADER w/ navigation -->
       <nav
         id="top-nav"
         class="navbar row justify-content-center fixed-top navbar-expand-md navbar-light bg-white fixed-top"
       >
         <div class="row justify-content-center">
-          <div class="col-12">
-            <div class="container">
+          <div class="col-12 m-0 p-0">
+            <div class="container mr-auto px-2">
               <div class="row justify-content-center">
-                <div class="col-4">
+                <div class="col-md-6 col-9">
                   <a href="/" id="logo" class="navbar-brand">
                     <img
                       src="/images/logo.png"
@@ -69,7 +69,7 @@
                     />
                     Taskmeister</a>
                 </div>
-                <div class="col-8">
+                <div class="col-md-6 col-3 justify-content-center">
                   <button
                     class="navbar-toggler"
                     type="button"
@@ -82,7 +82,7 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div
-                    class="collapse navbar-collapse ms-auto"
+                    class="collapse navbar-collapse ms-auto py-2"
                     id="toggleMobileMenu"
                   >
                     <ul class="navbar-nav ms-auto text-center">
@@ -156,7 +156,6 @@
           </a>
         </div>
       </nav>
-
     {{/if}}
 
     <script src="/js/script.js"></script>
