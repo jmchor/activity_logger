@@ -21,8 +21,9 @@
    This app was deployed using MongoDB Atlas for database handling as well as [cyclic.sh](https://cyclic.sh/) for the Node processes.
  </div>
 
- <h2 align="center">Take me to <a href="https://taskmeister.cyclic.app" target="_blank">Taskmeister</a></h2>
+ <p style="font-size: 24px" align="center">Take me to <a href="https://taskmeister.cyclic.app" target="_blank">Taskmeister</a></p>
 
+---
 </br>
 
 ## Project Description
