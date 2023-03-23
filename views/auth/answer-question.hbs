@@ -3,6 +3,7 @@
     class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3 shadow-lg"
     id="login-box"
   >
+    {{! Page title }}
     <div class="row justify-content-center px-3 py-5">
       <h1>Security</h1>
       <h1>Question</h1>
@@ -16,21 +17,36 @@
 
       <div class="row justify-content-center">
         <div class="col">
-          <p>Howdy, {{user.username}}!</p>
-          <p>To reset your password, please answer your personal security
-            question.</p>
+          <p class="fs-4 text mb-3">Howdy, {{user.username}}!</p>
+          <p class="fs-6 text">To reset your password, please answer your
+            personal security question
+            <i class="bi bi-arrow-down-short"></i></p>
         </div>
       </div>
 
-      <div class="row justify-content-center">
+      {{! Security question }}
+      <div class="row justify-content-center m-2">
         <div class="col">
-          <h4>{{message}}</h4>
+          <p class="fs-5 text">{{message}}</p>
+        </div>
+      </div>
 
+      {{! Answer input }}
+      <div class="row justify-content-center m-2">
+        <div class="col">
           <form action="/answer" method="POST">
-            <label for="answer">Answer</label>
-            <input type="text" id="answer" name="passwordResetAnswer" />
+            <input
+              class="form-input"
+              type="text"
+              id="answer"
+              name="passwordResetAnswer"
+              placeholder="Answer"
+            />
             <input type="hidden" name="_id" value="{{user._id}}" />
-            <button type="submit">Submit</button>
+            {{! Submit button }}
+            <div class="btn-group w-100 my-3">
+              <button class="btn btn-secondary" type="submit">Submit</button>
+            </div>
           </form>
         </div>
       </div>
