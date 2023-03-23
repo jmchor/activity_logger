@@ -76,6 +76,15 @@ footer {
   position: fixed;
 }
 
+#members-area {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+}
+
 .btn {
   border: none;
 }
