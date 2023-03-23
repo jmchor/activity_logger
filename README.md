@@ -25,10 +25,6 @@
 
 </br>
 
----
-
-</br>
-
 ## Project Description
 
 ### Basic Functionalities
