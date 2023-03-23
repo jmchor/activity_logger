@@ -266,7 +266,7 @@ userId: {
 
 ### Trivia
 
-In order to cut loading times for the Random Fact API call down to a minimum, we followed a "get many, show one" approach: the API call fetches as many facts as possible, while only one gets shown on page load. When there are no more facts - new ones will be fetched.
+In order to cut loading times for the **Random Fact API** call down to a minimum, we followed a "get many, show one" approach: the API call fetches *as many facts as possible*, while **only one** gets shown on page load. When there are no more facts - new ones will be fetched.
 
 ___
 
