@@ -7,10 +7,14 @@
       <h1>Welcome</h1>
       <h1>Back</h1>
     </div>
+
+    {{! Pool ladder image }}
     <div id="ladder-container" class="px-3">
       <img id="ladder-img" src="/images/icons/pool-ladder.png" />
     </div>
     <div id="login-lower-half" class="row justify-content-center px-3 py-5">
+
+      {{! Error message for wrong password }}
       {{#if errorMessage}}
         <h5 class="text-danger text-center">{{errorMessage}}</h5>
       {{/if}}
@@ -18,6 +22,8 @@
       {{#if successMessage}}
         <h5 class="text-success text-center">{{successMessage}}</h5>
       {{/if}}
+
+      {{! Username and password input }}
       <form action="/login" method="POST">
 
         <div class="col-auto">
@@ -41,6 +47,8 @@
             required
           />
         </div>
+
+        {{! Forgot password link }}
         <a href="/find-user">Forgot password?</a>
         <div class="col-auto mt-5 mb-2 text-center">
           <input
@@ -52,6 +60,7 @@
           <label for="rememberMe">Remember Me</label>
         </div>
 
+        {{! Buttons }}
         <div class="row d-flex justify-content-center">
           <div class="btn-group w-100">
             <input
