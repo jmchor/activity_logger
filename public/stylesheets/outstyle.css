@@ -316,6 +316,14 @@ input[type="checkbox"] {
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
 
+  #register-box {
+    border: solid 1px white;
+    border-radius: 10px;
+    margin: 10vh 0px 0px 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+
   #login-lower-half {
     background-color: white;
     border-radius: 0px 0px 10px 10px;

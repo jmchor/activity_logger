@@ -1,74 +1,113 @@
-<div class='row justify-content-center mb-4 py-4'>
-	<div class='col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3'>
-		<h1>Create a new account</h1>
-	</div>
+<div id="login-content" class="row justify-content-center">
+  <div
+    class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3"
+    id="register-box"
+  >
 
-	<form action='/signup' method='POST' class='col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3'>
-		<div class='col-auto my-3'>
-			<label for='username'>Username</label>
-		</div>
+    {{! Page title }}
+    <div class="row justify-content-center px-3 py-5">
+      <h1>New</h1>
+      <h1>Account</h1>
+    </div>
 
-		<div class='col-auto my-3'>
-			<input type='text' id='username' class='form-control' name='username' required />
-		</div>
-		<div class='col-auto my-3'>
-			<label for='email'>Email</label>
-		</div>
+    <div id="login-lower-half" class="row justify-content-center px-3 py-5">
 
-		<div class='col-auto my-3'>
-			<input type='text' id='email' class='form-control' name='email' required />
-		</div>
+      <form action="/signup" method="POST">
 
-		<div class='col-auto my-3'>
-			<label for='password'>Password</label>
-		</div>
+        <div class="col-auto my-2">
+          <input
+            class="form-input"
+            placeholder="Username"
+            type="text"
+            id="username"
+            class="form-control"
+            name="username"
+            required
+          />
+        </div>
 
-		<div class='col-auto my-3'>
-			<input type='password' id='password' class='form-control' name='password' required />
-		</div>
+        <div class="col-auto my-2">
+          <input
+            class="form-input"
+            placeholder="Email"
+            type="text"
+            id="email"
+            class="form-control"
+            name="email"
+            required
+          />
+        </div>
 
-		<div class='col-auto my-3'>
-			<label for='confirm'>Confirm Password</label>
-		</div>
+        <div class="col-auto my-2">
+          <input
+            class="form-input"
+            placeholder="Password"
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            required
+          />
+        </div>
 
-		<div class='col-auto my-3'>
-			<input type='password' id='confirm' class='form-control' name='confirm' required />
-		</div>
+        <div class="col-auto my-2">
+          <input
+            class="form-input"
+            placeholder="Confirm Password"
+            type="password"
+            id="confirm"
+            class="form-control"
+            name="confirm"
+            required
+          />
+        </div>
 
-		<div class='col-auto my-3'>
-			<label for='security'>Pick Security Question</label>
-		</div>
+        <div class="col-auto my-2">
+          <select name="securityQuestion" id="security">
+            <option value="animal">What is the name of your pet?</option>
+            <option value="father">What is your father's last name?</option>
+            <option value="place">What is your favorite place in the world?</option>
+          </select>
+        </div>
+        <div class="col-auto my-2">
+          <input
+            class="form-input"
+            placeholder="Answer"
+            type="text"
+            id="security"
+            class="form-control"
+            name="passwordResetAnswer"
+            required
+          />
+        </div>
 
-		<div class='col-auto my-3'>
-			<select name='securityQuestion' id='security'>
-				<option value='animal'>What is the name of your pet?</option>
-				<option value='father'>What is your father's last name?</option>
-				<option value='place'>What is your favorite place in the world?</option>
-			</select>
-		</div>
-		<div class='col-auto my-3'>
-			<input type='text' id='security' class='form-control' name='passwordResetAnswer' required />
-		</div>
+        {{! Button group }}
+        <div class="row d-flex justify-content-center">
+          <div class="btn-group w-100">
+            <input
+              class="btn btn-secondary flex-fill"
+              type="submit"
+              value="Sign up"
+            />
+          </div>
+        </div>
 
-		<div class='row d-flex justify-content-center'>
-			<div class='btn-group w-100'>
-				<input class='btn btn-primary flex-fill' type='submit' value='Sign up' />
-			</div>
-		</div>
+        <div class="divider d-flex align-items-center my-2">
+          <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+        </div>
 
-		<div class='divider d-flex align-items-center my-4'>
-			<p class='text-center fw-bold mx-3 mb-0 text-muted'>OR</p>
-		</div>
+        <div class="row justify-content-center">
+          <div class="btn-group w-100">
+            <a class="btn btn-secondary flex-fill" href="/login">Log In</a>
+          </div>
+        </div>
 
-		<div class='row justify-content-center'>
-			<div class='btn-group w-100'>
-				<a class='btn btn-secondary flex-fill' href='/login'>Log In</a>
-			</div>
-		</div>
+      </form>
+    </div>
 
-	</form>
+    {{#if errorMessage}}
+      <p>{{errorMessage}}</p>
+    {{/if}}
+
+  </div>
 </div>
-
-{{#if errorMessage}}
-	<p>{{errorMessage}}</p>
-{{/if}}
