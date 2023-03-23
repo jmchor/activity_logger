@@ -3,16 +3,37 @@
     class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-12 pt-3 shadow-lg"
     id="login-box"
   >
-    <h3>Please answer the following question, {{user.username}}</h3>
+    <div class="row justify-content-center px-3 py-5">
+      <h1>Welcome</h1>
+      <h1>Back</h1>
+    </div>
 
-    <h4>{{message}}</h4>
+    {{! Pool ladder image }}
+    <div id="ladder-container" class="px-3">
+      <img id="ladder-img" src="/images/icons/pool-ladder.png" />
+    </div>
+    <div id="login-lower-half" class="row justify-content-center px-3 py-5">
 
-    <form action="/answer" method="POST">
-      <label for="answer">Answer</label>
-      <input type="text" id="answer" name="passwordResetAnswer" />
-      <input type="hidden" name="_id" value="{{user._id}}" />
-      <button type="submit">Submit</button>
-    </form>
+      {{! Error message for wrong password }}
+      {{#if errorMessage}}
+        <h5 class="text-danger text-center">{{errorMessage}}</h5>
+      {{/if}}
 
+      {{#if successMessage}}
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      {{/if}}
+
+      <h3>Please answer the following question, {{user.username}}</h3>
+
+      <h4>{{message}}</h4>
+
+      <form action="/answer" method="POST">
+        <label for="answer">Answer</label>
+        <input type="text" id="answer" name="passwordResetAnswer" />
+        <input type="hidden" name="_id" value="{{user._id}}" />
+        <button type="submit">Submit</button>
+      </form>
+
+    </div>
   </div>
 </div>
