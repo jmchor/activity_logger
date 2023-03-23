@@ -241,3 +241,32 @@ input[type="checkbox"] {
   padding-top: 9px;
   font-size: 14px;
 }
+
+/*--------------------------------------------------------------
+# Schedule Activity Boxes
+--------------------------------------------------------------*/
+
+#Work {
+  background-color: #92d283;
+}
+
+#Hobbies {
+  background-color: #f7b731;
+}
+
+#Sports {
+  background-color: #005f92;
+}
+
+#Studying {
+  background-color: #646464;
+}
+
+#Social{
+  background-color: #f7b731;
+}
+
+#Other {
+  background-color: #646464;
+}
+

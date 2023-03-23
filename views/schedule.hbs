@@ -41,11 +41,14 @@
     {{else}}
         {{#each activities}}
             {{#if hasMonday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
 </div>
+
 
 <div class="row border rounded m-3 py-2 justify-content-center">
     <div class="col my-2"><h4>Tuesday, {{weekDates.Tuesday}}</h4></div>
@@ -54,7 +57,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasTuesday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
@@ -67,7 +72,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasWednesday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
@@ -80,7 +87,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasThursday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
@@ -93,7 +102,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasFriday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
@@ -106,7 +117,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasSaturday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
@@ -119,7 +132,9 @@
     {{else}}
         {{#each activities}}
             {{#if hasSunday}}
-                {{> day}}
+                <div id="{{category}}">
+                    {{> day}}
+                </div>
             {{/if}}
         {{/each}}
     {{/if}}
