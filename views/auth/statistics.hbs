@@ -3,9 +3,10 @@
     class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3"
     id="content-box"
   >
+
+  {{!-- Page title --}}
 <div class="row justify-content-center">
   <div class="col-md-12 col-12">
-      {{! Page title }}
     <div id="page-title" class="row p-3">
       <div class="col-auto p-3">
         <img src="/images/icons/analytics.png" width="60px" />
@@ -14,84 +15,98 @@
         <h2>Statistics</h2>
       </div>
     </div>
+ </div>
+ </div>
 
-
-
-<h3>Here's what you've achieved so far</h3>
-
-
-{{#if monthActivities}}
-
-	{{#with statistic}}
-		<div class='row mx-auto text-center'>
-			<br />
-		{{#if today}}
-			<div class='col p-2'>
-				<h4>Today's activities</h4>
-				<canvas id='todayChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneToday}} of {{today}}</p>
-				<p>{{todayMessage}}</p>
-			{{else}}
-				<br>
-				<h6>No activities today</h6>
-				<hr>
-				<br>
-			</div>
-		{{/if}}
-			{{#if week}}
-			<div class='col p-2'>
-				<h4>This week's activities</h4>
-				<canvas id='weeklyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneWeek}} of {{week}}</p>
-				<p>{{weekMessage}}</p>
-			{{else}}
-				<br>
-				<h6>No activities this week</h6>
-				<hr>
-				<br>
-			</div>
-			{{/if}}
-
-		{{#if month}}
-			<div class='col p-2'>
-				<h4>This month's activities</h4>
-				<canvas id='MonthlyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
-				<p>{{doneMonth}} of {{month}}</p>
-				<p>{{monthMessage}}</p>
-			{{else}}
-				<br>
-				<h6>No activities this month</h6>
-				<hr>
-				<br>
-			</div>
-		{{/if}}
-		</div>
-
-  {{/with}}
-
-  <div class="row mt-5 mx-auto">
-  <div class="col text-center p-2">
-    <h3>This Weeks Activities by Category</h3>
-    <canvas
-      id="weeklyCategoryChart"
-      width="320"
-      height="320"
-      class="mx-auto"
-    ></canvas>
-  </div>
-  <div class="col text-center p-2">
-    <h3>This Months Activities by Category</h3>
-    <canvas
-      id="monthlyCategoryChart"
-      width="320"
-      height="320"
-      class="mx-auto"
-    ></canvas>
+{{!-- Page intro --}}
+<div class="row justify-content-center mb-2">
+  <div class="col-md-12 col-12 text-center">
+	<p>Here's what you've achieved so far, {{{user.username}}}.</p>
   </div>
 </div>
 
+{{!-- Progress pie charts --}}
+<div class="row justify-content-center">
+{{#if monthActivities}}
+	{{#with statistic}}
+	{{!-- Today's progress chart --}}
+		{{#if today}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">Today's progress</h4>
+				<canvas id='todayChart' width='200' height='200' class='mx-auto mb-3'></canvas>
+				<p>{{doneToday}} of {{today}}</p>
+				<p>{{todayMessage}}</p>
+			</div>
+		{{else}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">Today's progress</h4>
+				<p>No tasks completed today</h6>
+			</div>
+		{{/if}}
+
+{{!-- This week's progress chart --}}
+		{{#if week}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This week's progress</h4>
+				<canvas id='weeklyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
+				<p>{{doneWeek}} of {{week}}</p>
+				<p>{{weekMessage}}</p>
+			</div>
+		{{else}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This week's progress</h4>
+				<p>No tasks completed this week</h6>
+			</div>
+		{{/if}}
+
+{{!-- This month's progress chart --}}
+		{{#if month}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This month's progress</h4>
+				<canvas id='MonthlyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
+				<p>{{doneMonth}} of {{month}}</p>
+				<p>{{monthMessage}}</p>
+			</div>
+			{{else}}
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<p> class="py-2"No tasks completed this month</h6>
+			</div>
+		{{/if}}
+  	{{/with}}
+  </div>
+
+{{!-- Tasks by category pie charts --}}
+  <div class="row mt-3 mb-5 justify-content-center">
+{{#with statistic}}
+	{{#if week}}
+<div class='col-md-5 col-10 mx-3 my-4 p-2 text-center'>
+    <h4 class="py-2">This week's progress by category</h4>
+    <canvas
+      id="weeklyCategoryChart"
+      class="col-10 w-100"
+    ></canvas>
+  </div>
+  	{{/if}}
+{{/with}}
+
+
+<div class='col-md-5 col-10 mx-3 my-4 p-2 text-center'>
+    <h4 class="py-2">This month's progress by category</h4>
+    <canvas
+      id="monthlyCategoryChart"
+      class="col-10 w-100"
+    ></canvas>
+  </div>
+
+</div>
+
+
+
+{{!-- Will be displayed when no tasks have been completed. --}}
 {{else}}
-  <h4>There is no activity to show</h4>
+  <div class="row mt-3 mb-5 justify-content-center">
+  <p>You've not completed enough tasks to create any statistics for you.</p>
+  </div>
 {{/if}}
 
 
@@ -145,7 +160,7 @@
 		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
 		// set the data for the chart
 		const weeklyData = {
-		labels: ['Completed this Week', 'Remaining this Week'],
+		labels: ['Completed this week', 'Remaining this week'],
 		datasets: [{
 			label: 'Activities',
 			data: [{{doneWeek}},{{week}} - {{doneWeek}}],
@@ -184,7 +199,7 @@
 		const monthlyCtx = document.getElementById('MonthlyChart').getContext('2d');
 		// set the data for the monthly chart
 		const monthlyData = {
-			labels: ['Completed this Month', 'Remaining this Month'],
+			labels: ['Completed this month', 'Remaining this month'],
 		// {{doneMonth}},{{month}} - {{doneMonth}}
 			datasets: [{
 				label: 'Activities',
@@ -217,7 +232,7 @@
 			options: monthlyOptions
 		});
 		}
-		// WEEKLY CATEGORY CHART
+		if({{week}}){// WEEKLY CATEGORY CHART
 		// get the context of the canvas element we want to select
 		const weeklyCategoryCtx = document.getElementById('weeklyCategoryChart').getContext('2d');
 		// set the data for the chart
@@ -261,6 +276,7 @@
 			data: weeklyCategoryData,
 			options: weeklyCategoryOptions
 		});
+		}
 		// MONTHLY CATEGORY CHART
 		// get the context of the canvas element we want to select
 		const monthlyCategoryCtx = document.getElementById('monthlyCategoryChart').getContext('2d');
@@ -307,7 +323,6 @@
 		});
 	</script>
 {{/with}}
-</div>
 </div>
 </div>
 </div>
