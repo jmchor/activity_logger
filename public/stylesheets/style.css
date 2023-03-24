@@ -220,6 +220,16 @@ footer {
   color: #3a8340;
 }
 
+#weekday-heading {
+  background-color: #e8edfc;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#weekday-box {
+  border: 1px solid #5095ff;
+  border-radius: 10px;
+}
+
 #task-title {
   font-size: 18px;
   font-weight: 500;

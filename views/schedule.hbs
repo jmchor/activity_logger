@@ -44,10 +44,10 @@
 
 {{!-- Days and tasks --}}
 <div class="row justify-content-center mb-4">
-        <div class="col-12 mt-3 mb-1">
+    <div class="col-12 mt-3 mb-1">
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Monday, {{weekDates.Monday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Monday, {{weekDates.Monday}}</h4></div>
 
     {{#if noActivities.Monday}}
         <p>No tasks today</p>
