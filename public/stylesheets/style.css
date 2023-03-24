@@ -193,15 +193,6 @@ footer {
 # Main Content
 --------------------------------------------------------------*/
 
-main {
-  padding: 80px 0px 0px;
-  background: none;
-  height: 100%;
-  animation: fadeInAnimation ease 1.5s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
 #page-title {
   display: flex;
   align-items: flex-end;
@@ -290,8 +281,50 @@ input[type="checkbox"] {
 }
 
 /*--------------------------------------------------------------
+# Mobile exclusive styles
+--------------------------------------------------------------*/
+
+@media (max-width: 576px) {
+  main {
+    padding: 80px 0px 0px;
+    background: white;
+    height: 100%;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+}
+
+/*--------------------------------------------------------------
 # Larger viewport styles
 --------------------------------------------------------------*/
+
+@media (min-width: 576px) {
+  main {
+    padding: 80px 0px 0px;
+    background: none;
+    height: 100%;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  #new-task-box {
+    border: solid 1px #4460ff;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    box-shadow: rgba(68, 96, 255, 0.8) 5px 5px,
+      rgba(76, 154, 239, 0.3) 10px 10px, rgba(76, 154, 239, 0.2) 15px 15px,
+      rgba(76, 154, 239, 0.1) 20px 20px;
+  }
+
+  #top-nav {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  }
+}
 
 @media (min-width: 1320px) {
   #top-nav-container {
