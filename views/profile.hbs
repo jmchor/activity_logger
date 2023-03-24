@@ -27,6 +27,7 @@
           class="w-100"
         />
       </div>
+
       {{! User info }}
       <div class="col-md-8 col-10 py-2">
         <h4>Name</h4>
@@ -44,73 +45,73 @@
       <p class="text-center mx-3 mb-0 text-muted">Account Settings</p>
     </div>
 
-    {{! 		
+    <div class="row row-cols-auto justify-content-center">
 
+      <div class="col">
+        <form action="/update-password" method="POST" class="px-0">
+          <div class="row py-1">
+            <div class="col-auto">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+              />
+            </div>
+            {{! <div class='col-auto'>
+							<i
+								class='bi bi-eye-slash togglePassword'
+								role='button'
+								id='togglePassword'
+							></i>
+						</div> }}
+          </div>
+          <div class="row py-1">
+            <button class="btn btn-primary px-5 w-100" type="submit">Update
+              Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
-		<div class='divider d-flex align-items-center'>
-			<p class='text-center mx-3 mb-0 text-muted'>Options</p>
-		</div>
+    <form action="/profile/delete-activities" method="POST" class="m-3">
+      <div class="row d-flex">
+        <div class="col-auto my-1">
+          <input type="password" name="password" placeholder="Enter Password" />
+          <i
+            class="bi bi-eye-slash togglePassword"
+            role="button"
+            id="togglePassword"
+          ></i>
+        </div>
+      </div>
+      <div class="col-auto mx-auto">
+        <button class="btn btn-danger px-5 w-100" type="submit">Delete All Tasks</button>
+      </div>
+    </form>
 
-		<div class='row row-cols-auto justify-content-center'>
+    <form action="/profile/delete-account" method="POST" class="m-3">
+      <div class="row d-flex justify-content-around">
+        <div class="col-auto my-1 text-center">
+          <input type="password" name="password" placeholder="Enter Password" />
+          <i
+            class="bi bi-eye-slash togglePassword"
+            role="button"
+            id="togglePassword"
+          ></i>
+        </div>
+      </div>
+      <div class="col-auto mx-auto">
+        <button class="btn btn-danger px-5 w-100" type="submit">Delete Account</button>
+      </div>
+    </form>
 
-			<form action='/update-password' method='POST' class='m-3'>
+    {{#if errorMessage}}
+      <p>{{errorMessage}}</p>
+    {{/if}}
 
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
-
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-dark px-5' type='submit'>Update Password</button>
-				</div>
-			</form>
-
-			<form action='/profile/delete-activities' method='POST' class='m-3'>
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-danger px-5' type='submit'>Delete All Activities</button>
-				</div>
-			</form>
-
-			<form action='/profile/delete-account' method='POST' class='m-3'>
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-danger px-5' type='submit'>Delete Account</button>
-				</div>
-			</form> }}
-
-    {{!-- 
-		{{#if errorMessage}}
-			<p>{{errorMessage}}</p>
-		{{/if}}
-
-		{{#if successMessage}}
-			<p>{{successMessage}}</p>
-		{{/if}} --}}
+    {{#if successMessage}}
+      <p>{{successMessage}}</p>
+    {{/if}}
 
   </div>
 </div>
