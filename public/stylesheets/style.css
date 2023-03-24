@@ -247,3 +247,13 @@ input[type="checkbox"] {
   padding-top: 9px;
   font-size: 14px;
 }
+
+/*--------------------------------------------------------------
+# Larger viewport styles
+--------------------------------------------------------------*/
+
+@media (min-width: 1320px) {
+  #top-nav-container {
+    width: 1320px !important;
+  }
+}
