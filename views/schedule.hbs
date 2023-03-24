@@ -93,16 +93,14 @@
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Thursday, {{weekDates.Thursday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2">Thursday, {{weekDates.Thursday}}</h4></div>
     {{#if noActivities.Thursday}}
         <p>No tasks today</p>
     {{else}}
         {{#each activities}}
             {{#if hasThursday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
         {{/each}}
     {{/if}}
