@@ -54,7 +54,7 @@
 			</div>
 		{{else}}
 			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
-				<h4 class="py-2">This week's progress</h4>				
+				<h4 class="py-2">This week's progress</h4>
 				<p>No tasks completed this week</h6>
 			</div>
 		{{/if}}
@@ -75,9 +75,10 @@
   	{{/with}}
   </div>
 
-
 {{!-- Tasks by category pie charts --}}
   <div class="row mt-3 mb-5 justify-content-center">
+{{#with statistic}}
+	{{#if week}}
 <div class='col-md-5 col-10 mx-3 my-4 p-2 text-center'>
     <h4 class="py-2">This week's progress by category</h4>
     <canvas
@@ -85,6 +86,9 @@
       class="col-10 w-100"
     ></canvas>
   </div>
+  	{{/if}}
+{{/with}}
+
 
 <div class='col-md-5 col-10 mx-3 my-4 p-2 text-center'>
     <h4 class="py-2">This month's progress by category</h4>
@@ -93,6 +97,7 @@
       class="col-10 w-100"
     ></canvas>
   </div>
+
 </div>
 
 
@@ -227,7 +232,7 @@
 			options: monthlyOptions
 		});
 		}
-		// WEEKLY CATEGORY CHART
+		if({{week}}){// WEEKLY CATEGORY CHART
 		// get the context of the canvas element we want to select
 		const weeklyCategoryCtx = document.getElementById('weeklyCategoryChart').getContext('2d');
 		// set the data for the chart
@@ -271,6 +276,7 @@
 			data: weeklyCategoryData,
 			options: weeklyCategoryOptions
 		});
+		}
 		// MONTHLY CATEGORY CHART
 		// get the context of the canvas element we want to select
 		const monthlyCategoryCtx = document.getElementById('monthlyCategoryChart').getContext('2d');
