@@ -211,6 +211,13 @@ footer {
   font-size: 20px;
 }
 
+#week-title {
+  font-size: 22px !important;
+  color: #333 !important;
+  padding-top: 2px;
+  font-weight: 400;
+}
+
 .font-weight-bold {
   font-weight: 700;
 }
@@ -218,33 +225,7 @@ footer {
 .text-success a {
   font-size: 18px;
   font-weight: 500;
-  color: #3a8340;
-}
-
-#weekday-heading {
-  background-color: #e8edfc;
-  border-radius: 10px 10px 0px 0px;
-}
-
-#weekday-box {
-  border: 1px solid #5095ff;
-  border-radius: 10px;
-}
-
-#task-title {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-#task-description {
-  margin-left: 25px;
-}
-
-#week-title {
-  font-size: 22px !important;
-  color: #333 !important;
-  padding-top: 2px;
-  font-weight: 400;
+  color: #00b3a0;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -306,6 +287,25 @@ input[type="checkbox"] {
 /*--------------------------------------------------------------
 # Schedule Activity Boxes
 --------------------------------------------------------------*/
+
+#weekday-heading {
+  background-color: #e8edfc;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#weekday-box {
+  border: 1px solid #5095ff;
+  border-radius: 10px;
+}
+
+#task-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#task-description {
+  margin-left: 25px;
+}
 
 #Work {
   background-color: #d7ecfb;
