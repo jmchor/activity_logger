@@ -178,6 +178,10 @@ footer {
   background: #eee;
 }
 
+.navbar-toggler {
+  padding-left: 0;
+}
+
 .logo-image {
   margin-bottom: 10px;
 }
