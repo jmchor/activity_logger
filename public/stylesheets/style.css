@@ -7,6 +7,11 @@
 # Global Styles
 --------------------------------------------------------------*/
 
+@font-face {
+  font-family: "Lobster";
+  src: url("/fonts/Lobster-Regular.ttf") format("truetype");
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -183,10 +188,16 @@ footer {
   background: #eee;
 }
 
-#logo-position {
-  position: absolute;
-  left: auto;
-  top: 0;
+.logo-image {
+  margin-bottom: 10px;
+}
+
+#logo {
+  font-family: "Lobster";
+  font-size: 40px;
+  letter-spacing: 4px;
+  text-shadow: -1px 0 #5095ff, 0 1px #5095ff, 4px 0 #5095ff, 0 -1px #5095ff;
+  color: #e8edfc;
 }
 
 /*--------------------------------------------------------------
@@ -329,21 +340,5 @@ input[type="checkbox"] {
 @media (min-width: 1320px) {
   #top-nav-container {
     width: 1320px !important;
-  }
-
-  #new-task-box {
-    border: solid 1px #4460ff;
-    background-color: white;
-    border-radius: 10px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    box-shadow: rgba(68, 96, 255, 0.8) 5px 5px,
-      rgba(76, 154, 239, 0.3) 10px 10px, rgba(76, 154, 239, 0.2) 15px 15px,
-      rgba(76, 154, 239, 0.1) 20px 20px;
-  }
-
-  #top-nav {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
 }
