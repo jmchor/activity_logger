@@ -47,7 +47,8 @@ h1 {
 }
 
 h2 {
-  font-size: x-large;
+  font-size: 30px;
+  color: #4460ff;
 }
 
 h3 {
@@ -58,7 +59,7 @@ h4 {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #005f92;
+  color: #4460ff;
 }
 
 a {
@@ -67,7 +68,7 @@ a {
 }
 
 a:hover {
-  color: #92d283;
+  color: #4460ff;
 }
 
 li {
@@ -107,6 +108,11 @@ footer {
 
 .btn:active {
   border: none;
+}
+
+.btn-primary {
+  background-color: #4460ff;
+  color: white;
 }
 
 .schedule-button {
@@ -194,6 +200,11 @@ main {
   animation: fadeInAnimation ease 1.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+#page-title {
+  display: flex;
+  align-items: flex-end;
 }
 
 @keyframes fadeInAnimation {
@@ -299,8 +310,7 @@ input[type="checkbox"] {
   }
 
   #top-nav {
-    box-shadow: rgba(68, 96, 255, 0.8) 5px 5px,
-      rgba(76, 154, 239, 0.3) 10px 10px, rgba(76, 154, 239, 0.2) 15px 15px,
-      rgba(76, 154, 239, 0.1) 20px 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
 }
