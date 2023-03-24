@@ -5,13 +5,10 @@
       </div>
     </div>
 
-
-
-
 {{else}}
 
 
-
+{{!-- Calendar weeks navigatgion --}}
 <div class="row row-cols-3 justify-content-center">
     <div class="col-sm-1 text-center">
         <a href="/schedule?lastWeek={{week}}" id="week-button" class="btn btn-secondary">
@@ -29,7 +26,7 @@
 </div>
 
 
-
+{{!-- Days and tasks --}}
 <div class="row justify-content-center mb-4">
   <div class="col-xl-8 col-lg-9 col-md-10">
 
@@ -146,11 +143,13 @@
 {{/if}}
 
 
+{{!-- Ramdom fact --}}
 <div class="row justify-content-center mb-4 px-5">
     <div class="col">
 	{{> randomfact}}
     </div>
 </div>
+
 
 
 {{!-- <script>
