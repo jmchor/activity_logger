@@ -198,15 +198,6 @@ footer {
   align-items: flex-end;
 }
 
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 #home-task {
   background-color: #e8edfc;
   border: 1px solid #5095ff;
@@ -229,6 +220,22 @@ footer {
   color: #3a8340;
 }
 
+#task-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#task-description {
+  margin-left: 25px;
+}
+
+#week-title {
+  font-size: 22px !important;
+  color: #333 !important;
+  padding-top: 2px;
+  font-weight: 400;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   width: 45px;
 }
@@ -243,17 +250,7 @@ input[type="date"] {
   background-size: 1.5em;
 }
 
-#task-title {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-#task-description {
-  margin-left: 25px;
-}
-
 input[type="checkbox"] {
-  /* Not removed via appearance */
   margin: 0 3 0 0;
 
   font: inherit;
@@ -263,6 +260,15 @@ input[type="checkbox"] {
   border: 0.15em solid currentColor;
   border-radius: 0.15em;
   transform: translateY(0.1em);
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /*--------------------------------------------------------------

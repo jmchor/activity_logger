@@ -26,15 +26,15 @@
 
 {{!-- Calendar weeks navigatgion --}}
 <div class="row row-cols-3 justify-content-center">
-    <div class="col-sm-1 text-center">
+    <div class="col-sm-1 text-center py-1">
         <a href="/schedule?lastWeek={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-left-square"></i>
         </a>
     </div>
-    <div class="col-sm-2 text-center">
-        Week {{week}}
+    <div class="col-sm-2 text-center d-inline align-bottom py-1">
+        <h4 id="week-title">Week {{week}}</h4>
     </div>
-    <div class="col-sm-1 text-center">
+    <div class="col-sm-1 text-center py-1">
         <a href="/schedule?week={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-right-square"></i>
         </a>
