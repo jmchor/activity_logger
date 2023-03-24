@@ -278,8 +278,8 @@ ___
 <div align="center">
   <a href="https://github.com/jmchor/activity_logger/graphs/contributors" >
     <img src="https://avatars.githubusercontent.com/u/110151013?v=4" width="100"/>
-    <img src="https://avatars.githubusercontent.com/u/108548830?v=4" width="100"/>
     <img src="https://avatars.githubusercontent.com/u/105007117?v=4" width="100"/>
+    <img src="https://avatars.githubusercontent.com/u/108548830?v=4" width="100"/>
   </a>
 </div>
 
