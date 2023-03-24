@@ -45,25 +45,27 @@
       <p class="text-center mx-3 mb-0 text-muted">Account Settings</p>
     </div>
 
+    {{! Form input and button group container }}
     <div class="row row-cols-auto justify-content-center">
 
+      {{! Update password section }}
       <div class="col">
         <form action="/update-password" method="POST" class="px-0">
           <div class="row py-1">
-            <div class="col-12 px-0">
+            <div class="col-auto px-0">
               <input
                 type="password"
                 name="password"
                 placeholder="Enter Password"
               />
             </div>
-            {{! <div class='col-auto'>
-							<i
-								class='bi bi-eye-slash togglePassword'
-								role='button'
-								id='togglePassword'
-							></i>
-						</div> }}
+            <div class="col-auto pt-2">
+              <i
+                class="bi bi-eye-slash togglePassword"
+                role="button"
+                id="togglePassword"
+              ></i>
+            </div>
           </div>
           <div class="row py-1">
             <button class="btn btn-primary px-5 w-100" type="submit">Update
@@ -73,6 +75,9 @@
       </div>
     </div>
 
+    {{! Delete all tasks section }}
+
+    {{! OLD }}
     <form action="/profile/delete-activities" method="POST" class="m-3">
       <div class="row d-flex">
         <div class="col-auto my-1">
@@ -89,6 +94,9 @@
       </div>
     </form>
 
+    {{! Delete account section }}
+
+    {{! OLD }}
     <form action="/profile/delete-account" method="POST" class="m-3">
       <div class="row d-flex justify-content-around">
         <div class="col-auto my-1 text-center">
@@ -117,7 +125,7 @@
 </div>
 
 {{!-- prettier-ignore --}}
-{{!-- <script>
+<script>
         const toggleButtons = document.querySelectorAll('.togglePassword');
 		toggleButtons.forEach((button) => {
 			button.addEventListener('click', (e) => {
@@ -133,4 +141,4 @@
 				}
 			});
 		});
-</script> --}}
+</script>
