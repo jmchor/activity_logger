@@ -1,10 +1,10 @@
-<div class="row row-col-2">
-
+<div class="row row-col-2 px-0">
+{{!-- Category colour block --}}
   <div id="{{category}}" class="col-1">
-
   </div>
 
-  <div class="col-11 bg-white">
+{{!-- Completed task --}}
+  <div class="col-11">
 	 {{#if this.isDone}}
     <div class="row justify-content-center">
       <form class="col my-1" action="/schedule" method="POST">
@@ -30,6 +30,7 @@
       </form>
     </div>
 
+{{!-- Open task --}}
   {{else}}
     <div class="row justify-content-center">
       <form class="col my-1" action="/schedule" method="POST">

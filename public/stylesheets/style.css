@@ -296,6 +296,7 @@ input[type="checkbox"] {
 #weekday-box {
   border: 1px solid #5095ff;
   border-radius: 10px 10px 10px 0px;
+  margin-bottom: 40px;
 }
 
 #task-title {
@@ -309,32 +310,26 @@ input[type="checkbox"] {
 
 #Work {
   background-color: #d7ecfb;
-  border: 0px solid #36a2eb;
 }
 
 #Hobbies {
   background-color: #ebe0ff;
-  border: 0px solid #9966ff;
 }
 
 #Sports {
   background-color: #fff5dd;
-  border: 0px solid #ffce56;
 }
 
 #Studying {
   background-color: #ffe0e6;
-  border: 0px solid #ff6384;
 }
 
 #Social {
   background-color: #dbf2f2;
-  border: 0px solid #4bc0c0;
 }
 
 #Other {
   background-color: #ffecd9;
-  border: 0px solid #ff9f40;
 }
 
 /*--------------------------------------------------------------
