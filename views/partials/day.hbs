@@ -1,6 +1,11 @@
-<div id="{{category}}">
+<div class="row row-col-2">
 
-  {{#if this.isDone}}
+  <div id="{{category}}" class="col-1">
+
+  </div>
+
+  <div class="col-11 bg-white">
+	 {{#if this.isDone}}
     <div class="row justify-content-center">
       <form class="col my-1" action="/schedule" method="POST">
         <div class="col text-success">
@@ -53,6 +58,11 @@
 
   {{/if}}
 </div>
+  </div>
+
+</div>
+<div id="{{category}}">
+
 
 {{!-- prettier-ignore --}}
 <script>

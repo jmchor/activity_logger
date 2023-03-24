@@ -295,7 +295,7 @@ input[type="checkbox"] {
 
 #weekday-box {
   border: 1px solid #5095ff;
-  border-radius: 10px;
+  border-radius: 10px 10px 10px 0px;
 }
 
 #task-title {
