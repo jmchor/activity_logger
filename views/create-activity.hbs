@@ -44,15 +44,22 @@
           </div>
         </div>
 
-        <label for="category">Category</label>
-        <select id="category" name="category">
-          <option value="Sports" selected>Sports</option>
-          <option value="Studying" selected>Studying</option>
-          <option value="Work" selected>Work</option>
-          <option value="Social Life" selected>Social Life</option>
-          <option value="Hobbies" selected>Hobbies</option>
-          <option value="Other" selected>Other</option>
-        </select>
+        <div class="row row-cols-2 justify-content-center">
+          <div class="col-auto mt-3 mb-1">
+            <label for="category">Category</label>
+          </div>
+
+          <div class="col-auto mt-3 mb-1">
+            <select id="category" name="category">
+              <option value="Sports" selected>Sports</option>
+              <option value="Studying" selected>Studying</option>
+              <option value="Work" selected>Work</option>
+              <option value="Social Life" selected>Social Life</option>
+              <option value="Hobbies" selected>Hobbies</option>
+              <option value="Other" selected>Other</option>
+            </select>
+          </div>
+        </div>
 
         {{! Tabs }}
         <ul class="nav nav-tabs" id="new-task-tab" role="tablist">
