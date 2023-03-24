@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 col-11">
 
   {{!-- Greeting --}}
     <div class="row justify-content-center px-3 py-5">
@@ -8,7 +8,7 @@
 
   {{!-- Error message --}}
   {{#if errorMessage}}
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
+    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 col-11">
       <div class="alert alert-danger" role="alert">
         {{{errorMessage}}}
       </div>
@@ -18,12 +18,12 @@
 
   {{#if comingWeekActivities}}
   <div class="row justify-content-center">
-    <h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-2">Here's your agenda for today, {{date}} <i class="bi bi-arrow-down-short"></i></h3>
+    <h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 col-11 my-2">Here's your agenda for today, {{date}} <i class="bi bi-arrow-down-short"></i></h3>
   </div>
 
   {{#each comingWeekActivities}}
     <div class="row justify-content-center">
-      <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1 p-1 border rounded">
+      <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 col-11 my-1 p-1 border rounded">
 		  {{> day}}
       </div>
 	  </div>
@@ -31,7 +31,7 @@
 
   {{else}}
     <div class="row justify-content-center">
-	  	<h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-4">There's nothing planned yet for today.</h3>
+	  	<h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 col-11 my-4">There's nothing planned yet for today.</h3>
     </div>
 
   {{!-- Add new task button --}}
