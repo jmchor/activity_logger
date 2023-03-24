@@ -202,7 +202,7 @@ footer {
 #home-task {
   background-color: #e8edfc;
   border: 1px solid #5095ff;
-  border-radius: 10px;
+  border-radius: 0px 10px 10px 0px;
 }
 
 #week-button {
