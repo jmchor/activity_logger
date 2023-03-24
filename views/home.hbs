@@ -27,7 +27,8 @@
 
   {{#if comingWeekActivities}}
         <div class="row justify-content-center my-1">
-          <h4 class="col-12 py-1 text-center">{{date}}</h4>
+          <img src="/images/icons/miniature-pool-2.svg" height="200px">
+          <h4 class="col-12 pt-4 pb-1 text-center">{{date}}</h4>
           <h3 class="col-12 pt-1 pb-2 text-center">Today's Pool of Tasks</h3>
         </div>
 
@@ -40,8 +41,9 @@
   {{/each}}
 
   {{else}}
-    <div class="row justify-content-center">
-	  	<h3 class="col-md-12 col-11 my-4">There's nothing planned yet for today.</h3>
+    <div class="row justify-content-center mt-3">
+      <img src="/images/icons/miniature-pool-1.svg" height="200px">
+	  	<h3 class="col-12 py-4 text-center">There's nothing planned yet for today.</h3>
     </div>
 
   {{!-- Add new task button --}}
