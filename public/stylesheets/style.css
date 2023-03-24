@@ -181,6 +181,18 @@ main {
   padding: 80px 0px 0px;
   background-color: #eee;
   height: 100vh;
+  animation: fadeInAnimation ease 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #week-button {
