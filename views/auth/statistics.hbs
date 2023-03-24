@@ -155,7 +155,7 @@
 		const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
 		// set the data for the chart
 		const weeklyData = {
-		labels: ['Completed this Week', 'Remaining this Week'],
+		labels: ['Completed this week', 'Remaining this week'],
 		datasets: [{
 			label: 'Activities',
 			data: [{{doneWeek}},{{week}} - {{doneWeek}}],
@@ -194,7 +194,7 @@
 		const monthlyCtx = document.getElementById('MonthlyChart').getContext('2d');
 		// set the data for the monthly chart
 		const monthlyData = {
-			labels: ['Completed this Month', 'Remaining this Month'],
+			labels: ['Completed this month', 'Remaining this month'],
 		// {{doneMonth}},{{month}} - {{doneMonth}}
 			datasets: [{
 				label: 'Activities',
