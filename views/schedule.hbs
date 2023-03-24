@@ -1,27 +1,40 @@
+<div id="main-content" class="row justify-content-center">
+  <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3" id="content-box">
+
+{{!-- Error message --}}
+
 {{#if errorMessage}}
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
-      <div class="alert alert-danger" role="alert">
-        {{{errorMessage}}}
-      </div>
+    <div class="col-auto p-3"></div>
+        <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+        <div class="alert alert-danger" role="alert">
+            {{{errorMessage}}}
+        </div>
+        </div>
     </div>
-
-
-
-
 {{else}}
 
+{{! Page title }}
+   <div id="page-title" class="row p-3">
+     <div class="col-auto p-3">
+       <img src="/images/icons/schedule.png" width="60px" />
+     </div>
+     <div class="col-auto py-3">
+       <h2>Schedule</h2>
+     </div>
+   </div>
 
 
+{{!-- Calendar weeks navigatgion --}}
 <div class="row row-cols-3 justify-content-center">
-    <div class="col-sm-1 text-center">
+    <div class="col-sm-1 text-center py-1">
         <a href="/schedule?lastWeek={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-left-square"></i>
         </a>
     </div>
-    <div class="col-sm-2 text-center">
-        Week {{week}}
+    <div class="col-sm-2 text-center d-inline align-bottom py-1">
+        <h4 id="week-title">Week {{week}}</h4>
     </div>
-    <div class="col-sm-1 text-center">
+    <div class="col-sm-1 text-center py-1">
         <a href="/schedule?week={{week}}" id="week-button" class="btn btn-secondary">
             <i class="bi bi-caret-right-square"></i>
         </a>
@@ -29,127 +42,165 @@
 </div>
 
 
+{{!-- Days and tasks --}}
+<div class="row justify-content-center mb-2">
+    <div class="col-12 mt-3 mb-1">
 
-<div class="row justify-content-center mb-4">
-  <div class="col-xl-8 col-lg-9 col-md-10">
-
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Monday, {{weekDates.Monday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Monday, {{weekDates.Monday}}</h4></div>
 
     {{#if noActivities.Monday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasMonday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Tuesday, {{weekDates.Tuesday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Tuesday, {{weekDates.Tuesday}}</h4></div>
     {{#if noActivities.Tuesday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasTuesday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Wednesday, {{weekDates.Wednesday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Wednesday, {{weekDates.Wednesday}}</h4></div>
     {{#if noActivities.Wednesday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasWednesday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Thursday, {{weekDates.Thursday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Thursday, {{weekDates.Thursday}}</h4></div>
     {{#if noActivities.Thursday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasThursday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Friday, {{weekDates.Friday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Friday, {{weekDates.Friday}}</h4></div>
     {{#if noActivities.Friday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasFriday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Saturday, {{weekDates.Saturday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Saturday, {{weekDates.Saturday}}</h4></div>
     {{#if noActivities.Saturday}}
-        <p>No tasks today</p>
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
     {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasSaturday}}
-                <div id="{{category}}">
-                    {{> day}}
-                </div>
+                    {{> day}}          
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-<div class="row border rounded m-3 py-2 justify-content-center">
-    <div class="col my-2"><h4>Sunday, {{weekDates.Sunday}}</h4></div>
+<div id="weekday-box" class="row mx-3 justify-content-center">
+    <div id="weekday-heading" class="col-12 py-2"><h4>Sunday, {{weekDates.Sunday}}</h4></div>
     {{#if noActivities.Sunday}}
-        <p>No tasks today</p>
-    {{else}}
+    <div class="row row-col-2 px-0 py-2">
+         <div class="col-1"></div>
+        <div class="col-11">
+            <p>No tasks today</p>
+        </div>
+    </div>
+        {{else}}
         {{#each activities}}
+            <div class="row row-col-2 mx-3">
             {{#if hasSunday}}
-                <div id="{{category}}">
                     {{> day}}
-                </div>
             {{/if}}
+            </div>
         {{/each}}
     {{/if}}
 </div>
 
-  </div>
 </div>
-
+</div>
 {{/if}}
 
 
-<div class="row justify-content-center mb-4 px-5">
+{{!-- Ramdom fact --}}
+<div class="row justify-content-center mb-5 px-5">
     <div class="col">
 	{{> randomfact}}
     </div>
+</div>
+
+</div>
 </div>
 
 

@@ -74,6 +74,7 @@ li {
 p {
   color: #505050;
   font-weight: 300;
+  font-size: 18px;
   margin: 0px;
 }
 
@@ -198,25 +199,23 @@ footer {
   align-items: flex-end;
 }
 
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 #home-task {
   background-color: #e8edfc;
   border: 1px solid #5095ff;
-  border-radius: 10px;
+  border-radius: 0px 10px 10px 0px;
 }
 
 #week-button {
   background-color: white;
   color: #333;
   font-size: 20px;
+}
+
+#week-title {
+  font-size: 22px !important;
+  color: #333 !important;
+  padding-top: 2px;
+  font-weight: 400;
 }
 
 .font-weight-bold {
@@ -226,7 +225,7 @@ footer {
 .text-success a {
   font-size: 18px;
   font-weight: 500;
-  color: #3a8340;
+  color: #00b3a0;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -243,17 +242,7 @@ input[type="date"] {
   background-size: 1.5em;
 }
 
-#task-title {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-#task-description {
-  margin-left: 25px;
-}
-
 input[type="checkbox"] {
-  /* Not removed via appearance */
   margin: 0 3 0 0;
 
   font: inherit;
@@ -263,6 +252,15 @@ input[type="checkbox"] {
   border: 0.15em solid currentColor;
   border-radius: 0.15em;
   transform: translateY(0.1em);
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -290,34 +288,48 @@ input[type="checkbox"] {
 # Schedule Activity Boxes
 --------------------------------------------------------------*/
 
+#weekday-heading {
+  background-color: #e8edfc;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#weekday-box {
+  border: 1px solid #5095ff;
+  border-radius: 10px 10px 10px 0px;
+  margin-bottom: 40px;
+}
+
+#task-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#task-description {
+  margin-left: 25px;
+}
+
 #Work {
   background-color: #d7ecfb;
-  border: 0px solid #36a2eb;
 }
 
 #Hobbies {
   background-color: #ebe0ff;
-  border: 0px solid #9966ff;
 }
 
 #Sports {
   background-color: #fff5dd;
-  border: 0px solid #ffce56;
 }
 
 #Studying {
   background-color: #ffe0e6;
-  border: 0px solid #ff6384;
 }
 
 #Social {
   background-color: #dbf2f2;
-  border: 0px solid #4bc0c0;
 }
 
 #Other {
   background-color: #ffecd9;
-  border: 0px solid #ff9f40;
 }
 
 /*--------------------------------------------------------------

@@ -1,45 +1,69 @@
-{{#if this.isDone}}
+<div class="row row-col-2 px-0">
+{{!-- Category colour block --}}
+  <div id="{{category}}" class="col-1">
+  </div>
 
-	<div class='row justify-content-center'>
-		<form class='col my-1' action='/schedule' method='POST'>
-			<div class='col text-success'>
-				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' checked />
-				<input type='hidden' name='_id' value='{{this._id}}' />
-				<label id='{{this._id}}' for='{{this._id}}'>
-					<a href='/schedule/{{this._id}}'>{{title}}</a>
-				</label>
-			</div>
+{{!-- Completed task --}}
+  <div class="col-11">
+	 {{#if this.isDone}}
+    <div class="row justify-content-center">
+      <form class="col my-1" action="/schedule" method="POST">
+        <div class="col text-success">
+          <input
+            type="checkbox"
+            id="{{this._id}}"
+            name="_id"
+            value="{{this._id}}"
+            checked
+          />
+          <input type="hidden" name="_id" value="{{this._id}}" />
+          <label id="{{this._id}}" for="{{this._id}}">
+            <a href="/schedule/{{this._id}}">{{title}}</a>
+          </label>
+        </div>
 
-			<div class='row'>
-				<div class='col' id='task-description'>
-					{{description}}
-				</div>
-			</div>
-		</form>
-	</div>
+        <div class="row">
+          <div class="col" id="task-description">
+            {{description}}
+          </div>
+        </div>
+      </form>
+    </div>
 
-{{else}}
-	<div class='row justify-content-center'>
-		<form class='col my-1' action='/schedule' method='POST'>
-			<div class='col'>
-				<input type='checkbox' id='{{this._id}}' name='_id' value='{{this._id}}' />
-				<label id='{{this._id}}' for='{{this._id}}'>
-					<a
-						href='/schedule/{{this._id}}'
-						class='font-weight-bold'
-						id='task-title'
-					>{{title}}</a>
-				</label>
-				<div class='row'>
-					<div class='col' id='task-description'>
-						{{description}}
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+{{!-- Open task --}}
+  {{else}}
+    <div class="row justify-content-center">
+      <form class="col my-1" action="/schedule" method="POST">
+        <div class="col">
+          <input
+            type="checkbox"
+            id="{{this._id}}"
+            name="_id"
+            value="{{this._id}}"
+          />
+          <label id="{{this._id}}" for="{{this._id}}">
+            <a
+              href="/schedule/{{this._id}}"
+              class="font-weight-bold"
+              id="task-title"
+            >{{title}}</a>
+          </label>
+          <div class="row">
+            <div class="col" id="task-description">
+              {{description}}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-{{/if}}
+  {{/if}}
+</div>
+  </div>
+
+</div>
+<div id="{{category}}">
+
 
 {{!-- prettier-ignore --}}
 <script>
@@ -62,6 +86,4 @@
     });
   });
 };
-
-
 </script>
