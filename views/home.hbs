@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
 
   {{!-- Greeting --}}
     <div class="row justify-content-center px-3 py-5">
@@ -8,7 +8,7 @@
 
   {{!-- Error message --}}
   {{#if errorMessage}}
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10">
       <div class="alert alert-danger" role="alert">
         {{{errorMessage}}}
       </div>
@@ -22,7 +22,7 @@
   </div>
 
   {{#each comingWeekActivities}}
-    <div class="row justify-content-center my-4">
+    <div class="row justify-content-center">
       <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1 p-1 border rounded">
 		  {{> day}}
       </div>
@@ -30,7 +30,7 @@
   {{/each}}
 
   {{else}}
-    <div class="row justify-content-center my-4">
+    <div class="row justify-content-center">
 	  	<h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-4">There's nothing planned yet for today.</h3>
     </div>
 
