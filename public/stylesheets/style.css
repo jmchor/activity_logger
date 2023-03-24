@@ -89,6 +89,10 @@ footer {
   position: fixed;
 }
 
+/*--------------------------------------------------------------
+# Button stylings
+--------------------------------------------------------------*/
+
 .btn {
   border: none;
 }
@@ -110,19 +114,34 @@ footer {
   color: white;
 }
 
-.schedule-button {
-  background-color: #4460ff;
-}
-
+.home-button,
+.schedule-button,
 .create-button {
   background-color: #4460ff;
 }
 
-.home-button {
-  background-color: #4460ff;
+.btn-outline-primary {
+  border: solid 1px #4460ff;
+  background-color: #e8edfc;
+  color: #4460ff;
 }
+
+.btn-outline-primary:hover {
+  background-color: #4c9aef;
+  border: solid 1px #4c9aef;
+  color: white;
+}
+
 .btn-primary:hover {
   background-color: #4c9aef;
+}
+
+.btn-warning {
+  background-color: #ffbe2e;
+}
+
+.btn-danger {
+  background-color: #ff555e;
 }
 
 /*--------------------------------------------------------------
@@ -176,6 +195,10 @@ footer {
   flex: 1;
   height: 1px;
   background: #eee;
+}
+
+.navbar-toggler {
+  padding-left: 0;
 }
 
 .logo-image {

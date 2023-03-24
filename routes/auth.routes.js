@@ -427,7 +427,7 @@ router.get("/profile/statistics", isLoggedIn, async (req, res, next) => {
     if (doneTodaysActivitiesCount / allTodaysActivities < 1) {
       percentDone = (doneTodaysActivitiesCount / allTodaysActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";
-      todayMessage = `${percentageStringWithPercent} -  Keep going!`;
+      todayMessage = `${percentageStringWithPercent} -  Keep it up!`;
     } else if (doneTodaysActivitiesCount / allTodaysActivities === 1) {
       percentDone = (doneTodaysActivitiesCount / allTodaysActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";
@@ -437,7 +437,7 @@ router.get("/profile/statistics", isLoggedIn, async (req, res, next) => {
     if (doneWeekActivitiesCount / allCurrentWeekActivities < 1) {
       percentDone = (doneWeekActivitiesCount / allCurrentWeekActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";
-      weekMessage = `${percentageStringWithPercent} -  Keep going!`;
+      weekMessage = `${percentageStringWithPercent} -  Keep it up!`;
     } else if (doneWeekActivitiesCount / allCurrentWeekActivities === 1) {
       percentDone = (doneWeekActivitiesCount / allCurrentWeekActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";
@@ -447,7 +447,7 @@ router.get("/profile/statistics", isLoggedIn, async (req, res, next) => {
     if (doneMonthActivitiesCount / allMonthActivities < 1) {
       percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";
-      monthMessage = `${percentageStringWithPercent} -  Keep going!`;
+      monthMessage = `${percentageStringWithPercent} -  Keep it up!`;
     } else if (doneMonthActivitiesCount / allMonthActivities === 1) {
       percentDone = (doneMonthActivitiesCount / allMonthActivities) * 100;
       percentageStringWithPercent = percentDone.toFixed(0) + "%";

@@ -1,17 +1,26 @@
-<div class="row justify-content-center">
-  <div class="col-xl-8 col-lg-9 col-md-10 my-3">
-    <h2>Edit "{{findActivity.title}}"</h2>
+<div id="main-content" class="row justify-content-center">
+  <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3" id="content-box">
+
+    {{! Page title }}
+    <div id="page-title" class="row p-3">
+      <div class="col-auto p-3">
+        <img src="/images/icons/edit-task.png" width="60px" />
+      </div>
+      <div class="col-auto py-3">
+        <h2>Edit "{{findActivity.title}}"</h2>
+      </div>
+    </div>
 
     <form action="/schedule/{{findActivity._id}}" method="POST">
 
       {{! Edit Title }}
       <div class="row justify-content-center">
-        <div class="col-12 mt-3 mb-1">
+        <div class="col-12 mt-0 mb-1">
           <label for="title">Title</label>
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12">
           <input
             type="text"
             id="title"
@@ -55,7 +64,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12">
           <textarea
             id="description"
             class="form-control"
@@ -64,14 +73,16 @@
           >{{findActivity.description}}</textarea>
         </div>
       </div>
+
+      {{! Date picker }}
       <div class="row justify-content-center">
-        <div class="col-12 my-2">
-          <label for="date">Date</label>
+        <div class="col-12 mt-3 mb-1 text-center">
+          <label for="date">Date (optional)</label>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12 text-center">
           <input
             type="date"
             id="date"
@@ -91,7 +102,7 @@
             type="submit"
             value="Edit One"
             name="update"
-            class="btn btn-dark px-5"
+            class="btn btn-primary px-5"
           />
         </div>
         <div class="col-auto mx-auto my-3">
@@ -99,7 +110,7 @@
             type="submit"
             value="Edit All"
             name="update"
-            class="btn btn-secondary px-5"
+            class="btn btn-outline-primary px-5"
           />
         </div>
       </div>
@@ -107,60 +118,58 @@
 
     {{! More options divider }}
     <div class="divider d-flex align-items-center">
-      <p class="text-center mx-3 mb-0 text-muted">More options</p>
+      <p class="text-center text-muted">More Options</p>
     </div>
 
     {{! More otions buttons group }}
-    <div class="row row-cols-auto justify-content-center">
+    <div class="row mb-4 justify-content-center">
 
       {{! Procrastinate button }}
-      <form action="/schedule/{{findActivity._id}}" method="POST" class="m-3">
+      <form
+        action="/schedule/{{findActivity._id}}"
+        method="POST"
+        class="col-md-3 col-10 py-3"
+      >
         <input type="hidden" name="_id" value="{{findActivity._id}}" />
         <input
           type="hidden"
           name="specificDate"
           value="{{findActivity.specificDate}}"
         />
-        <div class="col">
-          <input
-            type="submit"
-            name="update"
-            value="Procrastinate"
-            class="btn btn-warning px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          name="update"
+          value="Procrastinate"
+          class="btn btn-warning w-100"
+        />
       </form>
 
       {{! Delete ONE button }}
       <form
         action="/schedule/{{findActivity._id}}?_method=DELETE"
         method="POST"
-        class="m-3"
+        class="col-md-3 col-10 py-3"
       >
-        <div class="col">
-          <input
-            type="submit"
-            value="Delete this task"
-            name="terminate"
-            class="btn btn-danger px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          value="Delete this task"
+          name="terminate"
+          class="btn btn-danger w-100"
+        />
       </form>
 
       {{! Delete GROUP button }}
       <form
         action="/schedule/{{findActivity._id}}?_method=DELETE"
         method="POST"
-        class="m-3"
+        class="col-md-3 col-10 py-3"
       >
-        <div class="col">
-          <input
-            type="submit"
-            value="Delete task group"
-            name="terminate"
-            class="btn btn-danger px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          value="Delete task group"
+          name="terminate"
+          class="btn btn-danger w-100"
+        />
       </form>
     </div>
 
