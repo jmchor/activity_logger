@@ -283,7 +283,7 @@ router.get("/profile", isLoggedIn, async (req, res, next) => {
     } else if (allDone.length === 1) {
       achievementMessage = "One task done - keep swimming!";
     } else if (allDone.length > 1) {
-      achievementMessage = `${allDone.length} tasks completed - you're winning!`;
+      achievementMessage = `${allDone.length} tasks completed since`;
     }
 
     res.render("profile", {

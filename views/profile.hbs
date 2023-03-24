@@ -1,116 +1,173 @@
-<div id='main-content' class='row justify-content-center'>
-	<div class='col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3' id='content-box'>
-		<h2>{{user.username}}'s Profile</h2>
-		<br />
-		<div class='row '>
+<div id="main-content" class="row justify-content-center">
+  <div
+    class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 px-3 pb-4"
+    id="content-box"
+  >
 
-		<div class="col-auto"><img src='images/rubberduck.png' alt='' /></div>
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-12">
+        {{! Page title }}
+        <div id="page-title" class="row p-3">
+          <div class="col-auto p-3">
+            <img src="/images/icons/profile.png" width="60px" />
+          </div>
+          <div class="col-auto py-3">
+            <h2>{{user.username}}'s Profile</h2>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<div class="col justify-content-center d-inline-flex align-items-center text-wrap">
-			<h3 class="flex-wrap">{{achievementMessage}}</p>
-		</div>
-		</div>
+    <div class="row justify-content-center pb-3">
+      {{! Profile picture }}
+      <div class="col-md-4 col-12 pt-2 pb-5 px-5">
+        <img
+          src="/images/SVG/profile-picture.svg"
+          alt="Profile picture"
+          class="w-100"
+        />
+      </div>
 
-		<div class='row justify-content-center'>
-			<div class='col-12 mt-3 mb-1'>
+      {{! User info }}
+      <div class="col-md-8 col-10 py-2">
+        <h4>Name</h4>
+        <p class="pb-2">{{user.username}}</p>
+        <h4>Email</h4>
+        <p class="pb-2">{{user.email}}</p>
 
-				<p>Name: {{user.username}}</p>
-				<p>Email: {{user.email}}</p>
-			</div>
-		</div>
+        <p class="flex-wrap pt-1">{{achievementMessage}}
+          <b>{{memberDate}}</b></p>
+      </div>
+    </div>
 
-		<div class='row justify-content-center'>
-			<div class='col-12 mt-3 mb-1'>
-				<p class='text-center mx-3 mb-3 text-muted'>Member since
-					{{memberDate}}</p>
-			</div>
-		</div>
+    {{! Account settings divider }}
+    <div class="divider d-flex align-items-center">
+      <p class="text-center mx-3 mb-0 text-muted">Account Settings</p>
+    </div>
 
-		<div class='divider d-flex align-items-center'>
-			<p class='text-center mx-3 mb-0 text-muted'>Options</p>
-		</div>
+    {{! Form input and button group container }}
+    <div class="row row-cols-auto justify-content-center mb-1">
 
-		<div class='row row-cols-auto justify-content-center'>
+      {{! Update password section }}
+      <div class="col mx-auto mt-3">
+        <form action="/update-password" method="POST" class="px-0">
+          <div class="row py-1">
+            <div class="col-auto px-0">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+              />
+            </div>
+            <div class="col-auto pt-2">
+              <i
+                class="bi bi-eye-slash togglePassword"
+                role="button"
+                id="togglePassword"
+              ></i>
+            </div>
+          </div>
+          <div class="row py-1">
+            <button class="btn btn-primary px-5 w-100" type="submit">Change
+              Password</button>
+          </div>
+        </form>
+      </div>
 
-			<form action='/update-password' method='POST' class='m-3'>
+      {{! Delete all tasks section }}
+      <div class="col mx-auto mt-3">
+        <form action="/profile/delete-activities" method="POST" class="px-0">
+          <div class="row py-1">
+            <div class="col-auto px-0">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+              />
+            </div>
+            <div class="col-auto pt-2">
+              <i
+                class="bi bi-eye-slash togglePassword"
+                role="button"
+                id="togglePassword"
+              ></i>
+            </div>
+          </div>
+          <div class="row py-1">
+            <button class="btn btn-danger px-5 w-100" type="submit">Delete All
+              Tasks</button>
+          </div>
+        </form>
+      </div>
 
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
+      {{! Delete account section }}
+      <div class="col mx-auto mt-3">
+        <form action="/profile/delete-account" method="POST" class="px-0">
+          <div class="row py-1">
+            <div class="col-auto px-0">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+              />
+            </div>
+            <div class="col-auto pt-2">
+              <i
+                class="bi bi-eye-slash togglePassword"
+                role="button"
+                id="togglePassword"
+              ></i>
+            </div>
+          </div>
+          <div class="row py-1">
+            <button class="btn btn-primary px-5 w-100" type="submit">Delete
+              Account</button>
+          </div>
+        </form>
+      </div>
 
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-dark px-5' type='submit'>Update Password</button>
-				</div>
-			</form>
+    </div>
 
-			<form action='/profile/delete-activities' method='POST' class='m-3'>
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-danger px-5' type='submit'>Delete All Activities</button>
-				</div>
-			</form>
+    <div class="row justify-content-center p-4">
+      <div class="col-md-12 col-12">
+        {{#if errorMessage}}
+          <p>{{errorMessage}}</p>
+        {{/if}}
 
-			<form action='/profile/delete-account' method='POST' class='m-3'>
-				<div class='row d-flex justify-content-around'>
-					<div class='col-auto my-1 text-center'>
-						<input type='password' name='password' placeholder='Enter Password' />
-						<i
-							class='bi bi-eye-slash togglePassword'
-							role='button'
-							id='togglePassword'
-						></i>
-					</div>
-				</div>
-				<div class='col-auto mx-auto'>
-					<button class='btn btn-danger px-5' type='submit'>Delete Account</button>
-				</div>
-			</form>
+        {{#if successMessage}}
+          <p>{{successMessage}}</p>
+        {{/if}}
+      </div>
+    </div>
 
-		</div>
-
-		{{#if errorMessage}}
-			<p>{{errorMessage}}</p>
-		{{/if}}
-
-		{{#if successMessage}}
-			<p>{{successMessage}}</p>
-		{{/if}}
-
-	</div>
+  </div>
 </div>
 
+{{! Password toggler }}
 {{!-- prettier-ignore --}}
 <script>
-        const toggleButtons = document.querySelectorAll('.togglePassword');
-		toggleButtons.forEach((button) => {
-			button.addEventListener('click', (e) => {
-				const input = e.target.previousElementSibling;
-				if (input.type === 'password') {
-					input.type = 'text';
-					e.target.classList.remove('bi-eye-slash');
-					e.target.classList.add('bi-eye');
-				} else {
-					input.type = 'password';
-					e.target.classList.remove('bi-eye');
-					e.target.classList.add('bi-eye-slash');
-				}
-			});
-		});
 
-    </script>
+
+const passwordFields = document.querySelectorAll('input[type="password"]');
+const toggleButtons = document.querySelectorAll('.togglePassword');
+
+toggleButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+
+    const passwordField = passwordFields[index];
+
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    
+    const icon = button.querySelector('i');
+    if (type === 'password') {
+      icon.classList.remove('bi-eye-slash');
+      icon.classList.add('bi-eye');
+    } else {
+      icon.classList.remove('bi-eye');
+      icon.classList.add('bi-eye-slash');
+    }
+  });
+});
+
+</script>
