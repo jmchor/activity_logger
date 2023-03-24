@@ -24,17 +24,6 @@ body {
   padding: 0;
 }
 
-.background-image {
-  position: fixed;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-  background-image: url(/images/background.jpg);
-  width: 100vw;
-  height: 100vh;
-  filter: opacity(80%);
-}
-
 h1,
 h2,
 h3,
@@ -318,6 +307,17 @@ input[type="checkbox"] {
     animation: fadeInAnimation ease 1.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+  }
+
+  .background-image {
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    z-index: -100;
+    background-image: url(/images/background.jpg);
+    width: 100vw;
+    height: 100vh;
+    filter: opacity(80%);
   }
 
   #new-task-box {
