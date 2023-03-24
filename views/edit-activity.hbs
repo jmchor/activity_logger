@@ -15,7 +15,7 @@
 
       {{! Edit Title }}
       <div class="row justify-content-center">
-        <div class="col-12 mt-3 mb-1">
+        <div class="col-12 mt-0 mb-1">
           <label for="title">Title</label>
         </div>
       </div>
@@ -73,14 +73,16 @@
           >{{findActivity.description}}</textarea>
         </div>
       </div>
+
+      {{! Date picker }}
       <div class="row justify-content-center">
-        <div class="col-12 mt-3 mb-1">
+        <div class="col-12 mt-3 mb-1 text-center">
           <label for="date">Date (optional)</label>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-12 text-center">
           <input
             type="date"
             id="date"
@@ -116,11 +118,11 @@
 
     {{! More options divider }}
     <div class="divider d-flex align-items-center">
-      <p class="text-center mx-3 mb-0 text-muted">More options</p>
+      <p class="text-center mx-3 mb-0 text-muted">Account Settings</p>
     </div>
 
     {{! More otions buttons group }}
-    <div class="row row-cols-auto justify-content-center">
+    <div class="row row-cols-auto justify-content-center my-4">
 
       {{! Procrastinate button }}
       <form action="/schedule/{{findActivity._id}}" method="POST" class="m-3">
