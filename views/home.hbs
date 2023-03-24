@@ -26,14 +26,14 @@
     </div>
 
   {{#if comingWeekActivities}}
-        <div class="row justify-content-center my-3">
-          <h4 class="col-12 px-4 text-center">{{date}}</h4>
-          <h3 class="col-12 px-4 text-center">Here's your agenda for today</h3>
+        <div class="row justify-content-center my-1">
+          <h4 class="col-12 py-1 text-center">{{date}}</h4>
+          <h3 class="col-12 pt-1 pb-2 text-center">Today's Pool of Tasks</h3>
         </div>
 
   {{#each comingWeekActivities}}
     <div class="row justify-content-center">
-      <div class="col-md-10 col-11 my-2 p-3 border rounded">
+      <div id="home-task" class="col-md-10 col-11 my-2 p-3">
 		  {{> day}}
       </div>
 	  </div>
