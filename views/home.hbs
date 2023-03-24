@@ -4,11 +4,11 @@
     id="content-box"
   >
 <div class="row justify-content-center">
-  <div class="col-md-12 col-11">
+  <div class="col-md-12 col-12">
 
   {{!-- Error message --}}
   {{#if errorMessage}}
-    <div class="col-md-12 col-11">
+    <div class="col-md-12 col-12">
       <div class="alert alert-danger" role="alert">
         {{{errorMessage}}}
       </div>
@@ -19,19 +19,17 @@
   {{!-- Greeting --}}
 
       {{! Page title }}
-    <div id="page-title" class="row p-3">
-      <div class="col-auto p-3">
-        <img src="/images/icons/home.png" width="60px" />
-      </div>
-      <div class="col-auto py-3">
+    <div id="page-title" class="row row-cols-2">
+      <div class="col-auto py-3 px-4">
         <h2>Howdy, {{{user.username}}}!</h2>
       </div>
     </div>
 
   {{#if comingWeekActivities}}
-  <div class="row justify-content-center">
-    <h3 class="col-md-10 col-11 my-2">Here's your agenda for today, {{date}}</h3>
-  </div>
+        <div class="row justify-content-center my-3">
+          <h4 class="col-12 px-4 text-center">{{date}}</h4>
+          <h3 class="col-12 px-4 text-center">Here's your agenda for today</h3>
+        </div>
 
   {{#each comingWeekActivities}}
     <div class="row justify-content-center">
