@@ -290,27 +290,33 @@ input[type='checkbox'] {
 --------------------------------------------------------------*/
 
 #Work {
-	background-color: #92d283;
+	background-color: #d7ecfb;
+	border: 2px solid #36a2eb;
 }
 
 #Hobbies {
-	background-color: #f7b731;
+	background-color: #ebe0ff;
+	border: 2px solid #9966ff;
 }
 
 #Sports {
-	background-color: #005f92;
+	background-color: #fff5dd;
+	border: 2px solid #ffce56;
 }
 
 #Studying {
-	background-color: #646464;
+	background-color: #ffe0e6;
+	border: 2px solid #ff6384;
 }
 
 #Social {
-	background-color: #f7b731;
+	background-color: #dbf2f2;
+	border: 2px solid #4bc0c0;
 }
 
 #Other {
-	background-color: #646464;
+	background-color: #ffecd9;
+	border: 2px solid #ff9f40;
 }
 
 /*--------------------------------------------------------------
