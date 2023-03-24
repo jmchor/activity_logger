@@ -320,7 +320,7 @@ input[type="checkbox"] {
     filter: opacity(80%);
   }
 
-  #new-task-box {
+  #content-box {
     border: solid 1px #4460ff;
     background-color: white;
     border-radius: 10px;

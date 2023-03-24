@@ -1,7 +1,7 @@
 <div id="main-content" class="row justify-content-center">
   <div
     class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3"
-    id="new-task-box"
+    id="content-box"
   >
 <div class="row justify-content-center">
   <div class="col-md-12 col-11">
@@ -17,8 +17,15 @@
   {{else}}
 
   {{!-- Greeting --}}
-    <div class="row justify-content-center px-3 py-5">
-      <h2> Welcome back, {{{user.username}}}!</h2>
+
+      {{! Page title }}
+    <div id="page-title" class="row p-3">
+      <div class="col-auto p-3">
+        <img src="/images/icons/home.png" width="60px" />
+      </div>
+      <div class="col-auto py-3">
+        <h2>Howdy, {{{user.username}}}!</h2>
+      </div>
     </div>
 
   {{#if comingWeekActivities}}
