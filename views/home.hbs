@@ -1,48 +1,72 @@
+<div id="main-content" class="row justify-content-center">
+  <div
+    class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3"
+    id="content-box"
+  >
 <div class="row justify-content-center">
-  <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
-    <h2> Welcome back, {{{user.username}}}!</h2>
-  </div>
+  <div class="col-md-12 col-12">
+
+  {{!-- Error message --}}
   {{#if errorMessage}}
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-3">
+    <div class="col-md-12 col-12">
       <div class="alert alert-danger" role="alert">
         {{{errorMessage}}}
       </div>
     </div>
 
+  {{else}}
 
+  {{!-- Greeting --}}
 
+      {{! Page title }}
+    <div id="page-title" class="row row-cols-2">
+      <div class="col-auto py-3 px-4">
+        <h2>Howdy, {{{user.username}}}!</h2>
+      </div>
+    </div>
 
-{{else}}
-
-{{#if comingWeekActivities}}
-  <div class="row justify-content-center">
-    <h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-2">Here's your agenda for today, {{date}} <i class="bi bi-arrow-down-short"></i></h3>
-  </div>
+  {{#if comingWeekActivities}}
+        <div class="row justify-content-center my-1">
+          <img src="/images/icons/miniature-pool-2.svg" height="200px">
+          <h4 class="col-12 pt-4 pb-1 text-center">{{date}}</h4>
+          <h3 class="col-12 pt-1 pb-2 text-center">Today's Pool of Tasks</h3>
+        </div>
 
   {{#each comingWeekActivities}}
-    <div class="row justify-content-center my-4">
-    <div class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-1 p-1 border rounded">
+    <div class="row justify-content-center">
+      <div id="home-task" class="col-md-10 col-11 my-2 p-3">
         <div id="{{category}}">
-                  {{> day}}
-        </div>
-    </div>
+                    {{> day}}
+          </div>
+      </div>
 	</div>
   {{/each}}
 
-{{else}}
-		<h3 class="col-xxl-8 col-xl-8 col-lg-10 col-md-10 my-4">There's nothing planned yet for today.</h3>
+  {{else}}
+    <div class="row justify-content-center mt-3">
+      <img src="/images/icons/miniature-pool-1.svg" height="200px">
+	  	<h3 class="col-12 py-4 text-center">There's nothing planned yet for today.</h3>
     </div>
-    <div class="row justify-content-center">
-		<div class="col-auto">
-			<a href="/create" class="btn btn-primary">Add a new task</a>
-		</div>
-	</div>
-{{/if}}
- {{/if}}
 
-		{{> randomfact}}
+  {{!-- Add new task button --}}
+      <div class="row justify-content-center">
+		    <div class="col-auto">
+			    <a href="/create" class="btn btn-primary">Add a new task</a>
+		    </div>
+	    </div>
+    {{/if}}
+  {{/if}}
 
-</div>
+  {{!-- Random fact --}}
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-11 my-2 p-3">
+          {{> randomfact}}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 
 {{!-- <script>
 

@@ -1,10 +1,24 @@
-<h1>Hello, {{user.username}}</h1>
+<div id="main-content" class="row justify-content-center">
+  <div
+    class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 p-3"
+    id="content-box"
+  >
+<div class="row justify-content-center">
+  <div class="col-md-12 col-12">
+      {{! Page title }}
+    <div id="page-title" class="row p-3">
+      <div class="col-auto p-3">
+        <img src="/images/icons/analytics.png" width="60px" />
+      </div>
+      <div class="col-auto py-3">
+        <h2>Statistics</h2>
+      </div>
+    </div>
 
-<br />
 
-<h3>Here is what you've achieved so far</h3>
-<br />
-<br />
+
+<h3>Here's what you've achieved so far</h3>
+
 
 {{#if monthActivities}}
 
@@ -293,3 +307,7 @@
 		});
 	</script>
 {{/with}}
+</div>
+</div>
+</div>
+</div>

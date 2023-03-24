@@ -6,6 +6,10 @@
 /*--------------------------------------------------------------
 # Global Styles
 --------------------------------------------------------------*/
+@font-face {
+  font-family: "Lobster";
+  src: url("/fonts/Lobster-Regular.ttf") format("truetype");
+}
 
 body {
   background-color: #fff;
@@ -85,6 +89,7 @@ select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -182,6 +187,17 @@ select.dropdown-style:focus {
 /*--------------------------------------------------------------
 # Header Navigation
 --------------------------------------------------------------*/
+.logo-image {
+  margin-bottom: 10px;
+}
+
+#logo {
+  font-family: "Lobster";
+  font-size: 40px;
+  letter-spacing: 4px;
+  text-shadow: -1px 0 #5095ff, 0 1px #5095ff, 4px 0 #5095ff, 0 -1px #5095ff;
+  color: #e8edfc;
+}
 
 .navbar {
   padding: 20px;
@@ -372,7 +388,7 @@ input[type="checkbox"] {
   #login-box {
     border: solid 1px white;
     border-radius: 10px;
-    margin: 14vh 0px 0px 0px;
+    margin: 16vh 0px 0px 0px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
@@ -380,7 +396,7 @@ input[type="checkbox"] {
   #register-box {
     border: solid 1px white;
     border-radius: 10px;
-    margin: 10vh 0px 0px 0px;
+    margin: 14vh 0px 0px 0px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
