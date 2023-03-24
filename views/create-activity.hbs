@@ -44,12 +44,13 @@
           </div>
         </div>
 
-        <div class="row row-cols-2 justify-content-center">
-          <div class="col-auto mt-3 mb-1">
+        {{! Select a category }}
+        <div class="row row-cols-2">
+          <div class="col-auto mt-4 mb-1">
             <label for="category">Category</label>
           </div>
 
-          <div class="col-auto mt-3 mb-1">
+          <div class="col-auto mt-4 mb-1">
             <select id="category" name="category">
               <option value="Sports" selected>Sports</option>
               <option value="Studying" selected>Studying</option>
@@ -62,155 +63,159 @@
         </div>
 
         {{! Tabs }}
-        <ul class="nav nav-tabs" id="new-task-tab" role="tablist">
-          <li class="nav-item mt-3" role="presentation">
-            <button
-              class="nav-link active"
-              id="once-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#once"
-              type="button"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-            >Add task once</button>
-          </li>
-          <li class="nav-item mt-3" role="presentation">
-            <button
-              class="nav-link"
-              id="weekly-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#weekly"
-              type="button"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-            >Schedule task weekly</button>
-          </li>
-        </ul>
+        <div class="row justify-content-center">
+          <div class="col-12 mt-3 mb-1">
+            <ul class="nav nav-tabs" id="new-task-tab" role="tablist">
+              <li class="nav-item mt-3" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="once-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#once"
+                  type="button"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+                >Add task once</button>
+              </li>
+              <li class="nav-item mt-3" role="presentation">
+                <button
+                  class="nav-link"
+                  id="weekly-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#weekly"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="false"
+                >Schedule task weekly</button>
+              </li>
+            </ul>
 
-        {{! This block only shows when the "once" tab is active }}
-        <div class="tab-content mx-4 my-2" id="new-task-tab-content">
-          <div
-            class="tab-pane fade show active"
-            id="once"
-            role="tabpanel"
-            aria-labelledby="once-tab"
-          >
+            {{! This block only shows when the "once" tab is active }}
+            <div class="tab-content mx-4 my-2" id="new-task-tab-content">
+              <div
+                class="tab-pane fade show active"
+                id="once"
+                role="tabpanel"
+                aria-labelledby="once-tab"
+              >
 
-            <div class="row justify-content-center">
-              <div class="col-12 my-2">
-                <label for="specificDate">Choose a date</label>
+                <div class="row justify-content-center">
+                  <div class="col-12 my-2 text-center">
+                    <label for="specificDate">Choose a date</label>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div class="col-12 my-1 text-center">
+                    <input type="date" id="specificDate" name="specificDate" />
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div class="col-12 mt-5 mb-2 text-center">
+                    <input
+                      type="submit"
+                      value="Add task"
+                      class="btn btn-primary px-5"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="row justify-content-center">
-              <div class="col-12 my-1">
-                <input type="date" id="specificDate" name="specificDate" />
-              </div>
-            </div>
+              {{! This block only shows when "weekly" tab is active }}
+              <div
+                class="tab-pane fade"
+                id="weekly"
+                role="tabpanel"
+                aria-labelledby="weekly-tab"
+              >
+                <div id="days" class="row justify-content-center">
+                  <div class="col-12 m-2">
+                    <label for="daysOfWeek"><p>For which days do you want to
+                        schedule this task?</p></label>
+                  </div>
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Sunday"
+                      name="daysOfWeek"
+                      value="Sunday"
+                    />
+                    <label for="Sunday">Sunday</label>
+                  </div>
 
-            <div class="row justify-content-center">
-              <div class="col-12 my-4 text-center">
-                <input
-                  type="submit"
-                  value="Add task"
-                  class="btn btn-primary px-5"
-                />
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Monday"
+                      name="daysOfWeek"
+                      value="Monday"
+                    />
+                    <label for="Monday">Monday</label>
+                  </div>
+
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Tuesday"
+                      name="daysOfWeek"
+                      value="Tuesday"
+                    />
+                    <label for="Tuesday">Tuesday</label>
+                  </div>
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Wednesday"
+                      name="daysOfWeek"
+                      value="Wednesday"
+                    />
+                    <label for="Wednesday">Wednesday</label>
+                  </div>
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Thursday"
+                      name="daysOfWeek"
+                      value="Thursday"
+                    />
+                    <label for="Thursday">Thursday</label>
+                  </div>
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Friday"
+                      name="daysOfWeek"
+                      value="Friday"
+                    />
+                    <label for="Friday">Friday</label>
+                  </div>
+                  <div class="col-12 m-1">
+                    <input
+                      type="checkbox"
+                      id="Saturday"
+                      name="daysOfWeek"
+                      value="Saturday"
+                    />
+                    <label for="Saturday">Saturday</label>
+                  </div>
+
+                  <div class="row justify-content-center">
+                    <div class="col-12 my-4 mx-auto text-center">
+                      <input
+                        type="submit"
+                        value="Add recurring task"
+                        class="btn btn-primary px-5"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          {{! This block only shows when "weekly" tab is active }}
-          <div
-            class="tab-pane fade"
-            id="weekly"
-            role="tabpanel"
-            aria-labelledby="weekly-tab"
-          >
-            <div id="days" class="row justify-content-center">
-              <div class="col-12 m-2">
-                <label for="daysOfWeek"><p>For which days do you want to
-                    schedule this task?</p></label>
-              </div>
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Sunday"
-                  name="daysOfWeek"
-                  value="Sunday"
-                />
-                <label for="Sunday">Sunday</label>
-              </div>
-
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Monday"
-                  name="daysOfWeek"
-                  value="Monday"
-                />
-                <label for="Monday">Monday</label>
-              </div>
-
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Tuesday"
-                  name="daysOfWeek"
-                  value="Tuesday"
-                />
-                <label for="Tuesday">Tuesday</label>
-              </div>
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Wednesday"
-                  name="daysOfWeek"
-                  value="Wednesday"
-                />
-                <label for="Wednesday">Wednesday</label>
-              </div>
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Thursday"
-                  name="daysOfWeek"
-                  value="Thursday"
-                />
-                <label for="Thursday">Thursday</label>
-              </div>
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Friday"
-                  name="daysOfWeek"
-                  value="Friday"
-                />
-                <label for="Friday">Friday</label>
-              </div>
-              <div class="col-12 m-1">
-                <input
-                  type="checkbox"
-                  id="Saturday"
-                  name="daysOfWeek"
-                  value="Saturday"
-                />
-                <label for="Saturday">Saturday</label>
-              </div>
-
-              <div class="row justify-content-center">
-                <div class="col-12 my-4 mx-auto text-center">
-                  <input
-                    type="submit"
-                    value="Add recurring task"
-                    class="btn btn-primary px-5"
-                  />
-                </div>
-              </div>
-            </div></div>
         </div>
-
       </form>
 
     </div>
