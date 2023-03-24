@@ -19,8 +19,8 @@
  </div>
 
 {{!-- Page intro --}}
-<div class="row justify-content-center">
-  <div class="col-md-12 col-12">
+<div class="row justify-content-center mb-2">
+  <div class="col-md-12 col-12 text-center">
 	<p>Here's what you've achieved so far, {{{user.username}}}.</p>
   </div>
 </div>
@@ -31,45 +31,45 @@
 	{{#with statistic}}
 	{{!-- Today's progress chart --}}
 		{{#if today}}
-			<div class='col-auto p-2'>
-				<h4>Today's progress</h4>
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">Today's progress</h4>
 				<canvas id='todayChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneToday}} of {{today}}</p>
 				<p>{{todayMessage}}</p>
 			</div>
 		{{else}}
-			<div class='col-auto p-2'>
-				<h4>Today's progress</h4>
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">Today's progress</h4>
 				<p>No tasks completed today</h6>
 			</div>
 		{{/if}}
 
 {{!-- This week's progress chart --}}
 		{{#if week}}
-			<div class='col-auto p-2'>
-				<h4>This week's progress</h4>
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This week's progress</h4>
 				<canvas id='weeklyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneWeek}} of {{week}}</p>
 				<p>{{weekMessage}}</p>
 			</div>
 		{{else}}
-			<div class='col-auto p-2'>
-				<h4>This week's progress</h4>				
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This week's progress</h4>				
 				<p>No tasks completed this week</h6>
 			</div>
 		{{/if}}
 
 {{!-- This month's progress chart --}}
 		{{#if month}}
-			<div class='col-auto p-2'>
-				<h4>This month's progress</h4>
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<h4 class="py-2">This month's progress</h4>
 				<canvas id='MonthlyChart' width='200' height='200' class='mx-auto mb-3'></canvas>
 				<p>{{doneMonth}} of {{month}}</p>
 				<p>{{monthMessage}}</p>
 			</div>
 			{{else}}
-			<div class='col-auto p-2'>
-				<p>No tasks completed this month</h6>
+			<div class='col-md-3 col-11 mx-3 my-4 p-2 text-center'>
+				<p> class="py-2"No tasks completed this month</h6>
 			</div>
 		{{/if}}
   	{{/with}}
