@@ -4,14 +4,12 @@
     {{! Page title }}
     <div id="page-title" class="row p-3">
       <div class="col-auto p-3">
-        <img src="/images/icons/add-task.png" width="60px" />
+        <img src="/images/icons/edit-task.png" width="60px" />
       </div>
       <div class="col-auto py-3">
-        <h2>Add a new task</h2>
+        <h2>Edit "{{findActivity.title}}"</h2>
       </div>
     </div>
-
-    <h2>Edit "{{findActivity.title}}"</h2>
 
     <form action="/schedule/{{findActivity._id}}" method="POST">
 
@@ -22,7 +20,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12">
           <input
             type="text"
             id="title"
@@ -66,7 +64,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12">
           <textarea
             id="description"
             class="form-control"
@@ -76,13 +74,13 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-12 my-2">
-          <label for="date">Date</label>
+        <div class="col-12 mt-3 mb-1">
+          <label for="date">Date (optional)</label>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-12 my-1">
+        <div class="col-12">
           <input
             type="date"
             id="date"
