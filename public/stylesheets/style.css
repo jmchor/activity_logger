@@ -326,12 +326,16 @@ input[type="checkbox"] {
 
 @media (max-width: 576px) {
   main {
-    padding: 80px 0px 0px;
+    padding: 50px 0px 0px;
     background: white;
     height: 100%;
     animation: fadeInAnimation ease 1.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+  }
+
+  #content-box {
+    margin-bottom: 50px;
   }
 }
 
@@ -341,7 +345,7 @@ input[type="checkbox"] {
 
 @media (min-width: 576px) {
   main {
-    padding: 80px 0px 0px;
+    padding: 50px 0px 0px;
     background: none;
     height: 100%;
     animation: fadeInAnimation ease 1.5s;
@@ -364,8 +368,8 @@ input[type="checkbox"] {
     border: solid 1px #4460ff;
     background-color: white;
     border-radius: 10px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 70px;
+    margin-bottom: 120px;
     box-shadow: rgba(68, 96, 255, 0.8) 5px 5px,
       rgba(76, 154, 239, 0.3) 10px 10px, rgba(76, 154, 239, 0.2) 15px 15px,
       rgba(76, 154, 239, 0.1) 20px 20px;
