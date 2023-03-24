@@ -326,7 +326,7 @@ input[type="checkbox"] {
 
 @media (max-width: 576px) {
   main {
-    padding: 80px 0px 0px;
+    padding: 50px 0px 0px;
     background: white;
     height: 100%;
     animation: fadeInAnimation ease 1.5s;
@@ -341,7 +341,7 @@ input[type="checkbox"] {
 
 @media (min-width: 576px) {
   main {
-    padding: 80px 0px 0px;
+    padding: 50px 0px 0px;
     background: none;
     height: 100%;
     animation: fadeInAnimation ease 1.5s;
