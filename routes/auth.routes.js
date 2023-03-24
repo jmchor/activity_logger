@@ -255,11 +255,17 @@ router.post("/logout", isLoggedIn, (req, res) => {
 # Profile page
 --------------------------------------------------------------*/
 
-router.get("/profile", isLoggedIn, async (req, res) => {
+router.get("/profile", isLoggedIn, async (req, res, next) => {
   const userId = req.session.currentUser._id;
 
   try {
     const findUser = await User.findById(userId);
+
+    const activities = await Activity.find({ userId: userId });
+    const allDone = activities.filter((activity) => activity.isDone === true);
+    console.log(allDone.length)
+
+
     const date = findUser.createdAt;
     const memberDate = date.toLocaleDateString("en-US", {
       weekday: "long",
@@ -268,7 +274,16 @@ router.get("/profile", isLoggedIn, async (req, res) => {
       day: "numeric",
     });
 
-    res.render("profile", { user: findUser, memberDate: memberDate });
+    let achievementMessage;
+    if (allDone.length === 0) {
+      achievementMessage = "You haven't done any activities yet";
+    } else if (allDone.length === 1) {
+      achievementMessage = "One activity down - keep up the good work!";
+    } else if (allDone.length > 1) {
+      achievementMessage = `${allDone.length} tasks done - you rock!`;
+    }
+
+    res.render("profile", { user: findUser, memberDate: memberDate, achievementMessage: achievementMessage });
   } catch (error) {
     next(error);
   }
