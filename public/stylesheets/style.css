@@ -98,12 +98,19 @@ footer {
   border: none;
 }
 
-.btn-primary {
-  background-color: #212529;
+.schedule-button {
+  background-color: #4460ff;
 }
 
+.create-button {
+  background-color: #4460ff;
+}
+
+.home-button {
+  background-color: #4460ff;
+}
 .btn-primary:hover {
-  background-color: #212529;
+  background-color: #4c9aef;
 }
 
 /*--------------------------------------------------------------
@@ -176,9 +183,6 @@ main {
   height: 100vh;
 }
 
-.container {
-}
-
 #week-button {
   background-color: white;
   color: #333;
@@ -234,6 +238,10 @@ input[type="checkbox"] {
 /*--------------------------------------------------------------
 # Footer Navigation
 --------------------------------------------------------------*/
+
+#bottom-nav {
+  background-color: #4460ff;
+}
 
 #bottom-nav a {
   color: white;
