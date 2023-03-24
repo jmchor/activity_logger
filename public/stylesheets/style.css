@@ -333,6 +333,10 @@ input[type="checkbox"] {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
   }
+
+  #content-box {
+    margin-bottom: 50px;
+  }
 }
 
 /*--------------------------------------------------------------
