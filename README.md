@@ -284,3 +284,5 @@ ___
 </br>
 
 <p align="center">This project was realized by <a href="https://github.com/jmchor">Johannes Chorzempa</a>, <a href="https://github.com/nncht" target="_blank">Nana Chuto</a> & <a href="https://github.com/lukasmerlin" target="_blank">Lukas Jürgens</a> for the second module of Ironhack Bootcamp.</p>
+
+<p align="center"><a href="https://www.flaticon.com/authors/basic-miscellany/blue?author_id=159&type=standard" title="Icons bz Smashicons">Basic Miscellanz Blue </a>created by Smashicons - Flaticon</p>
