@@ -1,4 +1,4 @@
-<div id="login-content" class="row justify-content-center">
+<div id="main-content" class="row justify-content-center">
   <div
     class="col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-12 pt-3"
     id="new-task-box"
@@ -125,6 +125,7 @@
               </div>
 
               {{! This block only shows when "weekly" tab is active }}
+
               <div
                 class="tab-pane fade"
                 id="weekly"
@@ -132,75 +133,79 @@
                 aria-labelledby="weekly-tab"
               >
                 <div id="days" class="row justify-content-center">
-                  <div class="col-12 m-2">
+                  <div class="col-12 m-2 text-center">
                     <label for="daysOfWeek"><p>For which days do you want to
                         schedule this task?</p></label>
                   </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-3 col-12 my-2">
 
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Monday"
-                      name="daysOfWeek"
-                      value="Monday"
-                    />
-                    <label for="Monday">Monday</label>
-                  </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Monday"
+                          name="daysOfWeek"
+                          value="Monday"
+                        />
+                        <label for="Monday">Monday</label>
+                      </div>
 
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Tuesday"
-                      name="daysOfWeek"
-                      value="Tuesday"
-                    />
-                    <label for="Tuesday">Tuesday</label>
-                  </div>
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Wednesday"
-                      name="daysOfWeek"
-                      value="Wednesday"
-                    />
-                    <label for="Wednesday">Wednesday</label>
-                  </div>
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Thursday"
-                      name="daysOfWeek"
-                      value="Thursday"
-                    />
-                    <label for="Thursday">Thursday</label>
-                  </div>
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Friday"
-                      name="daysOfWeek"
-                      value="Friday"
-                    />
-                    <label for="Friday">Friday</label>
-                  </div>
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Saturday"
-                      name="daysOfWeek"
-                      value="Saturday"
-                    />
-                    <label for="Saturday">Saturday</label>
-                  </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Tuesday"
+                          name="daysOfWeek"
+                          value="Tuesday"
+                        />
+                        <label for="Tuesday">Tuesday</label>
+                      </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Wednesday"
+                          name="daysOfWeek"
+                          value="Wednesday"
+                        />
+                        <label for="Wednesday">Wednesday</label>
+                      </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Thursday"
+                          name="daysOfWeek"
+                          value="Thursday"
+                        />
+                        <label for="Thursday">Thursday</label>
+                      </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Friday"
+                          name="daysOfWeek"
+                          value="Friday"
+                        />
+                        <label for="Friday">Friday</label>
+                      </div>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Saturday"
+                          name="daysOfWeek"
+                          value="Saturday"
+                        />
+                        <label for="Saturday">Saturday</label>
+                      </div>
 
-                  <div class="col-12 m-1">
-                    <input
-                      type="checkbox"
-                      id="Sunday"
-                      name="daysOfWeek"
-                      value="Sunday"
-                    />
-                    <label for="Sunday">Sunday</label>
+                      <div class="col-12 m-1">
+                        <input
+                          type="checkbox"
+                          id="Sunday"
+                          name="daysOfWeek"
+                          value="Sunday"
+                        />
+                        <label for="Sunday">Sunday</label>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row justify-content-center">
