@@ -118,60 +118,58 @@
 
     {{! More options divider }}
     <div class="divider d-flex align-items-center">
-      <p class="text-center mx-3 mb-0 text-muted">Account Settings</p>
+      <p class="text-center text-muted">More Options</p>
     </div>
 
     {{! More otions buttons group }}
-    <div class="row row-cols-auto justify-content-center my-4">
+    <div class="row my-4">
 
       {{! Procrastinate button }}
-      <form action="/schedule/{{findActivity._id}}" method="POST" class="m-3">
+      <form
+        action="/schedule/{{findActivity._id}}"
+        method="POST"
+        class="col-md-3"
+      >
         <input type="hidden" name="_id" value="{{findActivity._id}}" />
         <input
           type="hidden"
           name="specificDate"
           value="{{findActivity.specificDate}}"
         />
-        <div class="col">
-          <input
-            type="submit"
-            name="update"
-            value="Procrastinate"
-            class="btn btn-warning px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          name="update"
+          value="Procrastinate"
+          class="btn btn-warning w-100"
+        />
       </form>
 
       {{! Delete ONE button }}
       <form
         action="/schedule/{{findActivity._id}}?_method=DELETE"
         method="POST"
-        class="m-3"
+        class="col-md-3"
       >
-        <div class="col">
-          <input
-            type="submit"
-            value="Delete this task"
-            name="terminate"
-            class="btn btn-danger px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          value="Delete this task"
+          name="terminate"
+          class="btn btn-danger w-100"
+        />
       </form>
 
       {{! Delete GROUP button }}
       <form
         action="/schedule/{{findActivity._id}}?_method=DELETE"
         method="POST"
-        class="m-3"
+        class="col-md-3"
       >
-        <div class="col">
-          <input
-            type="submit"
-            value="Delete task group"
-            name="terminate"
-            class="btn btn-danger px-5"
-          />
-        </div>
+        <input
+          type="submit"
+          value="Delete task group"
+          name="terminate"
+          class="btn btn-danger w-100"
+        />
       </form>
     </div>
 
