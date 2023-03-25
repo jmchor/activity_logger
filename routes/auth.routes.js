@@ -819,6 +819,7 @@ router.post("/reset-password/:id", async (req, res, next) => {
     res.status(500).render("auth/reset-password", {
       errorMessage:
         "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.",
+        loggedOut: loggedOut
     });
     return;
   }
