@@ -374,11 +374,26 @@ input[type="checkbox"] {
   }
 }
 
+@media (max-width: 912px) and (min-width: 577px) {
+  main {
+    padding: 50px 0px 0px;
+    background: white;
+    height: 100%;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  #content-box {
+    margin-bottom: 50px;
+  }
+}
+
 /*--------------------------------------------------------------
 # Larger viewport styles
 --------------------------------------------------------------*/
 
-@media (min-width: 576px) {
+@media (min-width: 913px) {
   main {
     padding: 50px 0px 0px;
     background: none;
