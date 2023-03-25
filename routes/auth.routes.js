@@ -279,9 +279,9 @@ router.get("/profile", isLoggedIn, async (req, res, next) => {
 
     let achievementMessage;
     if (allDone.length === 0) {
-      achievementMessage = "You haven't completed any tasks yet";
+      achievementMessage = "You haven't completed any tasks since";
     } else if (allDone.length === 1) {
-      achievementMessage = "One task done - keep swimming!";
+      achievementMessage = "You've completed one task since";
     } else if (allDone.length > 1) {
       achievementMessage = `${allDone.length} tasks completed since`;
     }

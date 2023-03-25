@@ -150,12 +150,14 @@ select.dropdown-style:focus {
   background: none;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:active {
   background-color: #4460ff;
   color: white;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
   background-color: #4460ff;
   border: solid 1px #4460ff;
   color: white;
@@ -167,7 +169,8 @@ select.dropdown-style:focus {
   padding: 10px;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:active {
   background-color: #5fb8f4;
   color: white;
 }
@@ -179,7 +182,8 @@ select.dropdown-style:focus {
   padding: 10px;
 }
 
-.btn-outline-secondary:hover {
+.btn-outline-secondary:hover,
+.btn-outline-secondary:active {
   background-color: #5fb8f4;
   border: solid 1px #5fb8f4;
   color: white;
