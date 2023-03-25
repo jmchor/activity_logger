@@ -579,7 +579,7 @@ router.post("/profile/delete-account", isLoggedIn, async (req, res, next) => {
   const regex =
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
   if (!regex.test(password)) {
-    res.status(500).render("auth/sign-up", {
+    res.status(500).render("profile", {
       errorMessage:
         "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.",
     });
@@ -591,6 +591,51 @@ router.post("/profile/delete-account", isLoggedIn, async (req, res, next) => {
       await User.findByIdAndDelete(_id);
       req.session.destroy();
       res.redirect("/");
+    } else {
+      res.render("profile", {
+        errorMessage: "Incorrect password.",
+        user: user,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+/*--------------------------------------------------------------
+# Deleting all tasks
+--------------------------------------------------------------*/
+
+router.post("/profile/delete-activities", isLoggedIn, async (req, res, next) => {
+  const { _id } = req.session.currentUser;
+  const { password } = req.body;
+  const user = req.session.currentUser;
+
+  if (!password) {
+    res.render("profile", {
+      errorMessage: "Please enter your password to delete your account.",
+      user: req.session.currentUser,
+    });
+    return;
+  }
+
+  const regex =
+    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
+  if (!regex.test(password)) {
+    res.status(500).render("profile", {
+      errorMessage:
+        "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.",
+    });
+    return;
+  }
+
+  try {
+    if (bcryptjs.compareSync(password, user.password)) {
+      await Activity.deleteMany({userId: _id});
+      res.render("profile", {
+        successMessage: "All activities deleted.",
+        user: user,
+      });
     } else {
       res.render("profile", {
         errorMessage: "Incorrect password.",
@@ -771,7 +816,7 @@ router.post("/reset-password/:id", async (req, res, next) => {
   const regex =
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?\-]).{8,}/;
   if (!regex.test(password)) {
-    res.status(500).render("auth/sign-up", {
+    res.status(500).render("auth/reset-password", {
       errorMessage:
         "Password needs to have at least 8 characters and must contain at least one special character, one number, one lowercase and one uppercase letter.",
     });
