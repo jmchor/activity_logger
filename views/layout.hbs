@@ -117,32 +117,38 @@
         class="navbar row row-cols-3 fixed-bottom navbar-dark justify-content-center"
       >
 
+        {{! Home button }}
         <div class="nav-item col-md-2 col-sm-1 text-center">
           <a href="/home" id="menu-button" class="btn btn-primary home-button">
-            <div><i class="bi bi-house"></i></div>
+            <img src="/images/icons/menu-home.png" height="36px" />
             <div class="pt-1">Home</div>
           </a>
         </div>
+
+        {{! Schedule button }}
         <div class="nav-item col-md-2 col-sm-1 text-center">
           <a
             href="/schedule"
             id="menu-button"
             class="btn btn-primary schedule-button"
           >
-            <div><i class="bi bi-calendar-week"></i></div>
+            <img src="/images/icons/menu-schedule.png" height="36px" />
             <div class="pt-1">Schedule</div>
           </a>
         </div>
+
+        {{! Add button }}
         <div class="nav-item col-md-2 col-sm-1 text-center">
           <a
             href="/create"
             id="menu-button"
             class="btn btn-primary create-button"
           >
-            <div><i class="bi bi-plus-square"></i></div>
+            <img src="/images/icons/menu-add.png" height="36px" />
             <div class="pt-1">Add Task</div>
           </a>
         </div>
+
       </nav>
     {{/if}}
 
