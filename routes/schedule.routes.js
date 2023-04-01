@@ -25,12 +25,14 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				currentDate.getDate() - currentDate.getDay() + (currentDate.getDay() === 0 ? -6 : 1)
 			)
 		);
+
 		// Set the last day of the week to Sunday
 		const lastDayOfWeek = new Date(
 			firstDayOfWeek.getFullYear(),
 			firstDayOfWeek.getMonth(),
 			firstDayOfWeek.getDate() + 6
 		);
+
 		let weekNumber;
 
 		const today = new Date(new Date().setHours(0, 0, 0, 0));
@@ -40,13 +42,13 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 		let currentWeekFromView;
 
 		// Calculate the number of the current week
-
 		let currentMoment = Math.ceil(
 			((firstDayOfWeek.getTime() - new Date(firstDayOfWeek.getFullYear(), 0, 1).getTime()) /
 				86400000 +
 				1) /
 				7
 		);
+
 
 		if (!week && !lastWeek) {
 			weekNumber = Math.ceil(
@@ -56,17 +58,15 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 					7
 			);
 
-			currentDate.setDate(today.getDate());
-			// let daylightSavings = currentDate.getTimezoneOffset();
 
-			// if (daylightSavings === -60) {
-			// 	currentDate.setHours(1, 0, 0, 0);
-			// } else {
-			// 	currentDate.setHours(2, 0, 0, 0);
-			// }
+			//fix code for the change from last of month to first of month
+			currentDate.setFullYear(today.getFullYear(), today.getMonth(), today.getDate());
+
 			currentDate.setHours(0, 0, 0, 0);
+			/*	For summer time: 	currentDate.setHours(2, 0, 0, 0);
+				For winter time currentDate.setHours(1, 0, 0, 0);
+			*/
 
-			// nextWeek.setHours(1, 0, 0, 0);
 			flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 			console.log(currentDate.getDay());
 			currentDate.setDate(currentDate.getDate() - flexWeekStart);
@@ -75,31 +75,23 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				currentDate.getMonth(),
 				currentDate.getDate() + (7 - currentDate.getDay())
 			);
+
 		} else {
 			if (week) {
 				currentWeekFromView = (Number(week) + 1) % 53;
 				weekNumber = currentWeekFromView === 0 ? 1 : currentWeekFromView;
 
 				i = weekNumber - currentMoment;
-				console.log('i', i);
-				currentDate.setDate(today.getDate() + 7 * i);
+
+				currentDate.setFullYear(today.getFullYear(), today.getMonth(), today.getDate() + 7 * i);
 				currentDate.setHours(0, 0, 0, 0);
 
-				// let daylightSavings = currentDate.getTimezoneOffset();
+			/*	For summer time: 	currentDate.setHours(2, 0, 0, 0);
+								nextWeek.setHours(2, 0, 0, 0);
+				For winter time: currentDate.setHours(1, 0, 0, 0);
+							nextWeek.setHours(2, 0, 0, 0);
+			*/
 
-				// if (daylightSavings === -60) {
-				// 	currentDate.setHours(1, 0, 0, 0);
-				// 	nextWeek = new Date(
-				// 		currentDate.getFullYear(),
-				// 		currentDate.getMonth(),
-				// 		currentDate.getDate() + (7 - currentDate.getDay())
-				// 	);
-				// 	nextWeek.setHours(2, 0, 0, 0);
-				// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-				// } else if (daylightSavings === -120) {
-				// 	currentDate.setHours(2, 0, 0, 0);
 
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
@@ -108,32 +100,20 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 					currentDate.getMonth(),
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
-				// nextWeek.setHours(2, 0, 0, 0);
-				// }
+
 			} else {
 				currentWeekFromView = Number(lastWeek) - 1;
 
 				weekNumber = currentWeekFromView === 0 ? 52 : currentWeekFromView;
 				i = (weekNumber - currentMoment) * -1;
-				currentDate.setDate(today.getDate() - 7 * i);
+				currentDate.setFullYear(today.getFullYear(), today.getMonth(), today.getDate() - 7 * i);
 				currentDate.setHours(0, 0, 0, 0);
-				// let daylightSavings = currentDate.getTimezoneOffset();
 
-				// if (daylightSavings === -60) {
-				// 	currentDate.setHours(1, 0, 0, 0);
-				// 	nextWeek = new Date(
-				// 		currentDate.getFullYear(),
-				// 		currentDate.getMonth(),
-				// 		currentDate.getDate() + (7 - currentDate.getDay())
-				// 	);
-				// 	nextWeek.setHours(2, 0, 0, 0);
-				// 	flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
-				// 	currentDate.setDate(currentDate.getDate() - flexWeekStart);
-
-				// } else if (daylightSavings === -120) {
-				// 	currentDate.setHours(2, 0, 0, 0);
-
-				// 	nextWeek.setHours(2, 0, 0, 0);
+				/*	For summer time: 	currentDate.setHours(2, 0, 0, 0);
+								nextWeek.setHours(2, 0, 0, 0);
+				For winter time: currentDate.setHours(1, 0, 0, 0);
+							nextWeek.setHours(2, 0, 0, 0);
+			*/
 				flexWeekStart = currentDate.getDay() - 1 < 0 ? 6 : currentDate.getDay() - 1;
 				currentDate.setDate(currentDate.getDate() - flexWeekStart);
 				nextWeek = new Date(
@@ -142,11 +122,9 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 					currentDate.getDate() + (7 - currentDate.getDay())
 				);
 
-				// console.log('currentDate', currentDate, 'nextWeek', nextWeek)
 				// }
 			}
 		}
-		// console.log('Activity finding for', currentDate, 'and', nextWeek)
 
 		// Find all activities that have a specific date within the next two weeks
 		const activities = await Activity.find({
@@ -156,6 +134,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 				$lte: nextWeek,
 			},
 		});
+
 
 		// Filter the activities to only include those within the coming week
 		const comingWeekActivities = activities.filter((activity) => {
@@ -195,8 +174,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			activity.hasSunday ? (noActivities.Sunday = false) : 0;
 		});
 
-		// Change Category Social Life into Social
-
+		// Change Category Social Life into Social for CSS purposes
 		comingWeekActivities.forEach((activity) => {
 			activity.category === 'Social Life' ? activity.category = 'Social' : false;
 		});
@@ -292,7 +270,7 @@ router.get('/schedule', isLoggedIn, async (req, res, next) => {
 			facts = req.session.facts;
 		}
 
-		// Use a fact from the array
+		// Use a fact from the array and remove it
 		const fact = facts.shift();
 
 		// Refetch 30 facts when the array is empty
