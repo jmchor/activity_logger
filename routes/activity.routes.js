@@ -106,7 +106,6 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 						groupId,
 					});
 					await newActivity.save();
-					console.log(newActivity)
 				}
 			} else {
 				const groupString = `${title}${description}${daysOfWeek}`;
@@ -147,7 +146,6 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
 					groupId,
 				});
 				await newActivity.save();
-				console.log(newActivity)
 			}
 
 		}
